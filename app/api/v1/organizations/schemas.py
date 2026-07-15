@@ -68,3 +68,5 @@ class MessageResponse(BaseModel):
     message: str
     organization_id: Optional[str] = None
     organization_gid: Optional[str] = None
+    client_id: Optional[str] = None
+    client_secret: Optional[str] = Field(None, description="Only returned on creation — store securely, never shown again")

@@ -45,6 +45,7 @@ async def initialize_collections():
 
     # ── organizations ──
     await database["organizations"].create_index("organization_gid", unique=True, name="org_gid_unique")
+    await database["organizations"].create_index("client_id", unique=True, name="org_client_id_unique")
     await database["organizations"].create_index("organization_name", name="org_name_idx")
     await database["organizations"].create_index("status", name="org_status_idx")
 

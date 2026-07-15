@@ -2,22 +2,45 @@
 Organization service — CRUD for organizations collection
 """
 
+import secrets
+import re
 from datetime import datetime
 from typing import Optional, Dict, Any
 from fastapi import HTTPException, status
 from bson import ObjectId
 from app.database import get_database
+from app.core.security import hash_password
 from app.models.organization_model import OrganizationInDB, generate_org_gid
 
 
+def _generate_client_id(org_name: str) -> str:
+    """Generate client_id from org name: lowercase, underscores, + 4 random chars"""
+    slug = re.sub(r'[^a-z0-9]', '_', org_name.lower().strip())
+    slug = re.sub(r'_+', '_', slug).strip('_')[:30]
+    return f"{slug}_{secrets.token_hex(2)}"
+
+
+def _generate_client_secret() -> str:
+    """Generate a long random client_secret (64 chars)"""
+    return secrets.token_urlsafe(48)
+
+
 async def create_organization(data: Dict[str, Any], admin_user: Dict) -> Dict[str, Any]:
-    """Create a new organization"""
+    """Create a new organization with auto-generated credentials"""
     db = get_database()
 
     # Generate unique GID
     org_gid = generate_org_gid()
     while await db.organizations.find_one({"organization_gid": org_gid}):
         org_gid = generate_org_gid()
+
+    # Generate service auth credentials
+    client_id = _generate_client_id(data["organization_name"])
+    while await db.organizations.find_one({"client_id": client_id}):
+        client_id = _generate_client_id(data["organization_name"])
+
+    client_secret = _generate_client_secret()
+    client_secret_hash = hash_password(client_secret)
 
     org = OrganizationInDB(
         organization_gid=org_gid,
@@ -33,6 +56,8 @@ async def create_organization(data: Dict[str, Any], admin_user: Dict) -> Dict[st
         state=data.get("state"),
         country=data.get("country"),
         pincode=data.get("pincode"),
+        client_id=client_id,
+        client_secret_hash=client_secret_hash,
         status="ACTIVE",
         created_by=admin_user["_id"],
         created_at=datetime.utcnow(),
@@ -41,10 +66,13 @@ async def create_organization(data: Dict[str, Any], admin_user: Dict) -> Dict[st
 
     result = await db.organizations.insert_one(org.model_dump())
 
+    # Return client_secret ONLY on creation (never again)
     return {
         "message": "Organization created successfully",
         "organization_id": str(result.inserted_id),
-        "organization_gid": org_gid
+        "organization_gid": org_gid,
+        "client_id": client_id,
+        "client_secret": client_secret  # Only returned once!
     }
 
 

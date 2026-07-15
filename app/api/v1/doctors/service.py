@@ -139,3 +139,183 @@ async def bulk_upload_doctors(file: UploadFile, admin_user: Dict) -> Dict[str, A
         "errors": errors,
         "message": message
     }
+
+
+# ══════════════════════════════════════════════════════════════
+# Doctor CRUD (Admin)
+# ══════════════════════════════════════════════════════════════
+
+from bson import ObjectId
+from fastapi import status
+import uuid
+
+
+async def get_doctor_by_id(doctor_id: str) -> Dict[str, Any]:
+    """Get a single doctor by ID (admin view)"""
+    db = get_database()
+
+    if not ObjectId.is_valid(doctor_id):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid doctor ID")
+
+    doctor = await db.doctors.find_one({"_id": ObjectId(doctor_id)})
+    if not doctor:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Doctor not found")
+
+    doctor["id"] = str(doctor.pop("_id"))
+    doctor.pop("password_hash", None)
+    return doctor
+
+
+async def list_all_doctors(search: str = None, skip: int = 0, limit: int = 50) -> Dict[str, Any]:
+    """List doctors with optional search, pagination"""
+    db = get_database()
+
+    query = {}
+    if search:
+        query["$or"] = [
+            {"name": {"$regex": search, "$options": "i"}},
+            {"email": {"$regex": search, "$options": "i"}},
+            {"doctor_gid": {"$regex": search, "$options": "i"}},
+            {"specialization": {"$regex": search, "$options": "i"}}
+        ]
+
+    total = await db.doctors.count_documents(query)
+    doctors = await db.doctors.find(query, {"password_hash": 0}).sort("created_at", -1).skip(skip).limit(limit).to_list(length=limit)
+
+    for doc in doctors:
+        doc["id"] = str(doc.pop("_id"))
+
+    return {"total": total, "doctors": doctors}
+
+
+async def update_doctor_by_admin(doctor_id: str, update_data: Dict[str, Any]) -> Dict[str, str]:
+    """Admin updates a doctor's profile"""
+    db = get_database()
+
+    if not ObjectId.is_valid(doctor_id):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid doctor ID")
+
+    doctor = await db.doctors.find_one({"_id": ObjectId(doctor_id)})
+    if not doctor:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Doctor not found")
+
+    # Filter out None values
+    update_doc = {k: v for k, v in update_data.items() if v is not None}
+    if not update_doc:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No valid fields to update")
+
+    update_doc["updated_at"] = datetime.utcnow()
+
+    await db.doctors.update_one({"_id": ObjectId(doctor_id)}, {"$set": update_doc})
+    return {"message": "Doctor updated successfully"}
+
+
+# ══════════════════════════════════════════════════════════════
+# Location Management
+# ══════════════════════════════════════════════════════════════
+
+async def add_doctor_location(doctor_id: str, location_data: Dict[str, Any], admin_user: Dict) -> Dict[str, Any]:
+    """Add a practice location to a doctor"""
+    db = get_database()
+
+    if not ObjectId.is_valid(doctor_id):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid doctor ID")
+
+    doctor = await db.doctors.find_one({"_id": ObjectId(doctor_id)})
+    if not doctor:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Doctor not found")
+
+    location_id = str(uuid.uuid4())[:8]
+
+    location = {
+        "id": location_id,
+        "type": location_data.get("type", "hospital"),
+        "name": location_data["name"],
+        "address": location_data["address"],
+        "country": location_data["country"],
+        "state": location_data["state"],
+        "district": location_data["district"],
+        "city": location_data["city"],
+        "area": location_data["area"],
+        "latitude": location_data["latitude"],
+        "longitude": location_data["longitude"],
+        "is_active": True,
+        "geofence_radius": location_data.get("geofence_radius", 100),
+        "added_by": str(admin_user["_id"]),
+        "added_at": datetime.utcnow()
+    }
+
+    await db.doctors.update_one(
+        {"_id": ObjectId(doctor_id)},
+        {
+            "$push": {"locations": location},
+            "$set": {"updated_at": datetime.utcnow()}
+        }
+    )
+
+    return {"message": "Location added successfully", "location_id": location_id}
+
+
+async def get_doctor_locations(doctor_id: str) -> Dict[str, Any]:
+    """Get all locations for a doctor"""
+    db = get_database()
+
+    if not ObjectId.is_valid(doctor_id):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid doctor ID")
+
+    doctor = await db.doctors.find_one({"_id": ObjectId(doctor_id)}, {"locations": 1})
+    if not doctor:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Doctor not found")
+
+    locations = doctor.get("locations", [])
+    return {"total": len(locations), "locations": locations}
+
+
+async def update_doctor_location(doctor_id: str, location_id: str, update_data: Dict[str, Any]) -> Dict[str, str]:
+    """Update a specific location on a doctor"""
+    db = get_database()
+
+    if not ObjectId.is_valid(doctor_id):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid doctor ID")
+
+    # Build $set for nested location fields
+    update_fields = {}
+    for key, value in update_data.items():
+        if value is not None:
+            update_fields[f"locations.$.{key}"] = value
+
+    if not update_fields:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="No valid fields to update")
+
+    update_fields["updated_at"] = datetime.utcnow()
+
+    result = await db.doctors.update_one(
+        {"_id": ObjectId(doctor_id), "locations.id": location_id},
+        {"$set": update_fields}
+    )
+
+    if result.matched_count == 0:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Doctor or location not found")
+
+    return {"message": "Location updated successfully"}
+
+
+async def delete_doctor_location(doctor_id: str, location_id: str) -> Dict[str, str]:
+    """Remove a location from a doctor"""
+    db = get_database()
+
+    if not ObjectId.is_valid(doctor_id):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid doctor ID")
+
+    result = await db.doctors.update_one(
+        {"_id": ObjectId(doctor_id)},
+        {
+            "$pull": {"locations": {"id": location_id}},
+            "$set": {"updated_at": datetime.utcnow()}
+        }
+    )
+
+    if result.matched_count == 0:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Doctor not found")
+
+    return {"message": "Location removed successfully"}

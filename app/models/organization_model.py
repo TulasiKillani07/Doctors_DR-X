@@ -28,6 +28,9 @@ class OrganizationInDB(BaseModel):
     state: Optional[str] = Field(None, max_length=100, description="State")
     country: Optional[str] = Field(None, max_length=100, description="Country")
     pincode: Optional[str] = Field(None, max_length=20, description="Pincode")
+    # Service-to-service auth credentials
+    client_id: str = Field(..., description="Unique client_id for service auth (auto-generated)")
+    client_secret_hash: str = Field(..., description="Hashed client_secret (never exposed via API)")
     status: str = Field(default="ACTIVE", description="ACTIVE or INACTIVE")
     created_by: str = Field(..., description="Admin user ID who created this org")
     created_at: datetime = Field(default_factory=datetime.utcnow)

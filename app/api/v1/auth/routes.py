@@ -12,7 +12,7 @@ from app.api.v1.auth import service
 router = APIRouter()
 
 
-@router.post("/admin/create", response_model=MessageResponse, summary="Create Platform Admin")
+@router.post("/admin/create", response_model=MessageResponse, status_code=201, summary="Create Platform Admin")
 async def create_admin(request: AdminCreateRequest):
     """
     **Purpose:** Create a new platform administrator (internal staff).
@@ -71,7 +71,7 @@ async def admin_login(request: AdminLoginRequest):
     return await service.admin_login(request.email, request.password)
 
 
-@router.post("/doctor/register", response_model=MessageResponse, summary="Doctor Registration")
+@router.post("/doctor/register", response_model=MessageResponse, status_code=201, summary="Doctor Registration")
 async def doctor_register(request: DoctorRegisterRequest):
     """
     **Purpose:** Doctor self-registration on the platform.
