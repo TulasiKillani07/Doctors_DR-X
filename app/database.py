@@ -58,3 +58,71 @@ async def initialize_collections():
     await database["doctor_organizations"].create_index("doctor_id", name="doc_org_doctor_idx")
     await database["doctor_organizations"].create_index("organization_id", name="doc_org_org_idx")
     await database["doctor_organizations"].create_index("status", name="doc_org_status_idx")
+
+    # ── notifications ──
+    await database["notifications"].create_index(
+        [("user_id", 1), ("created_at", -1)],
+        name="notification_user_time_idx"
+    )
+    await database["notifications"].create_index(
+        [("user_id", 1), ("is_read", 1)],
+        name="notification_user_read_idx"
+    )
+
+    # ── connections ──
+    await database["connections"].create_index(
+        [("requester_id", 1), ("receiver_id", 1)],
+        unique=True,
+        name="connection_unique_idx"
+    )
+    await database["connections"].create_index("requester_id", name="connection_requester_idx")
+    await database["connections"].create_index("receiver_id", name="connection_receiver_idx")
+    await database["connections"].create_index("status", name="connection_status_idx")
+
+    # ── cme_registrations ──
+    await database["cme_registrations"].create_index(
+        [("doctor_id", 1), ("organization_id", 1), ("event_id", 1)],
+        unique=True,
+        name="cme_reg_unique_idx"
+    )
+    await database["cme_registrations"].create_index("doctor_id", name="cme_reg_doctor_idx")
+    await database["cme_registrations"].create_index("organization_id", name="cme_reg_org_idx")
+    await database["cme_registrations"].create_index("status", name="cme_reg_status_idx")
+
+    # ── conversations ──
+    await database["conversations"].create_index("participants", name="conv_participants_idx")
+    await database["conversations"].create_index("last_message_at", name="conv_last_msg_idx")
+
+    # ── messages ──
+    await database["messages"].create_index(
+        [("conversation_id", 1), ("created_at", -1)],
+        name="msg_conv_time_idx"
+    )
+    await database["messages"].create_index(
+        [("conversation_id", 1), ("is_read", 1)],
+        name="msg_conv_read_idx"
+    )
+
+    # ── posts ──
+    await database["posts"].create_index("author_id", name="post_author_idx")
+    await database["posts"].create_index([("is_active", 1), ("created_at", -1)], name="post_active_time_idx")
+
+    # ── post_likes ──
+    await database["post_likes"].create_index(
+        [("post_id", 1), ("user_id", 1)],
+        unique=True,
+        name="like_unique_idx"
+    )
+
+    # ── post_comments ──
+    await database["post_comments"].create_index("post_id", name="comment_post_idx")
+
+    # ── groups ──
+    await database["groups"].create_index("members", name="group_members_idx")
+    await database["groups"].create_index("last_message_at", name="group_last_msg_idx")
+
+    # ── group_messages ──
+    await database["group_messages"].create_index(
+        [("group_id", 1), ("created_at", -1)],
+        name="gmsg_group_time_idx"
+    )

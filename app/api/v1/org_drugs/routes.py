@@ -1,0 +1,82 @@
+"""
+Organization Drugs Routes — Doctor views drugs from connected org's MRX
+"""
+
+from fastapi import APIRouter, Depends, Query
+from typing import Dict, Optional
+from app.core.auth import require_doctor
+from app.api.v1.org_drugs import service
+
+router = APIRouter()
+
+
+@router.get("/{org_id}/drugs", summary="List Organization Drugs")
+async def list_drugs(
+    org_id: str,
+    search: Optional[str] = Query(None, description="Search by drug name"),
+    skip: int = Query(0, ge=0),
+    limit: int = Query(50, ge=1, le=200),
+    current_user: Dict = Depends(require_doctor)
+):
+    """
+    **Purpose:** Doctor views drugs from one of their connected organizations.
+
+    **Access:** Doctor only (must be connected to the organization)
+
+    **Flow:**
+    ```
+    Doctor → DRX → mrx_client → MRX /integration/drugs → response
+    ```
+
+    **Query Params:** `search`, `skip`, `limit`
+
+    **Response:**
+    ```json
+    {
+      "total": 45,
+      "drugs": [
+        {
+          "drug_name": "Amlodipine",
+          "generic_name": "Amlodipine Besylate",
+          "therapeutic_category": "Cardiovascular",
+          "dosage_form": "Tablet",
+          "strength": "5mg",
+          "packaging": { ... },
+          "brochure_url": "https://..."
+        }
+      ],
+      "organization": "XYZ Pharma Pvt Ltd"
+    }
+    ```
+
+    **Errors:**
+    - 403: Doctor not connected to this organization
+    - 502: MRX backend unreachable or returned error
+    """
+    return await service.list_org_drugs(org_id, current_user["_id"], search, skip, limit)
+
+
+@router.get("/{org_id}/drugs/{drug_id}", summary="Get Drug Detail")
+async def get_drug_detail(
+    org_id: str,
+    drug_id: str,
+    current_user: Dict = Depends(require_doctor)
+):
+    """
+    **Purpose:** Doctor views a single drug's full detail from a connected organization.
+
+    **Access:** Doctor only (must be connected to the organization)
+
+    **Flow:**
+    ```
+    Doctor → DRX → mrx_client → MRX /integration/drugs/{drug_id} → response
+    ```
+
+    **Response:** Full drug document with packaging info.
+
+    **Errors:**
+    - 403: Doctor not connected to this organization
+    - 404: Drug not found on MRX
+    - 502: MRX backend unreachable
+    """
+    return await service.get_org_drug_detail(org_id, drug_id, current_user["_id"])

@@ -1,11 +1,11 @@
 """
 Doctor Settings Routes — DRX Doctor Platform
+Password, privacy, preferences, language
 """
 
 from fastapi import APIRouter, Depends
-from typing import Dict
+from typing import Dict, Optional
 from pydantic import BaseModel, Field
-from typing import Optional
 from app.core.auth import require_doctor
 from app.api.v1.settings import service
 
@@ -18,7 +18,7 @@ class ChangePasswordRequest(BaseModel):
 
 
 class UpdatePreferencesRequest(BaseModel):
-    language: Optional[str] = Field(None, max_length=10, description="Language code: en, hi, te, etc.")
+    language: Optional[str] = Field(None, max_length=10, description="Language code: en, hi, te, ta, etc.")
     notifications_enabled: Optional[bool] = None
     email_notifications: Optional[bool] = None
     sms_notifications: Optional[bool] = None
@@ -53,6 +53,9 @@ async def change_password(
     **Rules:**
     - Must provide correct current password
     - New password: 8-72 characters
+
+    **Errors:**
+    - 401: Current password is incorrect
     """
     return await service.change_password(request.current_password, request.new_password, current_user)
 
@@ -60,9 +63,11 @@ async def change_password(
 @router.get("/preferences", summary="Get My Preferences")
 async def get_preferences(current_user: Dict = Depends(require_doctor)):
     """
-    **Purpose:** Get the doctor's preferences/settings.
+    **Purpose:** Get the doctor's settings/preferences (language, privacy, notifications).
 
     **Access:** Doctor only
+
+    **Request Body:** None
 
     **Response:**
     ```json
@@ -76,6 +81,8 @@ async def get_preferences(current_user: Dict = Depends(require_doctor)):
       "show_email": true
     }
     ```
+
+    **Defaults:** If no preferences are set, returns system defaults.
     """
     return await service.get_preferences(current_user)
 
@@ -86,7 +93,7 @@ async def update_preferences(
     current_user: Dict = Depends(require_doctor)
 ):
     """
-    **Purpose:** Update the doctor's preferences.
+    **Purpose:** Update the doctor's preferences. Only send fields you want to change.
 
     **Access:** Doctor only
 
@@ -95,7 +102,8 @@ async def update_preferences(
     {
       "language": "hi",
       "profile_visibility": "connections_only",
-      "show_phone": true
+      "show_phone": true,
+      "sms_notifications": true
     }
     ```
 
@@ -104,7 +112,10 @@ async def update_preferences(
     { "message": "Preferences updated successfully" }
     ```
 
-    **Allowed profile_visibility values:** `public`, `connections_only`, `private`
+    **Allowed `profile_visibility` values:** `public`, `connections_only`, `private`
+
+    **Errors:**
+    - 400: Invalid profile_visibility value / No valid preferences to update
     """
     update_data = request.model_dump(exclude_unset=True)
     return await service.update_preferences(update_data, current_user)

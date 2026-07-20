@@ -42,9 +42,10 @@ async def create_relationship(doctor_id: str, organization_id: str, admin_user: 
     relationship = DoctorOrganizationInDB(
         doctor_id=doctor_id,
         organization_id=organization_id,
-        status=RelationshipStatus.PENDING,
+        status=RelationshipStatus.ACTIVE,
         requested_by=admin_user["_id"],
         requested_at=datetime.utcnow(),
+        joined_at=datetime.utcnow(),
         created_at=datetime.utcnow(),
         updated_at=datetime.utcnow()
     )
@@ -52,7 +53,7 @@ async def create_relationship(doctor_id: str, organization_id: str, admin_user: 
     result = await db.doctor_organizations.insert_one(relationship.model_dump())
 
     return {
-        "message": "Relationship created (PENDING)",
+        "message": "Doctor linked to organization (ACTIVE)",
         "relationship_id": str(result.inserted_id)
     }
 
