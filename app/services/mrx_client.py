@@ -32,6 +32,7 @@ from typing import Optional, Dict, Any
 import httpx
 from bson import ObjectId
 from app.database import get_database
+from app.config import settings
 
 logger = logging.getLogger("drx.mrx_client")
 
@@ -84,9 +85,7 @@ class MRXClient:
             {"_id": ObjectId(org_id)},
             {
                 "organization_name": 1,
-                "backend_url": 1,
-                "integration_client_id": 1,
-                "integration_client_secret": 1,
+                "mrx_url": 1,
                 "status": 1
             }
         )
@@ -100,22 +99,19 @@ class MRXClient:
                 status_code=403, org_id=org_id
             )
 
-        backend_url = org.get("backend_url")
-        client_id = org.get("integration_client_id")
-        client_secret = org.get("integration_client_secret")
+        mrx_url = org.get("mrx_url")
 
-        if not backend_url or not client_id or not client_secret:
+        if not mrx_url:
             raise MRXClientError(
-                f"Organization '{org.get('organization_name')}' is missing MRX integration credentials "
-                f"(backend_url, integration_client_id, integration_client_secret)",
+                f"Organization '{org.get('organization_name')}' is missing mrx_url",
                 status_code=503, org_id=org_id
             )
 
         return {
             "organization_name": org.get("organization_name"),
-            "backend_url": backend_url.rstrip("/"),
-            "integration_client_id": client_id,
-            "integration_client_secret": client_secret
+            "backend_url": mrx_url.rstrip("/"),
+            "integration_client_id": settings.DRX_TO_MRX_CLIENT_ID,
+            "integration_client_secret": settings.DRX_TO_MRX_SECRET
         }
 
     # ══════════════════════════════════════════════════════════
@@ -152,7 +148,7 @@ class MRXClient:
 
         logger.info(f"Requesting Service JWT from MRX | org={config['organization_name']} | url={config['backend_url']}")
 
-        async with httpx.AsyncClient(timeout=10) as client:
+        async with httpx.AsyncClient(timeout=30) as client:
             try:
                 response = await client.post(url, json={
                     "client_id": config["integration_client_id"],

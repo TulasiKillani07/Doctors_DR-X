@@ -121,7 +121,7 @@ async def search_doctors_integration(
         "phone": 1
     }).limit(50).to_list(length=50)
 
-    return {"total": len(doctors), "doctors": doctors, "organization": org_context["organization_name"]}
+    return {"total": len(doctors), "doctors": doctors, "caller": org_context["client_id"]}
 
 
 @router.get("/doctors/{doctor_gid}", summary="Get Doctor by GID (Service API)")

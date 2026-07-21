@@ -20,6 +20,8 @@ class OrganizationCreateRequest(BaseModel):
     state: Optional[str] = Field(None, max_length=100)
     country: Optional[str] = Field(None, max_length=100)
     pincode: Optional[str] = Field(None, max_length=20)
+    # Integration — only MRX URL needed (credentials come from DRX .env)
+    mrx_url: Optional[str] = Field(None, max_length=500, description="Organization's MRX backend URL")
 
 
 class OrganizationUpdateRequest(BaseModel):
@@ -36,10 +38,8 @@ class OrganizationUpdateRequest(BaseModel):
     country: Optional[str] = Field(None, max_length=100)
     pincode: Optional[str] = Field(None, max_length=20)
     status: Optional[str] = Field(None, description="ACTIVE or INACTIVE")
-    # Integration credentials (DRX → MRX direction)
-    backend_url: Optional[str] = Field(None, max_length=500, description="Organization's MRX backend URL")
-    integration_client_id: Optional[str] = Field(None, description="client_id for authenticating with this org's MRX")
-    integration_client_secret: Optional[str] = Field(None, description="client_secret for authenticating with this org's MRX")
+    # Integration — only MRX URL needed (credentials come from DRX .env)
+    mrx_url: Optional[str] = Field(None, max_length=500, description="Organization's MRX backend URL")
 
 
 class OrganizationResponse(BaseModel):

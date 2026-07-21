@@ -58,6 +58,7 @@ async def create_organization(data: Dict[str, Any], admin_user: Dict) -> Dict[st
         pincode=data.get("pincode"),
         client_id=client_id,
         client_secret_hash=client_secret_hash,
+        mrx_url=data.get("mrx_url"),
         status="ACTIVE",
         created_by=admin_user["_id"],
         created_at=datetime.utcnow(),

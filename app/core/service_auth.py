@@ -20,8 +20,7 @@ def create_service_token(organization_id: str, organization_name: str, client_id
     """Generate a short-lived Service JWT — signed with SERVICE_JWT_SECRET (isolated from user JWTs)"""
     now = datetime.utcnow()
     payload = {
-        "organization_id": organization_id,
-        "organization_name": organization_name,
+        "iss": "mrx",
         "client_id": client_id,
         "token_type": "service",
         "iat": now,
@@ -47,7 +46,7 @@ async def require_service_auth(
     """
     Middleware for integration APIs.
     Validates Service JWT only — rejects Doctor/Admin JWTs.
-    Attaches organization context to the request.
+    Attaches caller context to the request.
     """
     token = credentials.credentials
     payload = decode_service_token(token)
@@ -59,7 +58,6 @@ async def require_service_auth(
         )
 
     return {
-        "organization_id": payload["organization_id"],
-        "organization_name": payload["organization_name"],
+        "iss": payload.get("iss", "unknown"),
         "client_id": payload["client_id"]
     }
