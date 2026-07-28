@@ -79,16 +79,6 @@ async def initialize_collections():
     await database["connections"].create_index("receiver_id", name="connection_receiver_idx")
     await database["connections"].create_index("status", name="connection_status_idx")
 
-    # ── cme_registrations ──
-    await database["cme_registrations"].create_index(
-        [("doctor_id", 1), ("organization_id", 1), ("event_id", 1)],
-        unique=True,
-        name="cme_reg_unique_idx"
-    )
-    await database["cme_registrations"].create_index("doctor_id", name="cme_reg_doctor_idx")
-    await database["cme_registrations"].create_index("organization_id", name="cme_reg_org_idx")
-    await database["cme_registrations"].create_index("status", name="cme_reg_status_idx")
-
     # ── conversations ──
     await database["conversations"].create_index("participants", name="conv_participants_idx")
     await database["conversations"].create_index("last_message_at", name="conv_last_msg_idx")

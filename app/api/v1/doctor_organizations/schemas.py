@@ -21,13 +21,13 @@ class DoctorOrganizationResponse(BaseModel):
     doctor_id: str
     organization_id: str
     status: str
-    requested_by: str
-    requested_at: datetime
+    requested_by: Optional[str] = None
+    requested_at: Optional[datetime] = None
     responded_at: Optional[datetime] = None
     joined_at: Optional[datetime] = None
     removed_at: Optional[datetime] = None
-    created_at: datetime
-    updated_at: datetime
+    created_at: Optional[datetime] = None
+    updated_at: Optional[datetime] = None
 
 
 class DoctorOrganizationListResponse(BaseModel):

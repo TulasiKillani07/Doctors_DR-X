@@ -144,7 +144,7 @@ class MRXClient:
         POST {backend_url}/api/v1/integration/auth/service-token
         """
         config = await self._get_org_config(org_id)
-        url = f"{config['backend_url']}/api/v1/integration/auth/service-token"
+        url = f"{config['backend_url']}/mrx/api/v1/integration/auth/service-token"
 
         logger.info(f"Requesting Service JWT from MRX | org={config['organization_name']} | url={config['backend_url']}")
 

@@ -62,6 +62,7 @@ class DoctorInDB(BaseModel):
     is_active: bool = Field(default=True)
     is_email_verified: bool = Field(default=False)
     is_phone_verified: bool = Field(default=False)
+    registered_via: Optional[str] = Field(None, description="Which service registered this doctor (e.g. client_id of MRX)")
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     last_login_at: Optional[datetime] = Field(None)

@@ -36,7 +36,7 @@ async def shutdown_event():
     await close_mongo_connection()
 
 
-app.include_router(api_router, prefix="/api/v1")
+app.include_router(api_router, prefix="/drx/api/v1")
 
 
 if __name__ == "__main__":

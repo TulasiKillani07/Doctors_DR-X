@@ -45,7 +45,7 @@ async def list_org_drugs(
         params["search"] = search
 
     try:
-        return await mrx_client.request(org_id, "GET", "/api/v1/integration/drugs", params=params)
+        return await mrx_client.request(org_id, "GET", "/mrx/api/v1/integration/drugs", params=params)
     except MRXClientError as e:
         raise HTTPException(status_code=e.status_code or 502, detail=e.message)
 
@@ -55,6 +55,6 @@ async def get_org_drug_detail(org_id: str, drug_id: str, doctor_id: str) -> Dict
     await _verify_doctor_org_access(doctor_id, org_id)
 
     try:
-        return await mrx_client.request(org_id, "GET", f"/api/v1/integration/drugs/{drug_id}")
+        return await mrx_client.request(org_id, "GET", f"/mrx/api/v1/integration/drugs/{drug_id}")
     except MRXClientError as e:
         raise HTTPException(status_code=e.status_code or 502, detail=e.message)
