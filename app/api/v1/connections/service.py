@@ -8,6 +8,7 @@ from typing import Dict, Any, Optional
 from bson import ObjectId
 from fastapi import HTTPException, status
 from app.database import get_database
+from app.models.social_models import ConnectionInDB
 
 
 async def discover_users(current_user: Dict, search: Optional[str], specialization: Optional[str], page: int, limit: int) -> Dict[str, Any]:
@@ -81,18 +82,29 @@ async def send_connection_request(receiver_id: str, current_user: Dict) -> Dict[
             await db.connections.update_one({"_id": existing["_id"]}, {"$set": {"status": "pending", "requester_id": my_id, "receiver_id": receiver_id, "updated_at": datetime.utcnow()}})
             return {"connection_id": str(existing["_id"]), "receiver_name": receiver.get("name", ""), "status": "pending", "message": "Connection request sent"}
 
-    conn = {
-        "requester_id": my_id,
-        "receiver_id": receiver_id,
-        "requester_name": current_user.get("name", ""),
-        "receiver_name": receiver.get("name", ""),
-        "requester_specialization": current_user.get("specialization"),
-        "receiver_specialization": receiver.get("specialization"),
-        "status": "pending",
-        "created_at": datetime.utcnow(),
-        "updated_at": datetime.utcnow()
-    }
-    result = await db.connections.insert_one(conn)
+    conn = ConnectionInDB(
+        requester_id=my_id,
+        receiver_id=receiver_id,
+        requester_name=current_user.get("name", ""),
+        receiver_name=receiver.get("name", ""),
+        requester_specialization=current_user.get("specialization"),
+        receiver_specialization=receiver.get("specialization"),
+        status="pending",
+        created_at=datetime.utcnow(),
+        updated_at=datetime.utcnow()
+    )
+    result = await db.connections.insert_one(conn.model_dump())
+
+    # Notify the receiver about the connection request
+    from app.api.v1.notifications.service import create_notification
+    await create_notification(
+        user_id=receiver_id,
+        title="New Connection Request",
+        message=f"{current_user.get('name', 'A doctor')} sent you a connection request",
+        notification_type="connection_request",
+        metadata={"connection_id": str(result.inserted_id), "requester_id": my_id, "requester_name": current_user.get("name", "")}
+    )
+
     return {"connection_id": str(result.inserted_id), "receiver_name": receiver.get("name", ""), "status": "pending", "message": "Connection request sent successfully"}
 
 
@@ -135,6 +147,17 @@ async def accept_connection(connection_id: str, current_user: Dict) -> Dict[str,
     if conn["status"] != "pending":
         raise HTTPException(status_code=400, detail=f"Connection is already {conn['status']}")
     await db.connections.update_one({"_id": ObjectId(connection_id)}, {"$set": {"status": "accepted", "accepted_at": datetime.utcnow(), "updated_at": datetime.utcnow()}})
+
+    # Notify the requester that their request was accepted
+    from app.api.v1.notifications.service import create_notification
+    await create_notification(
+        user_id=conn["requester_id"],
+        title="Connection Accepted",
+        message=f"{current_user.get('name', 'A doctor')} accepted your connection request",
+        notification_type="connection_accepted",
+        metadata={"connection_id": connection_id, "accepter_id": current_user["_id"], "accepter_name": current_user.get("name", "")}
+    )
+
     return {"message": "Connection accepted", "connection_id": connection_id}
 
 
@@ -232,7 +255,16 @@ async def block_user(doctor_id: str, current_user: Dict) -> Dict[str, str]:
     if existing:
         await db.connections.update_one({"_id": existing["_id"]}, {"$set": {"status": "blocked", "updated_at": datetime.utcnow()}})
     else:
-        await db.connections.insert_one({"requester_id": my_id, "receiver_id": doctor_id, "requester_name": current_user.get("name", ""), "receiver_name": "", "status": "blocked", "created_at": datetime.utcnow(), "updated_at": datetime.utcnow()})
+        block_conn = ConnectionInDB(
+            requester_id=my_id,
+            receiver_id=doctor_id,
+            requester_name=current_user.get("name", ""),
+            receiver_name="",
+            status="blocked",
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow()
+        )
+        await db.connections.insert_one(block_conn.model_dump())
 
     return {"message": "User blocked successfully"}
 

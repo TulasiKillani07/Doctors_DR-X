@@ -79,4 +79,30 @@ async def get_drug_detail(
     - 404: Drug not found on MRX
     - 502: MRX backend unreachable
     """
-    return await service.get_org_drug_detail(org_id, drug_id, current_user["_id"])
+    return await service.get_org_drug_detail(org_id, drug_id, current_user["_id"], current_user.get("doctor_gid", ""), current_user.get("name", ""))
+
+
+@router.get("/{org_id}/drugs/{drug_id}/brochure/download", summary="Download Drug Brochure")
+async def download_drug_brochure(
+    org_id: str,
+    drug_id: str,
+    current_user: Dict = Depends(require_doctor)
+):
+    """
+    **Purpose:** Download drug brochure PDF from the connected organization's MRX.
+
+    **Access:** Doctor only (must be connected to the organization)
+
+    **Flow:**
+    ```
+    Doctor → DRX → mrx_client → MRX /drugs/{drug_id}/brochure/download → PDF stream
+    ```
+
+    **Response:** PDF file streamed with download headers.
+
+    **Errors:**
+    - 403: Not connected to org
+    - 404: Drug not found or no brochure uploaded
+    - 502: MRX unreachable
+    """
+    return await service.download_org_drug_brochure(org_id, drug_id, current_user["_id"])

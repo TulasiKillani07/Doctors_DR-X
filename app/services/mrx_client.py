@@ -33,8 +33,9 @@ import httpx
 from bson import ObjectId
 from app.database import get_database
 from app.config import settings
+from app.utils.logger import get_drx_logger
 
-logger = logging.getLogger("drx.mrx_client")
+logger = get_drx_logger("drx.mrx_client")
 
 
 class MRXClientError(Exception):

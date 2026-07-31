@@ -7,6 +7,7 @@ from typing import Dict, Any, Optional
 from bson import ObjectId
 from fastapi import HTTPException, status
 from app.database import get_database
+from app.models.social_models import NotificationInDB
 
 
 async def get_notifications(
@@ -95,15 +96,15 @@ async def create_notification(
     """Create a notification (internal helper — used by other services)"""
     db = get_database()
 
-    notification = {
-        "user_id": user_id,
-        "title": title,
-        "message": message,
-        "type": notification_type,
-        "metadata": metadata or {},
-        "is_read": False,
-        "created_at": datetime.utcnow()
-    }
+    notification = NotificationInDB(
+        user_id=user_id,
+        title=title,
+        message=message,
+        type=notification_type,
+        metadata=metadata or {},
+        is_read=False,
+        created_at=datetime.utcnow()
+    )
 
-    result = await db.notifications.insert_one(notification)
+    result = await db.notifications.insert_one(notification.model_dump())
     return str(result.inserted_id)

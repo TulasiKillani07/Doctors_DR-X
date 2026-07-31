@@ -21,6 +21,10 @@ class AddCommentRequest(BaseModel):
     content: str = Field(..., min_length=1, max_length=1000)
 
 
+class ShareToChatRequest(BaseModel):
+    recipient_id: str = Field(..., description="Doctor ID to share with")
+
+
 @router.post("/posts", summary="Create Post")
 async def create_post(request: CreatePostRequest, current_user: Dict = Depends(require_doctor)):
     """
@@ -190,6 +194,74 @@ async def get_comments(
     ```
     """
     return await service.get_comments(post_id, skip, limit)
+
+
+@router.post("/posts/{post_id}/share-to-chat", summary="Share Post to Chat")
+async def share_post_to_chat(
+    post_id: str,
+    request: ShareToChatRequest,
+    current_user: Dict = Depends(require_doctor)
+):
+    """
+    **Purpose:** Share a post to another doctor via direct message.
+
+    **Access:** Doctor only
+
+    **Request Body:**
+    ```json
+    { "recipient_id": "6a50f173..." }
+    ```
+
+    **Response:**
+    ```json
+    { "message": "Post shared via chat", "conversation_id": "...", "message_id": "..." }
+    ```
+
+    **Rules:**
+    - Post must exist and be active
+    - Recipient must exist
+    - Creates/uses existing conversation with recipient
+    - Sends formatted message with post preview
+    """
+    return await service.share_to_chat(post_id, current_user["_id"], request.recipient_id)
+
+
+@router.get("/posts/me", summary="Get My Posts")
+async def get_my_posts(
+    skip: int = Query(0, ge=0),
+    limit: int = Query(20, ge=1, le=100),
+    current_user: Dict = Depends(require_doctor)
+):
+    """
+    **Purpose:** Get only the current doctor's own posts.
+
+    **Access:** Doctor only
+
+    **Request Body:** None
+
+    **Response:**
+    ```json
+    {
+      "total": 5,
+      "posts": [
+        {
+          "id": "...",
+          "author_id": "...",
+          "author_name": "Dr. Arjun Mehta",
+          "content": "My latest research findings...",
+          "image_url": null,
+          "likes_count": 3,
+          "comments_count": 1,
+          "is_liked": false,
+          "is_active": true,
+          "created_at": "2026-07-28T10:00:00",
+          "updated_at": "2026-07-28T10:00:00"
+        }
+      ]
+    }
+    ```
+    """
+    return await service.get_my_posts(current_user["_id"], skip, limit)
 
 
 @router.delete("/posts/{post_id}", summary="Delete Post")

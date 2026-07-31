@@ -16,10 +16,12 @@ from app.api.v1.settings.routes import router as settings_router
 from app.api.v1.my_organizations.routes import router as my_organizations_router
 from app.api.v1.org_drugs.routes import router as org_drugs_router
 from app.api.v1.cme.routes import router as cme_router
+from app.api.v1.bookmarks.routes import router as bookmarks_router
 from app.api.v1.chat.routes import router as chat_router
 from app.api.v1.feed.routes import router as feed_router
 from app.api.v1.search.routes import router as search_router
 from app.api.v1.groups.routes import router as groups_router
+from app.api.v1.activity_logs.routes import router as activity_logs_router
 
 api_router = APIRouter()
 
@@ -62,6 +64,9 @@ api_router.include_router(org_drugs_router, prefix="/organizations", tags=["Orga
 # CME (registrations owned by DRX, events fetched from MRX)
 api_router.include_router(cme_router, prefix="/cme", tags=["CME Events"])
 
+# Drug Bookmarks (per-org, DRX-owned)
+api_router.include_router(bookmarks_router, prefix="/bookmarks", tags=["Bookmarks"])
+
 # Doctor management (Platform Admin only)
 api_router.include_router(doctors_router, prefix="/doctors", tags=["Doctors (Admin)"])
 
@@ -73,3 +78,6 @@ api_router.include_router(doctor_orgs_router, prefix="/doctor-organizations", ta
 
 # Integration APIs (Service JWT only — backend-to-backend)
 api_router.include_router(integration_router, prefix="/integration", tags=["Integration (Service-to-Service)"])
+
+# Activity Logs (Doctor views own activity history)
+api_router.include_router(activity_logs_router, prefix="/activity-logs", tags=["Activity Logs"])

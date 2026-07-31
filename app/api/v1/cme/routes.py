@@ -55,6 +55,38 @@ async def list_org_events(
     return await service.list_org_cme_events(org_id, current_user["_id"], status, skip, limit)
 
 
+@router.get("/organizations/{org_id}/events/{event_id}", summary="Get CME Event Detail")
+async def get_event_detail(
+    org_id: str,
+    event_id: str,
+    current_user: Dict = Depends(require_doctor)
+):
+    """
+    **Purpose:** Doctor views full details of a single CME event. Tracks the view for admin analytics.
+
+    **Access:** Doctor only (must be connected to org)
+
+    **Response:**
+    ```json
+    {
+      "id": "6a605fe9...",
+      "title": "Cardiology Update 2026",
+      "description": "Latest developments in cardiac care",
+      "event_date": "2026-08-15",
+      "event_time": "10:00 AM - 12:00 PM",
+      "event_type": "Webinar",
+      "event_mode": "online",
+      "platform": "Zoom",
+      "meeting_link": "https://zoom.us/j/...",
+      "speaker": "Dr. Ramesh Babu",
+      "max_attendees": 100,
+      "status": "upcoming"
+    }
+    ```
+    """
+    return await service.get_cme_event_detail(org_id, event_id, current_user["_id"])
+
+
 @router.post("/organizations/{org_id}/register", summary="Register for CME Event")
 async def register_for_event(
     org_id: str,

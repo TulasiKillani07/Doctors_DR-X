@@ -252,3 +252,74 @@ async def register_doctor_integration(
         "doctor_gid": doctor_gid,
         "message": "Doctor registered on DRX"
     }
+
+
+# ══════════════════════════════════════════════════════════════
+# Notification Push (MRX → DRX: new drug, new CME event)
+# ══════════════════════════════════════════════════════════════
+
+@router.post("/notifications/push", summary="Push Notifications to Doctors (Service API)")
+async def push_notifications_integration(
+    request: dict,
+    org_context=Depends(require_service_auth)
+):
+    """
+    **Purpose:** MRX pushes notifications to all doctors connected to this organization.
+    Used when a new drug is launched or new CME event is created.
+
+    **Access:** Service JWT only (backend-to-backend)
+
+    **Request Body:**
+    ```json
+    {
+      "title": "New Drug Launched",
+      "message": "Paracetamol 500mg is now available",
+      "type": "new_drug",
+      "metadata": { "drug_id": "6a69e619...", "drug_name": "Paracetamol 500mg" }
+    }
+    ```
+
+    **Types:** `new_drug`, `new_cme_event`
+
+    **Response:**
+    ```json
+    { "status": "ok", "notified_count": 15 }
+    ```
+    """
+    from app.api.v1.notifications.service import create_notification
+    from bson import ObjectId
+
+    db = get_database()
+
+    title = request.get("title", "")
+    message = request.get("message", "")
+    notification_type = request.get("type", "general")
+    metadata = request.get("metadata", {})
+    org_id = org_context.get("organization_id", "")
+
+    if not title or not message:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="title and message are required")
+
+    # Find all doctors connected to this organization
+    relationships = await db.doctor_organizations.find(
+        {"organization_id": org_id, "status": "ACTIVE"}
+    ).to_list(length=5000)
+
+    doctor_ids = [rel["doctor_id"] for rel in relationships]
+
+    # Create notification for each connected doctor
+    notified = 0
+    for doctor_id in doctor_ids:
+        try:
+            await create_notification(
+                user_id=doctor_id,
+                title=title,
+                message=message,
+                notification_type=notification_type,
+                metadata={**metadata, "organization_id": org_id}
+            )
+            notified += 1
+        except Exception:
+            pass  # Don't fail entire batch if one notification fails
+
+    return {"status": "ok", "notified_count": notified}

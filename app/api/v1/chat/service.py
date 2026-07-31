@@ -8,6 +8,7 @@ from typing import Dict, Any, Optional, List
 from bson import ObjectId
 from fastapi import HTTPException, status
 from app.database import get_database
+from app.models.social_models import ConversationInDB, MessageInDB
 
 
 async def get_or_create_conversation(doctor_id: str, other_doctor_id: str) -> Dict[str, Any]:
@@ -34,13 +35,14 @@ async def get_or_create_conversation(doctor_id: str, other_doctor_id: str) -> Di
         return conversation
 
     # Create new
-    conv = {
-        "participants": participants,
-        "last_message": None,
-        "last_message_at": None,
-        "created_at": datetime.utcnow()
-    }
-    result = await db.conversations.insert_one(conv)
+    conv = ConversationInDB(
+        participants=participants,
+        last_message=None,
+        last_message_at=None,
+        created_at=datetime.utcnow()
+    )
+    result = await db.conversations.insert_one(conv.model_dump())
+    conv = conv.model_dump()
     conv["id"] = str(result.inserted_id)
     conv.pop("_id", None)
     return conv
@@ -101,15 +103,15 @@ async def send_message(conversation_id: str, sender_id: str, content: str) -> Di
     if sender_id not in conv["participants"]:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Not a participant")
 
-    message = {
-        "conversation_id": conversation_id,
-        "sender_id": sender_id,
-        "content": content,
-        "is_read": False,
-        "created_at": datetime.utcnow()
-    }
+    message = MessageInDB(
+        conversation_id=conversation_id,
+        sender_id=sender_id,
+        content=content,
+        is_read=False,
+        created_at=datetime.utcnow()
+    )
 
-    result = await db.messages.insert_one(message)
+    result = await db.messages.insert_one(message.model_dump())
 
     # Update conversation
     await db.conversations.update_one(
@@ -117,7 +119,7 @@ async def send_message(conversation_id: str, sender_id: str, content: str) -> Di
         {"$set": {"last_message": content[:100], "last_message_at": datetime.utcnow()}}
     )
 
-    return {"message_id": str(result.inserted_id), "sent_at": message["created_at"]}
+    return {"message_id": str(result.inserted_id), "sent_at": message.created_at}
 
 
 async def get_messages(conversation_id: str, doctor_id: str, skip: int = 0, limit: int = 50) -> Dict[str, Any]:
@@ -169,7 +171,7 @@ async def mark_as_read(conversation_id: str, doctor_id: str) -> Dict[str, Any]:
 
 
 async def delete_message(message_id: str, doctor_id: str) -> Dict[str, str]:
-    """Delete own message"""
+    """Delete own message and update conversation's last_message if needed"""
     db = get_database()
 
     if not ObjectId.is_valid(message_id):
@@ -182,7 +184,27 @@ async def delete_message(message_id: str, doctor_id: str) -> Dict[str, str]:
     if msg["sender_id"] != doctor_id:
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Can only delete your own messages")
 
+    conversation_id = msg["conversation_id"]
+
+    # Delete the message
     await db.messages.delete_one({"_id": ObjectId(message_id)})
+
+    # Check if this was the conversation's last_message — if so, recalculate
+    conv = await db.conversations.find_one({"_id": ObjectId(conversation_id)})
+    if conv and conv.get("last_message") == msg.get("content", "")[:100]:
+        # Find the new last message
+        new_last = await db.messages.find_one(
+            {"conversation_id": conversation_id},
+            sort=[("created_at", -1)]
+        )
+        await db.conversations.update_one(
+            {"_id": ObjectId(conversation_id)},
+            {"$set": {
+                "last_message": new_last["content"][:100] if new_last else None,
+                "last_message_at": new_last["created_at"] if new_last else None
+            }}
+        )
+
     return {"message": "Message deleted"}
 
 

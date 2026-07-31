@@ -3,50 +3,9 @@ Doctor Dashboard service — DRX Doctor Platform
 Returns everything the frontend dashboard needs in one call.
 """
 
-from typing import Dict, Any, List
+from typing import Dict, Any
 from bson import ObjectId
 from app.database import get_database
-
-
-def _compute_profile_completion(doctor: Dict) -> Dict[str, Any]:
-    """Calculate profile completion percentage and missing fields"""
-    fields = {
-        "name": doctor.get("name"),
-        "phone": doctor.get("phone"),
-        "email": doctor.get("email"),
-        "specialization": doctor.get("specialization"),
-        "hospital": doctor.get("hospital"),
-        "qualification": doctor.get("qualification"),
-        "experience_years": doctor.get("experience_years"),
-        "license_number": doctor.get("license_number"),
-        "bio": doctor.get("bio"),
-        "avatar_url": doctor.get("avatar_url"),
-        "city": doctor.get("city"),
-        "state": doctor.get("state"),
-        "country": doctor.get("country"),
-    }
-
-    total = len(fields)
-    filled = sum(1 for v in fields.values() if v)
-    missing = [k for k, v in fields.items() if not v]
-    percentage = round((filled / total) * 100)
-
-    locations = doctor.get("locations", [])
-    has_location = len(locations) > 0
-    if not has_location:
-        missing.append("practice_location")
-        total += 1
-    else:
-        total += 1
-        filled += 1
-        percentage = round((filled / total) * 100)
-
-    return {
-        "percentage": percentage,
-        "filled": filled,
-        "total": total,
-        "missing_fields": missing
-    }
 
 
 async def get_doctor_dashboard(current_user: Dict, org_id: str = None) -> Dict[str, Any]:
@@ -73,10 +32,7 @@ async def get_doctor_dashboard(current_user: Dict, org_id: str = None) -> Dict[s
         "qualification": doctor.get("qualification"),
     }
 
-    # ── 2. Profile Completion ──
-    profile_completion = _compute_profile_completion(doctor)
-
-    # ── 3. Organizations ──
+    # ── 2. Organizations ──
     org_relationships = await db.doctor_organizations.find(
         {"doctor_id": doctor_id, "status": "ACTIVE"}
     ).to_list(length=100)
@@ -98,39 +54,10 @@ async def get_doctor_dashboard(current_user: Dict, org_id: str = None) -> Dict[s
                 "joined_at": rel.get("joined_at")
             })
 
-    # ── 4. Activity Summary ──
-    # CME registrations
-    total_cme = await db.cme_registrations.count_documents({"doctor_id": doctor_id})
-    cme_attended = await db.cme_registrations.count_documents({"doctor_id": doctor_id, "status": "ATTENDED"})
-    cme_upcoming = await db.cme_registrations.count_documents({"doctor_id": doctor_id, "status": "REGISTERED"})
-
-    # Connections
-    total_connections = await db.connections.count_documents({
-        "$or": [{"requester_id": doctor_id}, {"receiver_id": doctor_id}],
-        "status": "accepted"
-    })
-    pending_requests = await db.connections.count_documents({
-        "receiver_id": doctor_id, "status": "pending"
-    })
-
-    # Posts
-    total_posts = await db.posts.count_documents({"author_id": doctor_id, "is_active": True})
-
-    # Notifications unread
+    # ── 3. Activity Summary ──
     unread_notifications = await db.notifications.count_documents({"user_id": doctor_id, "is_read": False})
 
-    # ── 5. Locations ──
-    locations = doctor.get("locations", [])
-    active_locations = [loc for loc in locations if loc.get("is_active", True)]
-    primary_id = doctor.get("primary_location_id")
-    primary_location = None
-    for loc in locations:
-        if loc.get("id") == primary_id:
-            primary_location = {"name": loc["name"], "city": loc.get("city", ""), "type": loc.get("type", "")}
-            break
-
-    # ── 6. Top Doctors (suggestions to connect) ──
-    # Get doctors not already connected
+    # ── 4. Suggested Doctors (not already connected) ──
     connected_ids = set()
     connections = await db.connections.find(
         {"$or": [{"requester_id": doctor_id}, {"receiver_id": doctor_id}]}
@@ -156,16 +83,7 @@ async def get_doctor_dashboard(current_user: Dict, org_id: str = None) -> Dict[s
             "avatar_url": doc.get("avatar_url")
         })
 
-    # ── 7. Account Status ──
-    account = {
-        "is_active": doctor.get("is_active", True),
-        "is_email_verified": doctor.get("is_email_verified", False),
-        "is_phone_verified": doctor.get("is_phone_verified", False),
-        "member_since": doctor.get("created_at"),
-        "last_login": doctor.get("last_login_at"),
-    }
-
-    # ── MRX Dashboard Data (if org_id provided) ──
+    # ── 5. MRX Dashboard Data (if org_id provided) ──
     mrx_data = None
     if org_id:
         try:
@@ -175,6 +93,7 @@ async def get_doctor_dashboard(current_user: Dict, org_id: str = None) -> Dict[s
             mrx_data = None  # MRX unavailable — dashboard still works with DRX data
 
     return {
+        "doctor_info": doctor_info,
         "organizations": {
             "connected": len(connected_orgs),
             "list": connected_orgs

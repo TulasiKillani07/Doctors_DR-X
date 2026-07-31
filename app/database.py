@@ -4,7 +4,10 @@ MongoDB connection management for DRX Doctor Platform
 
 from motor.motor_asyncio import AsyncIOMotorClient, AsyncIOMotorDatabase
 from app.config import settings
+from app.utils.logger import get_drx_logger
 from typing import Optional
+
+logger = get_drx_logger("drx.database")
 
 
 class Database:
@@ -18,12 +21,14 @@ db = Database()
 async def connect_to_mongo():
     db.client = AsyncIOMotorClient(settings.MONGODB_URL)
     db.database = db.client[settings.DATABASE_NAME]
+    logger.info(f"Connected to MongoDB: {settings.DATABASE_NAME}")
     await initialize_collections()
 
 
 async def close_mongo_connection():
     if db.client:
         db.client.close()
+        logger.info("MongoDB connection closed")
 
 
 def get_database() -> AsyncIOMotorDatabase:
@@ -107,6 +112,30 @@ async def initialize_collections():
     # ── post_comments ──
     await database["post_comments"].create_index("post_id", name="comment_post_idx")
 
+    # ── drug_bookmarks ──
+    await database["drug_bookmarks"].create_index(
+        [("doctor_id", 1), ("organization_id", 1), ("drug_id", 1)],
+        unique=True,
+        name="bookmark_unique_idx"
+    )
+    await database["drug_bookmarks"].create_index("doctor_id", name="bookmark_doctor_idx")
+
+    # ── cme_bookmarks ──
+    await database["cme_bookmarks"].create_index(
+        [("doctor_id", 1), ("organization_id", 1), ("event_id", 1)],
+        unique=True,
+        name="cme_bookmark_unique_idx"
+    )
+    await database["cme_bookmarks"].create_index("doctor_id", name="cme_bookmark_doctor_idx")
+
+    # ── post_bookmarks ──
+    await database["post_bookmarks"].create_index(
+        [("doctor_id", 1), ("post_id", 1)],
+        unique=True,
+        name="post_bookmark_unique_idx"
+    )
+    await database["post_bookmarks"].create_index("doctor_id", name="post_bookmark_doctor_idx")
+
     # ── groups ──
     await database["groups"].create_index("members", name="group_members_idx")
     await database["groups"].create_index("last_message_at", name="group_last_msg_idx")
@@ -115,4 +144,14 @@ async def initialize_collections():
     await database["group_messages"].create_index(
         [("group_id", 1), ("created_at", -1)],
         name="gmsg_group_time_idx"
+    )
+
+    # ── activity_logs ──
+    await database["activity_logs"].create_index(
+        [("doctor_id", 1), ("organization_id", 1), ("created_at", -1)],
+        name="activity_doctor_org_time_idx"
+    )
+    await database["activity_logs"].create_index(
+        [("doctor_id", 1), ("organization_id", 1), ("action", 1)],
+        name="activity_doctor_org_action_idx"
     )

@@ -8,6 +8,7 @@ from typing import Dict, Any, List
 from bson import ObjectId
 from fastapi import HTTPException, status
 from app.database import get_database
+from app.models.social_models import GroupInDB, GroupMessageInDB
 
 
 async def create_group(name: str, description: str, member_ids: List[str], current_user: Dict) -> Dict[str, Any]:
@@ -23,19 +24,20 @@ async def create_group(name: str, description: str, member_ids: List[str], curre
             if doc:
                 valid_members.append(mid)
 
-    group = {
-        "group_name": name,
-        "group_description": description,
-        "created_by": creator_id,
-        "admins": [creator_id],
-        "members": valid_members,
-        "last_message": None,
-        "last_message_at": None,
-        "created_at": datetime.utcnow(),
-        "updated_at": datetime.utcnow()
-    }
+    group = GroupInDB(
+        group_name=name,
+        group_description=description,
+        created_by=creator_id,
+        admins=[creator_id],
+        members=valid_members,
+        last_message=None,
+        last_message_at=None,
+        created_at=datetime.utcnow(),
+        updated_at=datetime.utcnow()
+    )
 
-    result = await db.groups.insert_one(group)
+    result = await db.groups.insert_one(group.model_dump())
+
     return {
         "group_id": str(result.inserted_id),
         "group_name": name,
@@ -147,6 +149,16 @@ async def add_members(group_id: str, user_ids: List[str], current_user: Dict) ->
 
     if added:
         await db.groups.update_one({"_id": ObjectId(group_id)}, {"$push": {"members": {"$each": added}}, "$set": {"updated_at": datetime.utcnow()}})
+        # Notify each added member
+        from app.api.v1.notifications.service import create_notification
+        for uid in added:
+            await create_notification(
+                user_id=uid,
+                title="Added to Group",
+                message=f"You were added to group '{group.get('group_name', '')}'",
+                notification_type="group_added",
+                metadata={"group_id": group_id, "group_name": group.get("group_name", "")}
+            )
 
     return {"message": "Members added", "added": len(added)}
 
@@ -232,18 +244,18 @@ async def send_group_message(group_id: str, content: str, current_user: Dict) ->
     if my_id not in group.get("members", []):
         raise HTTPException(status_code=403, detail="Not a member")
 
-    message = {
-        "group_id": group_id,
-        "sender_id": my_id,
-        "sender_name": current_user.get("name", ""),
-        "content": content,
-        "created_at": datetime.utcnow()
-    }
+    message = GroupMessageInDB(
+        group_id=group_id,
+        sender_id=my_id,
+        sender_name=current_user.get("name", ""),
+        content=content,
+        created_at=datetime.utcnow()
+    )
 
-    result = await db.group_messages.insert_one(message)
+    result = await db.group_messages.insert_one(message.model_dump())
     await db.groups.update_one({"_id": ObjectId(group_id)}, {"$set": {"last_message": content[:100], "last_message_at": datetime.utcnow()}})
 
-    return {"message_id": str(result.inserted_id), "sent_at": message["created_at"]}
+    return {"message_id": str(result.inserted_id), "sent_at": message.created_at}
 
 
 async def get_group_messages(group_id: str, current_user: Dict, page: int = 1, limit: int = 50) -> Dict[str, Any]:
