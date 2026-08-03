@@ -1,13 +1,14 @@
 """
-Doctor management service — bulk upload
+Doctor management service — single add + bulk upload
 """
 
 import re
 from datetime import datetime
-from typing import Dict, Any
-from fastapi import HTTPException, UploadFile
+from typing import Dict, Any, Optional
+from fastapi import HTTPException, UploadFile, status
 import pandas as pd
 from io import BytesIO
+from bson import ObjectId
 from app.database import get_database
 from app.core.security import hash_password
 from app.config import settings
@@ -22,6 +23,62 @@ def validate_email(email: str) -> bool:
 def validate_phone(phone: str) -> bool:
     cleaned = re.sub(r'[^0-9]', '', str(phone))
     return len(cleaned) == 10
+
+
+async def add_single_doctor(data: Dict[str, Any]) -> Dict[str, Any]:
+    """Platform admin manually adds a single doctor"""
+    db = get_database()
+
+    name = data.get("name", "").strip()
+    email = data.get("email", "").strip().lower()
+    phone = data.get("phone", "").strip()
+
+    # Validate required
+    if not name:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Name is required")
+    if not email or not validate_email(email):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Valid email is required")
+    if not phone or not validate_phone(phone):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Valid 10-digit phone is required")
+
+    # Check duplicates
+    if await db.doctors.find_one({"email": email}):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
+    if await db.doctors.find_one({"phone": phone}):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Phone number already registered")
+
+    # Generate unique GID
+    doctor_gid = generate_doctor_gid()
+    while await db.doctors.find_one({"doctor_gid": doctor_gid}):
+        doctor_gid = generate_doctor_gid()
+
+    # Build doctor document
+    doctor = DoctorInDB(
+        doctor_gid=doctor_gid,
+        email=email,
+        phone=phone,
+        password_hash=hash_password(settings.DEFAULT_USER_PASSWORD),
+        name=name,
+        specialization=data.get("specialization"),
+        hospital=data.get("hospital"),
+        qualification=data.get("qualification"),
+        license_number=data.get("license_number"),
+        is_active=True,
+        is_email_verified=False,
+        is_phone_verified=False,
+        registered_via="drx_admin",
+        created_at=datetime.utcnow(),
+        updated_at=datetime.utcnow()
+    )
+
+    result = await db.doctors.insert_one(doctor.model_dump())
+
+    return {
+        "message": "Doctor added successfully",
+        "doctor_id": str(result.inserted_id),
+        "doctor_gid": doctor_gid,
+        "default_password": settings.DEFAULT_USER_PASSWORD
+    }
 
 
 async def bulk_upload_doctors(file: UploadFile, admin_user: Dict) -> Dict[str, Any]:

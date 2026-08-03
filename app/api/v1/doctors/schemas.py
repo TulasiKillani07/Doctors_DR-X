@@ -1,11 +1,36 @@
 """
-Doctor management schemas
+Doctor management schemas — DRX Doctor Platform
 """
 
 from pydantic import BaseModel, Field, field_validator
 from typing import Optional, List
 from datetime import datetime
 
+
+# ── Specialization options (dropdown) ──
+SPECIALIZATIONS = [
+    "General Physician", "General Medicine", "Family Medicine", "Emergency Medicine",
+    "Cardiology", "Neurology", "Nephrology", "Gastroenterology", "Endocrinology",
+    "Pulmonology (Respiratory Medicine)", "Rheumatology", "Infectious Diseases",
+    "Clinical Immunology", "Geriatric Medicine", "Critical Care Medicine",
+    "Pediatrics", "Neonatology", "Pediatric Cardiology", "Pediatric Neurology",
+    "Pediatric Nephrology", "Pediatric Gastroenterology", "Pediatric Endocrinology",
+    "General Surgery", "Orthopedic Surgery", "Neurosurgery", "Plastic Surgery",
+    "Cardiothoracic Surgery", "Vascular Surgery", "Urology", "Pediatric Surgery",
+    "Surgical Gastroenterology", "Obstetrics & Gynecology", "Reproductive Medicine",
+    "Medical Oncology", "Surgical Oncology", "Radiation Oncology", "Hematology",
+    "Hemato-Oncology", "Dermatology", "Venereology", "Ophthalmology",
+    "ENT (Otorhinolaryngology)", "Psychiatry", "Radiology", "Nuclear Medicine",
+    "Pathology", "Microbiology", "Transfusion Medicine", "Anesthesiology",
+    "Pain Medicine", "Palliative Medicine", "Physical Medicine & Rehabilitation",
+    "Sports Medicine", "Dentistry", "Oral & Maxillofacial Surgery",
+    "Community Medicine", "Preventive Medicine",
+]
+
+
+# ══════════════════════════════════════════════════════════════
+# Bulk Upload
+# ══════════════════════════════════════════════════════════════
 
 class BulkUploadErrorDetail(BaseModel):
     row: int
@@ -20,6 +45,50 @@ class BulkUploadResponse(BaseModel):
     failed: int
     errors: List[BulkUploadErrorDetail] = []
     message: str
+
+
+# ══════════════════════════════════════════════════════════════
+# Add Single Doctor
+# ══════════════════════════════════════════════════════════════
+
+class AddDoctorRequest(BaseModel):
+    """Admin manually adds a single doctor"""
+    name: str = Field(..., min_length=2, max_length=100)
+    email: str = Field(..., description="Doctor email (used for login)")
+    phone: str = Field(..., min_length=10, max_length=15)
+    specialization: Optional[str] = Field(None, description="Must be from predefined list")
+    hospital: Optional[str] = Field(None, max_length=200)
+    qualification: Optional[str] = Field(None, max_length=200)
+    license_number: Optional[str] = Field(None, max_length=50)
+
+    @field_validator("specialization")
+    @classmethod
+    def validate_specialization(cls, v: Optional[str]) -> Optional[str]:
+        if v is None:
+            return v
+        if v not in SPECIALIZATIONS:
+            raise ValueError("Invalid specialization. Use GET /doctors/specializations for valid options.")
+        return v
+
+    class Config:
+        extra = "forbid"
+        json_schema_extra = {
+            "example": {
+                "name": "Dr. Arjun Mehta",
+                "email": "arjun@hospital.com",
+                "phone": "9876543210",
+                "specialization": "Cardiology",
+                "hospital": "Apollo Hospital",
+                "qualification": "MBBS, MD Cardiology"
+            }
+        }
+
+
+class AddDoctorResponse(BaseModel):
+    message: str
+    doctor_id: str
+    doctor_gid: str
+    default_password: str
 
 
 # ══════════════════════════════════════════════════════════════
@@ -56,7 +125,7 @@ class DoctorUpdateByAdminRequest(BaseModel):
     """Fields an admin can update on a doctor"""
     name: Optional[str] = Field(None, min_length=2, max_length=100)
     phone: Optional[str] = Field(None, min_length=10, max_length=15)
-    specialization: Optional[str] = Field(None, max_length=100)
+    specialization: Optional[str] = Field(None, description="Must be one of the predefined specializations")
     hospital: Optional[str] = Field(None, max_length=200)
     license_number: Optional[str] = Field(None, max_length=50)
     experience_years: Optional[float] = Field(None, ge=0, le=70)
@@ -68,6 +137,15 @@ class DoctorUpdateByAdminRequest(BaseModel):
     state: Optional[str] = Field(None, max_length=100)
     country: Optional[str] = Field(None, max_length=100)
     is_active: Optional[bool] = None
+
+    @field_validator("specialization")
+    @classmethod
+    def validate_specialization(cls, v: Optional[str]) -> Optional[str]:
+        if v is None:
+            return v
+        if v not in SPECIALIZATIONS:
+            raise ValueError("Invalid specialization. Choose from the predefined list.")
+        return v
 
     class Config:
         extra = "forbid"
@@ -99,8 +177,8 @@ class DoctorListResponse(BaseModel):
 
 class AddLocationRequest(BaseModel):
     """Add a practice location to a doctor"""
-    name: str = Field(..., min_length=1, max_length=200, description="Location name")
-    address: str = Field(..., max_length=500, description="Full address")
+    name: str = Field(..., min_length=1, max_length=200)
+    address: str = Field(..., max_length=500)
     country: str = Field(..., max_length=100)
     state: str = Field(..., max_length=100)
     district: str = Field(..., max_length=100)

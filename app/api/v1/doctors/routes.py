@@ -9,12 +9,67 @@ from app.api.v1.doctors import service
 from app.api.v1.doctors.schemas import (
     BulkUploadResponse, DoctorDetailResponse, DoctorUpdateByAdminRequest,
     DoctorListResponse, AddLocationRequest, UpdateLocationRequest,
-    LocationListResponse, MessageResponse
+    LocationListResponse, MessageResponse, SPECIALIZATIONS,
+    AddDoctorRequest, AddDoctorResponse
 )
 
 router = APIRouter()
 
 
+@router.get("/specializations", summary="Get Specialization Options")
+async def get_specializations():
+    """
+    **Purpose:** Get the list of valid doctor specialization options for dropdown.
+
+    **Access:** Public (no auth required)
+
+    **Response:**
+    ```json
+    { "specializations": ["General Physician", "Cardiology", ...], "total": 57 }
+    ```
+    """
+    return {"specializations": SPECIALIZATIONS, "total": len(SPECIALIZATIONS)}
+
+
+@router.post("", response_model=AddDoctorResponse, status_code=201, summary="Add Doctor")
+async def add_doctor(
+    request: AddDoctorRequest,
+    current_user=Depends(require_platform_admin)
+):
+    """
+    **Purpose:** Platform admin manually adds a single doctor.
+
+    **Access:** Platform Admin only
+
+    **Request Body:**
+    ```json
+    {
+      "name": "Dr. Arjun Mehta",
+      "email": "arjun@hospital.com",
+      "phone": "9876543210",
+      "specialization": "Cardiology",
+      "hospital": "Apollo Hospital",
+      "qualification": "MBBS, MD Cardiology",
+      "license_number": "MH12345"
+    }
+    ```
+
+    **Response:**
+    ```json
+    {
+      "message": "Doctor added successfully",
+      "doctor_id": "6a6aef18...",
+      "doctor_gid": "PRXDOC482915",
+      "default_password": "Welcome@123"
+    }
+    ```
+
+    **Rules:**
+    - Email and phone must be unique
+    - Doctor can login with default_password immediately
+    - specialization must be from predefined list (GET /doctors/specializations)
+    """
+    return await service.add_single_doctor(request.model_dump())
 # ══════════════════════════════════════════════════════════════
 # Doctor CRUD
 # ══════════════════════════════════════════════════════════════

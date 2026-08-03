@@ -2,9 +2,10 @@
 Profile schemas for DRX Doctor Platform
 """
 
-from pydantic import BaseModel, Field, EmailStr
+from pydantic import BaseModel, Field, EmailStr, field_validator
 from typing import Optional
 from datetime import datetime
+from app.api.v1.doctors.schemas import SPECIALIZATIONS
 
 
 class DoctorProfileResponse(BaseModel):
@@ -45,7 +46,7 @@ class DoctorProfileUpdateRequest(BaseModel):
     phone: Optional[str] = Field(None, min_length=10, max_length=15)
 
     # Professional
-    specialization: Optional[str] = Field(None, max_length=100)
+    specialization: Optional[str] = Field(None, description="Must be one of the predefined specializations")
     hospital: Optional[str] = Field(None, max_length=200)
     license_number: Optional[str] = Field(None, max_length=50)
     experience_years: Optional[float] = Field(None, ge=0, le=70)
@@ -58,6 +59,15 @@ class DoctorProfileUpdateRequest(BaseModel):
     city: Optional[str] = Field(None, max_length=100)
     state: Optional[str] = Field(None, max_length=100)
     country: Optional[str] = Field(None, max_length=100)
+
+    @field_validator("specialization")
+    @classmethod
+    def validate_specialization(cls, v: Optional[str]) -> Optional[str]:
+        if v is None:
+            return v
+        if v not in SPECIALIZATIONS:
+            raise ValueError("Invalid specialization. Use GET /doctors/specializations for valid options.")
+        return v
 
     class Config:
         extra = "forbid"
