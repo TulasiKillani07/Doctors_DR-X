@@ -155,3 +155,11 @@ async def initialize_collections():
         [("doctor_id", 1), ("organization_id", 1), ("action", 1)],
         name="activity_doctor_org_action_idx"
     )
+
+    # ── integration_services ──
+    await database["integration_services"].create_index(
+        "client_id", unique=True, name="int_svc_client_id_unique_idx"
+    )
+    await database["integration_services"].create_index(
+        "service_code", unique=True, name="int_svc_code_unique_idx"
+    )

@@ -8,6 +8,7 @@ from app.api.v1.organizations.routes import router as organizations_router
 from app.api.v1.doctor_organizations.routes import router as doctor_orgs_router
 from app.api.v1.doctors.routes import router as doctors_router
 from app.api.v1.integration.routes import router as integration_router
+from app.api.v1.integration_services.routes import router as integration_services_router
 from app.api.v1.profile.routes import router as profile_router
 from app.api.v1.dashboard.routes import router as dashboard_router
 from app.api.v1.notifications.routes import router as notifications_router
@@ -78,6 +79,9 @@ api_router.include_router(doctor_orgs_router, prefix="/doctor-organizations", ta
 
 # Integration APIs (Service JWT only — backend-to-backend)
 api_router.include_router(integration_router, prefix="/integration", tags=["Integration (Service-to-Service)"])
+
+# Integration Services Management (Platform Admin only)
+api_router.include_router(integration_services_router, prefix="/integration/services", tags=["Integration Services (Admin)"])
 
 # Activity Logs (Doctor views own activity history)
 api_router.include_router(activity_logs_router, prefix="/activity-logs", tags=["Activity Logs"])

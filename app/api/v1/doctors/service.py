@@ -25,8 +25,16 @@ def validate_phone(phone: str) -> bool:
     return len(cleaned) == 10
 
 
-async def add_single_doctor(data: Dict[str, Any]) -> Dict[str, Any]:
-    """Platform admin manually adds a single doctor"""
+async def add_single_doctor(data: Dict[str, Any], return_existing: bool = False) -> Dict[str, Any]:
+    """
+    Single source of truth for doctor creation.
+    Called by both admin endpoint and integration endpoint.
+
+    Args:
+        data: Doctor fields (name, email, phone, specialization, etc.)
+        return_existing: If True, returns existing doctor info instead of raising 400 on duplicate.
+                         Used by integration (MRX auto-sync, voice onboarding).
+    """
     db = get_database()
 
     name = data.get("name", "").strip()
@@ -42,9 +50,16 @@ async def add_single_doctor(data: Dict[str, Any]) -> Dict[str, Any]:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Valid 10-digit phone is required")
 
     # Check duplicates
-    if await db.doctors.find_one({"email": email}):
+    existing_email = await db.doctors.find_one({"email": email})
+    if existing_email:
+        if return_existing:
+            return {"status": "exists", "doctor_gid": existing_email.get("doctor_gid", ""), "doctor_id": str(existing_email["_id"]), "message": "Doctor already exists on DRX"}
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
-    if await db.doctors.find_one({"phone": phone}):
+
+    existing_phone = await db.doctors.find_one({"phone": phone})
+    if existing_phone:
+        if return_existing:
+            return {"status": "exists", "doctor_gid": existing_phone.get("doctor_gid", ""), "doctor_id": str(existing_phone["_id"]), "message": "Doctor with this phone already exists on DRX"}
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Phone number already registered")
 
     # Generate unique GID
@@ -66,7 +81,7 @@ async def add_single_doctor(data: Dict[str, Any]) -> Dict[str, Any]:
         is_active=True,
         is_email_verified=False,
         is_phone_verified=False,
-        registered_via="drx_admin",
+        registered_via=data.get("registered_via", "drx_admin"),
         created_at=datetime.utcnow(),
         updated_at=datetime.utcnow()
     )
@@ -74,6 +89,7 @@ async def add_single_doctor(data: Dict[str, Any]) -> Dict[str, Any]:
     result = await db.doctors.insert_one(doctor.model_dump())
 
     return {
+        "status": "created",
         "message": "Doctor added successfully",
         "doctor_id": str(result.inserted_id),
         "doctor_gid": doctor_gid,

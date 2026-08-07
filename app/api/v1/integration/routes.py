@@ -33,12 +33,12 @@ async def get_service_token(request: ServiceTokenRequest):
     """
     **Purpose:** Exchange client_id + client_secret for a short-lived Service JWT.
 
-    **Access:** Any service with valid credentials (MRX backend)
+    **Access:** Any registered integration service or organization with valid credentials.
 
     **Request Body:**
     ```json
     {
-      "client_id": "abc_pharma_7f2a",
+      "client_id": "onboarding_a1b2c3d4",
       "client_secret": "X8kQ29Lp7mF..."
     }
     ```
@@ -52,40 +52,51 @@ async def get_service_token(request: ServiceTokenRequest):
     }
     ```
 
-    **Validations:**
-    - Organization must exist with matching client_id
-    - client_secret must match stored hash
-    - Organization must be ACTIVE
+    **Credential sources (checked in order):**
+    1. `integration_services` collection (Voice Onboarding, OCR, etc.)
+    2. `organizations` collection (MRX backends — backward compatible)
 
     **Token lifetime:** 15 minutes
     """
     db = get_database()
 
-    # Find org by client_id
+    # 1. Check integration_services first (new way)
+    svc = await db.integration_services.find_one({"client_id": request.client_id})
+    if svc:
+        if svc.get("status") != "ACTIVE":
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Service is inactive")
+        if not verify_password(request.client_secret, svc["client_secret_hash"]):
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
+
+        # Update last_used_at
+        from app.api.v1.integration_services.service import update_last_used
+        await update_last_used(request.client_id)
+
+        token = create_service_token(
+            organization_id=svc.get("service_code", ""),
+            organization_name=svc["service_name"],
+            client_id=svc["client_id"]
+        )
+        return {"access_token": token, "token_type": "Bearer", "expires_in": SERVICE_TOKEN_EXPIRE_MINUTES * 60}
+
+    # 2. Fall back to organizations (backward compatible with MRX)
     org = await db.organizations.find_one({"client_id": request.client_id})
     if not org:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
 
-    # Verify secret
     if not verify_password(request.client_secret, org["client_secret_hash"]):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
 
-    # Check active
     if org.get("status") != "ACTIVE":
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Organization is inactive")
 
-    # Generate service token
     token = create_service_token(
         organization_id=str(org["_id"]),
         organization_name=org["organization_name"],
         client_id=org["client_id"]
     )
 
-    return {
-        "access_token": token,
-        "token_type": "Bearer",
-        "expires_in": SERVICE_TOKEN_EXPIRE_MINUTES * 60
-    }
+    return {"access_token": token, "token_type": "Bearer", "expires_in": SERVICE_TOKEN_EXPIRE_MINUTES * 60}
 
 
 # ── Protected Integration Endpoints (require Service JWT) ──
@@ -186,12 +197,7 @@ async def register_doctor_integration(
     }
     ```
     """
-    from datetime import datetime
-    from app.core.security import hash_password
-    from app.models.doctor_model import generate_doctor_gid
-    from app.config import settings
-
-    db = get_database()
+    from app.api.v1.doctors.service import add_single_doctor
 
     name = request.get("name", "").strip()
     email = request.get("email", "").strip().lower()
@@ -200,58 +206,15 @@ async def register_doctor_integration(
     if not name or not email:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="name and email are required")
 
-    # Check if doctor already exists by email
-    existing = await db.doctors.find_one({"email": email})
-    if existing:
-        return {
-            "status": "exists",
-            "doctor_gid": existing.get("doctor_gid", ""),
-            "message": "Doctor already exists on DRX"
-        }
-
-    # Check phone duplicate
-    if phone:
-        phone_exists = await db.doctors.find_one({"phone": phone})
-        if phone_exists:
-            return {
-                "status": "exists",
-                "doctor_gid": phone_exists.get("doctor_gid", ""),
-                "message": "Doctor with this phone already exists on DRX"
-            }
-
-    # Generate unique GID
-    doctor_gid = generate_doctor_gid()
-    while await db.doctors.find_one({"doctor_gid": doctor_gid}):
-        doctor_gid = generate_doctor_gid()
-
-    # Create doctor using Pydantic model
-    from app.models.doctor_model import DoctorInDB
-
-    doctor = DoctorInDB(
-        doctor_gid=doctor_gid,
-        email=email,
-        phone=phone,
-        password_hash=hash_password(settings.DEFAULT_USER_PASSWORD),
-        name=name,
-        is_active=True,
-        is_email_verified=False,
-        is_phone_verified=False,
-        locations=[],
-        registered_via=org_context.get("client_id", "unknown"),
-        created_at=datetime.utcnow(),
-        updated_at=datetime.utcnow()
+    return await add_single_doctor(
+        data={
+            "name": name,
+            "email": email,
+            "phone": phone,
+            "registered_via": org_context.get("client_id", "unknown")
+        },
+        return_existing=True
     )
-
-    try:
-        await db.doctors.insert_one(doctor.model_dump())
-    except Exception as e:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=f"Failed to register doctor: {str(e)}")
-
-    return {
-        "status": "created",
-        "doctor_gid": doctor_gid,
-        "message": "Doctor registered on DRX"
-    }
 
 
 # ══════════════════════════════════════════════════════════════
