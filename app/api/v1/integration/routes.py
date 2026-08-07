@@ -206,11 +206,16 @@ async def register_doctor_integration(
     if not name or not email:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="name and email are required")
 
+    # Pass all fields through — add_single_doctor stores whatever is provided
     return await add_single_doctor(
         data={
             "name": name,
             "email": email,
             "phone": phone,
+            "specialization": request.get("specialization"),
+            "hospital": request.get("hospital"),
+            "qualification": request.get("qualification"),
+            "license_number": request.get("license_number"),
             "registered_via": org_context.get("client_id", "unknown")
         },
         return_existing=True
