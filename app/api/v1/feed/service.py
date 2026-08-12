@@ -246,7 +246,7 @@ async def share_to_chat(post_id: str, doctor_id: str, recipient_id: str) -> Dict
     conv_id = conversation.get("id", conversation.get("conversation_id", ""))
 
     # Send the post as a message
-    content = f"📄 Shared a post by {post.get('author_name', 'a doctor')}:\n\n\"{post.get('content', '')[:200]}\"\n\n[Post ID: {post_id}]"
+    content = f"[Shared Post] by {post.get('author_name', 'a doctor')}:\n\n\"{post.get('content', '')[:200]}\"\n\n[Post ID: {post_id}]"
     result = await send_message(conv_id, doctor_id, content)
 
     return {"message": "Post shared via chat", "conversation_id": conv_id, "message_id": result.get("message_id")}

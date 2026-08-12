@@ -7,7 +7,7 @@ from app.core.auth import require_platform_admin
 from app.api.v1.integration_services import service
 from app.api.v1.integration_services.schemas import (
     CreateIntegrationServiceRequest, CreateIntegrationServiceResponse,
-    IntegrationServiceListResponse, RotateSecretResponse, MessageResponse
+    IntegrationServiceListResponse, MessageResponse
 )
 
 router = APIRouter()
@@ -60,27 +60,6 @@ async def list_services_endpoint(current_user=Depends(require_platform_admin)):
     **Response:** All services with status, last_used_at, etc. No secrets shown.
     """
     return await service.get_all_services()
-
-
-@router.post("/{service_id}/rotate-secret", response_model=RotateSecretResponse, summary="Rotate Service Secret")
-async def rotate_secret_endpoint(service_id: str, current_user=Depends(require_platform_admin)):
-    """
-    **Purpose:** Generate a new secret for a service. Old secret becomes invalid immediately.
-
-    **Access:** Platform Admin only
-
-    **Response (new secret shown ONCE):**
-    ```json
-    {
-      "message": "Secret rotated successfully",
-      "client_id": "onboarding_a1b2c3d4",
-      "client_secret": "NewSecretHere..."
-    }
-    ```
-
-    **After rotation:** Update the consuming service's .env with the new secret.
-    """
-    return await service.rotate_secret(service_id)
 
 
 @router.patch("/{service_id}/activate", response_model=MessageResponse, summary="Activate Service")
