@@ -9,6 +9,7 @@ from datetime import datetime
 
 class OrganizationCreateRequest(BaseModel):
     organization_name: str = Field(..., min_length=2, max_length=200)
+    mrx_url: str = Field(..., min_length=10, max_length=500, description="Organization's MRX backend URL (required for communication)")
     logo: Optional[str] = None
     contact_email: Optional[EmailStr] = None
     contact_phone: Optional[str] = None
@@ -20,12 +21,11 @@ class OrganizationCreateRequest(BaseModel):
     state: Optional[str] = Field(None, max_length=100)
     country: Optional[str] = Field(None, max_length=100)
     pincode: Optional[str] = Field(None, max_length=20)
-    # Integration — only MRX URL needed (credentials come from DRX .env)
-    mrx_url: Optional[str] = Field(None, max_length=500, description="Organization's MRX backend URL")
 
 
 class OrganizationUpdateRequest(BaseModel):
     organization_name: Optional[str] = Field(None, min_length=2, max_length=200)
+    mrx_url: Optional[str] = Field(None, min_length=10, max_length=500, description="Update MRX backend URL")
     logo: Optional[str] = None
     contact_email: Optional[EmailStr] = None
     contact_phone: Optional[str] = None
@@ -38,14 +38,13 @@ class OrganizationUpdateRequest(BaseModel):
     country: Optional[str] = Field(None, max_length=100)
     pincode: Optional[str] = Field(None, max_length=20)
     status: Optional[str] = Field(None, description="ACTIVE or INACTIVE")
-    # Integration — only MRX URL needed (credentials come from DRX .env)
-    mrx_url: Optional[str] = Field(None, max_length=500, description="Organization's MRX backend URL")
 
 
 class OrganizationResponse(BaseModel):
     id: str
     organization_gid: str
     organization_name: str
+    mrx_url: Optional[str] = None
     logo: Optional[str] = None
     contact_email: Optional[str] = None
     contact_phone: Optional[str] = None
@@ -73,4 +72,4 @@ class MessageResponse(BaseModel):
     organization_id: Optional[str] = None
     organization_gid: Optional[str] = None
     client_id: Optional[str] = None
-    client_secret: Optional[str] = Field(None, description="Only returned on creation — store securely, never shown again")
+    client_secret: Optional[str] = Field(None, description="Only returned on creation -- store securely, never shown again")

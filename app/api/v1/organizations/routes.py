@@ -20,35 +20,39 @@ async def create_organization(
     current_user=Depends(require_platform_admin)
 ):
     """
-    **Purpose:** Register a new pharmaceutical company on the platform.
+    **Purpose:** Register a new pharmaceutical company on the platform. Auto-generates integration credentials.
 
     **Access:** Platform Admin only
 
     **Request Body:**
     ```json
     {
-      "organization_name": "XYZ Pharma Pvt Ltd",
-      "contact_email": "info@xyzpharma.com",
+      "organization_name": "Sanofi India",
+      "mrx_url": "https://pharma-medrepai.onrender.com",
+      "contact_email": "info@sanofi.com",
       "contact_phone": "9876543210",
-      "org_admin": "Rajesh Kumar",
-      "admin_email": "rajesh@xyzpharma.com",
-      "admin_phone": "9876543211",
-      "address": "Plot 45, Industrial Area",
-      "city": "Hyderabad",
-      "state": "Telangana",
-      "country": "India",
-      "pincode": "500032"
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "country": "India"
     }
     ```
 
-    **Response:**
+    **Required:** `organization_name`, `mrx_url`
+
+    **Response (credentials shown ONCE):**
     ```json
     {
       "message": "Organization created successfully",
-      "organization_id": "507f1f77bcf86cd799439011",
-      "organization_gid": "PRXORG482915"
+      "organization_id": "6a5f4fbe...",
+      "organization_gid": "PRXORG631774",
+      "client_id": "sanofi_e228",
+      "client_secret": "XGqW5_OvZzC05h-bSh... (shown only once — put in MRX .env)"
     }
     ```
+
+    **After creation:**
+    - Copy `client_id` and `client_secret` into MRX's `.env` as `MRX_TO_DRX_CLIENT_ID` and `MRX_TO_DRX_SECRET`
+    - `mrx_url` is used by DRX to reach this org's MRX backend
     """
     return await service.create_organization(request.model_dump(), current_user)
 
@@ -116,13 +120,16 @@ async def update_organization(
 
     **Access:** Platform Admin only
 
-    **Request Body (partial update):**
+    **Request Body (partial update — send only what changes):**
     ```json
     {
-      "organization_name": "XYZ Pharma Updated",
+      "mrx_url": "https://new-mrx-url.onrender.com",
+      "organization_name": "Sanofi India Updated",
       "city": "Mumbai"
     }
     ```
+
+    **Use case for `mrx_url`:** If MRX moves to a new server/URL, update it here.
 
     **Response:**
     ```json
