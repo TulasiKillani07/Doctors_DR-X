@@ -212,6 +212,7 @@ async def register_doctor_integration(
             "name": name,
             "email": email,
             "phone": phone,
+            "username": request.get("username", "").strip().lower(),
             "specialization": request.get("specialization"),
             "hospital": request.get("hospital"),
             "qualification": request.get("qualification"),
