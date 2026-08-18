@@ -21,8 +21,9 @@ def validate_email(email: str) -> bool:
 
 
 def validate_phone(phone: str) -> bool:
+    """Accept 10-digit numbers or with country code (e.g. +91XXXXXXXXXX)"""
     cleaned = re.sub(r'[^0-9]', '', str(phone))
-    return len(cleaned) == 10
+    return len(cleaned) == 10 or len(cleaned) == 12
 
 
 async def add_single_doctor(data: Dict[str, Any], return_existing: bool = False) -> Dict[str, Any]:
@@ -67,9 +68,24 @@ async def add_single_doctor(data: Dict[str, Any], return_existing: bool = False)
     while await db.doctors.find_one({"doctor_gid": doctor_gid}):
         doctor_gid = generate_doctor_gid()
 
+    # Username is required
+    username = data.get("username", "").strip().lower()
+    if not username:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username is required")
+
+    # Validate format
+    import re as _re
+    if not _re.match(r'^[a-z0-9_]{3,30}$', username):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username must be 3-30 characters, only lowercase letters, numbers, and underscores")
+
+    # Check uniqueness
+    if await db.doctors.find_one({"username": username}):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already taken")
+
     # Build doctor document
     doctor = DoctorInDB(
         doctor_gid=doctor_gid,
+        username=username,
         email=email,
         phone=phone,
         password_hash=hash_password(settings.DEFAULT_USER_PASSWORD),
@@ -123,7 +139,7 @@ async def bulk_upload_doctors(file: UploadFile, admin_user: Dict) -> Dict[str, A
     df.columns = [col.strip().lower().replace(' ', '_') for col in df.columns]
 
     # Validate required columns
-    required = ["name", "email", "phone"]
+    required = ["name", "username", "email", "phone"]
     missing = [col for col in required if col not in df.columns]
     if missing:
         raise HTTPException(status_code=400, detail=f"Missing required columns: {', '.join(missing)}")
@@ -141,10 +157,16 @@ async def bulk_upload_doctors(file: UploadFile, admin_user: Dict) -> Dict[str, A
         name = str(row.get('name', '')).strip() if pd.notna(row.get('name')) else ''
         email = str(row.get('email', '')).strip().lower() if pd.notna(row.get('email')) else ''
         phone = str(row.get('phone', '')).strip() if pd.notna(row.get('phone')) else ''
+        username = str(row.get('username', '')).strip().lower() if pd.notna(row.get('username')) else ''
 
         # Validate
         if not name:
             errors.append({"row": row_number, "email": email, "error": "Name is required"})
+            failed += 1
+            continue
+
+        if not username or not re.match(r'^[a-z0-9_]{3,30}$', username):
+            errors.append({"row": row_number, "name": name, "email": email, "error": "Username is required (3-30 chars, lowercase letters/numbers/underscores)"})
             failed += 1
             continue
 
@@ -179,10 +201,17 @@ async def bulk_upload_doctors(file: UploadFile, admin_user: Dict) -> Dict[str, A
         while await db.doctors.find_one({"doctor_gid": doctor_gid}):
             doctor_gid = generate_doctor_gid()
 
+        # Check username uniqueness
+        if await db.doctors.find_one({"username": username}):
+            errors.append({"row": row_number, "name": name, "email": email, "error": "Username already taken"})
+            failed += 1
+            continue
+
         # Create doctor
         try:
             doctor = DoctorInDB(
                 doctor_gid=doctor_gid,
+                username=username,
                 email=email,
                 phone=phone_cleaned,
                 password_hash=hash_password(settings.DEFAULT_USER_PASSWORD),
