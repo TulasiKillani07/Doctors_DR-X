@@ -11,6 +11,12 @@ from fastapi import HTTPException, status
 from app.database import get_database
 
 
+def _is_duplicate_key_error(e: Exception) -> bool:
+    """Check if an exception is a MongoDB duplicate key error."""
+    err_str = str(e).lower()
+    return "duplicate key" in err_str or "e11000" in err_str
+
+
 class DrugBookmarkInDB(BaseModel):
     """Write model for drug_bookmarks collection"""
     model_config = ConfigDict(extra="forbid")
@@ -29,15 +35,6 @@ async def add_bookmark(doctor_id: str, org_id: str, drug_id: str, drug_name: str
     if not ObjectId.is_valid(org_id):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid organization ID")
 
-    # Check duplicate
-    existing = await db.drug_bookmarks.find_one({
-        "doctor_id": doctor_id,
-        "organization_id": org_id,
-        "drug_id": drug_id
-    })
-    if existing:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Drug already bookmarked")
-
     bookmark = DrugBookmarkInDB(
         doctor_id=doctor_id,
         organization_id=org_id,
@@ -46,7 +43,13 @@ async def add_bookmark(doctor_id: str, org_id: str, drug_id: str, drug_name: str
         bookmarked_at=datetime.utcnow()
     )
 
-    result = await db.drug_bookmarks.insert_one(bookmark.model_dump())
+    # Insert-first: rely on unique index (doctor_id, organization_id, drug_id)
+    try:
+        result = await db.drug_bookmarks.insert_one(bookmark.model_dump())
+    except Exception as e:
+        if _is_duplicate_key_error(e):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Drug already bookmarked")
+        raise
 
     # Log activity
     from app.services.activity_logger import log_activity
@@ -115,14 +118,6 @@ async def add_cme_bookmark(doctor_id: str, org_id: str, event_id: str, event_tit
     if not ObjectId.is_valid(org_id):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid organization ID")
 
-    existing = await db.cme_bookmarks.find_one({
-        "doctor_id": doctor_id,
-        "organization_id": org_id,
-        "event_id": event_id
-    })
-    if existing:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="CME event already bookmarked")
-
     bookmark = CMEBookmarkInDB(
         doctor_id=doctor_id,
         organization_id=org_id,
@@ -131,7 +126,14 @@ async def add_cme_bookmark(doctor_id: str, org_id: str, event_id: str, event_tit
         bookmarked_at=datetime.utcnow()
     )
 
-    result = await db.cme_bookmarks.insert_one(bookmark.model_dump())
+    # Insert-first: rely on unique index (doctor_id, organization_id, event_id)
+    try:
+        result = await db.cme_bookmarks.insert_one(bookmark.model_dump())
+    except Exception as e:
+        if _is_duplicate_key_error(e):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="CME event already bookmarked")
+        raise
+
     return {"message": "CME event bookmarked", "bookmark_id": str(result.inserted_id)}
 
 
@@ -197,14 +199,6 @@ async def add_post_bookmark(doctor_id: str, post_id: str, post_author_name: str,
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
 
-    # Check duplicate
-    existing = await db.post_bookmarks.find_one({
-        "doctor_id": doctor_id,
-        "post_id": post_id
-    })
-    if existing:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Post already bookmarked")
-
     bookmark = PostBookmarkInDB(
         doctor_id=doctor_id,
         post_id=post_id,
@@ -213,7 +207,13 @@ async def add_post_bookmark(doctor_id: str, post_id: str, post_author_name: str,
         bookmarked_at=datetime.utcnow()
     )
 
-    result = await db.post_bookmarks.insert_one(bookmark.model_dump())
+    # Insert-first: rely on unique index (doctor_id, post_id)
+    try:
+        result = await db.post_bookmarks.insert_one(bookmark.model_dump())
+    except Exception as e:
+        if _is_duplicate_key_error(e):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Post already bookmarked")
+        raise
 
     from app.services.activity_logger import log_activity
     await log_activity(doctor_id, "drx_platform", "post_bookmarked", {"post_id": post_id})

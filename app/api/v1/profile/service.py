@@ -190,9 +190,15 @@ async def update_my_location(location_id: str, update_data: Dict[str, Any], curr
     """Doctor updates one of their own locations"""
     db = get_database()
 
+    # Whitelist: only these fields can be updated by the doctor
+    allowed_location_fields = {
+        "name", "address", "country", "state", "district", "city", "area",
+        "latitude", "longitude", "type", "geofence_radius", "is_active"
+    }
+
     update_fields = {}
     for key, value in update_data.items():
-        if value is not None:
+        if value is not None and key in allowed_location_fields:
             update_fields[f"locations.$.{key}"] = value
 
     if not update_fields:

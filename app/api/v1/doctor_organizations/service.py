@@ -8,25 +8,16 @@ from fastapi import HTTPException, status
 from bson import ObjectId
 from app.database import get_database
 from app.models.doctor_organization_model import DoctorOrganizationInDB, RelationshipStatus
+from app.services.helpers import get_or_404
 
 
 async def create_relationship(doctor_id: str, organization_id: str, admin_user: Dict) -> Dict[str, Any]:
     """Create a new doctor-organization relationship (starts as PENDING)"""
     db = get_database()
 
-    # Validate doctor exists
-    if not ObjectId.is_valid(doctor_id):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid doctor ID")
-    doctor = await db.doctors.find_one({"_id": ObjectId(doctor_id)})
-    if not doctor:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Doctor not found")
-
-    # Validate organization exists
-    if not ObjectId.is_valid(organization_id):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid organization ID")
-    org = await db.organizations.find_one({"_id": ObjectId(organization_id)})
-    if not org:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Organization not found")
+    # Validate doctor and org exist (raises 400/404 automatically)
+    await get_or_404("doctors", doctor_id, {"_id": 1}, detail="Doctor not found")
+    await get_or_404("organizations", organization_id, {"_id": 1}, detail="Organization not found")
 
     # Check duplicate
     existing = await db.doctor_organizations.find_one({
@@ -60,15 +51,7 @@ async def create_relationship(doctor_id: str, organization_id: str, admin_user: 
 
 async def get_relationship(rel_id: str) -> Dict[str, Any]:
     """Get a single relationship by ID"""
-    db = get_database()
-
-    if not ObjectId.is_valid(rel_id):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid relationship ID")
-
-    rel = await db.doctor_organizations.find_one({"_id": ObjectId(rel_id)})
-    if not rel:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Relationship not found")
-
+    rel = await get_or_404("doctor_organizations", rel_id, detail="Relationship not found")
     rel["id"] = str(rel.pop("_id"))
     return rel
 
@@ -111,12 +94,8 @@ async def update_status(rel_id: str, new_status: str) -> Dict[str, Any]:
             detail=f"Status must be one of: {', '.join(valid_statuses)}"
         )
 
-    if not ObjectId.is_valid(rel_id):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid relationship ID")
-
-    rel = await db.doctor_organizations.find_one({"_id": ObjectId(rel_id)})
-    if not rel:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Relationship not found")
+    # Validates ObjectId format and existence in one call
+    await get_or_404("doctor_organizations", rel_id, {"_id": 1}, detail="Relationship not found")
 
     now = datetime.utcnow()
     update_fields = {"status": new_status, "updated_at": now}

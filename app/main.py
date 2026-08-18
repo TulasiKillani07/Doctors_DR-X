@@ -18,8 +18,9 @@ app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
     description="DRX - Doctor Platform. Verified doctor network for pharmaceutical industry.",
-    docs_url="/docs",
-    redoc_url="/redoc",
+    docs_url="/drxdb/docs",
+    redoc_url="/drxdb/redoc",
+    openapi_url="/drxdb/openapi.json"
 )
 
 app.add_middleware(
@@ -54,13 +55,13 @@ async def shutdown_event():
     logger.info("DRX shut down")
 
 
-app.include_router(api_router, prefix="/drx/api/v1")
+app.include_router(api_router, prefix="/drxdb")
 
 
 # Root route
-@app.get("/", include_in_schema=False)
+@app.get("/drxdb", include_in_schema=False)
 async def root():
-    return {"service": settings.APP_NAME, "version": settings.APP_VERSION, "docs": "/docs"}
+    return {"service": settings.APP_NAME, "version": settings.APP_VERSION}
 
 
 @app.get("/favicon.ico", include_in_schema=False)

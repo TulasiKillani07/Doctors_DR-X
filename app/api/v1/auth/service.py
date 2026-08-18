@@ -74,7 +74,7 @@ async def admin_login(email: str, password: str) -> Dict[str, Any]:
     }
 
 
-async def doctor_register(name: str, email: str, phone: str, password: str = None) -> Dict[str, Any]:
+async def doctor_register(name: str, email: str, phone: str, username: str, password: str = None) -> Dict[str, Any]:
     """Doctor self-registration"""
     from app.config import settings
     from app.models.doctor_model import generate_doctor_gid
@@ -86,6 +86,9 @@ async def doctor_register(name: str, email: str, phone: str, password: str = Non
     if await db.doctors.find_one({"phone": phone}):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Phone already registered")
 
+    if await db.doctors.find_one({"username": username}):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already taken")
+
     final_password = password or settings.DEFAULT_USER_PASSWORD
 
     # Generate unique GID (retry on collision)
@@ -95,6 +98,7 @@ async def doctor_register(name: str, email: str, phone: str, password: str = Non
 
     doctor = DoctorInDB(
         doctor_gid=doctor_gid,
+        username=username,
         email=email,
         phone=phone,
         password_hash=hash_password(final_password),
@@ -116,14 +120,17 @@ async def doctor_register(name: str, email: str, phone: str, password: str = Non
 
 
 async def doctor_login(identifier: str, password: str) -> Dict[str, Any]:
-    """Doctor login — accepts email or doctor_gid"""
+    """Doctor login — accepts email, username, or doctor_gid"""
     db = get_database()
 
-    # Determine if identifier is email or GID
+    # Determine if identifier is email, GID, or username
     if "@" in identifier:
         doctor = await db.doctors.find_one({"email": identifier})
-    else:
+    elif identifier.upper().startswith("PRXDOC"):
         doctor = await db.doctors.find_one({"doctor_gid": identifier})
+    else:
+        # Treat as username (stored lowercase)
+        doctor = await db.doctors.find_one({"username": identifier.lower()})
 
     if not doctor:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")

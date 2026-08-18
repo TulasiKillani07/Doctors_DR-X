@@ -16,13 +16,21 @@ async def create_group(name: str, description: str, member_ids: List[str], curre
     db = get_database()
     creator_id = current_user["_id"]
 
-    # Validate members exist and are connected
-    valid_members = [creator_id]
+    # Batch validate members: collect valid ObjectIds, query once
+    candidate_ids = []
     for mid in member_ids[:49]:  # Max 50 including creator
         if ObjectId.is_valid(mid) and mid != creator_id:
-            doc = await db.doctors.find_one({"_id": ObjectId(mid)}, {"_id": 1})
-            if doc:
-                valid_members.append(mid)
+            candidate_ids.append(mid)
+
+    valid_members = [creator_id]
+    if candidate_ids:
+        candidate_oids = [ObjectId(mid) for mid in candidate_ids]
+        existing_docs = await db.doctors.find(
+            {"_id": {"$in": candidate_oids}},
+            {"_id": 1}
+        ).to_list(length=len(candidate_oids))
+        existing_ids = {str(doc["_id"]) for doc in existing_docs}
+        valid_members.extend([mid for mid in candidate_ids if mid in existing_ids])
 
     group = GroupInDB(
         group_name=name,
@@ -81,10 +89,19 @@ async def get_group_details(group_id: str, current_user: Dict) -> Dict[str, Any]
     if current_user["_id"] not in group.get("members", []):
         raise HTTPException(status_code=403, detail="Not a member")
 
-    # Fetch member details
+    # Batch fetch all member details in one query
+    member_ids = group.get("members", [])
+    member_oids = [ObjectId(mid) for mid in member_ids if ObjectId.is_valid(mid)]
+    doctors_list = await db.doctors.find(
+        {"_id": {"$in": member_oids}},
+        {"name": 1, "doctor_gid": 1, "specialization": 1, "avatar_url": 1}
+    ).to_list(length=len(member_oids))
+    doctor_map = {str(doc["_id"]): doc for doc in doctors_list}
+
+    admins_set = set(group.get("admins", []))
     members = []
-    for mid in group.get("members", []):
-        doc = await db.doctors.find_one({"_id": ObjectId(mid)}, {"name": 1, "doctor_gid": 1, "specialization": 1, "avatar_url": 1})
+    for mid in member_ids:
+        doc = doctor_map.get(mid)
         if doc:
             members.append({
                 "user_id": mid,
@@ -92,7 +109,7 @@ async def get_group_details(group_id: str, current_user: Dict) -> Dict[str, Any]
                 "doctor_gid": doc.get("doctor_gid", ""),
                 "specialization": doc.get("specialization"),
                 "avatar_url": doc.get("avatar_url"),
-                "is_admin": mid in group.get("admins", [])
+                "is_admin": mid in admins_set
             })
 
     return {
@@ -140,12 +157,20 @@ async def add_members(group_id: str, user_ids: List[str], current_user: Dict) ->
         raise HTTPException(status_code=403, detail="Only admins can add members")
 
     current_members = set(group.get("members", []))
+
+    # Filter candidates: valid ObjectIds, not already members, max 10
+    candidate_ids = [uid for uid in user_ids[:10] if uid not in current_members and ObjectId.is_valid(uid)]
+
     added = []
-    for uid in user_ids[:10]:
-        if uid not in current_members and ObjectId.is_valid(uid):
-            doc = await db.doctors.find_one({"_id": ObjectId(uid)}, {"_id": 1})
-            if doc:
-                added.append(uid)
+    if candidate_ids:
+        # Batch validate existence in one query
+        candidate_oids = [ObjectId(uid) for uid in candidate_ids]
+        existing_docs = await db.doctors.find(
+            {"_id": {"$in": candidate_oids}},
+            {"_id": 1}
+        ).to_list(length=len(candidate_oids))
+        existing_ids = {str(doc["_id"]) for doc in existing_docs}
+        added = [uid for uid in candidate_ids if uid in existing_ids]
 
     if added:
         await db.groups.update_one({"_id": ObjectId(group_id)}, {"$push": {"members": {"$each": added}}, "$set": {"updated_at": datetime.utcnow()}})

@@ -14,12 +14,13 @@ async def change_password(current_password: str, new_password: str, current_user
     """Change doctor's password"""
     db = get_database()
 
-    doctor = await db.doctors.find_one({"_id": ObjectId(current_user["_id"])})
-    if not doctor:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Doctor not found")
+    # current_user already has password_hash from require_doctor → get_current_user
+    password_hash = current_user.get("password_hash")
+    if not password_hash:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Unable to verify password")
 
     # Verify current password
-    if not verify_password(current_password, doctor["password_hash"]):
+    if not verify_password(current_password, password_hash):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Current password is incorrect")
 
     # Hash and save new password

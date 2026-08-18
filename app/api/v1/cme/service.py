@@ -13,18 +13,7 @@ from fastapi import HTTPException, status
 from bson import ObjectId
 from app.database import get_database
 from app.services.mrx_client import mrx_client, MRXClientError
-
-
-async def _verify_doctor_org_access(doctor_id: str, org_id: str):
-    """Verify doctor has ACTIVE relationship with org"""
-    db = get_database()
-    if not ObjectId.is_valid(org_id):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid organization ID")
-    rel = await db.doctor_organizations.find_one({
-        "doctor_id": doctor_id, "organization_id": org_id, "status": "ACTIVE"
-    })
-    if not rel:
-        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="You are not connected to this organization")
+from app.services.helpers import verify_doctor_org_access
 
 
 async def list_org_cme_events(
@@ -35,7 +24,7 @@ async def list_org_cme_events(
     limit: int = 50
 ) -> Dict[str, Any]:
     """Fetch CME events from org's MRX backend"""
-    await _verify_doctor_org_access(doctor_id, org_id)
+    await verify_doctor_org_access(doctor_id, org_id)
 
     params = {"skip": skip, "limit": limit}
     if status_filter:
@@ -53,7 +42,7 @@ async def get_cme_event_detail(
     doctor_id: str,
 ) -> Dict[str, Any]:
     """Fetch a single CME event detail from MRX"""
-    await _verify_doctor_org_access(doctor_id, org_id)
+    await verify_doctor_org_access(doctor_id, org_id)
 
     try:
         result = await mrx_client.request(org_id, "GET", "/mrx/api/v1/integration/cme", params={"skip": 0, "limit": 200})
@@ -78,7 +67,7 @@ async def register_for_event(
     current_user: Dict
 ) -> Dict[str, Any]:
     """Forward registration to MRX — MRX owns the registration"""
-    await _verify_doctor_org_access(current_user["_id"], org_id)
+    await verify_doctor_org_access(current_user["_id"], org_id)
 
     doctor_gid = current_user.get("doctor_gid", "")
     doctor_name = current_user.get("name", "")
@@ -106,7 +95,7 @@ async def register_for_event(
 
 async def get_my_cme(org_id: str, current_user: Dict) -> Dict[str, Any]:
     """Fetch doctor's CME registrations from MRX"""
-    await _verify_doctor_org_access(current_user["_id"], org_id)
+    await verify_doctor_org_access(current_user["_id"], org_id)
 
     doctor_gid = current_user.get("doctor_gid", "")
 

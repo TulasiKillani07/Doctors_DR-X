@@ -8,26 +8,7 @@ from fastapi import HTTPException, status
 from bson import ObjectId
 from app.database import get_database
 from app.services.mrx_client import mrx_client, MRXClientError
-
-
-async def _verify_doctor_org_access(doctor_id: str, org_id: str):
-    """Verify the doctor has an ACTIVE relationship with this org"""
-    db = get_database()
-
-    if not ObjectId.is_valid(org_id):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid organization ID")
-
-    relationship = await db.doctor_organizations.find_one({
-        "doctor_id": doctor_id,
-        "organization_id": org_id,
-        "status": "ACTIVE"
-    })
-
-    if not relationship:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="You are not connected to this organization"
-        )
+from app.services.helpers import verify_doctor_org_access
 
 
 async def list_org_drugs(
@@ -38,7 +19,7 @@ async def list_org_drugs(
     limit: int = 50
 ) -> Dict[str, Any]:
     """Fetch drugs from an organization's MRX backend"""
-    await _verify_doctor_org_access(doctor_id, org_id)
+    await verify_doctor_org_access(doctor_id, org_id)
 
     params = {"skip": skip, "limit": limit}
     if search:
@@ -52,7 +33,7 @@ async def list_org_drugs(
 
 async def get_org_drug_detail(org_id: str, drug_id: str, doctor_id: str, doctor_gid: str = "", doctor_name: str = "") -> Dict[str, Any]:
     """Fetch a single drug detail from an organization's MRX backend and push view event"""
-    await _verify_doctor_org_access(doctor_id, org_id)
+    await verify_doctor_org_access(doctor_id, org_id)
 
     try:
         result = await mrx_client.request(org_id, "GET", f"/mrx/api/v1/integration/drugs/{drug_id}")
@@ -76,7 +57,7 @@ async def download_org_drug_brochure(org_id: str, drug_id: str, doctor_id: str):
     from fastapi.responses import StreamingResponse
     import httpx
 
-    await _verify_doctor_org_access(doctor_id, org_id)
+    await verify_doctor_org_access(doctor_id, org_id)
 
     # Get the brochure download URL from MRX
     try:

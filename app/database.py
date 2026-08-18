@@ -46,6 +46,7 @@ async def initialize_collections():
     await database["doctors"].create_index("email", unique=True, name="doctor_email_unique")
     await database["doctors"].create_index("phone", unique=True, name="doctor_phone_unique")
     await database["doctors"].create_index("doctor_gid", unique=True, name="doctor_gid_unique")
+    await database["doctors"].create_index("username", unique=True, sparse=True, name="doctor_username_unique")
     await database["doctors"].create_index("is_active", name="doctor_active_idx")
 
     # ── organizations ──
@@ -63,6 +64,11 @@ async def initialize_collections():
     await database["doctor_organizations"].create_index("doctor_id", name="doc_org_doctor_idx")
     await database["doctor_organizations"].create_index("organization_id", name="doc_org_org_idx")
     await database["doctor_organizations"].create_index("status", name="doc_org_status_idx")
+    # Compound: every org-access check queries (doctor_id + status)
+    await database["doctor_organizations"].create_index(
+        [("doctor_id", 1), ("status", 1)],
+        name="doc_org_doctor_status_idx"
+    )
 
     # ── notifications ──
     await database["notifications"].create_index(
@@ -83,6 +89,16 @@ async def initialize_collections():
     await database["connections"].create_index("requester_id", name="connection_requester_idx")
     await database["connections"].create_index("receiver_id", name="connection_receiver_idx")
     await database["connections"].create_index("status", name="connection_status_idx")
+    # Compound: get_received_requests queries (receiver_id + status)
+    await database["connections"].create_index(
+        [("receiver_id", 1), ("status", 1)],
+        name="connection_receiver_status_idx"
+    )
+    # Compound: get_sent_requests queries (requester_id + status)
+    await database["connections"].create_index(
+        [("requester_id", 1), ("status", 1)],
+        name="connection_requester_status_idx"
+    )
 
     # ── conversations ──
     await database["conversations"].create_index("participants", name="conv_participants_idx")
@@ -101,6 +117,11 @@ async def initialize_collections():
     # ── posts ──
     await database["posts"].create_index("author_id", name="post_author_idx")
     await database["posts"].create_index([("is_active", 1), ("created_at", -1)], name="post_active_time_idx")
+    # Compound: get_my_posts queries (author_id + is_active + created_at)
+    await database["posts"].create_index(
+        [("author_id", 1), ("is_active", 1), ("created_at", -1)],
+        name="post_author_active_time_idx"
+    )
 
     # ── post_likes ──
     await database["post_likes"].create_index(

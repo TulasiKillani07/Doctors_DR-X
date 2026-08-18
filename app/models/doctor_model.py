@@ -35,6 +35,7 @@ class DoctorLocation(BaseModel):
 class DoctorInDB(BaseModel):
     """Write model for doctors collection — identity + profile + locations"""
     doctor_gid: str = Field(default_factory=generate_doctor_gid, description="Global platform ID (e.g. PRXDOC482915). Immutable.")
+    username: str = Field(..., min_length=3, max_length=30, description="Unique username (lowercase, alphanumeric + underscores)")
     email: EmailStr = Field(..., description="Doctor email (unique, login identifier)")
     phone: str = Field(..., description="Phone number (unique)")
     password_hash: str = Field(..., description="Bcrypt hashed password")

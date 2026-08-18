@@ -56,20 +56,36 @@ async def get_my_conversations(doctor_id: str) -> Dict[str, Any]:
         {"participants": doctor_id}
     ).sort("last_message_at", -1).to_list(length=100)
 
-    results = []
-    for conv in conversations:
-        # Get the other participant
-        other_id = [p for p in conv["participants"] if p != doctor_id][0]
-        other = await db.doctors.find_one(
-            {"_id": ObjectId(other_id)},
-            {"name": 1, "doctor_gid": 1, "avatar_url": 1, "specialization": 1}
-        )
+    if not conversations:
+        return {"total": 0, "conversations": []}
 
-        # Unread count
+    # Collect all "other" participant IDs
+    other_ids = []
+    for conv in conversations:
+        other_id = [p for p in conv["participants"] if p != doctor_id][0]
+        other_ids.append(other_id)
+
+    # Batch fetch all other doctors in one query
+    other_oids = [ObjectId(uid) for uid in other_ids if ObjectId.is_valid(uid)]
+    doctors_list = await db.doctors.find(
+        {"_id": {"$in": other_oids}},
+        {"name": 1, "doctor_gid": 1, "avatar_url": 1, "specialization": 1}
+    ).to_list(length=len(other_oids))
+    doctor_map = {str(doc["_id"]): doc for doc in doctors_list}
+
+    # Batch count unread messages per conversation
+    conv_ids = [str(conv["_id"]) for conv in conversations]
+    unread_pipeline = [
+        {"$match": {"conversation_id": {"$in": conv_ids}, "sender_id": {"$ne": doctor_id}, "is_read": False}},
+        {"$group": {"_id": "$conversation_id", "count": {"$sum": 1}}}
+    ]
+    unread_results = await db.messages.aggregate(unread_pipeline).to_list(length=len(conv_ids))
+    unread_map = {r["_id"]: r["count"] for r in unread_results}
+
+    results = []
+    for conv, other_id in zip(conversations, other_ids):
+        other = doctor_map.get(other_id)
         conv_id = str(conv["_id"])
-        unread = await db.messages.count_documents({
-            "conversation_id": conv_id, "sender_id": {"$ne": doctor_id}, "is_read": False
-        })
 
         results.append({
             "conversation_id": conv_id,
@@ -82,7 +98,7 @@ async def get_my_conversations(doctor_id: str) -> Dict[str, Any]:
             },
             "last_message": conv.get("last_message"),
             "last_message_at": conv.get("last_message_at"),
-            "unread_count": unread
+            "unread_count": unread_map.get(conv_id, 0)
         })
 
     return {"total": len(results), "conversations": results}

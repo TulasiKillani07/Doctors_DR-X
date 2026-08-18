@@ -5,16 +5,22 @@ Password, privacy, preferences, language
 
 from fastapi import APIRouter, Depends
 from typing import Dict, Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, field_validator
 from app.core.auth import require_doctor
 from app.api.v1.settings import service
+from app.api.v1.auth.schemas import validate_password_strength
 
 router = APIRouter()
 
 
 class ChangePasswordRequest(BaseModel):
     current_password: str = Field(..., min_length=8)
-    new_password: str = Field(..., min_length=8, max_length=72)
+    new_password: str = Field(..., min_length=8, max_length=64)
+
+    @field_validator("new_password")
+    @classmethod
+    def check_new_password(cls, v: str) -> str:
+        return validate_password_strength(v)
 
 
 class UpdatePreferencesRequest(BaseModel):

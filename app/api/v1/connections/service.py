@@ -12,21 +12,29 @@ from app.models.social_models import ConnectionInDB
 
 
 async def discover_users(current_user: Dict, search: Optional[str], specialization: Optional[str], page: int, limit: int) -> Dict[str, Any]:
-    """Discover doctors to connect with (excludes connected/pending/blocked)"""
+    """Discover doctors to connect with (excludes connected/pending/blocked).
+    Uses aggregation pipeline to avoid loading all connections into memory.
+    """
     db = get_database()
     my_id = current_user["_id"]
 
-    # Get all connection IDs (any status) to exclude
-    connections = await db.connections.find({"$or": [{"requester_id": my_id}, {"receiver_id": my_id}]}).to_list(length=1000)
-    excluded_ids = {my_id}
-    for conn in connections:
-        excluded_ids.add(conn["requester_id"])
-        excluded_ids.add(conn["receiver_id"])
+    # Use distinct to get only the unique IDs involved in connections — much lighter than full docs
+    # This fetches just the string IDs, not full connection documents
+    requester_ids = await db.connections.distinct("receiver_id", {"requester_id": my_id})
+    receiver_ids = await db.connections.distinct("requester_id", {"receiver_id": my_id})
 
-    # Build query
-    query = {"_id": {"$nin": [ObjectId(uid) for uid in excluded_ids if ObjectId.is_valid(uid)]}, "is_active": True}
+    excluded_ids = set(requester_ids + receiver_ids)
+    excluded_ids.add(my_id)
+
+    # Build query with ObjectId exclusion
+    exclude_oids = [ObjectId(uid) for uid in excluded_ids if ObjectId.is_valid(uid)]
+    query = {"_id": {"$nin": exclude_oids}, "is_active": True}
+
     if search:
-        query["name"] = {"$regex": search, "$options": "i"}
+        query["$or"] = [
+            {"name": {"$regex": search, "$options": "i"}},
+            {"doctor_gid": {"$regex": search, "$options": "i"}}
+        ]
     if specialization:
         query["specialization"] = {"$regex": specialization, "$options": "i"}
 
@@ -34,7 +42,9 @@ async def discover_users(current_user: Dict, search: Optional[str], specializati
     total_pages = (total + limit - 1) // limit if total > 0 else 0
     skip = (page - 1) * limit
 
-    doctors = await db.doctors.find(query, {"password_hash": 0, "preferences": 0, "locations": 0}).sort("name", 1).skip(skip).limit(limit).to_list(length=limit)
+    doctors = await db.doctors.find(query, {
+        "password_hash": 0, "preferences": 0, "locations": 0
+    }).sort("name", 1).skip(skip).limit(limit).to_list(length=limit)
 
     users = []
     for doc in doctors:
@@ -93,7 +103,15 @@ async def send_connection_request(receiver_id: str, current_user: Dict) -> Dict[
         created_at=datetime.utcnow(),
         updated_at=datetime.utcnow()
     )
-    result = await db.connections.insert_one(conn.model_dump())
+
+    # Insert-first: unique index on (requester_id, receiver_id) catches concurrent duplicates
+    try:
+        result = await db.connections.insert_one(conn.model_dump())
+    except Exception as e:
+        err_str = str(e).lower()
+        if "duplicate key" in err_str or "e11000" in err_str:
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Connection request already pending")
+        raise
 
     # Notify the receiver about the connection request
     from app.api.v1.notifications.service import create_notification
@@ -203,10 +221,25 @@ async def get_my_connections(current_user: Dict, conn_status: str, page: int, li
     total_pages = (total + limit - 1) // limit if total > 0 else 0
     connections = await db.connections.find(query).sort("updated_at", -1).skip(skip).limit(limit).to_list(length=limit)
 
-    results = []
+    if not connections:
+        return {"connections": [], "total": total, "page": page, "limit": limit, "total_pages": total_pages}
+
+    # Collect all "other" doctor IDs and batch fetch
+    other_ids = []
     for conn in connections:
         other_id = conn["receiver_id"] if conn["requester_id"] == my_id else conn["requester_id"]
-        other = await db.doctors.find_one({"_id": ObjectId(other_id)}, {"name": 1, "doctor_gid": 1, "specialization": 1, "hospital": 1, "avatar_url": 1})
+        other_ids.append(other_id)
+
+    other_oids = [ObjectId(uid) for uid in other_ids if ObjectId.is_valid(uid)]
+    doctors_list = await db.doctors.find(
+        {"_id": {"$in": other_oids}},
+        {"name": 1, "doctor_gid": 1, "specialization": 1, "hospital": 1, "avatar_url": 1}
+    ).to_list(length=len(other_oids))
+    doctor_map = {str(doc["_id"]): doc for doc in doctors_list}
+
+    results = []
+    for conn, other_id in zip(connections, other_ids):
+        other = doctor_map.get(other_id)
         results.append({
             "connection_id": str(conn["_id"]),
             "user_id": other_id,
@@ -239,7 +272,7 @@ async def remove_connection(connection_id: str, current_user: Dict) -> Dict[str,
 
 
 async def block_user(doctor_id: str, current_user: Dict) -> Dict[str, str]:
-    """Block a doctor"""
+    """Block a doctor. Tracks who initiated the block for unambiguous unblock."""
     db = get_database()
     my_id = current_user["_id"]
     if not ObjectId.is_valid(doctor_id):
@@ -253,7 +286,12 @@ async def block_user(doctor_id: str, current_user: Dict) -> Dict[str, str]:
     ]})
 
     if existing:
-        await db.connections.update_one({"_id": existing["_id"]}, {"$set": {"status": "blocked", "updated_at": datetime.utcnow()}})
+        await db.connections.update_one({"_id": existing["_id"]}, {"$set": {
+            "status": "blocked",
+            "blocked_by": my_id,
+            "blocked_at": datetime.utcnow(),
+            "updated_at": datetime.utcnow()
+        }})
     else:
         block_conn = ConnectionInDB(
             requester_id=my_id,
@@ -264,13 +302,16 @@ async def block_user(doctor_id: str, current_user: Dict) -> Dict[str, str]:
             created_at=datetime.utcnow(),
             updated_at=datetime.utcnow()
         )
-        await db.connections.insert_one(block_conn.model_dump())
+        doc = block_conn.model_dump()
+        doc["blocked_by"] = my_id
+        doc["blocked_at"] = datetime.utcnow()
+        await db.connections.insert_one(doc)
 
     return {"message": "User blocked successfully"}
 
 
 async def unblock_user(doctor_id: str, current_user: Dict) -> Dict[str, str]:
-    """Unblock a doctor"""
+    """Unblock a doctor. Only the user who initiated the block can unblock."""
     db = get_database()
     my_id = current_user["_id"]
 
@@ -282,8 +323,16 @@ async def unblock_user(doctor_id: str, current_user: Dict) -> Dict[str, str]:
     if not conn:
         raise HTTPException(status_code=404, detail="No blocked connection found")
 
+    # Only the person who blocked can unblock
+    if conn.get("blocked_by") and conn["blocked_by"] != my_id:
+        raise HTTPException(status_code=403, detail="Only the user who initiated the block can unblock")
+
     if conn.get("accepted_at"):
-        await db.connections.update_one({"_id": conn["_id"]}, {"$set": {"status": "accepted", "updated_at": datetime.utcnow()}})
+        # Was a previously accepted connection — restore it
+        await db.connections.update_one({"_id": conn["_id"]}, {"$set": {
+            "status": "accepted",
+            "updated_at": datetime.utcnow()
+        }, "$unset": {"blocked_by": "", "blocked_at": ""}})
         return {"message": "User unblocked and connection restored"}
     else:
         await db.connections.delete_one({"_id": conn["_id"]})

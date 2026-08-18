@@ -102,6 +102,7 @@ async def doctor_register(request: DoctorRegisterRequest):
         name=request.name,
         email=request.email,
         phone=request.phone,
+        username=request.username,
         password=request.password
     )
 

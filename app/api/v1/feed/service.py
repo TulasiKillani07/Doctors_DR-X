@@ -9,6 +9,7 @@ from bson import ObjectId
 from fastapi import HTTPException, status
 from app.database import get_database
 from app.models.social_models import PostInDB, PostLikeInDB, PostCommentInDB
+from app.services.helpers import enrich_posts_with_likes
 
 
 async def create_post(content: str, doctor_id: str, doctor_name: str, image_url: Optional[str] = None) -> Dict[str, Any]:
@@ -41,7 +42,8 @@ async def get_feed(doctor_id: str, skip: int = 0, limit: int = 20) -> Dict[str, 
 
     # Get connected doctor IDs
     connections = await db.connections.find(
-        {"$or": [{"requester_id": doctor_id}, {"receiver_id": doctor_id}], "status": "accepted"}
+        {"$or": [{"requester_id": doctor_id}, {"receiver_id": doctor_id}], "status": "accepted"},
+        {"requester_id": 1, "receiver_id": 1}
     ).to_list(length=500)
 
     connected_ids = set()
@@ -50,18 +52,22 @@ async def get_feed(doctor_id: str, skip: int = 0, limit: int = 20) -> Dict[str, 
         connected_ids.add(conn["receiver_id"])
     connected_ids.add(doctor_id)  # Include own posts
 
-    # Fetch posts
-    posts = await db.posts.find(
-        {"author_id": {"$in": list(connected_ids)}, "is_active": True}
-    ).sort("created_at", -1).skip(skip).limit(limit).to_list(length=limit)
+    # Get total count for proper pagination
+    feed_filter = {"author_id": {"$in": list(connected_ids)}, "is_active": True}
+    total = await db.posts.count_documents(feed_filter)
 
+    # Fetch posts
+    posts = await db.posts.find(feed_filter).sort("created_at", -1).skip(skip).limit(limit).to_list(length=limit)
+
+    if not posts:
+        return {"total": total, "posts": []}
+
+    # Convert _id and enrich with like status in one batch query
     for post in posts:
         post["id"] = str(post.pop("_id"))
-        # Check if current doctor liked this post
-        liked = await db.post_likes.find_one({"post_id": post["id"], "user_id": doctor_id})
-        post["is_liked"] = liked is not None
+    await enrich_posts_with_likes(posts, doctor_id)
 
-    return {"total": len(posts), "posts": posts}
+    return {"total": total, "posts": posts}
 
 
 async def like_post(post_id: str, doctor_id: str) -> Dict[str, str]:
@@ -75,17 +81,20 @@ async def like_post(post_id: str, doctor_id: str) -> Dict[str, str]:
     if not post:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Post not found")
 
-    # Check if already liked
-    existing = await db.post_likes.find_one({"post_id": post_id, "user_id": doctor_id})
-    if existing:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Already liked")
-
+    # Insert-first approach: rely on unique index (post_id, user_id) to prevent duplicates
     like = PostLikeInDB(
         post_id=post_id,
         user_id=doctor_id,
         created_at=datetime.utcnow()
     )
-    await db.post_likes.insert_one(like.model_dump())
+    try:
+        await db.post_likes.insert_one(like.model_dump())
+    except Exception as e:
+        # pymongo.errors.DuplicateKeyError indicates already liked
+        if "duplicate key" in str(e).lower() or "E11000" in str(e):
+            raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Already liked")
+        raise
+
     await db.posts.update_one({"_id": ObjectId(post_id)}, {"$inc": {"likes_count": 1}})
 
     # Notify post author (if not self-liking)
@@ -176,16 +185,18 @@ async def get_my_posts(doctor_id: str, skip: int = 0, limit: int = 20) -> Dict[s
     """Get only the doctor's own posts"""
     db = get_database()
 
-    posts = await db.posts.find(
-        {"author_id": doctor_id, "is_active": True}
-    ).sort("created_at", -1).skip(skip).limit(limit).to_list(length=limit)
+    post_filter = {"author_id": doctor_id, "is_active": True}
+    total = await db.posts.count_documents(post_filter)
 
-    total = await db.posts.count_documents({"author_id": doctor_id, "is_active": True})
+    posts = await db.posts.find(post_filter).sort("created_at", -1).skip(skip).limit(limit).to_list(length=limit)
 
+    if not posts:
+        return {"total": total, "posts": []}
+
+    # Convert _id and enrich with like status in one batch query
     for post in posts:
         post["id"] = str(post.pop("_id"))
-        liked = await db.post_likes.find_one({"post_id": post["id"], "user_id": doctor_id})
-        post["is_liked"] = liked is not None
+    await enrich_posts_with_likes(posts, doctor_id)
 
     return {"total": total, "posts": posts}
 

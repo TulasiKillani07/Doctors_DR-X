@@ -29,52 +29,62 @@ async def create_organization(data: Dict[str, Any], admin_user: Dict) -> Dict[st
     """Create a new organization with auto-generated credentials"""
     db = get_database()
 
-    # Generate unique GID
-    org_gid = generate_org_gid()
-    while await db.organizations.find_one({"organization_gid": org_gid}):
+    max_retries = 3
+
+    for attempt in range(max_retries):
+        # Generate unique GID and client_id
         org_gid = generate_org_gid()
-
-    # Generate service auth credentials
-    client_id = _generate_client_id(data["organization_name"])
-    while await db.organizations.find_one({"client_id": client_id}):
         client_id = _generate_client_id(data["organization_name"])
+        client_secret = _generate_client_secret()
+        client_secret_hash = hash_password(client_secret)
 
-    client_secret = _generate_client_secret()
-    client_secret_hash = hash_password(client_secret)
+        org = OrganizationInDB(
+            organization_gid=org_gid,
+            organization_name=data["organization_name"],
+            logo=data.get("logo"),
+            contact_email=data.get("contact_email"),
+            contact_phone=data.get("contact_phone"),
+            org_admin=data.get("org_admin"),
+            admin_email=data.get("admin_email"),
+            admin_phone=data.get("admin_phone"),
+            address=data.get("address"),
+            city=data.get("city"),
+            state=data.get("state"),
+            country=data.get("country"),
+            pincode=data.get("pincode"),
+            client_id=client_id,
+            client_secret_hash=client_secret_hash,
+            mrx_url=data.get("mrx_url"),
+            status="ACTIVE",
+            created_by=admin_user["_id"],
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow()
+        )
 
-    org = OrganizationInDB(
-        organization_gid=org_gid,
-        organization_name=data["organization_name"],
-        logo=data.get("logo"),
-        contact_email=data.get("contact_email"),
-        contact_phone=data.get("contact_phone"),
-        org_admin=data.get("org_admin"),
-        admin_email=data.get("admin_email"),
-        admin_phone=data.get("admin_phone"),
-        address=data.get("address"),
-        city=data.get("city"),
-        state=data.get("state"),
-        country=data.get("country"),
-        pincode=data.get("pincode"),
-        client_id=client_id,
-        client_secret_hash=client_secret_hash,
-        mrx_url=data.get("mrx_url"),
-        status="ACTIVE",
-        created_by=admin_user["_id"],
-        created_at=datetime.utcnow(),
-        updated_at=datetime.utcnow()
-    )
+        try:
+            result = await db.organizations.insert_one(org.model_dump())
+        except Exception as e:
+            err_str = str(e).lower()
+            if ("duplicate key" in err_str or "e11000" in err_str) and attempt < max_retries - 1:
+                continue  # Retry with new GID/client_id
+            if "duplicate key" in err_str or "e11000" in err_str:
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail="Failed to generate unique identifiers after multiple attempts"
+                )
+            raise
 
-    result = await db.organizations.insert_one(org.model_dump())
+        # Return client_secret ONLY on creation (never again)
+        return {
+            "message": "Organization created successfully",
+            "organization_id": str(result.inserted_id),
+            "organization_gid": org_gid,
+            "client_id": client_id,
+            "client_secret": client_secret  # Only returned once!
+        }
 
-    # Return client_secret ONLY on creation (never again)
-    return {
-        "message": "Organization created successfully",
-        "organization_id": str(result.inserted_id),
-        "organization_gid": org_gid,
-        "client_id": client_id,
-        "client_secret": client_secret  # Only returned once!
-    }
+    # Should never reach here due to the raise inside the loop
+    raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Organization creation failed")
 
 
 async def get_organization(org_id: str) -> Dict[str, Any]:
