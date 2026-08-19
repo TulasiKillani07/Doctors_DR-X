@@ -1,7 +1,7 @@
 """
 Authentication dependencies for DRX Doctor Platform
 
-All user authentication is via Proxzar-issued JWT (RS256, verified with Proxzar JWKS).
+User authentication is via Proxzar-issued JWT only (RS256, verified with Proxzar JWKS).
 DRX does not issue its own user tokens.
 """
 
@@ -24,13 +24,15 @@ async def get_current_user(
     Get current authenticated user (admin or doctor) from Proxzar JWT.
 
     1. Verify token cryptographically using Proxzar JWKS (RS256).
+       Validates: signature, iss, aud contains "DRX", exp, kid.
     2. Extract verified `sub` (username) and `role`.
     3. Resolve the DRX user by username + role.
+
+    Does NOT auto-create users. Returns 401 if user not found.
     """
     token = credentials.credentials
 
     # ── Verify token using Proxzar JWKS ──
-    # verify_proxzar_jwt handles: signature, iss, aud contains "DRX", exp, kid
     payload = await verify_proxzar_jwt(token)
 
     # ── Extract verified claims ──

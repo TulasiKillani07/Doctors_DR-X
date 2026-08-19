@@ -51,51 +51,18 @@ async def create_admin(request: AdminCreateRequest):
     )
 
 
-@router.post("/admin/login", response_model=TokenResponse, summary="Platform Admin Login")
+@router.post("/admin/login", summary="Platform Admin Login (Deprecated)")
 async def admin_login(request: AdminLoginRequest):
     """
-    **Purpose:** Authenticate platform administrator and return JWT token.
-    
-    **Access:** Public
-    
-    **Request Body (login with email):**
-    ```json
-    {
-      "identifier": "vamsi@drx.com",
-      "password": "Admin@123456"
-    }
-    ```
-    
-    **Request Body (login with username):**
-    ```json
-    {
-      "identifier": "vamsi_admin",
-      "password": "Admin@123456"
-    }
-    ```
-    
-    **JWT Token Claims:**
-    ```json
-    {
-      "sub": "vamsi_admin",
-      "role": "PLATFORM_ADMIN",
-      "iss": "DRX",
-      "aud": "MRX",
-      "exp": 1719000000
-    }
-    ```
-    
-    **Response:**
-    ```json
-    {
-      "access_token": "eyJhbGciOiJIUzI1NiIs...",
-      "token_type": "bearer",
-      "role": "PLATFORM_ADMIN",
-      "user": { "id": "...", "email": "vamsi@drx.com", "name": "Vamsi" }
-    }
-    ```
+    **DEPRECATED:** DRX platform login has been removed.
+    All user authentication is now through Proxzar OAuth.
+    Use the Proxzar login flow to obtain a JWT.
     """
-    return await service.admin_login(request.identifier, request.password)
+    from fastapi.responses import JSONResponse
+    return JSONResponse(
+        status_code=410,
+        content={"detail": "DRX platform login is deprecated. Use Proxzar OAuth to authenticate."}
+    )
 
 
 @router.post("/doctor/register", response_model=DoctorMessageResponse, status_code=201, summary="Doctor Registration")
@@ -142,56 +109,15 @@ async def doctor_register(request: DoctorRegisterRequest):
     )
 
 
-@router.post("/doctor/login", response_model=TokenResponse, summary="Doctor Login")
+@router.post("/doctor/login", summary="Doctor Login (Deprecated)")
 async def doctor_login(request: DoctorLoginRequest):
     """
-    **Purpose:** Authenticate doctor and return JWT token.
-    
-    **Access:** Public
-    
-    **Request Body (login with email):**
-    ```json
-    {
-      "identifier": "arjun@doctor.com",
-      "password": "Doctor@123"
-    }
-    ```
-    
-    **Request Body (login with username):**
-    ```json
-    {
-      "identifier": "arjun_mehta",
-      "password": "Doctor@123"
-    }
-    ```
-    
-    **Request Body (login with GID):**
-    ```json
-    {
-      "identifier": "PRXDOC482915",
-      "password": "Doctor@123"
-    }
-    ```
-    
-    **JWT Token Claims:**
-    ```json
-    {
-      "sub": "arjun_mehta",
-      "role": "DOCTOR",
-      "iss": "DRX",
-      "aud": "MRX",
-      "exp": 1719000000
-    }
-    ```
-    
-    **Response:**
-    ```json
-    {
-      "access_token": "eyJhbGciOiJIUzI1NiIs...",
-      "token_type": "bearer",
-      "role": "DOCTOR",
-      "user": { "id": "...", "email": "arjun@doctor.com", "name": "Dr. Arjun Mehta", "doctor_gid": "PRXDOC482915" }
-    }
-    ```
+    **DEPRECATED:** DRX platform login has been removed.
+    All user authentication is now through Proxzar OAuth.
+    Use the Proxzar login flow to obtain a JWT.
     """
-    return await service.doctor_login(request.identifier, request.password)
+    from fastapi.responses import JSONResponse
+    return JSONResponse(
+        status_code=410,
+        content={"detail": "DRX platform login is deprecated. Use Proxzar OAuth to authenticate."}
+    )

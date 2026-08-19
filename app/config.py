@@ -11,7 +11,6 @@ class Settings(BaseSettings):
     DATABASE_NAME: str = "drx_doctor_platform_db"
 
     SECRET_KEY: str = "drx-secret-key-change-in-production-min-32-chars"
-    SERVICE_JWT_SECRET: str = "drx-service-jwt-secret-change-in-production-min-32-chars"
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 

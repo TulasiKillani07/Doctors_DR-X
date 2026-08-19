@@ -5,7 +5,6 @@ Validates JWTs issued by the Proxzar OAuth2 server (https://oauth2.proxzar.ai).
 Uses JWKS public keys for local RS256 signature verification.
 
 This is SEPARATE from DRX's own platform login (HS256 + SECRET_KEY).
-This is SEPARATE from the old Service JWT (HS256 + SERVICE_JWT_SECRET).
 
 Architecture:
     Proxzar signs JWT with its RSA private key.
