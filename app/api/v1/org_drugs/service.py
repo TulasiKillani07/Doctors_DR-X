@@ -9,6 +9,7 @@ from bson import ObjectId
 from app.database import get_database
 from app.services.mrx_client import mrx_client, MRXClientError
 from app.services.helpers import verify_doctor_org_access
+from app.config import settings
 
 
 async def list_org_drugs(
@@ -27,7 +28,7 @@ async def list_org_drugs(
         params["search"] = search
 
     try:
-        return await mrx_client.request(org_id, "GET", "/mrxdb/integration/drugs", token=token, params=params)
+        return await mrx_client.request(org_id, "GET", f"{settings.MRX_API_PREFIX}/drugs", token=token, params=params)
     except MRXClientError as e:
         raise HTTPException(status_code=e.status_code or 502, detail=e.message)
 
@@ -37,10 +38,10 @@ async def get_org_drug_detail(org_id: str, drug_id: str, doctor_id: str, token: 
     await verify_doctor_org_access(doctor_id, org_id)
 
     try:
-        result = await mrx_client.request(org_id, "GET", f"/mrxdb/integration/drugs/{drug_id}", token=token)
+        result = await mrx_client.request(org_id, "GET", f"{settings.MRX_API_PREFIX}/drugs/{drug_id}", token=token)
         # Push drug view to MRX (fire-and-forget)
         try:
-            await mrx_client.request(org_id, "POST", "/mrxdb/integration/drug-views", token=token, body={
+            await mrx_client.request(org_id, "POST", f"{settings.MRX_API_PREFIX}/drug-views", token=token, body={
                 "drug_id": drug_id,
                 "drug_name": result.get("drug_name", ""),
                 "doctor_gid": doctor_gid,
@@ -63,7 +64,7 @@ async def download_org_drug_brochure(org_id: str, drug_id: str, doctor_id: str, 
     # Get the brochure download URL from MRX
     try:
         # First get drug detail to check if brochure exists
-        drug = await mrx_client.request(org_id, "GET", f"/mrxdb/integration/drugs/{drug_id}", token=token)
+        drug = await mrx_client.request(org_id, "GET", f"{settings.MRX_API_PREFIX}/drugs/{drug_id}", token=token)
         brochure_url = drug.get("brochure_url", "")
 
         if not brochure_url:

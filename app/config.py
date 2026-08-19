@@ -8,7 +8,7 @@ from typing import Optional
 
 class Settings(BaseSettings):
     MONGODB_URL: str = "mongodb://localhost:27017"
-    DATABASE_NAME: str = "drx_doctor_platform_db"
+    DATABASE_NAME: str = "ProxzarDRxDb"
 
     SECRET_KEY: str = "drx-secret-key-change-in-production-min-32-chars"
     ALGORITHM: str = "HS256"
@@ -19,7 +19,10 @@ class Settings(BaseSettings):
     PROXZAR_ISSUER: str = "https://oauth2.proxzar.ai"
     PROXZAR_AUDIENCE: str = "DRX"
 
-    APP_NAME: str = "DRX - Doctor Platform"
+    # MRX integration endpoint prefix (used by mrx_client when calling MRX)
+    MRX_API_PREFIX: str = "/mrxdb/integration"
+
+    APP_NAME: str = "DRx: AI-Powered Doctor-Pharma Platform"
     APP_VERSION: str = "1.0.0"
 
     SMTP_HOST: str = "smtp.gmail.com"
