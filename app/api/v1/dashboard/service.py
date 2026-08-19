@@ -11,7 +11,7 @@ from app.database import get_database
 from app.services.helpers import get_doctor_orgs_batch
 
 
-async def get_doctor_dashboard(current_user: Dict, org_id: str = None) -> Dict[str, Any]:
+async def get_doctor_dashboard(current_user: Dict, token: str, org_id: str = None) -> Dict[str, Any]:
     """
     Build full doctor dashboard.
     If org_id is provided, also fetches pharma data from MRX in one call.
@@ -48,7 +48,7 @@ async def get_doctor_dashboard(current_user: Dict, org_id: str = None) -> Dict[s
             return None
         try:
             from app.services.mrx_client import mrx_client
-            return await mrx_client.request(org_id, "GET", "/mrx/api/v1/integration/dashboard")
+            return await mrx_client.request(org_id, "GET", "/mrx/api/v1/integration/dashboard", token=token)
         except Exception:
             return None  # MRX unavailable — dashboard still works with DRX data
 

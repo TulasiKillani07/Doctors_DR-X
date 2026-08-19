@@ -6,12 +6,14 @@ DRX forwards requests to MRX via mrx_client.
 """
 
 from fastapi import APIRouter, Depends, Query
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from typing import Dict, Optional
 from pydantic import BaseModel, Field
 from app.core.auth import require_doctor
 from app.api.v1.cme import service
 
 router = APIRouter()
+_bearer = HTTPBearer()
 
 
 class CMERegisterRequest(BaseModel):
@@ -24,7 +26,8 @@ async def list_org_events(
     status: Optional[str] = Query(None, description="upcoming, ongoing, completed"),
     skip: int = Query(0, ge=0),
     limit: int = Query(50, ge=1, le=200),
-    current_user: Dict = Depends(require_doctor)
+    current_user: Dict = Depends(require_doctor),
+    credentials: HTTPAuthorizationCredentials = Depends(_bearer)
 ):
     """
     **Purpose:** Doctor views CME events from a connected organization (fetched live from MRX).
@@ -52,14 +55,15 @@ async def list_org_events(
     }
     ```
     """
-    return await service.list_org_cme_events(org_id, current_user["_id"], status, skip, limit)
+    return await service.list_org_cme_events(org_id, current_user["_id"], credentials.credentials, status, skip, limit)
 
 
 @router.get("/organizations/{org_id}/events/{event_id}", summary="Get CME Event Detail")
 async def get_event_detail(
     org_id: str,
     event_id: str,
-    current_user: Dict = Depends(require_doctor)
+    current_user: Dict = Depends(require_doctor),
+    credentials: HTTPAuthorizationCredentials = Depends(_bearer)
 ):
     """
     **Purpose:** Doctor views full details of a single CME event. Tracks the view for admin analytics.
@@ -84,14 +88,15 @@ async def get_event_detail(
     }
     ```
     """
-    return await service.get_cme_event_detail(org_id, event_id, current_user["_id"])
+    return await service.get_cme_event_detail(org_id, event_id, current_user["_id"], credentials.credentials)
 
 
 @router.post("/organizations/{org_id}/register", summary="Register for CME Event")
 async def register_for_event(
     org_id: str,
     request: CMERegisterRequest,
-    current_user: Dict = Depends(require_doctor)
+    current_user: Dict = Depends(require_doctor),
+    credentials: HTTPAuthorizationCredentials = Depends(_bearer)
 ):
     """
     **Purpose:** Doctor registers for a CME event. Registration is stored in MRX (MRX owns it).
@@ -115,13 +120,14 @@ async def register_for_event(
     - Cannot register twice
     - Event must have capacity
     """
-    return await service.register_for_event(org_id, request.event_id, current_user)
+    return await service.register_for_event(org_id, request.event_id, current_user, credentials.credentials)
 
 
 @router.get("/organizations/{org_id}/my-registrations", summary="My CME Registrations")
 async def get_my_cme(
     org_id: str,
-    current_user: Dict = Depends(require_doctor)
+    current_user: Dict = Depends(require_doctor),
+    credentials: HTTPAuthorizationCredentials = Depends(_bearer)
 ):
     """
     **Purpose:** Doctor views their CME registrations for this organization (fetched from MRX).
@@ -148,4 +154,4 @@ async def get_my_cme(
     }
     ```
     """
-    return await service.get_my_cme(org_id, current_user)
+    return await service.get_my_cme(org_id, current_user, credentials.credentials)

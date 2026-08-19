@@ -15,9 +15,9 @@ class Settings(BaseSettings):
     ALGORITHM: str = "HS256"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60
 
-    # DRX calls MRX (outbound) — same credentials for all MRX deployments
-    DRX_TO_MRX_CLIENT_ID: str = "drx_doctor_platform"
-    DRX_TO_MRX_SECRET: str = "DRX2024SecureServiceKey"
+    # DRX calls MRX (outbound) — reserved for future machine-to-machine if needed
+    # DRX_TO_MRX_CLIENT_ID: str = "drx_doctor_platform"
+    # DRX_TO_MRX_SECRET: str = "DRX2024SecureServiceKey"
 
     # Proxzar Global Auth (inbound — DRX trusts Proxzar-issued JWTs)
     PROXZAR_JWKS_URL: str = "https://oauth2.proxzar.ai/api/v1/jwks"

@@ -1,38 +1,34 @@
 """
-MRX Integration Client — Service-to-Service communication with any organization's MRX backend.
+MRX Integration Client — Token-forwarding architecture.
 
-This is the reverse equivalent of MRX's drx_client.py.
+DRX forwards the user's Proxzar JWT to MRX.
+MRX independently verifies the Proxzar token using JWKS.
 
-Architecture:
-  DRX talks to MANY organizations. Each org has its own MRX backend.
-  Each org has its own cached Service JWT. Tokens are never shared across orgs.
+There is no:
+- client_id / client_secret exchange
+- Service JWT
+- Token cache
+- Token refresh/retry on 401
+
+If MRX returns 401, DRX propagates it — the user must re-authenticate via Proxzar.
 
 Responsibilities:
-  - Read org config from DB (backend_url, integration_client_id, integration_client_secret)
-  - Authenticate with the org's MRX
-  - Cache Service JWT per organization
-  - Refresh expired tokens automatically
+  - Read org config from DB (mrx_url)
+  - Forward the user's Proxzar JWT as Authorization header
   - Make authenticated HTTP requests
-  - Handle retries, timeouts, connection failures
+  - Handle timeouts, connection failures
   - Return parsed responses
 
-No business logic lives here. This is a pure communication layer.
-
-Usage (by future business services):
+Usage:
     from app.services.mrx_client import mrx_client
 
-    # Generic request — any endpoint, any org
-    drugs = await mrx_client.request("org_id_here", "GET", "/api/v1/integration/drugs")
-    cme = await mrx_client.request("org_id_here", "GET", "/api/v1/integration/cme")
+    drugs = await mrx_client.request(org_id, "GET", "/api/v1/integration/drugs", token=user_token)
 """
 
-import time
-import logging
 from typing import Optional, Dict, Any
 import httpx
 from bson import ObjectId
 from app.database import get_database
-from app.config import settings
 from app.utils.logger import get_drx_logger
 
 logger = get_drx_logger("drx.mrx_client")
@@ -49,24 +45,11 @@ class MRXClientError(Exception):
 
 class MRXClient:
     """
-    Reusable MRX Integration Client.
+    Reusable MRX Integration Client — token forwarding.
 
-    Token lifecycle (per organization):
-      1. No cached token → request new one from that org's MRX
-      2. Token expired → request new one
-      3. MRX returns 401 → clear cache, request new one, retry once
-      4. Token valid → use it
-
-    Token cache structure:
-      _token_cache = {
-        "org_id_1": {"token": "eyJ...", "expires_at": 1784020000},
-        "org_id_2": {"token": "eyJ...", "expires_at": 1784020500},
-      }
+    DRX forwards the caller's Proxzar JWT to MRX.
+    MRX verifies it independently via Proxzar JWKS.
     """
-
-    def __init__(self):
-        self._token_cache: Dict[str, Dict[str, Any]] = {}
-        self._token_buffer_seconds: int = 60  # Refresh 60s before actual expiry
 
     # ══════════════════════════════════════════════════════════
     # Organization Lookup
@@ -74,8 +57,8 @@ class MRXClient:
 
     async def _get_org_config(self, org_id: str) -> Dict[str, Any]:
         """
-        Read organization's integration config from DB.
-        Returns: backend_url, integration_client_id, integration_client_secret
+        Read organization's MRX backend URL from DB.
+        Returns: backend_url, organization_name
         """
         db = get_database()
 
@@ -111,96 +94,7 @@ class MRXClient:
         return {
             "organization_name": org.get("organization_name"),
             "backend_url": mrx_url.rstrip("/"),
-            "integration_client_id": settings.DRX_TO_MRX_CLIENT_ID,
-            "integration_client_secret": settings.DRX_TO_MRX_SECRET
         }
-
-    # ══════════════════════════════════════════════════════════
-    # Token Management (per organization)
-    # ══════════════════════════════════════════════════════════
-
-    def _get_cached_token(self, org_id: str) -> Optional[str]:
-        """Get cached token for an org if still valid."""
-        entry = self._token_cache.get(org_id)
-        if not entry:
-            return None
-        if time.time() >= (entry["expires_at"] - self._token_buffer_seconds):
-            return None  # Expired or about to expire
-        return entry["token"]
-
-    def _store_token(self, org_id: str, token: str, expires_in: int):
-        """Cache a token for an org."""
-        self._token_cache[org_id] = {
-            "token": token,
-            "expires_at": time.time() + expires_in
-        }
-
-    def _clear_cache(self, org_id: str):
-        """Clear cached token for an org (on 401)."""
-        self._token_cache.pop(org_id, None)
-
-    async def _request_new_token(self, org_id: str) -> str:
-        """
-        Request a new Service JWT from the organization's MRX.
-        POST {backend_url}/api/v1/integration/auth/service-token
-        """
-        config = await self._get_org_config(org_id)
-        url = f"{config['backend_url']}/mrx/api/v1/integration/auth/service-token"
-
-        logger.info(f"Requesting Service JWT from MRX | org={config['organization_name']} | url={config['backend_url']}")
-
-        async with httpx.AsyncClient(timeout=30) as client:
-            try:
-                response = await client.post(url, json={
-                    "client_id": config["integration_client_id"],
-                    "client_secret": config["integration_client_secret"]
-                })
-            except httpx.ConnectError:
-                raise MRXClientError(
-                    f"Cannot connect to MRX at {config['backend_url']} (org: {config['organization_name']})",
-                    status_code=503, org_id=org_id
-                )
-            except httpx.TimeoutException:
-                raise MRXClientError(
-                    f"MRX token request timed out (org: {config['organization_name']})",
-                    status_code=504, org_id=org_id
-                )
-
-        if response.status_code == 200:
-            data = response.json()
-            token = data["access_token"]
-            expires_in = data.get("expires_in", 900)
-            self._store_token(org_id, token, expires_in)
-            logger.info(f"MRX Service JWT obtained | org={config['organization_name']} | expires_in={expires_in}s")
-            return token
-
-        elif response.status_code == 401:
-            raise MRXClientError(
-                f"MRX authentication failed — invalid integration_client_id or integration_client_secret "
-                f"(org: {config['organization_name']})",
-                status_code=401, org_id=org_id
-            )
-
-        elif response.status_code == 403:
-            raise MRXClientError(
-                f"MRX service client is inactive (org: {config['organization_name']})",
-                status_code=403, org_id=org_id
-            )
-
-        else:
-            raise MRXClientError(
-                f"MRX token request failed: {response.status_code} {response.text[:200]} "
-                f"(org: {config['organization_name']})",
-                status_code=response.status_code, org_id=org_id
-            )
-
-    async def _get_token(self, org_id: str) -> str:
-        """Get a valid token for an org — cached or fresh."""
-        cached = self._get_cached_token(org_id)
-        if cached:
-            logger.debug(f"Using cached MRX token | org_id={org_id}")
-            return cached
-        return await self._request_new_token(org_id)
 
     # ══════════════════════════════════════════════════════════
     # Generic Request Method
@@ -211,29 +105,31 @@ class MRXClient:
         org_id: str,
         method: str,
         endpoint: str,
+        token: str,
         params: Optional[Dict] = None,
         body: Optional[Dict] = None,
-        retry_on_401: bool = True
     ) -> Dict[str, Any]:
         """
         Send an authenticated request to an organization's MRX backend.
+
+        Forwards the user's Proxzar JWT as the Authorization header.
+        MRX verifies it independently.
 
         Args:
             org_id: Organization MongoDB _id
             method: HTTP method (GET, POST, PUT, DELETE)
             endpoint: API path (e.g. "/api/v1/integration/drugs")
+            token: The user's raw Proxzar JWT (forwarded as Bearer token)
             params: Query parameters
             body: JSON body
-            retry_on_401: Whether to retry once on 401 (default True)
 
         Returns:
             Parsed JSON response from MRX
 
         Raises:
-            MRXClientError: On authentication, connection, or HTTP errors
+            MRXClientError: On connection, timeout, or HTTP errors
         """
         config = await self._get_org_config(org_id)
-        token = await self._get_token(org_id)
         url = f"{config['backend_url']}{endpoint}"
         headers = {"Authorization": f"Bearer {token}"}
 
@@ -259,13 +155,13 @@ class MRXClient:
                     status_code=504, org_id=org_id
                 )
 
-        # Handle 401 — token might have expired
-        if response.status_code == 401 and retry_on_401:
-            logger.warning(f"MRX returned 401 — refreshing token | org={config['organization_name']}")
-            self._clear_cache(org_id)
-            return await self.request(org_id, method, endpoint, params, body, retry_on_401=False)
+        # 401 — Proxzar token invalid/expired. Propagate to caller.
+        if response.status_code == 401:
+            raise MRXClientError(
+                f"MRX rejected the token (401). User must re-authenticate. (org: {config['organization_name']})",
+                status_code=401, org_id=org_id
+            )
 
-        # Handle other errors
         if response.status_code == 403:
             raise MRXClientError(
                 f"MRX forbidden: {response.text[:200]} (org: {config['organization_name']})",
@@ -298,24 +194,21 @@ class MRXClient:
 
     async def health_check(self, org_id: str) -> Dict[str, Any]:
         """
-        Verify DRX can authenticate with a specific org's MRX.
-        Does NOT call any business endpoint — just validates token exchange.
+        Verify DRX can reach a specific org's MRX backend.
+        Only checks connectivity — does not validate tokens.
         """
         try:
             config = await self._get_org_config(org_id)
-            await self._get_token(org_id)
             return {
                 "status": "ok",
                 "organization_name": config["organization_name"],
-                "backend_url": config["backend_url"],
-                "token_valid": True
+                "backend_url": config["backend_url"]
             }
         except MRXClientError as e:
             return {
                 "status": "error",
-                "org_id": org_id,
-                "message": e.message,
-                "status_code": e.status_code
+                "error": e.message,
+                "org_id": org_id
             }
 
 

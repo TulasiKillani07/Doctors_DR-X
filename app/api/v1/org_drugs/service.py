@@ -1,6 +1,6 @@
 """
 Organization Drugs service — Doctor views drugs from a connected org's MRX
-Flow: Doctor → DRX → mrx_client → MRX → drugs
+Flow: Doctor → DRX → mrx_client (forward Proxzar JWT) → MRX → drugs
 """
 
 from typing import Dict, Any, Optional
@@ -14,6 +14,7 @@ from app.services.helpers import verify_doctor_org_access
 async def list_org_drugs(
     org_id: str,
     doctor_id: str,
+    token: str,
     search: Optional[str] = None,
     skip: int = 0,
     limit: int = 50
@@ -26,20 +27,20 @@ async def list_org_drugs(
         params["search"] = search
 
     try:
-        return await mrx_client.request(org_id, "GET", "/mrx/api/v1/integration/drugs", params=params)
+        return await mrx_client.request(org_id, "GET", "/mrx/api/v1/integration/drugs", token=token, params=params)
     except MRXClientError as e:
         raise HTTPException(status_code=e.status_code or 502, detail=e.message)
 
 
-async def get_org_drug_detail(org_id: str, drug_id: str, doctor_id: str, doctor_gid: str = "", doctor_name: str = "") -> Dict[str, Any]:
+async def get_org_drug_detail(org_id: str, drug_id: str, doctor_id: str, token: str, doctor_gid: str = "", doctor_name: str = "") -> Dict[str, Any]:
     """Fetch a single drug detail from an organization's MRX backend and push view event"""
     await verify_doctor_org_access(doctor_id, org_id)
 
     try:
-        result = await mrx_client.request(org_id, "GET", f"/mrx/api/v1/integration/drugs/{drug_id}")
+        result = await mrx_client.request(org_id, "GET", f"/mrx/api/v1/integration/drugs/{drug_id}", token=token)
         # Push drug view to MRX (fire-and-forget)
         try:
-            await mrx_client.request(org_id, "POST", "/mrx/api/v1/integration/drug-views", body={
+            await mrx_client.request(org_id, "POST", "/mrx/api/v1/integration/drug-views", token=token, body={
                 "drug_id": drug_id,
                 "drug_name": result.get("drug_name", ""),
                 "doctor_gid": doctor_gid,
@@ -52,7 +53,7 @@ async def get_org_drug_detail(org_id: str, drug_id: str, doctor_id: str, doctor_
         raise HTTPException(status_code=e.status_code or 502, detail=e.message)
 
 
-async def download_org_drug_brochure(org_id: str, drug_id: str, doctor_id: str):
+async def download_org_drug_brochure(org_id: str, drug_id: str, doctor_id: str, token: str):
     """Download drug brochure from MRX — streams the PDF back to doctor"""
     from fastapi.responses import StreamingResponse
     import httpx
@@ -62,7 +63,7 @@ async def download_org_drug_brochure(org_id: str, drug_id: str, doctor_id: str):
     # Get the brochure download URL from MRX
     try:
         # First get drug detail to check if brochure exists
-        drug = await mrx_client.request(org_id, "GET", f"/mrx/api/v1/integration/drugs/{drug_id}")
+        drug = await mrx_client.request(org_id, "GET", f"/mrx/api/v1/integration/drugs/{drug_id}", token=token)
         brochure_url = drug.get("brochure_url", "")
 
         if not brochure_url:

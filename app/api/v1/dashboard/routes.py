@@ -3,17 +3,20 @@ Doctor Dashboard Routes — DRX Doctor Platform
 """
 
 from fastapi import APIRouter, Depends, Query
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from typing import Dict, Optional
 from app.core.auth import require_doctor
 from app.api.v1.dashboard import service
 
 router = APIRouter()
+_bearer = HTTPBearer()
 
 
 @router.get("/me", summary="Get My Dashboard")
 async def get_my_dashboard(
     org_id: Optional[str] = Query(None, description="Organization ID — if provided, includes pharma data from MRX"),
-    current_user: Dict = Depends(require_doctor)
+    current_user: Dict = Depends(require_doctor),
+    credentials: HTTPAuthorizationCredentials = Depends(_bearer)
 ):
     """
     **Purpose:** Get the logged-in doctor's complete dashboard in one API call.
@@ -101,4 +104,4 @@ async def get_my_dashboard(
     - `suggested_doctors` — doctors to connect with (top 5)
     - `account` — verification and status
     """
-    return await service.get_doctor_dashboard(current_user, org_id)
+    return await service.get_doctor_dashboard(current_user, credentials.credentials, org_id)
