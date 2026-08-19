@@ -5,7 +5,7 @@ Auth routes for DRX Doctor Platform
 from fastapi import APIRouter
 from app.api.v1.auth.schemas import (
     AdminLoginRequest, AdminCreateRequest, DoctorRegisterRequest, DoctorLoginRequest,
-    TokenResponse, AdminMessageResponse, DoctorMessageResponse
+    AdminMessageResponse, DoctorMessageResponse
 )
 from app.api.v1.auth import service
 
@@ -98,7 +98,7 @@ async def doctor_register(request: DoctorRegisterRequest):
     }
     ```
     
-    **After registration:** Doctor can login and complete their professional profile.
+    **After registration:** Doctor authenticates via Proxzar OAuth using their username.
     """
     return await service.doctor_register(
         name=request.name,

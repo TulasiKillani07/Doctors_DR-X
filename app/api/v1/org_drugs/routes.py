@@ -28,7 +28,7 @@ async def list_drugs(
 
     **Flow:**
     ```
-    Doctor → DRX → mrx_client → MRX /integration/drugs → response
+    Doctor → Proxzar JWT → DRX → forwards same JWT → MRX /integration/drugs → response
     ```
 
     **Query Params:** `search`, `skip`, `limit`
@@ -73,7 +73,7 @@ async def get_drug_detail(
 
     **Flow:**
     ```
-    Doctor → DRX → mrx_client → MRX /integration/drugs/{drug_id} → response
+    Doctor → Proxzar JWT → DRX → forwards same JWT → MRX /integration/drugs/{drug_id} → response
     ```
 
     **Response:** Full drug document with packaging info.
@@ -100,7 +100,7 @@ async def download_drug_brochure(
 
     **Flow:**
     ```
-    Doctor → DRX → mrx_client → MRX /drugs/{drug_id}/brochure/download → PDF stream
+    Doctor → Proxzar JWT → DRX → forwards same JWT → MRX /drugs/{drug_id}/brochure/download → PDF stream
     ```
 
     **Response:** PDF file streamed with download headers.

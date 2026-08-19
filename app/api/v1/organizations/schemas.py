@@ -13,9 +13,11 @@ class OrganizationCreateRequest(BaseModel):
     logo: Optional[str] = None
     contact_email: Optional[EmailStr] = None
     contact_phone: Optional[str] = None
-    org_admin: Optional[str] = Field(None, max_length=100)
-    admin_email: Optional[EmailStr] = None
+    org_admin: str = Field(..., min_length=2, max_length=100, description="Organization admin full name")
+    admin_username: str = Field(..., min_length=3, max_length=30, description="Org admin username (3-30 chars, alphanumeric + underscores)")
+    admin_email: EmailStr = Field(..., description="Org admin email")
     admin_phone: Optional[str] = None
+    admin_password: str = Field(..., min_length=8, max_length=64, description="Org admin password")
     address: Optional[str] = Field(None, max_length=500)
     city: Optional[str] = Field(None, max_length=100)
     state: Optional[str] = Field(None, max_length=100)
@@ -71,5 +73,3 @@ class MessageResponse(BaseModel):
     message: str
     organization_id: Optional[str] = None
     organization_gid: Optional[str] = None
-    client_id: Optional[str] = None
-    client_secret: Optional[str] = Field(None, description="Only returned on creation -- store securely, never shown again")

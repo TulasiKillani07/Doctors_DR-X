@@ -17,7 +17,22 @@ logger = get_drx_logger("drx.main")
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.APP_VERSION,
-    description="DRX - Doctor Platform. Verified doctor network for pharmaceutical industry.",
+    description=(
+        "DRX - Doctor Platform. Verified doctor network for pharmaceutical industry.\n\n"
+        "## Authentication\n\n"
+        "All user authentication is via **Proxzar OAuth** (RS256 JWT verified with Proxzar JWKS).\n\n"
+        "- DRX does not issue its own user tokens.\n"
+        "- Obtain a Proxzar JWT via `https://oauth2.proxzar.ai`\n"
+        "- Pass it as `Authorization: Bearer <Proxzar-JWT>`\n\n"
+        "### Token claims used by DRX:\n"
+        "```json\n"
+        '{\n  "sub": "username",\n  "role": "DOCTOR | PLATFORM_ADMIN",\n'
+        '  "iss": "https://oauth2.proxzar.ai",\n  "aud": ["DRX", "MRX", "TMS"],\n'
+        '  "exp": 1787140344\n}\n'
+        "```\n\n"
+        "### DRX → MRX communication\n"
+        "DRX forwards the same Proxzar JWT to MRX. No client_id/secret exchange.\n"
+    ),
     docs_url="/drxdb/docs",
     redoc_url="/drxdb/redoc",
     openapi_url="/drxdb/openapi.json"

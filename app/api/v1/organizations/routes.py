@@ -20,7 +20,7 @@ async def create_organization(
     current_user=Depends(require_platform_admin)
 ):
     """
-    **Purpose:** Register a new pharmaceutical company on the platform. Auto-generates integration credentials.
+    **Purpose:** Register a new pharmaceutical company on the platform. Auto-generates integration credentials and creates an org admin user.
 
     **Access:** Platform Admin only
 
@@ -29,6 +29,10 @@ async def create_organization(
     {
       "organization_name": "Sanofi India",
       "mrx_url": "https://pharma-medrepai.onrender.com",
+      "org_admin": "Tulasi Killani",
+      "admin_username": "tulasi_sanofi",
+      "admin_email": "tulasi@sanofi.com",
+      "admin_password": "Admin@123456",
       "contact_email": "info@sanofi.com",
       "contact_phone": "9876543210",
       "city": "Mumbai",
@@ -37,21 +41,20 @@ async def create_organization(
     }
     ```
 
-    **Required:** `organization_name`, `mrx_url`
+    **Required:** `organization_name`, `mrx_url`, `org_admin`, `admin_username`, `admin_email`, `admin_password`
 
-    **Response (credentials shown ONCE):**
+    **Response:**
     ```json
     {
       "message": "Organization created successfully",
       "organization_id": "6a5f4fbe...",
-      "organization_gid": "PRXORG631774",
-      "client_id": "sanofi_e228",
-      "client_secret": "XGqW5_OvZzC05h-bSh... (shown only once — put in MRX .env)"
+      "organization_gid": "PRXORG631774"
     }
     ```
 
     **After creation:**
-    - Copy `client_id` and `client_secret` into MRX's `.env` as `MRX_TO_DRX_CLIENT_ID` and `MRX_TO_DRX_SECRET`
+    - An org admin user is created in DRX with the provided `admin_username`
+    - The org admin authenticates via Proxzar OAuth using that username
     - `mrx_url` is used by DRX to reach this org's MRX backend
     """
     return await service.create_organization(request.model_dump(), current_user)

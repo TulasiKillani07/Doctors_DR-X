@@ -2,8 +2,6 @@
 Organization service — CRUD for organizations collection
 """
 
-import secrets
-import re
 from datetime import datetime
 from typing import Optional, Dict, Any
 from fastapi import HTTPException, status
@@ -13,30 +11,14 @@ from app.core.security import hash_password
 from app.models.organization_model import OrganizationInDB, generate_org_gid
 
 
-def _generate_client_id(org_name: str) -> str:
-    """Generate client_id from org name: lowercase, underscores, + 4 random chars"""
-    slug = re.sub(r'[^a-z0-9]', '_', org_name.lower().strip())
-    slug = re.sub(r'_+', '_', slug).strip('_')[:30]
-    return f"{slug}_{secrets.token_hex(2)}"
-
-
-def _generate_client_secret() -> str:
-    """Generate a long random client_secret (64 chars)"""
-    return secrets.token_urlsafe(48)
-
-
 async def create_organization(data: Dict[str, Any], admin_user: Dict) -> Dict[str, Any]:
-    """Create a new organization with auto-generated credentials"""
+    """Create a new organization and its admin user"""
     db = get_database()
 
     max_retries = 3
 
     for attempt in range(max_retries):
-        # Generate unique GID and client_id
         org_gid = generate_org_gid()
-        client_id = _generate_client_id(data["organization_name"])
-        client_secret = _generate_client_secret()
-        client_secret_hash = hash_password(client_secret)
 
         org = OrganizationInDB(
             organization_gid=org_gid,
@@ -44,16 +26,15 @@ async def create_organization(data: Dict[str, Any], admin_user: Dict) -> Dict[st
             logo=data.get("logo"),
             contact_email=data.get("contact_email"),
             contact_phone=data.get("contact_phone"),
-            org_admin=data.get("org_admin"),
-            admin_email=data.get("admin_email"),
+            org_admin=data["org_admin"],
+            admin_username=data["admin_username"].strip().lower(),
+            admin_email=data["admin_email"],
             admin_phone=data.get("admin_phone"),
             address=data.get("address"),
             city=data.get("city"),
             state=data.get("state"),
             country=data.get("country"),
             pincode=data.get("pincode"),
-            client_id=client_id,
-            client_secret_hash=client_secret_hash,
             mrx_url=data.get("mrx_url"),
             status="ACTIVE",
             created_by=admin_user["_id"],
@@ -66,7 +47,7 @@ async def create_organization(data: Dict[str, Any], admin_user: Dict) -> Dict[st
         except Exception as e:
             err_str = str(e).lower()
             if ("duplicate key" in err_str or "e11000" in err_str) and attempt < max_retries - 1:
-                continue  # Retry with new GID/client_id
+                continue  # Retry with new GID
             if "duplicate key" in err_str or "e11000" in err_str:
                 raise HTTPException(
                     status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
@@ -74,16 +55,38 @@ async def create_organization(data: Dict[str, Any], admin_user: Dict) -> Dict[st
                 )
             raise
 
-        # Return client_secret ONLY on creation (never again)
+        # ── Create org admin in admin_users collection ──
+        admin_username = data["admin_username"].strip().lower()
+        admin_password = data["admin_password"]
+        admin_name = data["org_admin"]
+        admin_email_val = data["admin_email"]
+
+        existing = await db.admin_users.find_one({"$or": [{"username": admin_username}, {"email": admin_email_val}]})
+        if existing:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="Admin username or email already exists"
+            )
+
+        from app.models.admin_model import AdminUserInDB
+        org_admin_doc = AdminUserInDB(
+            username=admin_username,
+            email=admin_email_val,
+            password_hash=hash_password(admin_password),
+            name=admin_name,
+            role="PLATFORM_ADMIN",
+            is_active=True,
+            created_at=datetime.utcnow(),
+            updated_at=datetime.utcnow()
+        )
+        await db.admin_users.insert_one(org_admin_doc.model_dump())
+
         return {
             "message": "Organization created successfully",
             "organization_id": str(result.inserted_id),
-            "organization_gid": org_gid,
-            "client_id": client_id,
-            "client_secret": client_secret  # Only returned once!
+            "organization_gid": org_gid
         }
 
-    # Should never reach here due to the raise inside the loop
     raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Organization creation failed")
 
 

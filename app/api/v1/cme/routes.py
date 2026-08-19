@@ -34,7 +34,7 @@ async def list_org_events(
 
     **Access:** Doctor only (must be connected to org)
 
-    **Flow:** Doctor → DRX → mrx_client → MRX /integration/cme → events
+    **Flow:** Doctor → Proxzar JWT → DRX → forwards same JWT → MRX /integration/cme → events
 
     **Response:**
     ```json
@@ -103,7 +103,7 @@ async def register_for_event(
 
     **Access:** Doctor only (must be connected to org)
 
-    **Flow:** Doctor → DRX validates → forwards to MRX → MRX stores registration
+    **Flow:** Doctor → Proxzar JWT → DRX validates → forwards to MRX → MRX stores registration
 
     **Request Body:**
     ```json
@@ -134,7 +134,7 @@ async def get_my_cme(
 
     **Access:** Doctor only (must be connected to org)
 
-    **Flow:** Doctor → DRX → mrx_client → MRX /integration/cme/my-registrations → registrations
+    **Flow:** Doctor → Proxzar JWT → DRX → forwards same JWT → MRX /integration/cme/my-registrations → registrations
 
     **Response:**
     ```json
