@@ -28,7 +28,7 @@ def create_access_token(data: Dict[str, Any], expires_delta: Optional[timedelta]
 
 def decode_access_token(token: str) -> Optional[Dict[str, Any]]:
     try:
-        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM], audience="MRX", issuer="DRX")
         return payload
     except JWTError:
         return None

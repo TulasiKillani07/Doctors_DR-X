@@ -19,6 +19,11 @@ class Settings(BaseSettings):
     DRX_TO_MRX_CLIENT_ID: str = "drx_doctor_platform"
     DRX_TO_MRX_SECRET: str = "DRX2024SecureServiceKey"
 
+    # Proxzar Global Auth (inbound — DRX trusts Proxzar-issued JWTs)
+    PROXZAR_JWKS_URL: str = "https://oauth2.proxzar.ai/api/v1/jwks"
+    PROXZAR_ISSUER: str = "https://oauth2.proxzar.ai"
+    PROXZAR_AUDIENCE: str = "DRX"
+
     APP_NAME: str = "DRX - Doctor Platform"
     APP_VERSION: str = "1.0.0"
 

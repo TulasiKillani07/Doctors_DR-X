@@ -60,7 +60,7 @@ async def admin_login(email: str, password: str) -> Dict[str, Any]:
         {"$set": {"last_login_at": datetime.utcnow()}}
     )
 
-    token = create_access_token({"sub": str(admin["_id"]), "role": "PLATFORM_ADMIN"})
+    token = create_access_token({"sub": str(admin["_id"]), "role": "PLATFORM_ADMIN", "iss": "DRX", "aud": "MRX"})
 
     return {
         "access_token": token,
@@ -147,7 +147,7 @@ async def doctor_login(identifier: str, password: str) -> Dict[str, Any]:
         {"$set": {"last_login_at": datetime.utcnow()}}
     )
 
-    token = create_access_token({"sub": str(doctor["_id"]), "role": "DOCTOR"})
+    token = create_access_token({"sub": str(doctor["_id"]), "role": "DOCTOR", "iss": "DRX", "aud": "MRX"})
 
     return {
         "access_token": token,

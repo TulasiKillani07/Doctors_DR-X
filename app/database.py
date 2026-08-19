@@ -178,9 +178,21 @@ async def initialize_collections():
     )
 
     # ── integration_services ──
+    # Drop old non-sparse client_id index if it exists (migration: DOBO has client_id=null)
+    try:
+        await database["integration_services"].drop_index("int_svc_client_id_unique_idx")
+    except Exception:
+        pass  # Index doesn't exist or already correct
+
     await database["integration_services"].create_index(
-        "client_id", unique=True, name="int_svc_client_id_unique_idx"
+        "client_id", unique=True, sparse=True, name="int_svc_client_id_unique_idx"
     )
     await database["integration_services"].create_index(
         "service_code", unique=True, name="int_svc_code_unique_idx"
+    )
+    # Proxzar-based lookup: subject + platform
+    await database["integration_services"].create_index(
+        [("proxzar_subject", 1), ("proxzar_platform", 1)],
+        sparse=True,
+        name="int_svc_proxzar_identity_idx"
     )

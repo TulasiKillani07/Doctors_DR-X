@@ -1,6 +1,6 @@
 """
 Integration Routes — Service-to-Service APIs
-Protected by Service JWT (not Doctor/Admin JWT)
+Protected by Service JWT (MRX) or Proxzar JWT (DOBO)
 """
 
 from fastapi import APIRouter, Depends
@@ -8,7 +8,12 @@ from pydantic import BaseModel, Field
 from app.database import get_database
 from app.core.security import verify_password
 from app.core.service_auth import create_service_token, require_service_auth, SERVICE_TOKEN_EXPIRE_MINUTES
+from app.core.proxzar_auth import require_proxzar_auth
 from fastapi import HTTPException, status
+from datetime import datetime
+from app.utils.logger import get_drx_logger
+
+logger = get_drx_logger("drx.integration")
 
 router = APIRouter()
 
@@ -163,17 +168,27 @@ async def get_doctor_integration(
 @router.post("/doctors/register", summary="Register Doctor (Service API)")
 async def register_doctor_integration(
     request: dict,
-    org_context=Depends(require_service_auth)
+    proxzar_identity: dict = Depends(require_proxzar_auth)
 ):
     """
-    **Purpose:** MRX registers a doctor on DRX. Checks duplication by email — if exists, returns existing GID.
+    **Purpose:** Register a doctor on DRX. Checks duplication by email — if exists, returns existing GID.
 
-    **Access:** Service JWT only (backend-to-backend)
+    **Access:** Proxzar JWT with authorized integration identity (e.g. DOBO)
+
+    **Authentication:** Proxzar-issued JWT verified via JWKS (RS256)
+
+    **Authorization:** Caller must be registered in integration_services with:
+    - `authentication_provider` = "PROXZAR"
+    - `proxzar_subject` matching JWT `sub`
+    - `proxzar_platform` matching JWT `platform`
+    - `status` = "ACTIVE"
+    - `permissions` containing "doctor:create"
 
     **Request Body:**
     ```json
     {
       "name": "Dr. Arjun Mehta",
+      "username": "arjun_mehta",
       "email": "arjun@hospital.com",
       "phone": "9876543210"
     }
@@ -197,6 +212,50 @@ async def register_doctor_integration(
     }
     ```
     """
+    # ── Authorization: verify the Proxzar identity is allowed to create doctors ──
+    db = get_database()
+
+    caller_sub = proxzar_identity.get("sub", "")
+    caller_platform = proxzar_identity.get("platform", "")
+
+    logger.info(f"DOBO auth: sub={caller_sub}, platform={caller_platform}, full_claims={proxzar_identity}")
+
+    # Look up the integration service record by sub (+ platform if present)
+    lookup_query = {
+        "authentication_provider": "PROXZAR",
+        "proxzar_subject": caller_sub
+    }
+    if caller_platform:
+        lookup_query["proxzar_platform"] = caller_platform
+
+    service_record = await db.integration_services.find_one(lookup_query)
+
+    if not service_record:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=f"No authorized integration found for sub={caller_sub}, platform={caller_platform}"
+        )
+
+    if service_record.get("status") != "ACTIVE":
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Integration service is inactive"
+        )
+
+    permissions = service_record.get("permissions", [])
+    if "doctor:create" not in permissions:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Integration does not have 'doctor:create' permission"
+        )
+
+    # Update last_used_at
+    await db.integration_services.update_one(
+        {"_id": service_record["_id"]},
+        {"$set": {"last_used_at": datetime.utcnow()}}
+    )
+
+    # ── Proceed with doctor creation (existing logic) ──
     from app.api.v1.doctors.service import add_single_doctor
 
     name = request.get("name", "").strip()
@@ -206,7 +265,6 @@ async def register_doctor_integration(
     if not name or not email:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="name and email are required")
 
-    # Pass all fields through — add_single_doctor stores whatever is provided
     return await add_single_doctor(
         data={
             "name": name,
@@ -217,7 +275,7 @@ async def register_doctor_integration(
             "hospital": request.get("hospital"),
             "qualification": request.get("qualification"),
             "license_number": request.get("license_number"),
-            "registered_via": org_context.get("client_id", "unknown")
+            "registered_via": f"proxzar:{caller_sub}:{caller_platform}"
         },
         return_existing=True
     )
