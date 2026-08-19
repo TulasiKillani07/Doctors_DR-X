@@ -32,7 +32,7 @@ async def list_org_cme_events(
         params["status"] = status_filter
 
     try:
-        return await mrx_client.request(org_id, "GET", "/mrx/api/v1/integration/cme", token=token, params=params)
+        return await mrx_client.request(org_id, "GET", "/mrxdb/integration/cme", token=token, params=params)
     except MRXClientError as e:
         raise HTTPException(status_code=e.status_code or 502, detail=e.message)
 
@@ -47,7 +47,7 @@ async def get_cme_event_detail(
     await verify_doctor_org_access(doctor_id, org_id)
 
     try:
-        result = await mrx_client.request(org_id, "GET", "/mrx/api/v1/integration/cme", token=token, params={"skip": 0, "limit": 200})
+        result = await mrx_client.request(org_id, "GET", "/mrxdb/integration/cme", token=token, params={"skip": 0, "limit": 200})
         events = result.get("events", [])
         event = None
         for e in events:
@@ -76,7 +76,7 @@ async def register_for_event(
     doctor_name = current_user.get("name", "")
 
     try:
-        result = await mrx_client.request(org_id, "POST", "/mrx/api/v1/integration/cme/register", token=token, body={
+        result = await mrx_client.request(org_id, "POST", "/mrxdb/integration/cme/register", token=token, body={
             "doctor_gid": doctor_gid,
             "doctor_name": doctor_name,
             "event_id": event_id
@@ -103,7 +103,7 @@ async def get_my_cme(org_id: str, current_user: Dict, token: str) -> Dict[str, A
     doctor_gid = current_user.get("doctor_gid", "")
 
     try:
-        return await mrx_client.request(org_id, "GET", "/mrx/api/v1/integration/cme/my-registrations", token=token, params={
+        return await mrx_client.request(org_id, "GET", "/mrxdb/integration/cme/my-registrations", token=token, params={
             "doctor_gid": doctor_gid
         })
     except MRXClientError as e:

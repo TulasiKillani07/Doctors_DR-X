@@ -48,7 +48,7 @@ async def get_doctor_dashboard(current_user: Dict, token: str, org_id: str = Non
             return None
         try:
             from app.services.mrx_client import mrx_client
-            return await mrx_client.request(org_id, "GET", "/mrx/api/v1/integration/dashboard", token=token)
+            return await mrx_client.request(org_id, "GET", "/mrxdb/integration/dashboard", token=token)
         except Exception:
             return None  # MRX unavailable — dashboard still works with DRX data
 
