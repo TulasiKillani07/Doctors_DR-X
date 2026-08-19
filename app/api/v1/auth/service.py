@@ -12,19 +12,16 @@ from app.models.admin_model import AdminUserInDB
 from app.models.doctor_model import DoctorInDB
 
 
-async def create_admin(name: str, email: str, password: str = None) -> Dict[str, Any]:
+async def create_admin(name: str, email: str, password: str) -> Dict[str, Any]:
     """Create a new platform admin"""
-    from app.config import settings
     db = get_database()
 
     if await db.admin_users.find_one({"email": email}):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
 
-    final_password = password or settings.DEFAULT_USER_PASSWORD
-
     admin = AdminUserInDB(
         email=email,
-        password_hash=hash_password(final_password),
+        password_hash=hash_password(password),
         name=name,
         role="PLATFORM_ADMIN",
         is_active=True,
@@ -74,9 +71,8 @@ async def admin_login(email: str, password: str) -> Dict[str, Any]:
     }
 
 
-async def doctor_register(name: str, email: str, phone: str, username: str, password: str = None) -> Dict[str, Any]:
+async def doctor_register(name: str, email: str, phone: str, username: str, password: str) -> Dict[str, Any]:
     """Doctor self-registration"""
-    from app.config import settings
     from app.models.doctor_model import generate_doctor_gid
     db = get_database()
 
@@ -89,7 +85,8 @@ async def doctor_register(name: str, email: str, phone: str, username: str, pass
     if await db.doctors.find_one({"username": username}):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already taken")
 
-    final_password = password or settings.DEFAULT_USER_PASSWORD
+    if not password:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Password is required")
 
     # Generate unique GID (retry on collision)
     doctor_gid = generate_doctor_gid()
@@ -101,7 +98,7 @@ async def doctor_register(name: str, email: str, phone: str, username: str, pass
         username=username,
         email=email,
         phone=phone,
-        password_hash=hash_password(final_password),
+        password_hash=hash_password(password),
         name=name,
         is_active=True,
         is_email_verified=False,

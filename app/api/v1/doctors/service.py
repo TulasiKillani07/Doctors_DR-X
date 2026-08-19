@@ -82,13 +82,18 @@ async def add_single_doctor(data: Dict[str, Any], return_existing: bool = False)
     if await db.doctors.find_one({"username": username}):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already taken")
 
+    # Password is required
+    password = data.get("password", "").strip()
+    if not password:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Password is required")
+
     # Build doctor document
     doctor = DoctorInDB(
         doctor_gid=doctor_gid,
         username=username,
         email=email,
         phone=phone,
-        password_hash=hash_password(settings.DEFAULT_USER_PASSWORD),
+        password_hash=hash_password(password),
         name=name,
         specialization=data.get("specialization"),
         hospital=data.get("hospital"),

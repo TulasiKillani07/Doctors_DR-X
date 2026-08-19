@@ -43,11 +43,11 @@ class AdminLoginRequest(BaseModel):
 class AdminCreateRequest(BaseModel):
     name: str = Field(..., min_length=2, max_length=100)
     email: EmailStr
-    password: Optional[str] = Field(None, min_length=8, max_length=64, description="Optional — defaults to Welcome@123")
+    password: str = Field(..., min_length=8, max_length=64)
 
     @field_validator("password")
     @classmethod
-    def check_password(cls, v: Optional[str]) -> Optional[str]:
+    def check_password(cls, v: str) -> str:
         return validate_password_strength(v)
 
 
@@ -56,7 +56,7 @@ class DoctorRegisterRequest(BaseModel):
     username: str = Field(..., min_length=3, max_length=30, description="Unique username (3-30 chars, alphanumeric + underscores)")
     email: EmailStr
     phone: str = Field(..., min_length=10, max_length=15)
-    password: Optional[str] = Field(None, min_length=8, max_length=64, description="Optional — defaults to Welcome@123")
+    password: str = Field(..., min_length=8, max_length=64)
 
     @field_validator("username")
     @classmethod
@@ -67,7 +67,7 @@ class DoctorRegisterRequest(BaseModel):
 
     @field_validator("password")
     @classmethod
-    def check_password(cls, v: Optional[str]) -> Optional[str]:
+    def check_password(cls, v: str) -> str:
         return validate_password_strength(v)
 
 

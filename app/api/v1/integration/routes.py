@@ -265,11 +265,16 @@ async def register_doctor_integration(
     if not name or not email:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="name and email are required")
 
+    password = request.get("password", "").strip()
+    if not password:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="password is required")
+
     return await add_single_doctor(
         data={
             "name": name,
             "email": email,
             "phone": phone,
+            "password": password,
             "username": request.get("username", "").strip().lower(),
             "specialization": request.get("specialization"),
             "hospital": request.get("hospital"),
