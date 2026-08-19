@@ -5,14 +5,14 @@ Auth routes for DRX Doctor Platform
 from fastapi import APIRouter
 from app.api.v1.auth.schemas import (
     AdminLoginRequest, AdminCreateRequest, DoctorRegisterRequest, DoctorLoginRequest,
-    TokenResponse, MessageResponse
+    TokenResponse, AdminMessageResponse, DoctorMessageResponse
 )
 from app.api.v1.auth import service
 
 router = APIRouter()
 
 
-@router.post("/admin/create", response_model=MessageResponse, status_code=201, summary="Create Platform Admin")
+@router.post("/admin/create", response_model=AdminMessageResponse, status_code=201, summary="Create Platform Admin")
 async def create_admin(request: AdminCreateRequest):
     """
     **Purpose:** Create a new platform administrator (internal staff).
@@ -23,10 +23,17 @@ async def create_admin(request: AdminCreateRequest):
     ```json
     {
       "name": "Vamsi",
+      "username": "vamsi_admin",
       "email": "vamsi@drx.com",
       "password": "Admin@123456"
     }
     ```
+    
+    **Fields:**
+    - `name` — Full name (2-100 chars)
+    - `username` — Unique username (3-30 chars, alphanumeric + underscores, stored lowercase)
+    - `email` — Valid email (unique)
+    - `password` — Required, 8-64 chars, must include uppercase, lowercase, number, and symbol
     
     **Response:**
     ```json
@@ -39,6 +46,7 @@ async def create_admin(request: AdminCreateRequest):
     return await service.create_admin(
         name=request.name,
         email=request.email,
+        username=request.username,
         password=request.password
     )
 
@@ -50,11 +58,30 @@ async def admin_login(request: AdminLoginRequest):
     
     **Access:** Public
     
-    **Request Body:**
+    **Request Body (login with email):**
     ```json
     {
-      "email": "vamsi@drx.com",
+      "identifier": "vamsi@drx.com",
       "password": "Admin@123456"
+    }
+    ```
+    
+    **Request Body (login with username):**
+    ```json
+    {
+      "identifier": "vamsi_admin",
+      "password": "Admin@123456"
+    }
+    ```
+    
+    **JWT Token Claims:**
+    ```json
+    {
+      "sub": "vamsi_admin",
+      "role": "PLATFORM_ADMIN",
+      "iss": "DRX",
+      "aud": "MRX",
+      "exp": 1719000000
     }
     ```
     
@@ -68,10 +95,10 @@ async def admin_login(request: AdminLoginRequest):
     }
     ```
     """
-    return await service.admin_login(request.email, request.password)
+    return await service.admin_login(request.identifier, request.password)
 
 
-@router.post("/doctor/register", response_model=MessageResponse, status_code=201, summary="Doctor Registration")
+@router.post("/doctor/register", response_model=DoctorMessageResponse, status_code=201, summary="Doctor Registration")
 async def doctor_register(request: DoctorRegisterRequest):
     """
     **Purpose:** Doctor self-registration on the platform.
@@ -82,11 +109,19 @@ async def doctor_register(request: DoctorRegisterRequest):
     ```json
     {
       "name": "Dr. Arjun Mehta",
+      "username": "arjun_mehta",
       "email": "arjun@doctor.com",
       "phone": "9876543210",
       "password": "Doctor@123"
     }
     ```
+    
+    **Fields:**
+    - `name` — Full name (2-100 chars)
+    - `username` — Unique username (3-30 chars, alphanumeric + underscores, stored lowercase)
+    - `email` — Valid email (unique)
+    - `phone` — 10-15 digit phone number (unique)
+    - `password` — Required, 8-64 chars, must include uppercase, lowercase, number, and symbol
     
     **Response:**
     ```json
@@ -122,11 +157,30 @@ async def doctor_login(request: DoctorLoginRequest):
     }
     ```
     
+    **Request Body (login with username):**
+    ```json
+    {
+      "identifier": "arjun_mehta",
+      "password": "Doctor@123"
+    }
+    ```
+    
     **Request Body (login with GID):**
     ```json
     {
       "identifier": "PRXDOC482915",
       "password": "Doctor@123"
+    }
+    ```
+    
+    **JWT Token Claims:**
+    ```json
+    {
+      "sub": "arjun_mehta",
+      "role": "DOCTOR",
+      "iss": "DRX",
+      "aud": "MRX",
+      "exp": 1719000000
     }
     ```
     

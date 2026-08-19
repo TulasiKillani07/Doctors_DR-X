@@ -12,14 +12,18 @@ from app.models.admin_model import AdminUserInDB
 from app.models.doctor_model import DoctorInDB
 
 
-async def create_admin(name: str, email: str, password: str) -> Dict[str, Any]:
+async def create_admin(name: str, email: str, username: str, password: str) -> Dict[str, Any]:
     """Create a new platform admin"""
     db = get_database()
 
     if await db.admin_users.find_one({"email": email}):
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
 
+    if await db.admin_users.find_one({"username": username}):
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Username already taken")
+
     admin = AdminUserInDB(
+        username=username,
         email=email,
         password_hash=hash_password(password),
         name=name,
@@ -37,10 +41,14 @@ async def create_admin(name: str, email: str, password: str) -> Dict[str, Any]:
     }
 
 
-async def admin_login(email: str, password: str) -> Dict[str, Any]:
-    """Platform admin login"""
+async def admin_login(identifier: str, password: str) -> Dict[str, Any]:
+    """Platform admin login — accepts email or username"""
     db = get_database()
-    admin = await db.admin_users.find_one({"email": email})
+
+    if "@" in identifier:
+        admin = await db.admin_users.find_one({"email": identifier})
+    else:
+        admin = await db.admin_users.find_one({"username": identifier.lower()})
 
     if not admin:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
@@ -57,7 +65,7 @@ async def admin_login(email: str, password: str) -> Dict[str, Any]:
         {"$set": {"last_login_at": datetime.utcnow()}}
     )
 
-    token = create_access_token({"sub": str(admin["_id"]), "role": "PLATFORM_ADMIN", "iss": "DRX", "aud": "MRX"})
+    token = create_access_token({"sub": admin["username"], "role": "PLATFORM_ADMIN", "iss": "DRX", "aud": "MRX"})
 
     return {
         "access_token": token,
@@ -144,7 +152,10 @@ async def doctor_login(identifier: str, password: str) -> Dict[str, Any]:
         {"$set": {"last_login_at": datetime.utcnow()}}
     )
 
-    token = create_access_token({"sub": str(doctor["_id"]), "role": "DOCTOR", "iss": "DRX", "aud": "MRX"})
+    if not doctor.get("username"):
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Account missing username. Please contact support to update your profile.")
+
+    token = create_access_token({"sub": doctor["username"], "role": "DOCTOR", "iss": "DRX", "aud": "MRX"})
 
     return {
         "access_token": token,

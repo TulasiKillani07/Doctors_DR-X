@@ -190,9 +190,17 @@ async def register_doctor_integration(
       "name": "Dr. Arjun Mehta",
       "username": "arjun_mehta",
       "email": "arjun@hospital.com",
-      "phone": "9876543210"
+      "phone": "9876543210",
+      "password": "Doctor@123"
     }
     ```
+
+    **Fields:**
+    - `name` — Required. Full name
+    - `username` — Required. Unique username (3-30 chars, alphanumeric + underscores)
+    - `email` — Required. Valid email (unique)
+    - `phone` — Required. 10-digit phone number (unique)
+    - `password` — Required. 8-64 chars, must include uppercase, lowercase, number, and symbol
 
     **Response (new doctor):**
     ```json

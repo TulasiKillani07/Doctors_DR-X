@@ -36,14 +36,22 @@ def validate_password_strength(password: Optional[str]) -> Optional[str]:
 # ══════════════════════════════════════════════════════════════
 
 class AdminLoginRequest(BaseModel):
-    email: EmailStr
+    identifier: str = Field(..., description="Email or Username")
     password: str
 
 
 class AdminCreateRequest(BaseModel):
     name: str = Field(..., min_length=2, max_length=100)
+    username: str = Field(..., min_length=3, max_length=30, description="Unique username (3-30 chars, alphanumeric + underscores)")
     email: EmailStr
     password: str = Field(..., min_length=8, max_length=64)
+
+    @field_validator("username")
+    @classmethod
+    def validate_username(cls, v: str) -> str:
+        if not re.match(r'^[a-zA-Z0-9_]{3,30}$', v):
+            raise ValueError("Username must be 3-30 characters, only letters, numbers, and underscores allowed")
+        return v.lower()
 
     @field_validator("password")
     @classmethod
@@ -83,7 +91,12 @@ class TokenResponse(BaseModel):
     user: dict
 
 
-class MessageResponse(BaseModel):
+class AdminMessageResponse(BaseModel):
+    message: str
+    user_id: Optional[str] = None
+
+
+class DoctorMessageResponse(BaseModel):
     message: str
     user_id: Optional[str] = None
     doctor_gid: Optional[str] = None

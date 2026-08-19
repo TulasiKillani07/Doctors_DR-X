@@ -9,6 +9,7 @@ from datetime import datetime
 
 class AdminUserInDB(BaseModel):
     """Write model for admin_users collection"""
+    username: str = Field(..., min_length=3, max_length=30, description="Unique username")
     email: EmailStr = Field(..., description="Admin email (unique)")
     password_hash: str = Field(..., description="Bcrypt hashed password")
     name: str = Field(..., min_length=2, max_length=100, description="Full name")
