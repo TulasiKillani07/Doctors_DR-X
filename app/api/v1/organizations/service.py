@@ -30,6 +30,7 @@ async def create_organization(data: Dict[str, Any], admin_user: Dict) -> Dict[st
             admin_username=data["admin_username"].strip().lower(),
             admin_email=data["admin_email"],
             admin_phone=data.get("admin_phone"),
+            admin_password_hash=hash_password(data["admin_password"]),
             address=data.get("address"),
             city=data.get("city"),
             state=data.get("state"),
@@ -54,32 +55,6 @@ async def create_organization(data: Dict[str, Any], admin_user: Dict) -> Dict[st
                     detail="Failed to generate unique identifiers after multiple attempts"
                 )
             raise
-
-        # ── Create org admin in admin_users collection ──
-        admin_username = data["admin_username"].strip().lower()
-        admin_password = data["admin_password"]
-        admin_name = data["org_admin"]
-        admin_email_val = data["admin_email"]
-
-        existing = await db.admin_users.find_one({"$or": [{"username": admin_username}, {"email": admin_email_val}]})
-        if existing:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Admin username or email already exists"
-            )
-
-        from app.models.admin_model import AdminUserInDB
-        org_admin_doc = AdminUserInDB(
-            username=admin_username,
-            email=admin_email_val,
-            password_hash=hash_password(admin_password),
-            name=admin_name,
-            role="PLATFORM_ADMIN",
-            is_active=True,
-            created_at=datetime.utcnow(),
-            updated_at=datetime.utcnow()
-        )
-        await db.admin_users.insert_one(org_admin_doc.model_dump())
 
         return {
             "message": "Organization created successfully",

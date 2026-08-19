@@ -24,6 +24,7 @@ class OrganizationInDB(BaseModel):
     admin_username: str = Field(..., max_length=30, description="Organization admin username")
     admin_email: EmailStr = Field(..., description="Admin email")
     admin_phone: Optional[str] = Field(None, description="Admin phone")
+    admin_password_hash: str = Field(..., description="Hashed admin password")
     address: Optional[str] = Field(None, max_length=500, description="Address")
     city: Optional[str] = Field(None, max_length=100, description="City")
     state: Optional[str] = Field(None, max_length=100, description="State")

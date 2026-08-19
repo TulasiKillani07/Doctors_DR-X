@@ -10,7 +10,6 @@ Authentication:
 from fastapi import APIRouter, Depends
 from fastapi.responses import JSONResponse
 from app.database import get_database
-from app.core.auth import get_current_user
 from app.core.proxzar_auth import require_proxzar_auth
 from fastapi import HTTPException, status
 from datetime import datetime
@@ -23,22 +22,26 @@ router = APIRouter()
 
 # ══════════════════════════════════════════════════════════════
 # User-driven endpoints (Proxzar JWT — forwarded by MRX)
+# Requires ADMIN role (MRX admin calling DRX)
 # ══════════════════════════════════════════════════════════════
 
 @router.get("/doctors/search", summary="Search Doctors (Integration API)")
 async def search_doctors_integration(
     q: str = "",
-    current_user=Depends(get_current_user)
+    proxzar_identity: dict = Depends(require_proxzar_auth)
 ):
     """
-    **Purpose:** Search doctors on the platform (used by MRX on behalf of a logged-in user).
+    **Purpose:** Search doctors on the platform (used by MRX on behalf of a logged-in admin).
 
-    **Access:** Proxzar JWT (MRX forwards the user's token)
+    **Access:** Proxzar JWT with role = ADMIN
 
     **Query:** `q` — search by name or doctor_gid
 
     **Response:** List of matching doctors (basic info only — no sensitive data)
     """
+    if proxzar_identity.get("role") != "ADMIN":
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="ADMIN role required")
+
     db = get_database()
 
     query = {"is_active": True}
@@ -62,15 +65,18 @@ async def search_doctors_integration(
 @router.get("/doctors/{doctor_gid}", summary="Get Doctor by GID (Integration API)")
 async def get_doctor_integration(
     doctor_gid: str,
-    current_user=Depends(get_current_user)
+    proxzar_identity: dict = Depends(require_proxzar_auth)
 ):
     """
     **Purpose:** Get doctor details by GID (used by MRX after doctor accepts org request).
 
-    **Access:** Proxzar JWT (MRX forwards the user's token)
+    **Access:** Proxzar JWT with role = ADMIN
 
     **Response:** Doctor basic profile (no password hash, no internal IDs)
     """
+    if proxzar_identity.get("role") != "ADMIN":
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="ADMIN role required")
+
     db = get_database()
 
     doctor = await db.doctors.find_one({"doctor_gid": doctor_gid}, {
