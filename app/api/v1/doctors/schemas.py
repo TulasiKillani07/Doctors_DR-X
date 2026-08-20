@@ -51,15 +51,36 @@ class BulkUploadResponse(BaseModel):
 # Add Single Doctor
 # ══════════════════════════════════════════════════════════════
 
+class LocationInput(BaseModel):
+    """Location data from map/GPS"""
+    latitude: str = Field(..., description="Latitude from map/GPS")
+    longitude: str = Field(..., description="Longitude from map/GPS")
+    address: str = Field(..., description="Full address from geocode")
+    city: str = Field(..., description="City from geocode")
+    state: str = Field(..., description="State from geocode")
+    country: str = Field(default="India", description="Country from geocode")
+
+
 class AddDoctorRequest(BaseModel):
     """Admin manually adds a single doctor"""
     name: str = Field(..., min_length=2, max_length=100)
-    email: str = Field(..., description="Doctor email (used for login)")
+    username: str = Field(..., min_length=3, max_length=30, description="Unique username (3-30 chars, lowercase + numbers + underscore)")
+    email: str = Field(..., description="Doctor email")
     phone: str = Field(..., min_length=10, max_length=15)
+    password: str = Field(..., min_length=8, max_length=64, description="8-64 chars, 1 upper, 1 lower, 1 number, 1 symbol")
     specialization: Optional[str] = Field(None, description="Must be from predefined list")
     hospital: Optional[str] = Field(None, max_length=200)
     qualification: Optional[str] = Field(None, max_length=200)
     license_number: Optional[str] = Field(None, max_length=50)
+    location: Optional[LocationInput] = Field(None, description="Doctor's practice location")
+
+    @field_validator("username")
+    @classmethod
+    def validate_username(cls, v: str) -> str:
+        import re
+        if not re.match(r'^[a-z0-9_]{3,30}$', v):
+            raise ValueError("Username must be 3-30 characters, only lowercase letters, numbers, and underscores")
+        return v.lower()
 
     @field_validator("specialization")
     @classmethod
@@ -75,11 +96,21 @@ class AddDoctorRequest(BaseModel):
         json_schema_extra = {
             "example": {
                 "name": "Dr. Arjun Mehta",
+                "username": "arjun_mehta",
                 "email": "arjun@hospital.com",
                 "phone": "9876543210",
+                "password": "Doctor@123",
                 "specialization": "Cardiology",
                 "hospital": "Apollo Hospital",
-                "qualification": "MBBS, MD Cardiology"
+                "qualification": "MBBS, MD Cardiology",
+                "location": {
+                    "latitude": "17.4401",
+                    "longitude": "78.3489",
+                    "address": "Apollo Hospital, Jubilee Hills",
+                    "city": "Hyderabad",
+                    "state": "Telangana",
+                    "country": "India"
+                }
             }
         }
 
@@ -88,7 +119,6 @@ class AddDoctorResponse(BaseModel):
     message: str
     doctor_id: str
     doctor_gid: str
-    default_password: str
 
 
 # ══════════════════════════════════════════════════════════════

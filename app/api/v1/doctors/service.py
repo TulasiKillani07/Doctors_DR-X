@@ -107,14 +107,24 @@ async def add_single_doctor(data: Dict[str, Any], return_existing: bool = False)
         updated_at=datetime.utcnow()
     )
 
-    result = await db.doctors.insert_one(doctor.model_dump())
+    doc = doctor.model_dump()
+
+    # Add location if provided
+    location = data.get("location")
+    if location:
+        if isinstance(location, dict):
+            doc["location"] = location
+            doc["city"] = location.get("city")
+            doc["state"] = location.get("state")
+            doc["country"] = location.get("country")
+
+    result = await db.doctors.insert_one(doc)
 
     return {
         "status": "created",
         "message": "Doctor added successfully",
         "doctor_id": str(result.inserted_id),
-        "doctor_gid": doctor_gid,
-        "default_password": settings.DEFAULT_USER_PASSWORD
+        "doctor_gid": doctor_gid
     }
 
 

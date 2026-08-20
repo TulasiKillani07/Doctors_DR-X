@@ -45,29 +45,44 @@ async def add_doctor(
     ```json
     {
       "name": "Dr. Arjun Mehta",
+      "username": "arjun_mehta",
       "email": "arjun@hospital.com",
       "phone": "9876543210",
+      "password": "Doctor@123",
       "specialization": "Cardiology",
       "hospital": "Apollo Hospital",
       "qualification": "MBBS, MD Cardiology",
-      "license_number": "MH12345"
+      "license_number": "MH12345",
+      "location": {
+        "latitude": "17.4401",
+        "longitude": "78.3489",
+        "address": "Apollo Hospital, Jubilee Hills",
+        "city": "Hyderabad",
+        "state": "Telangana",
+        "country": "India"
+      }
     }
     ```
+
+    **Required:** `name`, `username`, `email`, `phone`, `password`
+
+    **Optional:** `specialization`, `hospital`, `qualification`, `license_number`, `location`
 
     **Response:**
     ```json
     {
       "message": "Doctor added successfully",
       "doctor_id": "6a6aef18...",
-      "doctor_gid": "PRXDOC482915",
-      "default_password": "Welcome@123"
+      "doctor_gid": "PRXDOC482915"
     }
     ```
 
     **Rules:**
-    - Email and phone must be unique
-    - Doctor can login with default_password immediately
-    - specialization must be from predefined list (GET /doctors/specializations)
+    - Email, phone, and username must be unique
+    - Username: 3-30 chars, lowercase letters, numbers, underscores only
+    - Password: 8-64 chars, must include uppercase, lowercase, number, and symbol
+    - Doctor authenticates via Proxzar OAuth using their username
+    - Specialization must be from predefined list (GET /doctors/specializations)
     """
     return await service.add_single_doctor(request.model_dump())
 # ══════════════════════════════════════════════════════════════
