@@ -52,7 +52,7 @@ async def create_request(username: str, organization_gid: str, requested_by: str
 
     # Create the request
     request_doc = DoctorRequestInDB(
-        doctor_gid=doctor_gid,
+        doctor_gid=doctor.get("doctor_gid", ""),
         doctor_id=str(doctor["_id"]),
         organization_id=organization_id,
         organization_name=org.get("organization_name", ""),
