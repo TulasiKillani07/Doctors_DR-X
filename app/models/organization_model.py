@@ -6,6 +6,7 @@ from pydantic import BaseModel, EmailStr, Field
 from typing import Optional
 from datetime import datetime
 import random
+from pydantic import HttpUrl
 
 
 def generate_org_gid() -> str:

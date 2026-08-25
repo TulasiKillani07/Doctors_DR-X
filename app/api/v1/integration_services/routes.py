@@ -1,5 +1,6 @@
 """
-Integration Services Routes — Platform Admin manages trusted backend services.
+Integration Services Routes — Platform Admin manages trusted integration services.
+Authentication for these services is via Proxzar JWT.
 """
 
 from fastapi import APIRouter, Depends
@@ -19,33 +20,36 @@ async def create_service_endpoint(
     current_user=Depends(require_platform_admin)
 ):
     """
-    **Purpose:** Register a new trusted backend service (Voice Onboarding, MRX, OCR, etc.)
+    **Purpose:** Register a new trusted integration service (DOBO, OCR, etc.)
 
     **Access:** Platform Admin only
 
     **Request Body:**
     ```json
     {
-      "service_name": "Voice Onboarding",
-      "service_code": "ONBOARDING",
-      "description": "Voice onboarding backend for doctor registration"
+      "service_name": "Voice Onboarding (DOBO)",
+      "service_code": "DOBO",
+      "description": "Voice onboarding backend for doctor registration",
+      "proxzar_subject": "rx_integration",
+      "proxzar_platform": "dobo",
+      "permissions": ["doctor:create"]
     }
     ```
 
-    **Response (credentials shown ONCE):**
+    **Response:**
     ```json
     {
       "message": "Integration service created successfully",
       "service_id": "...",
-      "service_name": "Voice Onboarding",
-      "service_code": "ONBOARDING",
-      "client_id": "onboarding_a1b2c3d4",
-      "client_secret": "X8kQ29Lp7mF... (48 chars)",
+      "service_name": "Voice Onboarding (DOBO)",
+      "service_code": "DOBO",
       "status": "ACTIVE"
     }
     ```
 
-    **Important:** The `client_secret` is shown only once. Store it in the consuming service's .env immediately.
+    **How it works:** The service authenticates via Proxzar JWT. DRX matches the
+    JWT's `sub` and `platform` claims against the registered `proxzar_subject` and
+    `proxzar_platform` to authorize operations.
     """
     return await service.create_service(request.model_dump())
 
@@ -57,7 +61,7 @@ async def list_services_endpoint(current_user=Depends(require_platform_admin)):
 
     **Access:** Platform Admin only
 
-    **Response:** All services with status, last_used_at, etc. No secrets shown.
+    **Response:** All services with status, permissions, and Proxzar identity mapping.
     """
     return await service.get_all_services()
 
@@ -75,7 +79,7 @@ async def activate_service_endpoint(service_id: str, current_user=Depends(requir
 @router.patch("/{service_id}/deactivate", response_model=MessageResponse, summary="Deactivate Service")
 async def deactivate_service_endpoint(service_id: str, current_user=Depends(require_platform_admin)):
     """
-    **Purpose:** Disable a service. Its credentials will no longer be accepted for token exchange.
+    **Purpose:** Disable a service. Its Proxzar identity will no longer be authorized.
 
     **Access:** Platform Admin only
     """

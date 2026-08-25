@@ -1,32 +1,19 @@
 """
 Integration Services — Business Logic
-Manages trusted backend service credentials (Voice Onboarding, MRX, OCR, etc.)
+Manages trusted integration service records (DOBO, etc.)
+Authentication is via Proxzar JWT. This module manages authorization (permissions).
 """
 
-import secrets
-import uuid
 from datetime import datetime
-from typing import Dict, Any, Optional
+from typing import Dict, Any
 from bson import ObjectId
 from fastapi import HTTPException, status
 from app.database import get_database
-from app.core.security import hash_password, verify_password
 from app.models.integration_service_model import IntegrationServiceInDB
 
 
-def _generate_client_id(service_code: str) -> str:
-    """Generate a unique client_id: lowercase service_code + short uuid"""
-    short = uuid.uuid4().hex[:8]
-    return f"{service_code.lower()}_{short}"
-
-
-def _generate_client_secret() -> str:
-    """Generate a secure random client secret (48 chars)"""
-    return secrets.token_urlsafe(36)
-
-
 async def create_service(data: Dict[str, Any]) -> Dict[str, Any]:
-    """Create a new integration service. Returns plain secret once."""
+    """Create a new integration service."""
     db = get_database()
 
     service_name = data["service_name"]
@@ -38,23 +25,16 @@ async def create_service(data: Dict[str, Any]) -> Dict[str, Any]:
     if existing:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Service with code '{service_code}' already exists")
 
-    # Generate credentials
-    client_id = _generate_client_id(service_code)
-    # Ensure client_id uniqueness
-    while await db.integration_services.find_one({"client_id": client_id}):
-        client_id = _generate_client_id(service_code)
-
-    client_secret = _generate_client_secret()
-    client_secret_hash = hash_password(client_secret)
-
     # Create document
     service_doc = IntegrationServiceInDB(
         service_name=service_name,
         service_code=service_code,
-        client_id=client_id,
-        client_secret_hash=client_secret_hash,
         status="ACTIVE",
         description=description,
+        authentication_provider="PROXZAR",
+        proxzar_subject=data.get("proxzar_subject"),
+        proxzar_platform=data.get("proxzar_platform"),
+        permissions=data.get("permissions", []),
         created_at=datetime.utcnow(),
         updated_at=datetime.utcnow(),
         last_used_at=None
@@ -67,14 +47,12 @@ async def create_service(data: Dict[str, Any]) -> Dict[str, Any]:
         "service_id": str(result.inserted_id),
         "service_name": service_name,
         "service_code": service_code,
-        "client_id": client_id,
-        "client_secret": client_secret,
         "status": "ACTIVE"
     }
 
 
 async def get_all_services() -> Dict[str, Any]:
-    """List all integration services (no secrets)"""
+    """List all integration services"""
     db = get_database()
 
     services = await db.integration_services.find({}).sort("created_at", -1).to_list(length=100)
@@ -85,41 +63,18 @@ async def get_all_services() -> Dict[str, Any]:
             "id": str(svc["_id"]),
             "service_name": svc["service_name"],
             "service_code": svc["service_code"],
-            "client_id": svc["client_id"],
             "status": svc["status"],
             "description": svc.get("description"),
+            "authentication_provider": svc.get("authentication_provider", "PROXZAR"),
+            "proxzar_subject": svc.get("proxzar_subject"),
+            "proxzar_platform": svc.get("proxzar_platform"),
+            "permissions": svc.get("permissions", []),
             "created_at": svc["created_at"],
             "updated_at": svc["updated_at"],
             "last_used_at": svc.get("last_used_at")
         })
 
     return {"total": len(results), "services": results}
-
-
-async def rotate_secret(service_id: str) -> Dict[str, Any]:
-    """Generate new secret for a service. Returns plain secret once."""
-    db = get_database()
-
-    if not ObjectId.is_valid(service_id):
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid service ID")
-
-    svc = await db.integration_services.find_one({"_id": ObjectId(service_id)})
-    if not svc:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Service not found")
-
-    new_secret = _generate_client_secret()
-    new_hash = hash_password(new_secret)
-
-    await db.integration_services.update_one(
-        {"_id": ObjectId(service_id)},
-        {"$set": {"client_secret_hash": new_hash, "updated_at": datetime.utcnow()}}
-    )
-
-    return {
-        "message": "Secret rotated successfully",
-        "client_id": svc["client_id"],
-        "client_secret": new_secret
-    }
 
 
 async def set_status(service_id: str, new_status: str) -> Dict[str, str]:
@@ -143,7 +98,7 @@ async def set_status(service_id: str, new_status: str) -> Dict[str, str]:
 
 
 async def update_last_used(client_id: str):
-    """Update last_used_at timestamp. Called on every successful token issue."""
+    """Update last_used_at timestamp. Called on every successful authentication."""
     db = get_database()
     await db.integration_services.update_one(
         {"client_id": client_id},
