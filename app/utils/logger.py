@@ -21,28 +21,12 @@ import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 from typing import Optional
-import platform
 
 
 def get_log_directory() -> Path:
-    """Get log directory from environment or use platform-specific default."""
-    if log_dir_env := os.getenv("LOG_DIR"):
-        return Path(log_dir_env)
-
-    system = platform.system()
-    if system == "Windows":
-        return Path("C:/Logs/DRX_Platform")
-    elif system == "Linux":
-        try:
-            if os.geteuid() == 0:
-                return Path("/var/log/drx_platform")
-        except AttributeError:
-            pass
-        return Path.home() / ".drx_platform" / "logs"
-    elif system == "Darwin":
-        return Path.home() / ".drx_platform" / "logs"
-    else:
-        return Path.home() / ".drx_platform" / "logs"
+    """Get log directory from settings (configured via .env)."""
+    from app.config import settings
+    return Path(settings.LOG_DIR)
 
 
 def get_drx_logger(

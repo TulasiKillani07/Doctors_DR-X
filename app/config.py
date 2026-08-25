@@ -22,6 +22,9 @@ class Settings(BaseSettings):
     # MRX integration endpoint prefix (used by mrx_client when calling MRX)
     MRX_API_PREFIX: str = "/mrxdb/integration"
 
+    # Logging
+    LOG_DIR: str = "logs"
+
     APP_NAME: str = "DRx: AI-Powered Doctor-Pharma Platform"
     APP_VERSION: str = "1.0.0"
 

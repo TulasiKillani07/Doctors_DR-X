@@ -54,6 +54,7 @@ async def search_doctors_integration(
     doctors = await db.doctors.find(query, {
         "_id": 0,
         "doctor_gid": 1,
+        "username": 1,
         "name": 1,
         "email": 1,
         "phone": 1

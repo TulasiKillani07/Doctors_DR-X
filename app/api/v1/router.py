@@ -23,6 +23,7 @@ from app.api.v1.feed.routes import router as feed_router
 from app.api.v1.search.routes import router as search_router
 from app.api.v1.groups.routes import router as groups_router
 from app.api.v1.activity_logs.routes import router as activity_logs_router
+from app.api.v1.doctor_requests.routes import router as doctor_requests_router
 
 api_router = APIRouter()
 
@@ -85,3 +86,6 @@ api_router.include_router(integration_services_router, prefix="/integration/serv
 
 # Activity Logs (Doctor views own activity history)
 api_router.include_router(activity_logs_router, prefix="/activity-logs", tags=["Activity Logs"])
+
+# Doctor Requests (MRX admin requests doctor → doctor accepts → DRX admin approves)
+api_router.include_router(doctor_requests_router, tags=["Doctor Requests"])
