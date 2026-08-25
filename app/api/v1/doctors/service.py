@@ -120,6 +120,27 @@ async def add_single_doctor(data: Dict[str, Any], return_existing: bool = False)
 
     result = await db.doctors.insert_one(doc)
 
+    # Auto-link to default demo org if configured
+    if settings.DEFAULT_ORG_ID:
+        try:
+            existing_link = await db.doctor_organizations.find_one({
+                "doctor_id": str(result.inserted_id),
+                "organization_id": settings.DEFAULT_ORG_ID
+            })
+            if not existing_link:
+                await db.doctor_organizations.insert_one({
+                    "doctor_id": str(result.inserted_id),
+                    "organization_id": settings.DEFAULT_ORG_ID,
+                    "status": "ACTIVE",
+                    "requested_by": "system",
+                    "requested_at": datetime.utcnow(),
+                    "joined_at": datetime.utcnow(),
+                    "created_at": datetime.utcnow(),
+                    "updated_at": datetime.utcnow()
+                })
+        except Exception:
+            pass  # Don't fail doctor creation if auto-link fails
+
     return {
         "status": "created",
         "message": "Doctor added successfully",

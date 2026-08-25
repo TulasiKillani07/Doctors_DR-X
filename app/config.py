@@ -25,6 +25,9 @@ class Settings(BaseSettings):
     # Logging
     LOG_DIR: str = "logs"
 
+    # Default demo org — auto-linked to every new doctor on registration
+    DEFAULT_ORG_ID: str = ""
+
     APP_NAME: str = "DRx: AI-Powered Doctor-Pharma Platform"
     APP_VERSION: str = "1.0.0"
 

@@ -56,17 +56,62 @@ async def create_doctor_request(
     {
       "message": "Request sent to doctor",
       "request_id": "...",
-      "status": "PENDING_DOCTOR"
+      "status": "PENDING"
     }
     ```
 
-    **Flow:** Doctor receives notification → accepts/rejects → DRX admin approves/rejects.
+    **Flow:** Doctor receives notification → accepts/rejects → if accepted, DRX admin approves/rejects.
     """
     if proxzar_identity.get("role") != "ADMIN":
         raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="ADMIN role required")
 
     requested_by = proxzar_identity.get("sub", "unknown")
     return await service.create_request(body.username, body.organization_gid, requested_by)
+
+
+@router.get("/integration/doctor-requests", summary="View Sent Requests (MRX Admin)")
+async def get_org_doctor_requests(
+    organization_gid: str,
+    proxzar_identity: dict = Depends(require_proxzar_auth)
+):
+    """
+    **Purpose:** MRX Admin views all doctor requests they sent for their organization.
+
+    **Access:** Proxzar JWT with role = ADMIN
+
+    **Query Params:** `organization_gid` (required)
+
+    **Response:**
+    ```json
+    {
+      "total": 3,
+      "requests": [
+        {
+          "id": "...",
+          "doctor_gid": "PRXDOC485235",
+          "doctor_username": "rahul_mehta",
+          "organization_gid": "PRXORG631774",
+          "organization_name": "Sanofi",
+          "requested_by": "tulasi",
+          "status": "PENDING",
+          "doctor_accepted": null,
+          "admin_accepted": null,
+          "rejected_by": null,
+          "created_at": "..."
+        }
+      ]
+    }
+    ```
+
+    **Statuses:**
+    - `PENDING` — waiting for doctor or admin action
+    - `APPROVED` — doctor and admin both accepted, doctor linked
+    - `REJECTED` — rejected by doctor or admin (check `rejected_by` field)
+    """
+    if proxzar_identity.get("role") != "ADMIN":
+        raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="ADMIN role required")
+
+    return await service.get_requests_by_org(organization_gid)
 
 
 # ══════════════════════════════════════════════════════════════
