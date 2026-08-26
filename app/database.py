@@ -181,8 +181,8 @@ async def initialize_collections():
     # Drop old non-sparse client_id index if it exists (migration: DOBO has client_id=null)
     try:
         await database["integration_services"].drop_index("int_svc_client_id_unique_idx")
-    except Exception:
-        pass  # Index doesn't exist or already correct
+    except Exception as e:
+        logger.debug(f"Index drop skipped (expected if not exists): {e}")
 
     await database["integration_services"].create_index(
         "client_id", unique=True, sparse=True, name="int_svc_client_id_unique_idx"

@@ -16,6 +16,9 @@ from bson import ObjectId
 from app.database import get_database
 from app.models.doctor_request_model import DoctorRequestInDB, RequestStatus
 from app.config import settings
+from app.utils.logger import get_drx_logger
+
+logger = get_drx_logger("drx.doctor_requests.service")
 
 
 async def create_request(username: str, organization_gid: str, requested_by: str) -> Dict[str, Any]:
@@ -78,8 +81,8 @@ async def create_request(username: str, organization_gid: str, requested_by: str
             notification_type="doctor_request",
             metadata={"request_id": str(result.inserted_id), "organization_id": organization_id}
         )
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning(f"Notification failed (create_request): {e}")
 
     return {
         "message": "Request sent to doctor",
@@ -185,8 +188,8 @@ async def doctor_accept(request_id: str, doctor_id: str) -> Dict[str, Any]:
                 notification_type="doctor_request_approval",
                 metadata={"request_id": request_id, "organization_id": req["organization_id"]}
             )
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning(f"Notification failed (doctor_accept): {e}")
 
     return {"message": "Request accepted. Awaiting DRX admin approval.", "status": RequestStatus.PENDING}
 
@@ -320,8 +323,8 @@ async def admin_approve(request_id: str, admin_username: str, token: str) -> Dic
                     "hospital": doctor.get("hospital")
                 }
             )
-    except Exception:
-        pass  # Don't fail approval if MRX sync fails
+    except Exception as e:
+        logger.warning(f"MRX sync failed (admin_approve): {e}")  # Don't fail approval if MRX sync fails
 
     # Notify doctor
     try:
@@ -333,8 +336,8 @@ async def admin_approve(request_id: str, admin_username: str, token: str) -> Dic
             notification_type="doctor_request_approved",
             metadata={"organization_id": req["organization_id"]}
         )
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning(f"Notification failed (admin_approve): {e}")
 
     return {"message": "Request approved. Doctor linked to organization.", "status": RequestStatus.APPROVED}
 
@@ -375,7 +378,7 @@ async def admin_reject(request_id: str, admin_username: str) -> Dict[str, Any]:
             notification_type="doctor_request_rejected",
             metadata={"organization_id": req["organization_id"]}
         )
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning(f"Notification failed (admin_reject): {e}")
 
     return {"message": "Request rejected.", "status": RequestStatus.REJECTED}

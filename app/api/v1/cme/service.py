@@ -15,6 +15,9 @@ from app.database import get_database
 from app.services.mrx_client import mrx_client, MRXClientError
 from app.services.helpers import verify_doctor_org_access
 from app.config import settings
+from app.utils.logger import get_drx_logger
+
+logger = get_drx_logger("drx.cme.service")
 
 
 async def list_org_cme_events(
@@ -91,8 +94,8 @@ async def register_for_event(
         await log_activity(current_user["_id"], org_id, "cme_registered", {
             "event_id": event_id
         })
-    except Exception:
-        pass
+    except Exception as e:
+        logger.warning(f"Activity log failed for cme_registered (non-blocking): {e}")
 
     return result
 

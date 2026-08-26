@@ -10,6 +10,9 @@ from app.database import get_database
 from app.services.mrx_client import mrx_client, MRXClientError
 from app.services.helpers import verify_doctor_org_access
 from app.config import settings
+from app.utils.logger import get_drx_logger
+
+logger = get_drx_logger("drx.org_drugs.service")
 
 
 async def list_org_drugs(
@@ -47,8 +50,8 @@ async def get_org_drug_detail(org_id: str, drug_id: str, doctor_id: str, token: 
                 "doctor_gid": doctor_gid,
                 "doctor_name": doctor_name
             })
-        except Exception:
-            pass  # Never block drug detail for analytics
+        except Exception as e:
+            logger.warning(f"Drug view push failed (non-blocking): {e}")  # Never block drug detail for analytics
         return result
     except MRXClientError as e:
         raise HTTPException(status_code=e.status_code or 502, detail=e.message)
