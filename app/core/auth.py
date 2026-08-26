@@ -77,26 +77,34 @@ async def get_current_user(
     user["role"] = role
 
     # ── Auto-link doctor to default org if not already linked ──
-    if role == "DOCTOR" and settings.DEFAULT_ORG_ID:
-        try:
-            existing_link = await db.doctor_organizations.find_one({
-                "doctor_id": user["_id"],
-                "organization_id": settings.DEFAULT_ORG_ID
-            })
-            if not existing_link:
-                await db.doctor_organizations.insert_one({
+    if role == "DOCTOR":
+        logger.info(f"Doctor login: {username} | DEFAULT_ORG_ID={settings.DEFAULT_ORG_ID or '(empty)'}")
+        if settings.DEFAULT_ORG_ID:
+            try:
+                existing_link = await db.doctor_organizations.find_one({
                     "doctor_id": user["_id"],
-                    "organization_id": settings.DEFAULT_ORG_ID,
-                    "status": "ACTIVE",
-                    "requested_by": "system",
-                    "requested_at": datetime.utcnow(),
-                    "joined_at": datetime.utcnow(),
-                    "created_at": datetime.utcnow(),
-                    "updated_at": datetime.utcnow()
+                    "organization_id": settings.DEFAULT_ORG_ID
                 })
-                logger.info(f"Auto-linked doctor {username} to default org {settings.DEFAULT_ORG_ID}")
-        except Exception as e:
-            logger.error(f"Failed to auto-link doctor {username} to default org: {e}")
+                if not existing_link:
+                    await db.doctor_organizations.insert_one({
+                        "doctor_id": user["_id"],
+                        "organization_id": settings.DEFAULT_ORG_ID,
+                        "status": "ACTIVE",
+                        "requested_by": "system",
+                        "requested_at": datetime.utcnow(),
+                        "joined_at": datetime.utcnow(),
+                        "created_at": datetime.utcnow(),
+                        "updated_at": datetime.utcnow()
+                    })
+                    logger.info(f"Auto-linked doctor {username} (id={user['_id']}) to default org {settings.DEFAULT_ORG_ID}")
+                else:
+                    logger.debug(f"Doctor {username} already linked to default org (link_id={existing_link.get('_id')})")
+            except Exception as e:
+                logger.error(f"Failed to auto-link doctor {username} to default org: {e}")
+        else:
+            logger.warning(f"DEFAULT_ORG_ID is not set — skipping auto-link for doctor {username}")
+    else:
+        logger.info(f"Admin login: {username}")
 
     return user
 
