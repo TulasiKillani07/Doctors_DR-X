@@ -19,9 +19,9 @@ async def get_logs(
     current_user=Depends(require_platform_admin)
 ):
     """
-    **Purpose:** View the last N lines of the DRX server log file.
+    **Purpose:** View the last N lines of the DRX server log file. Use this to debug production issues remotely without server access.
 
-    **Access:** Public (no auth — use for debugging only, disable in production)
+    **Access:** Platform Admin only (Proxzar JWT with role=PLATFORM_ADMIN)
 
     **Query Params:**
     - `lines` — number of lines from end (default 100, max 5000)
