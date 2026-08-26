@@ -24,6 +24,7 @@ from app.api.v1.search.routes import router as search_router
 from app.api.v1.groups.routes import router as groups_router
 from app.api.v1.activity_logs.routes import router as activity_logs_router
 from app.api.v1.doctor_requests.routes import router as doctor_requests_router
+from app.api.v1.logs.routes import router as logs_router
 
 api_router = APIRouter()
 
@@ -89,3 +90,6 @@ api_router.include_router(activity_logs_router, prefix="/activity-logs", tags=["
 
 # Doctor Requests (MRX admin requests doctor → doctor accepts → DRX admin approves)
 api_router.include_router(doctor_requests_router, tags=["Doctor Requests"])
+
+# Server Logs (for debugging deployment issues)
+api_router.include_router(logs_router, tags=["Logs"])

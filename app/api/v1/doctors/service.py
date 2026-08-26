@@ -13,6 +13,9 @@ from app.database import get_database
 from app.core.security import hash_password
 from app.config import settings
 from app.models.doctor_model import DoctorInDB, generate_doctor_gid
+from app.utils.logger import get_drx_logger
+
+logger = get_drx_logger("drx.doctors.service")
 
 
 def validate_email(email: str) -> bool:
@@ -24,6 +27,33 @@ def validate_phone(phone: str) -> bool:
     """Accept 10-digit numbers or with country code (e.g. +91XXXXXXXXXX)"""
     cleaned = re.sub(r'[^0-9]', '', str(phone))
     return len(cleaned) == 10 or len(cleaned) == 12
+
+
+async def _ensure_default_org_link(doctor_id: str, db) -> None:
+    """Ensure doctor is linked to the default demo org. Safe to call multiple times."""
+    if not settings.DEFAULT_ORG_ID:
+        return
+    try:
+        existing_link = await db.doctor_organizations.find_one({
+            "doctor_id": doctor_id,
+            "organization_id": settings.DEFAULT_ORG_ID
+        })
+        if not existing_link:
+            await db.doctor_organizations.insert_one({
+                "doctor_id": doctor_id,
+                "organization_id": settings.DEFAULT_ORG_ID,
+                "status": "ACTIVE",
+                "requested_by": "system",
+                "requested_at": datetime.utcnow(),
+                "joined_at": datetime.utcnow(),
+                "created_at": datetime.utcnow(),
+                "updated_at": datetime.utcnow()
+            })
+            logger.info(f"Auto-linked existing doctor {doctor_id} to default org {settings.DEFAULT_ORG_ID}")
+        else:
+            logger.debug(f"Doctor {doctor_id} already linked to default org")
+    except Exception as e:
+        logger.error(f"Failed to auto-link doctor {doctor_id} to default org: {e}")
 
 
 async def add_single_doctor(data: Dict[str, Any], return_existing: bool = False) -> Dict[str, Any]:
@@ -54,12 +84,14 @@ async def add_single_doctor(data: Dict[str, Any], return_existing: bool = False)
     existing_email = await db.doctors.find_one({"email": email})
     if existing_email:
         if return_existing:
+            await _ensure_default_org_link(str(existing_email["_id"]), db)
             return {"status": "exists", "doctor_gid": existing_email.get("doctor_gid", ""), "doctor_id": str(existing_email["_id"]), "message": "Doctor already exists on DRX"}
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Email already registered")
 
     existing_phone = await db.doctors.find_one({"phone": phone})
     if existing_phone:
         if return_existing:
+            await _ensure_default_org_link(str(existing_phone["_id"]), db)
             return {"status": "exists", "doctor_gid": existing_phone.get("doctor_gid", ""), "doctor_id": str(existing_phone["_id"]), "message": "Doctor with this phone already exists on DRX"}
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Phone number already registered")
 
@@ -138,8 +170,11 @@ async def add_single_doctor(data: Dict[str, Any], return_existing: bool = False)
                     "created_at": datetime.utcnow(),
                     "updated_at": datetime.utcnow()
                 })
-        except Exception:
-            pass  # Don't fail doctor creation if auto-link fails
+                logger.info(f"Auto-linked new doctor {doctor_gid} to default org {settings.DEFAULT_ORG_ID}")
+            else:
+                logger.info(f"Doctor {doctor_gid} already linked to default org")
+        except Exception as e:
+            logger.error(f"Failed to auto-link doctor {doctor_gid} to default org: {e}")
 
     return {
         "status": "created",

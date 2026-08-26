@@ -8,7 +8,9 @@ DRX does not issue its own user tokens.
 from fastapi import Depends, HTTPException, status
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from typing import Dict, Any
+from datetime import datetime
 from app.core.proxzar_auth import verify_proxzar_jwt
+from app.config import settings
 from app.database import get_database
 from app.utils.logger import get_drx_logger
 
@@ -73,6 +75,29 @@ async def get_current_user(
 
     user["_id"] = str(user["_id"])
     user["role"] = role
+
+    # ── Auto-link doctor to default org if not already linked ──
+    if role == "DOCTOR" and settings.DEFAULT_ORG_ID:
+        try:
+            existing_link = await db.doctor_organizations.find_one({
+                "doctor_id": user["_id"],
+                "organization_id": settings.DEFAULT_ORG_ID
+            })
+            if not existing_link:
+                await db.doctor_organizations.insert_one({
+                    "doctor_id": user["_id"],
+                    "organization_id": settings.DEFAULT_ORG_ID,
+                    "status": "ACTIVE",
+                    "requested_by": "system",
+                    "requested_at": datetime.utcnow(),
+                    "joined_at": datetime.utcnow(),
+                    "created_at": datetime.utcnow(),
+                    "updated_at": datetime.utcnow()
+                })
+                logger.info(f"Auto-linked doctor {username} to default org {settings.DEFAULT_ORG_ID}")
+        except Exception as e:
+            logger.error(f"Failed to auto-link doctor {username} to default org: {e}")
+
     return user
 
 
