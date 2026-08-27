@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     # Virtual MR — LLM (Gemini, OpenAI-compatible endpoint)
     LLM_API_KEY: Optional[str] = None
     LLM_BASE_URL: str = "https://generativelanguage.googleapis.com/v1beta/openai"
-    LLM_MODEL: str = "gemini-2.0-flash"
+    LLM_MODEL: str = "gemini-3.6-flash"
     LLM_MAX_CONTEXT_CHARS: int = 30000
     LLM_TIMEOUT_SECONDS: int = 30
 
