@@ -2,11 +2,13 @@
 Doctor Requests Routes — DRX Doctor Platform
 
 Flow:
-  MRX Admin → POST /integration/doctor-requests → PENDING_DOCTOR
-  Doctor → POST /doctor-requests/{id}/accept → PENDING_ADMIN
-  Doctor → POST /doctor-requests/{id}/reject → REJECTED_BY_DOCTOR
-  DRX Admin → POST /doctor-requests/{id}/approve → APPROVED (link + MRX sync)
-  DRX Admin → POST /doctor-requests/{id}/reject → REJECTED_BY_ADMIN
+  MRX Admin → POST /integration/doctor-requests → PENDING
+  Doctor accepts → PENDING (doctor_accepted=true, waiting for admin)
+  Doctor rejects → REJECTED (rejected_by=doctor, done)
+  DRX Admin approves → APPROVED (links doctor + syncs to MRX)
+  DRX Admin rejects → REJECTED (rejected_by=admin, done)
+
+Statuses: PENDING | APPROVED | REJECTED
 """
 
 from fastapi import APIRouter, Depends
@@ -136,9 +138,10 @@ async def get_my_pending_requests(
           "id": "...",
           "doctor_gid": "PRXDOC485235",
           "organization_id": "...",
+          "organization_gid": "PRXORG631774",
           "organization_name": "Sanofi",
           "requested_by": "tulasi",
-          "status": "PENDING_DOCTOR",
+          "status": "PENDING",
           "created_at": "2026-08-19T..."
         }
       ]
@@ -162,7 +165,7 @@ async def doctor_accept_request(
     ```json
     {
       "message": "Request accepted. Awaiting DRX admin approval.",
-      "status": "PENDING_ADMIN"
+      "status": "PENDING"
     }
     ```
     """
@@ -183,7 +186,7 @@ async def doctor_reject_request(
     ```json
     {
       "message": "Request rejected.",
-      "status": "REJECTED_BY_DOCTOR"
+      "status": "REJECTED"
     }
     ```
     """
@@ -211,11 +214,15 @@ async def get_pending_approval_requests(
         {
           "id": "...",
           "doctor_gid": "PRXDOC485235",
+          "doctor_username": "rahul_mehta",
           "doctor_id": "...",
           "organization_id": "...",
+          "organization_gid": "PRXORG631774",
           "organization_name": "Sanofi",
           "requested_by": "tulasi",
-          "status": "PENDING_ADMIN",
+          "status": "PENDING",
+          "doctor_accepted": true,
+          "admin_accepted": null,
           "created_at": "...",
           "doctor_responded_at": "..."
         }
@@ -265,7 +272,7 @@ async def admin_reject_request(
     ```json
     {
       "message": "Request rejected.",
-      "status": "REJECTED_BY_ADMIN"
+      "status": "REJECTED"
     }
     ```
     """
