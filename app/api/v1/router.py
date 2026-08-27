@@ -25,6 +25,7 @@ from app.api.v1.groups.routes import router as groups_router
 from app.api.v1.activity_logs.routes import router as activity_logs_router
 from app.api.v1.doctor_requests.routes import router as doctor_requests_router
 from app.api.v1.logs.routes import router as logs_router
+from app.api.v1.virtual_mr.routes import router as virtual_mr_router
 
 api_router = APIRouter()
 
@@ -93,3 +94,6 @@ api_router.include_router(doctor_requests_router, tags=["Doctor Requests"])
 
 # Server Logs (for debugging deployment issues)
 api_router.include_router(logs_router, tags=["Logs"])
+
+# Virtual MR (AI drug Q&A chatbot — Doctor asks questions about a drug)
+api_router.include_router(virtual_mr_router, prefix="/virtual-mr", tags=["Virtual MR"])

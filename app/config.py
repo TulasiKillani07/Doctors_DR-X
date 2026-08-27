@@ -28,6 +28,13 @@ class Settings(BaseSettings):
     # Default demo org — auto-linked to every new doctor on registration
     DEFAULT_ORG_ID: str = ""
 
+    # Virtual MR — LLM (Groq, OpenAI-compatible)
+    GROQ_API_KEY: Optional[str] = None
+    GROQ_BASE_URL: str = "https://api.groq.com/openai/v1"
+    GROQ_MODEL: str = "openai/gpt-oss-20b"
+    GROQ_MAX_CONTEXT_CHARS: int = 30000
+    GROQ_TIMEOUT_SECONDS: int = 30
+
     APP_NAME: str = "DRx: AI-Powered Doctor-Pharma Platform"
     APP_VERSION: str = "1.0.0"
 
