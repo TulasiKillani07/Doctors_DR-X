@@ -31,7 +31,7 @@ class Settings(BaseSettings):
     # Virtual MR — LLM (Groq, OpenAI-compatible endpoint)
     LLM_API_KEY: Optional[str] = None
     LLM_BASE_URL: str = "https://api.groq.com/openai/v1"
-    LLM_MODEL: str = "llama-3.3-70b-versatile"
+    LLM_MODEL: str = "openai/gpt-oss-120b"
     LLM_MAX_CONTEXT_CHARS: int = 12000
     LLM_TIMEOUT_SECONDS: int = 30
 
