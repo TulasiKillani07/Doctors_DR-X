@@ -82,8 +82,8 @@ def build_drug_context(drug: Dict[str, Any]) -> tuple[str, bool]:
     context = "\n".join(lines)
 
     # V1 size guard (no tokenizer). Truncate if oversized.
-    if len(context) > settings.GROQ_MAX_CONTEXT_CHARS:
-        context = context[:settings.GROQ_MAX_CONTEXT_CHARS]
+    if len(context) > settings.LLM_MAX_CONTEXT_CHARS:
+        context = context[:settings.LLM_MAX_CONTEXT_CHARS]
 
     return context, used_brochure
 
@@ -108,7 +108,7 @@ async def _log_interaction(
             "drug_name": drug_name,
             "question": question,
             "answer": answer,
-            "model": settings.GROQ_MODEL,
+            "model": settings.LLM_MODEL,
             "used_brochure": used_brochure,
             "sources": sources,
             "created_at": datetime.utcnow(),

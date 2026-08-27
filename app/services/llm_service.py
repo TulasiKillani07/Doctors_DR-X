@@ -1,7 +1,7 @@
 """
 LLM Service — provider-agnostic chat completion via OpenAI-compatible API.
 
-Currently backed by Groq (https://api.groq.com/openai/v1).
+Currently backed by Gemini (Google Generative Language, OpenAI-compatible endpoint).
 The application talks to this service, not directly to a provider, so the
 provider/model can change via config without touching business logic.
 """
@@ -40,7 +40,7 @@ async def ask(
     Raises:
         LLMServiceError on missing config or provider failure.
     """
-    if not settings.GROQ_API_KEY:
+    if not settings.LLM_API_KEY:
         raise LLMServiceError("LLM is not configured (missing API key)", status_code=503)
 
     messages = [{"role": "system", "content": system_prompt}]
@@ -58,20 +58,20 @@ async def ask(
     messages.append({"role": "user", "content": user_content})
 
     payload = {
-        "model": settings.GROQ_MODEL,
+        "model": settings.LLM_MODEL,
         "messages": messages,
         "temperature": temperature,
     }
 
     headers = {
-        "Authorization": f"Bearer {settings.GROQ_API_KEY}",
+        "Authorization": f"Bearer {settings.LLM_API_KEY}",
         "Content-Type": "application/json",
     }
 
-    url = f"{settings.GROQ_BASE_URL.rstrip('/')}/chat/completions"
+    url = f"{settings.LLM_BASE_URL.rstrip('/')}/chat/completions"
 
     try:
-        async with httpx.AsyncClient(timeout=settings.GROQ_TIMEOUT_SECONDS) as client:
+        async with httpx.AsyncClient(timeout=settings.LLM_TIMEOUT_SECONDS) as client:
             response = await client.post(url, headers=headers, json=payload)
     except httpx.ConnectError:
         logger.error("LLM connection error")

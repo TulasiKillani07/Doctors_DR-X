@@ -28,12 +28,12 @@ class Settings(BaseSettings):
     # Default demo org — auto-linked to every new doctor on registration
     DEFAULT_ORG_ID: str = ""
 
-    # Virtual MR — LLM (Groq, OpenAI-compatible)
-    GROQ_API_KEY: Optional[str] = None
-    GROQ_BASE_URL: str = "https://api.groq.com/openai/v1"
-    GROQ_MODEL: str = "openai/gpt-oss-20b"
-    GROQ_MAX_CONTEXT_CHARS: int = 30000
-    GROQ_TIMEOUT_SECONDS: int = 30
+    # Virtual MR — LLM (Gemini, OpenAI-compatible endpoint)
+    LLM_API_KEY: Optional[str] = None
+    LLM_BASE_URL: str = "https://generativelanguage.googleapis.com/v1beta/openai"
+    LLM_MODEL: str = "gemini-2.0-flash"
+    LLM_MAX_CONTEXT_CHARS: int = 30000
+    LLM_TIMEOUT_SECONDS: int = 30
 
     APP_NAME: str = "DRx: AI-Powered Doctor-Pharma Platform"
     APP_VERSION: str = "1.0.0"
