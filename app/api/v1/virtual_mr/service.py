@@ -139,8 +139,14 @@ async def chat(doctor_id: str, token: str, request) -> Dict[str, Any]:
     drug_id = request.drug_id
     question = request.question
 
+    logger.info(f"Virtual MR chat | doctor={doctor_id} org={org_id} drug={drug_id}")
+
     # 1. Authorize doctor ↔ organization
-    await verify_doctor_org_access(doctor_id, org_id)
+    try:
+        await verify_doctor_org_access(doctor_id, org_id)
+    except HTTPException as e:
+        logger.warning(f"Virtual MR authz failed | doctor={doctor_id} org={org_id} | {e.detail}")
+        raise
 
     # 2. Fetch drug from the org's MRX (MRX enforces drug ↔ org scoping)
     try:
@@ -149,7 +155,9 @@ async def chat(doctor_id: str, token: str, request) -> Dict[str, Any]:
         )
     except MRXClientError as e:
         if e.status_code == 404:
+            logger.warning(f"Virtual MR drug not found | org={org_id} drug={drug_id}")
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Drug not found")
+        logger.error(f"Virtual MR MRX fetch failed | org={org_id} drug={drug_id} | status={e.status_code} | {e.message}")
         raise HTTPException(status_code=e.status_code or 502, detail=e.message)
 
     drug_name = drug.get("drug_name", "the drug")
@@ -171,7 +179,13 @@ async def chat(doctor_id: str, token: str, request) -> Dict[str, Any]:
             history=history,
         )
     except LLMServiceError as e:
+        logger.error(f"Virtual MR LLM failed | doctor={doctor_id} drug={drug_id} | status={e.status_code} | {e.message}")
         raise HTTPException(status_code=e.status_code, detail=e.message)
+    except Exception as e:
+        logger.error(f"Virtual MR unexpected LLM error | doctor={doctor_id} drug={drug_id} | {e}")
+        raise HTTPException(status_code=502, detail="AI service error")
+
+    logger.info(f"Virtual MR success | doctor={doctor_id} drug={drug_id} used_brochure={used_brochure}")
 
     # 5. Log (non-blocking)
     await _log_interaction(

@@ -93,6 +93,7 @@ async def ask(
         raise LLMServiceError("AI service returned an unexpected response", status_code=502)
 
     if not answer:
+        logger.error("LLM returned an empty answer")
         raise LLMServiceError("AI service returned an empty answer", status_code=502)
 
     return answer
