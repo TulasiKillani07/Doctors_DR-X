@@ -2,7 +2,7 @@
 Doctor management schemas — DRX Doctor Platform
 """
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 from typing import Optional, List
 from datetime import datetime
 
@@ -52,13 +52,55 @@ class BulkUploadResponse(BaseModel):
 # ══════════════════════════════════════════════════════════════
 
 class LocationInput(BaseModel):
-    """Location data from map/GPS"""
-    latitude: str = Field(..., description="Latitude from map/GPS")
-    longitude: str = Field(..., description="Longitude from map/GPS")
-    address: str = Field(..., description="Full address from geocode")
-    city: str = Field(..., description="City from geocode")
-    state: str = Field(..., description="State from geocode")
-    country: str = Field(default="India", description="Country from geocode")
+    """Doctor practice location from map/GPS/manual entry"""
+    location_id: Optional[str] = Field(None, description="Unique location ID (auto-generated server-side)")
+    location_priority: str = Field(..., description="PRIMARY / SECONDARY / OTHER")
+    facility_type: str = Field(..., description="HOSPITAL / CLINIC / POLYCLINIC / MEDICAL_CENTER / INSTITUTION_OR_MEDICAL_COLLEGE / OTHER")
+    facility_type_other: Optional[str] = Field(None, description="Required only when facility_type=OTHER")
+    location_name: str = Field(..., description="Facility / hospital name")
+    latitude: Optional[str] = Field(None, description="Latitude (kept as string)")
+    longitude: Optional[str] = Field(None, description="Longitude (kept as string)")
+    address: Optional[str] = Field(None, description="Full address")
+    area: Optional[str] = Field(None, description="Area / locality")
+    city: str = Field(..., description="City")
+    district: str = Field(..., description="District")
+    state: str = Field(..., description="State")
+    country: str = Field(..., description="Country")
+    postcode: str = Field(..., description="Postal / PIN code")
+    location_source: Optional[str] = Field("MANUAL", description="CURRENT_LOCATION / MAP_SEARCH / MANUAL")
+    status: Optional[str] = Field("ACTIVE", description="ACTIVE / INACTIVE")
+
+    @field_validator("location_priority")
+    @classmethod
+    def validate_priority(cls, v: str) -> str:
+        allowed = {"PRIMARY", "SECONDARY", "OTHER"}
+        if v.upper() not in allowed:
+            raise ValueError(f"location_priority must be one of {allowed}")
+        return v.upper()
+
+    @field_validator("facility_type")
+    @classmethod
+    def validate_facility_type(cls, v: str) -> str:
+        allowed = {"HOSPITAL", "CLINIC", "POLYCLINIC", "MEDICAL_CENTER", "INSTITUTION_OR_MEDICAL_COLLEGE", "OTHER"}
+        if v.upper() not in allowed:
+            raise ValueError(f"facility_type must be one of {allowed}")
+        return v.upper()
+
+    @field_validator("location_source")
+    @classmethod
+    def validate_source(cls, v: Optional[str]) -> Optional[str]:
+        if v is None:
+            return v
+        allowed = {"CURRENT_LOCATION", "MAP_SEARCH", "MANUAL"}
+        if v.upper() not in allowed:
+            raise ValueError(f"location_source must be one of {allowed}")
+        return v.upper()
+
+    @model_validator(mode="after")
+    def check_facility_type_other(self):
+        if self.facility_type == "OTHER" and not self.facility_type_other:
+            raise ValueError("facility_type_other is required when facility_type is OTHER")
+        return self
 
 
 class AddDoctorRequest(BaseModel):
@@ -69,7 +111,6 @@ class AddDoctorRequest(BaseModel):
     phone: str = Field(..., min_length=10, max_length=15)
     password: str = Field(..., min_length=8, max_length=64, description="8-64 chars, 1 upper, 1 lower, 1 number, 1 symbol")
     specialization: Optional[str] = Field(None, description="Must be from predefined list")
-    hospital: Optional[str] = Field(None, max_length=200)
     qualification: Optional[str] = Field(None, max_length=200)
     license_number: Optional[str] = Field(None, max_length=50)
     location: Optional[LocationInput] = Field(None, description="Doctor's practice location")
@@ -101,15 +142,22 @@ class AddDoctorRequest(BaseModel):
                 "phone": "9876543210",
                 "password": "Doctor@123",
                 "specialization": "Cardiology",
-                "hospital": "Apollo Hospital",
                 "qualification": "MBBS, MD Cardiology",
                 "location": {
+                    "location_priority": "PRIMARY",
+                    "facility_type": "HOSPITAL",
+                    "location_name": "Apollo Hospital",
                     "latitude": "17.4401",
                     "longitude": "78.3489",
-                    "address": "Apollo Hospital, Jubilee Hills",
+                    "address": "Road 45, Jubilee Hills",
+                    "area": "Jubilee Hills",
                     "city": "Hyderabad",
+                    "district": "Hyderabad",
                     "state": "Telangana",
-                    "country": "India"
+                    "country": "India",
+                    "postcode": "500033",
+                    "location_source": "MAP_SEARCH",
+                    "status": "ACTIVE"
                 }
             }
         }
@@ -133,7 +181,6 @@ class DoctorDetailResponse(BaseModel):
     phone: str
     name: str
     specialization: Optional[str] = None
-    hospital: Optional[str] = None
     license_number: Optional[str] = None
     experience_years: Optional[float] = None
     qualification: Optional[str] = None
@@ -146,7 +193,6 @@ class DoctorDetailResponse(BaseModel):
     locations: List[dict] = []
     is_active: bool = True
     is_email_verified: bool = False
-    is_phone_verified: bool = False
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 
@@ -156,7 +202,6 @@ class DoctorUpdateByAdminRequest(BaseModel):
     name: Optional[str] = Field(None, min_length=2, max_length=100)
     phone: Optional[str] = Field(None, min_length=10, max_length=15)
     specialization: Optional[str] = Field(None, description="Must be one of the predefined specializations")
-    hospital: Optional[str] = Field(None, max_length=200)
     license_number: Optional[str] = Field(None, max_length=50)
     experience_years: Optional[float] = Field(None, ge=0, le=70)
     qualification: Optional[str] = Field(None, max_length=200)
@@ -189,7 +234,6 @@ class DoctorListItem(BaseModel):
     phone: str
     name: str
     specialization: Optional[str] = None
-    hospital: Optional[str] = None
     city: Optional[str] = None
     state: Optional[str] = None
     is_active: bool = True
@@ -205,72 +249,91 @@ class DoctorListResponse(BaseModel):
 # Location Management
 # ══════════════════════════════════════════════════════════════
 
-class AddLocationRequest(BaseModel):
-    """Add a practice location to a doctor"""
-    name: str = Field(..., min_length=1, max_length=200)
-    address: str = Field(..., max_length=500)
-    country: str = Field(..., max_length=100)
-    state: str = Field(..., max_length=100)
-    district: str = Field(..., max_length=100)
-    city: str = Field(..., max_length=100)
-    area: str = Field(..., max_length=200)
-    latitude: float = Field(..., ge=-90, le=90)
-    longitude: float = Field(..., ge=-180, le=180)
-    type: str = Field(default="hospital", description="hospital, solo_clinic, or polyclinic")
-    geofence_radius: int = Field(default=100, ge=10, le=1000)
+FACILITY_TYPES = {"HOSPITAL", "CLINIC", "POLYCLINIC", "MEDICAL_CENTER", "INSTITUTION_OR_MEDICAL_COLLEGE", "OTHER"}
+LOCATION_PRIORITIES = {"PRIMARY", "SECONDARY", "OTHER"}
+LOCATION_SOURCES = {"CURRENT_LOCATION", "MAP_SEARCH", "MANUAL"}
 
-    @field_validator("type")
+
+class AddLocationRequest(BaseModel):
+    """Add a practice location to a doctor's own profile"""
+    location_priority: str = Field(..., description="PRIMARY / SECONDARY / OTHER")
+    facility_type: str = Field(..., description="HOSPITAL / CLINIC / POLYCLINIC / MEDICAL_CENTER / INSTITUTION_OR_MEDICAL_COLLEGE / OTHER")
+    facility_type_other: Optional[str] = Field(None, description="Required only when facility_type=OTHER")
+    location_name: str = Field(..., min_length=1, max_length=200)
+    latitude: Optional[str] = None
+    longitude: Optional[str] = None
+    address: Optional[str] = Field(None, max_length=500)
+    area: Optional[str] = Field(None, max_length=200)
+    city: str = Field(..., max_length=100)
+    district: str = Field(..., max_length=100)
+    state: str = Field(..., max_length=100)
+    country: str = Field(..., max_length=100)
+    postcode: str = Field(...)
+    location_source: Optional[str] = Field("MANUAL", description="CURRENT_LOCATION / MAP_SEARCH / MANUAL")
+    status: Optional[str] = Field("ACTIVE")
+
+    @field_validator("facility_type")
     @classmethod
-    def validate_type(cls, v: str) -> str:
-        allowed = {"hospital", "solo_clinic", "polyclinic"}
-        if v not in allowed:
-            raise ValueError(f"type must be one of: {', '.join(sorted(allowed))}")
-        return v
+    def _vt(cls, v: str) -> str:
+        if v.upper() not in FACILITY_TYPES:
+            raise ValueError(f"facility_type must be one of {FACILITY_TYPES}")
+        return v.upper()
+
+    @field_validator("location_priority")
+    @classmethod
+    def _vp(cls, v: str) -> str:
+        if v.upper() not in LOCATION_PRIORITIES:
+            raise ValueError(f"location_priority must be one of {LOCATION_PRIORITIES}")
+        return v.upper()
+
+    @model_validator(mode="after")
+    def check_facility_type_other(self):
+        if self.facility_type == "OTHER" and not self.facility_type_other:
+            raise ValueError("facility_type_other is required when facility_type is OTHER")
+        return self
 
 
 class UpdateLocationRequest(BaseModel):
-    """Update an existing location"""
-    name: Optional[str] = Field(None, min_length=1, max_length=200)
+    """Update an existing location (all optional)"""
+    location_priority: Optional[str] = None
+    facility_type: Optional[str] = None
+    facility_type_other: Optional[str] = None
+    location_name: Optional[str] = Field(None, max_length=200)
+    latitude: Optional[str] = None
+    longitude: Optional[str] = None
     address: Optional[str] = Field(None, max_length=500)
-    country: Optional[str] = Field(None, max_length=100)
-    state: Optional[str] = Field(None, max_length=100)
-    district: Optional[str] = Field(None, max_length=100)
-    city: Optional[str] = Field(None, max_length=100)
     area: Optional[str] = Field(None, max_length=200)
-    latitude: Optional[float] = Field(None, ge=-90, le=90)
-    longitude: Optional[float] = Field(None, ge=-180, le=180)
-    type: Optional[str] = None
-    geofence_radius: Optional[int] = Field(None, ge=10, le=1000)
-    is_active: Optional[bool] = None
+    city: Optional[str] = Field(None, max_length=100)
+    district: Optional[str] = Field(None, max_length=100)
+    state: Optional[str] = Field(None, max_length=100)
+    country: Optional[str] = Field(None, max_length=100)
+    postcode: Optional[str] = None
+    location_source: Optional[str] = None
+    status: Optional[str] = None
 
-    @field_validator("type")
-    @classmethod
-    def validate_type(cls, v: Optional[str]) -> Optional[str]:
-        if v is None:
-            return v
-        allowed = {"hospital", "solo_clinic", "polyclinic"}
-        if v not in allowed:
-            raise ValueError(f"type must be one of: {', '.join(sorted(allowed))}")
-        return v
+
+class SetLocationPriorityRequest(BaseModel):
+    """Change a location's priority"""
+    priority: str = Field(..., description="PRIMARY / SECONDARY / OTHER")
 
 
 class LocationResponse(BaseModel):
-    id: str
-    type: str
-    name: str
-    address: str
-    country: str
-    state: str
-    district: str
+    location_id: str
+    location_priority: str
+    facility_type: str
+    facility_type_other: Optional[str] = None
+    location_name: str
+    latitude: Optional[str] = None
+    longitude: Optional[str] = None
+    address: Optional[str] = None
+    area: Optional[str] = None
     city: str
-    area: str
-    latitude: float
-    longitude: float
-    is_active: bool
-    geofence_radius: int
-    is_primary: bool = False
-    added_by: str
-    added_at: datetime
+    district: Optional[str] = None
+    state: str
+    country: str
+    postcode: Optional[str] = None
+    location_source: Optional[str] = None
+    status: str
 
 
 class LocationListResponse(BaseModel):

@@ -319,8 +319,7 @@ async def admin_approve(request_id: str, admin_username: str, token: str) -> Dic
                     "email": doctor.get("email", ""),
                     "phone": doctor.get("phone", ""),
                     "username": doctor.get("username", ""),
-                    "specialization": doctor.get("specialization"),
-                    "hospital": doctor.get("hospital")
+                    "specialization": doctor.get("specialization")
                 }
             )
     except Exception as e:

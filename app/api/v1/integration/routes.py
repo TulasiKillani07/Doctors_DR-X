@@ -215,9 +215,10 @@ async def register_doctor_integration(
             "password": password,
             "username": request.get("username", "").strip().lower(),
             "specialization": request.get("specialization"),
-            "hospital": request.get("hospital"),
             "qualification": request.get("qualification"),
             "license_number": request.get("license_number"),
+            "source": request.get("source"),
+            "locations": request.get("locations", []),
             "registered_via": f"proxzar:{caller_sub}:{caller_platform}"
         },
         return_existing=True

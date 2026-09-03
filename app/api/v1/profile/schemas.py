@@ -19,7 +19,6 @@ class DoctorProfileResponse(BaseModel):
 
     # Professional info
     specialization: Optional[str] = None
-    hospital: Optional[str] = None
     license_number: Optional[str] = None
     experience_years: Optional[float] = None
     qualification: Optional[str] = None
@@ -35,7 +34,6 @@ class DoctorProfileResponse(BaseModel):
     # Status
     is_active: bool = True
     is_email_verified: bool = False
-    is_phone_verified: bool = False
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
 
@@ -47,7 +45,6 @@ class DoctorProfileUpdateRequest(BaseModel):
 
     # Professional
     specialization: Optional[str] = Field(None, description="Must be one of the predefined specializations")
-    hospital: Optional[str] = Field(None, max_length=200)
     license_number: Optional[str] = Field(None, max_length=50)
     experience_years: Optional[float] = Field(None, ge=0, le=70)
     qualification: Optional[str] = Field(None, max_length=200)

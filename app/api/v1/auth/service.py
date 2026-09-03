@@ -76,7 +76,6 @@ async def doctor_register(name: str, email: str, phone: str, username: str, pass
         name=name,
         is_active=True,
         is_email_verified=False,
-        is_phone_verified=False,
         created_at=datetime.utcnow(),
         updated_at=datetime.utcnow()
     )

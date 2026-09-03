@@ -83,7 +83,6 @@ async def search_doctors(
         query["$or"] = [
             {"name": {"$regex": q, "$options": "i"}},
             {"specialization": {"$regex": q, "$options": "i"}},
-            {"hospital": {"$regex": q, "$options": "i"}},
             {"doctor_gid": {"$regex": q, "$options": "i"}}
         ]
 
@@ -117,7 +116,6 @@ async def search_doctors(
             "doctor_gid": doc.get("doctor_gid", ""),
             "name": doc.get("name", ""),
             "specialization": doc.get("specialization"),
-            "hospital": doc.get("hospital"),
             "city": doc.get("city"),
             "avatar_url": doc.get("avatar_url"),
             "connection_status": connection_status,

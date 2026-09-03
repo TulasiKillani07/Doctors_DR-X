@@ -88,7 +88,6 @@ async def get_my_dashboard(
       "account": {
         "is_active": true,
         "is_email_verified": true,
-        "is_phone_verified": false,
         "member_since": "2026-01-01T00:00:00",
         "last_login": "2026-07-21T10:00:00"
       }

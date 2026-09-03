@@ -71,7 +71,6 @@ async def get_doctor_dashboard(current_user: Dict, token: str, org_id: str = Non
         "phone": doctor.get("phone", ""),
         "avatar_url": doctor.get("avatar_url"),
         "specialization": doctor.get("specialization"),
-        "hospital": doctor.get("hospital"),
         "qualification": doctor.get("qualification"),
     }
 

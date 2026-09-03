@@ -30,7 +30,6 @@ async def get_my_profile(current_user: Dict) -> Dict[str, Any]:
             "role": "DOCTOR",
             # Professional
             "specialization": doctor.get("specialization"),
-            "hospital": doctor.get("hospital"),
             "license_number": doctor.get("license_number"),
             "experience_years": doctor.get("experience_years"),
             "qualification": doctor.get("qualification"),
@@ -44,7 +43,6 @@ async def get_my_profile(current_user: Dict) -> Dict[str, Any]:
             # Status
             "is_active": doctor.get("is_active", True),
             "is_email_verified": doctor.get("is_email_verified", False),
-            "is_phone_verified": doctor.get("is_phone_verified", False),
             "created_at": doctor.get("created_at"),
             "updated_at": doctor.get("updated_at"),
         }
@@ -62,7 +60,6 @@ async def get_my_profile(current_user: Dict) -> Dict[str, Any]:
             "name": admin.get("name", ""),
             "role": "PLATFORM_ADMIN",
             "specialization": None,
-            "hospital": None,
             "license_number": None,
             "experience_years": None,
             "qualification": None,
@@ -74,7 +71,6 @@ async def get_my_profile(current_user: Dict) -> Dict[str, Any]:
             "country": None,
             "is_active": admin.get("is_active", True),
             "is_email_verified": None,
-            "is_phone_verified": None,
             "created_at": admin.get("created_at"),
             "updated_at": admin.get("updated_at"),
         }
@@ -98,7 +94,7 @@ async def update_my_profile(update_data: Dict[str, Any], current_user: Dict) -> 
 
     # Only allow valid doctor profile fields
     allowed_fields = {
-        "name", "phone", "specialization", "hospital", "license_number",
+        "name", "phone", "specialization", "license_number",
         "experience_years", "qualification", "bio", "avatar_url",
         "location", "city", "state", "country"
     }
@@ -131,23 +127,21 @@ async def update_my_profile(update_data: Dict[str, Any], current_user: Dict) -> 
 import uuid
 
 
+VALID_PRIORITIES = {"PRIMARY", "SECONDARY", "OTHER"}
+VALID_FACILITY_TYPES = {"HOSPITAL", "CLINIC", "POLYCLINIC", "MEDICAL_CENTER", "INSTITUTION_OR_MEDICAL_COLLEGE", "OTHER"}
+
+
 async def get_my_locations(current_user: Dict) -> Dict[str, Any]:
     """Get logged-in doctor's locations"""
     db = get_database()
     doctor = await db.doctors.find_one(
         {"_id": ObjectId(current_user["_id"])},
-        {"locations": 1, "primary_location_id": 1}
+        {"locations": 1}
     )
     if not doctor:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Doctor not found")
 
     locations = doctor.get("locations", [])
-    primary_id = doctor.get("primary_location_id")
-
-    # Add is_primary flag
-    for loc in locations:
-        loc["is_primary"] = (loc.get("id") == primary_id)
-
     return {"total": len(locations), "locations": locations}
 
 
@@ -155,25 +149,11 @@ async def add_my_location(location_data: Dict[str, Any], current_user: Dict) -> 
     """Doctor adds a practice location to their own profile"""
     db = get_database()
 
-    location_id = str(uuid.uuid4())[:8]
-
-    location = {
-        "id": location_id,
-        "type": location_data.get("type", "hospital"),
-        "name": location_data["name"],
-        "address": location_data["address"],
-        "country": location_data["country"],
-        "state": location_data["state"],
-        "district": location_data["district"],
-        "city": location_data["city"],
-        "area": location_data["area"],
-        "latitude": location_data["latitude"],
-        "longitude": location_data["longitude"],
-        "is_active": True,
-        "geofence_radius": location_data.get("geofence_radius", 100),
-        "added_by": "self",
-        "added_at": datetime.utcnow()
-    }
+    location = dict(location_data)
+    location["location_id"] = str(uuid.uuid4())
+    location.setdefault("location_priority", "OTHER")
+    location.setdefault("status", "ACTIVE")
+    location["added_at"] = datetime.utcnow()
 
     await db.doctors.update_one(
         {"_id": ObjectId(current_user["_id"])},
@@ -183,7 +163,7 @@ async def add_my_location(location_data: Dict[str, Any], current_user: Dict) -> 
         }
     )
 
-    return {"message": "Location added successfully"}
+    return {"message": "Location added successfully", "location_id": location["location_id"]}
 
 
 async def update_my_location(location_id: str, update_data: Dict[str, Any], current_user: Dict) -> Dict[str, str]:
@@ -192,8 +172,9 @@ async def update_my_location(location_id: str, update_data: Dict[str, Any], curr
 
     # Whitelist: only these fields can be updated by the doctor
     allowed_location_fields = {
-        "name", "address", "country", "state", "district", "city", "area",
-        "latitude", "longitude", "type", "geofence_radius", "is_active"
+        "location_name", "facility_type", "facility_type_other", "address", "area",
+        "country", "state", "district", "city", "postcode", "latitude", "longitude",
+        "location_source", "status", "location_priority"
     }
 
     update_fields = {}
@@ -207,7 +188,7 @@ async def update_my_location(location_id: str, update_data: Dict[str, Any], curr
     update_fields["updated_at"] = datetime.utcnow()
 
     result = await db.doctors.update_one(
-        {"_id": ObjectId(current_user["_id"]), "locations.id": location_id},
+        {"_id": ObjectId(current_user["_id"]), "locations.location_id": location_id},
         {"$set": update_fields}
     )
 
@@ -224,7 +205,7 @@ async def delete_my_location(location_id: str, current_user: Dict) -> Dict[str, 
     result = await db.doctors.update_one(
         {"_id": ObjectId(current_user["_id"])},
         {
-            "$pull": {"locations": {"id": location_id}},
+            "$pull": {"locations": {"location_id": location_id}},
             "$set": {"updated_at": datetime.utcnow()}
         }
     )
@@ -232,29 +213,55 @@ async def delete_my_location(location_id: str, current_user: Dict) -> Dict[str, 
     if result.matched_count == 0:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Doctor not found")
 
-    # If this was the primary, clear primary_location_id
-    await db.doctors.update_one(
-        {"_id": ObjectId(current_user["_id"]), "primary_location_id": location_id},
-        {"$unset": {"primary_location_id": ""}}
-    )
-
     return {"message": "Location removed successfully"}
 
 
-async def set_primary_location(location_id: str, current_user: Dict) -> Dict[str, str]:
-    """Set a location as primary"""
+async def set_location_priority(location_id: str, new_priority: str, current_user: Dict) -> Dict[str, str]:
+    """
+    Set a location's priority (PRIMARY / SECONDARY / OTHER).
+
+    If set to PRIMARY, any existing PRIMARY location is demoted to SECONDARY
+    (only one PRIMARY at a time).
+    """
+    new_priority = (new_priority or "").upper()
+    if new_priority not in VALID_PRIORITIES:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"priority must be one of {VALID_PRIORITIES}"
+        )
+
     db = get_database()
 
-    # Verify the location exists on this doctor
     doctor = await db.doctors.find_one(
-        {"_id": ObjectId(current_user["_id"]), "locations.id": location_id}
+        {"_id": ObjectId(current_user["_id"]), "locations.location_id": location_id},
+        {"locations": 1}
     )
     if not doctor:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Location not found")
 
+    locations = doctor.get("locations", [])
+
+    # Apply new priorities
+    for loc in locations:
+        if loc.get("location_id") == location_id:
+            loc["location_priority"] = new_priority
+        elif new_priority == "PRIMARY" and loc.get("location_priority") == "PRIMARY":
+            # Demote the old primary
+            loc["location_priority"] = "SECONDARY"
+
+    set_fields = {"locations": locations, "updated_at": datetime.utcnow()}
+
+    # If new primary, promote its geography to top-level
+    if new_priority == "PRIMARY":
+        primary = next((l for l in locations if l.get("location_id") == location_id), None)
+        if primary:
+            set_fields["city"] = primary.get("city")
+            set_fields["state"] = primary.get("state")
+            set_fields["country"] = primary.get("country")
+
     await db.doctors.update_one(
         {"_id": ObjectId(current_user["_id"])},
-        {"$set": {"primary_location_id": location_id, "updated_at": datetime.utcnow()}}
+        {"$set": set_fields}
     )
 
-    return {"message": "Primary location updated"}
+    return {"message": f"Location priority set to {new_priority}"}

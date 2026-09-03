@@ -6,7 +6,7 @@ from fastapi import APIRouter, Depends
 from typing import Dict
 from app.core.auth import get_current_user, require_doctor
 from app.api.v1.profile.schemas import DoctorProfileResponse, DoctorProfileUpdateRequest
-from app.api.v1.doctors.schemas import AddLocationRequest, UpdateLocationRequest, LocationListResponse, MessageResponse
+from app.api.v1.doctors.schemas import AddLocationRequest, UpdateLocationRequest, LocationListResponse, MessageResponse, SetLocationPriorityRequest
 from app.api.v1.profile import service
 
 router = APIRouter()
@@ -43,7 +43,6 @@ async def get_my_profile(current_user: Dict = Depends(get_current_user)):
       "country": "India",
       "is_active": true,
       "is_email_verified": true,
-      "is_phone_verified": false,
       "created_at": "2026-01-01T00:00:00",
       "updated_at": "2026-07-14T10:00:00"
     }
@@ -219,23 +218,31 @@ async def delete_my_location(
     return await service.delete_my_location(location_id, current_user)
 
 
-@router.post("/locations/{location_id}/set-primary", response_model=MessageResponse, summary="Set Primary Location")
-async def set_primary_location(
+@router.post("/locations/{location_id}/priority", response_model=MessageResponse, summary="Set Location Priority")
+async def set_location_priority(
     location_id: str,
+    request: SetLocationPriorityRequest,
     current_user: Dict = Depends(require_doctor)
 ):
     """
-    **Purpose:** Set a location as the doctor's primary practice location.
+    **Purpose:** Change a location's priority (PRIMARY / SECONDARY / OTHER).
+    A doctor can re-assign priorities anytime — make a secondary the primary, etc.
 
     **Access:** Doctor only
 
+    **Request Body:**
+    ```json
+    { "priority": "PRIMARY" }
+    ```
+
     **Response:**
     ```json
-    { "message": "Primary location updated" }
+    { "message": "Location priority set to PRIMARY" }
     ```
 
     **Rules:**
-    - Only one location can be primary at a time
-    - Setting a new primary automatically unsets the previous one
+    - Only one location can be PRIMARY at a time
+    - Setting a new PRIMARY demotes the previous PRIMARY to SECONDARY
+    - Valid values: PRIMARY, SECONDARY, OTHER
     """
-    return await service.set_primary_location(location_id, current_user)
+    return await service.set_location_priority(location_id, request.priority, current_user)

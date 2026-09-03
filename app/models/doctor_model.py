@@ -15,20 +15,22 @@ def generate_doctor_gid() -> str:
 
 class DoctorLocation(BaseModel):
     """A doctor's practice location"""
-    id: str = Field(..., description="Unique location ID")
-    type: str = Field(default="hospital", description="hospital, solo_clinic, or polyclinic")
-    name: str = Field(..., min_length=1, max_length=200, description="Location name")
-    address: str = Field(..., max_length=500, description="Full address")
-    country: str = Field(..., max_length=100)
-    state: str = Field(..., max_length=100)
-    district: str = Field(..., max_length=100)
-    city: str = Field(..., max_length=100)
-    area: str = Field(..., max_length=200)
-    latitude: float = Field(..., ge=-90, le=90)
-    longitude: float = Field(..., ge=-180, le=180)
-    is_active: bool = Field(default=True)
-    geofence_radius: int = Field(default=100, ge=10, le=1000)
-    added_by: str = Field(..., description="User ID who added this location")
+    location_id: str = Field(..., description="Unique location ID (auto-generated)")
+    location_priority: str = Field(..., description="PRIMARY / SECONDARY / OTHER")
+    facility_type: str = Field(..., description="HOSPITAL / CLINIC / POLYCLINIC / MEDICAL_CENTER / INSTITUTION_OR_MEDICAL_COLLEGE / OTHER")
+    facility_type_other: Optional[str] = Field(None, description="Detail when facility_type=OTHER")
+    location_name: str = Field(..., description="Facility / hospital name")
+    latitude: Optional[str] = Field(None, description="Latitude (string)")
+    longitude: Optional[str] = Field(None, description="Longitude (string)")
+    address: Optional[str] = Field(None, description="Full address")
+    area: Optional[str] = Field(None, description="Area / locality")
+    city: str = Field(..., description="City")
+    district: str = Field(..., description="District")
+    state: str = Field(..., description="State")
+    country: str = Field(..., description="Country")
+    postcode: str = Field(..., description="Postal / PIN code")
+    location_source: Optional[str] = Field(default="MANUAL", description="CURRENT_LOCATION / MAP_SEARCH / MANUAL")
+    status: str = Field(default="ACTIVE", description="ACTIVE / INACTIVE")
     added_at: datetime = Field(default_factory=datetime.utcnow)
 
 
@@ -43,7 +45,6 @@ class DoctorInDB(BaseModel):
 
     # Professional info
     specialization: Optional[str] = Field(None, max_length=100)
-    hospital: Optional[str] = Field(None, max_length=200)
     license_number: Optional[str] = Field(None, max_length=50)
     experience_years: Optional[float] = Field(None, ge=0, le=70)
     qualification: Optional[str] = Field(None, max_length=200)
@@ -62,8 +63,8 @@ class DoctorInDB(BaseModel):
     # Status
     is_active: bool = Field(default=True)
     is_email_verified: bool = Field(default=False)
-    is_phone_verified: bool = Field(default=False)
-    registered_via: Optional[str] = Field(None, description="Which service registered this doctor (e.g. client_id of MRX)")
+    source: Optional[str] = Field(None, description="Registration source (e.g. VOICE from DOBO)")
+    registered_via: Optional[str] = Field(None, description="Which service registered this doctor")
     created_at: datetime = Field(default_factory=datetime.utcnow)
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     last_login_at: Optional[datetime] = Field(None)

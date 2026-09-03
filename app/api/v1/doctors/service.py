@@ -128,12 +128,10 @@ async def add_single_doctor(data: Dict[str, Any], return_existing: bool = False)
         password_hash=hash_password(password),
         name=name,
         specialization=data.get("specialization"),
-        hospital=data.get("hospital"),
         qualification=data.get("qualification"),
         license_number=data.get("license_number"),
         is_active=True,
         is_email_verified=False,
-        is_phone_verified=False,
         registered_via=data.get("registered_via", "drx_admin"),
         created_at=datetime.utcnow(),
         updated_at=datetime.utcnow()
@@ -141,14 +139,39 @@ async def add_single_doctor(data: Dict[str, Any], return_existing: bool = False)
 
     doc = doctor.model_dump()
 
-    # Add location if provided
-    location = data.get("location")
-    if location:
-        if isinstance(location, dict):
-            doc["location"] = location
-            doc["city"] = location.get("city")
-            doc["state"] = location.get("state")
-            doc["country"] = location.get("country")
+    # Optional source (e.g. "VOICE" from DOBO)
+    if data.get("source"):
+        doc["source"] = data.get("source")
+
+    # Normalize locations: accept a single "location" (admin form) or "locations" array (DOBO)
+    import uuid
+    raw_locations = []
+    if data.get("locations") and isinstance(data.get("locations"), list):
+        raw_locations = data["locations"]
+    elif data.get("location") and isinstance(data.get("location"), dict):
+        raw_locations = [data["location"]]
+
+    normalized_locations = []
+    for loc in raw_locations:
+        if not isinstance(loc, dict):
+            continue
+        loc = dict(loc)
+        if not loc.get("location_id"):
+            loc["location_id"] = str(uuid.uuid4())
+        loc.setdefault("location_priority", "PRIMARY")
+        loc.setdefault("status", "ACTIVE")
+        normalized_locations.append(loc)
+
+    if normalized_locations:
+        doc["locations"] = normalized_locations
+        # Promote the PRIMARY location's geography to top-level for querying
+        primary = next(
+            (l for l in normalized_locations if l.get("location_priority") == "PRIMARY"),
+            normalized_locations[0]
+        )
+        doc["city"] = primary.get("city")
+        doc["state"] = primary.get("state")
+        doc["country"] = primary.get("country")
 
     result = await db.doctors.insert_one(doc)
 
@@ -289,7 +312,6 @@ async def bulk_upload_doctors(file: UploadFile, admin_user: Dict) -> Dict[str, A
                 name=name,
                 is_active=True,
                 is_email_verified=False,
-                is_phone_verified=False,
                 created_at=datetime.utcnow(),
                 updated_at=datetime.utcnow()
             )
@@ -398,25 +420,13 @@ async def add_doctor_location(doctor_id: str, location_data: Dict[str, Any], adm
     if not doctor:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Doctor not found")
 
-    location_id = str(uuid.uuid4())[:8]
+    location_id = str(uuid.uuid4())
 
-    location = {
-        "id": location_id,
-        "type": location_data.get("type", "hospital"),
-        "name": location_data["name"],
-        "address": location_data["address"],
-        "country": location_data["country"],
-        "state": location_data["state"],
-        "district": location_data["district"],
-        "city": location_data["city"],
-        "area": location_data["area"],
-        "latitude": location_data["latitude"],
-        "longitude": location_data["longitude"],
-        "is_active": True,
-        "geofence_radius": location_data.get("geofence_radius", 100),
-        "added_by": str(admin_user["_id"]),
-        "added_at": datetime.utcnow()
-    }
+    location = dict(location_data)
+    location["location_id"] = location_id
+    location.setdefault("location_priority", "OTHER")
+    location.setdefault("status", "ACTIVE")
+    location["added_at"] = datetime.utcnow()
 
     await db.doctors.update_one(
         {"_id": ObjectId(doctor_id)},
@@ -463,7 +473,7 @@ async def update_doctor_location(doctor_id: str, location_id: str, update_data: 
     update_fields["updated_at"] = datetime.utcnow()
 
     result = await db.doctors.update_one(
-        {"_id": ObjectId(doctor_id), "locations.id": location_id},
+        {"_id": ObjectId(doctor_id), "locations.location_id": location_id},
         {"$set": update_fields}
     )
 
@@ -483,7 +493,7 @@ async def delete_doctor_location(doctor_id: str, location_id: str) -> Dict[str, 
     result = await db.doctors.update_one(
         {"_id": ObjectId(doctor_id)},
         {
-            "$pull": {"locations": {"id": location_id}},
+            "$pull": {"locations": {"location_id": location_id}},
             "$set": {"updated_at": datetime.utcnow()}
         }
     )
