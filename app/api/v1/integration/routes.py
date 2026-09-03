@@ -117,20 +117,49 @@ async def register_doctor_integration(
     **Request Body:**
     ```json
     {
-      "name": "Dr. Arjun Mehta",
-      "username": "arjun_mehta",
-      "email": "arjun@hospital.com",
-      "phone": "9876543210",
-      "password": "Doctor@123"
+      "name": "Rahul Sharma",
+      "username": "rahul_sharma",
+      "email": "rahul@gmail.com",
+      "phone": "+919876543210",
+      "password": "Rahul@123",
+      "specialization": "Cardiology",
+      "source": "VOICE",
+      "locations": [
+        {
+          "location_priority": "PRIMARY",
+          "facility_type": "HOSPITAL",
+          "location_name": "Apollo Hospital",
+          "latitude": "17.385044",
+          "longitude": "78.486671",
+          "address": "Jubilee Hills, Hyderabad",
+          "area": "Jubilee Hills",
+          "city": "Hyderabad",
+          "district": "Hyderabad",
+          "state": "Telangana",
+          "country": "India",
+          "postcode": "500033",
+          "location_source": "MAP_SEARCH",
+          "status": "ACTIVE"
+        }
+      ]
     }
     ```
 
-    **Fields:**
+    **Doctor fields:**
     - `name` — Required. Full name
     - `username` — Required. Unique username (3-30 chars, alphanumeric + underscores)
     - `email` — Required. Valid email (unique)
-    - `phone` — Required. 10-digit phone number (unique)
+    - `phone` — Required. Phone number (unique)
     - `password` — Required. 8-64 chars, must include uppercase, lowercase, number, and symbol
+    - `specialization` — Optional
+    - `source` — Optional (e.g. "VOICE")
+    - `locations` — Optional array of practice locations
+
+    **Location required fields:** `location_priority`, `facility_type`, `location_name`, `city`, `district`, `state`, `country`, `postcode`
+
+    **Location optional fields:** `latitude`, `longitude`, `address`, `area`, `location_source`, `status`
+
+    **Location conditional:** `facility_type_other` — required only when `facility_type` = OTHER
 
     **Response (new doctor):**
     ```json

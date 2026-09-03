@@ -50,23 +50,41 @@ async def add_doctor(
       "phone": "9876543210",
       "password": "Doctor@123",
       "specialization": "Cardiology",
-      "hospital": "Apollo Hospital",
       "qualification": "MBBS, MD Cardiology",
       "license_number": "MH12345",
       "location": {
+        "location_priority": "PRIMARY",
+        "facility_type": "HOSPITAL",
+        "location_name": "Apollo Hospital",
         "latitude": "17.4401",
         "longitude": "78.3489",
-        "address": "Apollo Hospital, Jubilee Hills",
+        "address": "Road 45, Jubilee Hills",
+        "area": "Jubilee Hills",
         "city": "Hyderabad",
+        "district": "Hyderabad",
         "state": "Telangana",
-        "country": "India"
+        "country": "India",
+        "postcode": "500033",
+        "location_source": "MAP_SEARCH",
+        "status": "ACTIVE"
       }
     }
     ```
 
-    **Required:** `name`, `username`, `email`, `phone`, `password`
+    **Doctor required:** `name`, `username`, `email`, `phone`, `password`
 
-    **Optional:** `specialization`, `hospital`, `qualification`, `license_number`, `location`
+    **Doctor optional:** `specialization`, `qualification`, `license_number`, `location`
+
+    **Location required (if location provided):** `location_priority`, `facility_type`, `location_name`, `city`, `district`, `state`, `country`, `postcode`
+
+    **Location optional:** `latitude`, `longitude`, `address`, `area`, `location_source`, `status`
+
+    **Location conditional:** `facility_type_other` — required only when `facility_type` = OTHER
+
+    **Enums:**
+    - `location_priority`: PRIMARY / SECONDARY / OTHER
+    - `facility_type`: HOSPITAL / CLINIC / POLYCLINIC / MEDICAL_CENTER / INSTITUTION_OR_MEDICAL_COLLEGE / OTHER
+    - `location_source`: CURRENT_LOCATION / MAP_SEARCH / MANUAL
 
     **Response:**
     ```json
@@ -83,6 +101,7 @@ async def add_doctor(
     - Password: 8-64 chars, must include uppercase, lowercase, number, and symbol
     - Doctor authenticates via Proxzar OAuth using their username
     - Specialization must be from predefined list (GET /doctors/specializations)
+    - `location_id` is auto-generated server-side
     """
     return await service.add_single_doctor(request.model_dump())
 # ══════════════════════════════════════════════════════════════

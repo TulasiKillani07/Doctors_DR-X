@@ -150,23 +150,32 @@ async def add_my_location(
     **Request Body:**
     ```json
     {
-      "name": "My Clinic - Banjara Hills",
+      "location_priority": "SECONDARY",
+      "facility_type": "CLINIC",
+      "location_name": "My Clinic - Banjara Hills",
+      "latitude": "17.4156",
+      "longitude": "78.4347",
       "address": "Plot 23, Road No 12, Banjara Hills",
-      "country": "India",
-      "state": "Telangana",
-      "district": "Hyderabad",
-      "city": "Hyderabad",
       "area": "Banjara Hills",
-      "latitude": 17.4156,
-      "longitude": 78.4347,
-      "type": "solo_clinic",
-      "geofence_radius": 50
+      "city": "Hyderabad",
+      "district": "Hyderabad",
+      "state": "Telangana",
+      "country": "India",
+      "postcode": "500034",
+      "location_source": "MAP_SEARCH",
+      "status": "ACTIVE"
     }
     ```
 
+    **Required:** `location_priority`, `facility_type`, `location_name`, `city`, `district`, `state`, `country`, `postcode`
+
+    **Optional:** `latitude`, `longitude`, `address`, `area`, `location_source`, `status`
+
+    **Conditional:** `facility_type_other` — required only when `facility_type` = OTHER
+
     **Response:**
     ```json
-    { "message": "Location added successfully" }
+    { "message": "Location added successfully", "location_id": "..." }
     ```
     """
     return await service.add_my_location(request.model_dump(), current_user)
@@ -186,10 +195,15 @@ async def update_my_location(
     **Request Body (all fields optional):**
     ```json
     {
-      "name": "My Clinic - New Name",
-      "is_active": false
+      "location_name": "My Clinic - New Name",
+      "facility_type": "POLYCLINIC",
+      "status": "INACTIVE"
     }
     ```
+
+    **Updatable fields:** `location_name`, `facility_type`, `facility_type_other`, `address`, `area`,
+    `city`, `district`, `state`, `country`, `postcode`, `latitude`, `longitude`, `location_source`,
+    `status`, `location_priority`
 
     **Response:**
     ```json
