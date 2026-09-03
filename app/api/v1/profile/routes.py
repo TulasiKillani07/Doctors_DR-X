@@ -113,26 +113,33 @@ async def get_my_locations(current_user: Dict = Depends(require_doctor)):
       "total": 2,
       "locations": [
         {
-          "id": "a1b2c3d4",
-          "type": "hospital",
-          "name": "Apollo Hospital - Jubilee Hills",
+          "location_id": "b1f2c3d4-...",
+          "location_priority": "PRIMARY",
+          "facility_type": "HOSPITAL",
+          "facility_type_other": null,
+          "location_name": "Apollo Hospital - Jubilee Hills",
+          "latitude": "17.4401",
+          "longitude": "78.3489",
           "address": "Road 45, Jubilee Hills, Hyderabad",
-          "country": "India",
-          "state": "Telangana",
-          "district": "Ranga Reddy",
-          "city": "Hyderabad",
           "area": "Jubilee Hills",
-          "latitude": 17.4401,
-          "longitude": 78.3489,
-          "is_active": true,
-          "geofence_radius": 100,
-          "is_primary": true,
-          "added_by": "self",
-          "added_at": "2026-07-15T10:00:00"
+          "city": "Hyderabad",
+          "district": "Hyderabad",
+          "state": "Telangana",
+          "country": "India",
+          "postcode": "500033",
+          "location_source": "MAP_SEARCH",
+          "status": "ACTIVE"
         }
       ]
     }
     ```
+
+    **Field reference:**
+    - `location_id` — auto-generated unique ID (use it for update/delete/priority calls)
+    - `location_priority` — PRIMARY / SECONDARY / OTHER
+    - `facility_type` — HOSPITAL / CLINIC / POLYCLINIC / MEDICAL_CENTER / INSTITUTION_OR_MEDICAL_COLLEGE / OTHER
+    - `location_source` — CURRENT_LOCATION / MAP_SEARCH / MANUAL
+    - `status` — ACTIVE / INACTIVE
     """
     return await service.get_my_locations(current_user)
 
@@ -173,9 +180,17 @@ async def add_my_location(
 
     **Conditional:** `facility_type_other` — required only when `facility_type` = OTHER
 
+    **Enums:**
+    - `location_priority`: PRIMARY / SECONDARY / OTHER
+    - `facility_type`: HOSPITAL / CLINIC / POLYCLINIC / MEDICAL_CENTER / INSTITUTION_OR_MEDICAL_COLLEGE / OTHER
+    - `location_source`: CURRENT_LOCATION / MAP_SEARCH / MANUAL
+    - `status`: ACTIVE / INACTIVE
+
+    **Note:** `location_id` is auto-generated server-side and returned in the response.
+
     **Response:**
     ```json
-    { "message": "Location added successfully", "location_id": "..." }
+    { "message": "Location added successfully", "location_id": "b1f2c3d4-..." }
     ```
     """
     return await service.add_my_location(request.model_dump(), current_user)
@@ -188,11 +203,13 @@ async def update_my_location(
     current_user: Dict = Depends(require_doctor)
 ):
     """
-    **Purpose:** Doctor updates one of their own practice locations.
+    **Purpose:** Doctor updates one of their own practice locations. Only the fields you send are changed.
 
     **Access:** Doctor only
 
-    **Request Body (all fields optional):**
+    **Path Param:** `location_id` — the `location_id` returned by GET /profile/locations
+
+    **Request Body (all fields optional — send only what changes):**
     ```json
     {
       "location_name": "My Clinic - New Name",
@@ -205,10 +222,22 @@ async def update_my_location(
     `city`, `district`, `state`, `country`, `postcode`, `latitude`, `longitude`, `location_source`,
     `status`, `location_priority`
 
+    **Enums:**
+    - `location_priority`: PRIMARY / SECONDARY / OTHER
+    - `facility_type`: HOSPITAL / CLINIC / POLYCLINIC / MEDICAL_CENTER / INSTITUTION_OR_MEDICAL_COLLEGE / OTHER
+    - `location_source`: CURRENT_LOCATION / MAP_SEARCH / MANUAL
+    - `status`: ACTIVE / INACTIVE
+
+    **Note:** To change priority, prefer POST /profile/locations/{location_id}/priority
+    (it enforces single-PRIMARY rules).
+
     **Response:**
     ```json
     { "message": "Location updated successfully" }
     ```
+
+    **Errors:**
+    - 404: Location not found
     """
     update_data = request.model_dump(exclude_unset=True)
     return await service.update_my_location(location_id, update_data, current_user)
@@ -224,10 +253,15 @@ async def delete_my_location(
 
     **Access:** Doctor only
 
+    **Path Param:** `location_id` — the `location_id` returned by GET /profile/locations
+
     **Response:**
     ```json
     { "message": "Location removed successfully" }
     ```
+
+    **Errors:**
+    - 404: Doctor or location not found
     """
     return await service.delete_my_location(location_id, current_user)
 

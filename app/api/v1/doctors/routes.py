@@ -258,21 +258,22 @@ async def get_locations(
       "total": 2,
       "locations": [
         {
-          "id": "a1b2c3d4",
-          "type": "hospital",
-          "name": "Apollo Hospital - Jubilee Hills",
+          "location_id": "b1f2c3d4-...",
+          "location_priority": "PRIMARY",
+          "facility_type": "HOSPITAL",
+          "facility_type_other": null,
+          "location_name": "Apollo Hospital - Jubilee Hills",
+          "latitude": "17.4401",
+          "longitude": "78.3489",
           "address": "Road 45, Jubilee Hills, Hyderabad",
-          "country": "India",
-          "state": "Telangana",
-          "district": "Ranga Reddy",
-          "city": "Hyderabad",
           "area": "Jubilee Hills",
-          "latitude": 17.4401,
-          "longitude": 78.3489,
-          "is_active": true,
-          "geofence_radius": 100,
-          "added_by": "admin_id",
-          "added_at": "2026-07-15T10:00:00"
+          "city": "Hyderabad",
+          "district": "Hyderabad",
+          "state": "Telangana",
+          "country": "India",
+          "postcode": "500033",
+          "location_source": "MAP_SEARCH",
+          "status": "ACTIVE"
         }
       ]
     }
@@ -295,23 +296,37 @@ async def add_location(
     **Request Body:**
     ```json
     {
-      "name": "Apollo Hospital - Jubilee Hills",
+      "location_priority": "PRIMARY",
+      "facility_type": "HOSPITAL",
+      "location_name": "Apollo Hospital - Jubilee Hills",
+      "latitude": "17.4401",
+      "longitude": "78.3489",
       "address": "Road 45, Jubilee Hills, Hyderabad - 500033",
-      "country": "India",
-      "state": "Telangana",
-      "district": "Ranga Reddy",
-      "city": "Hyderabad",
       "area": "Jubilee Hills",
-      "latitude": 17.4401,
-      "longitude": 78.3489,
-      "type": "hospital",
-      "geofence_radius": 100
+      "city": "Hyderabad",
+      "district": "Hyderabad",
+      "state": "Telangana",
+      "country": "India",
+      "postcode": "500033",
+      "location_source": "MANUAL",
+      "status": "ACTIVE"
     }
     ```
 
+    **Required:** `location_priority`, `facility_type`, `location_name`, `city`, `district`, `state`, `country`, `postcode`
+
+    **Optional:** `latitude`, `longitude`, `address`, `area`, `location_source`, `status`
+
+    **Conditional:** `facility_type_other` — required only when `facility_type` = OTHER
+
+    **Enums:**
+    - `location_priority`: PRIMARY / SECONDARY / OTHER
+    - `facility_type`: HOSPITAL / CLINIC / POLYCLINIC / MEDICAL_CENTER / INSTITUTION_OR_MEDICAL_COLLEGE / OTHER
+    - `location_source`: CURRENT_LOCATION / MAP_SEARCH / MANUAL
+
     **Response:**
     ```json
-    { "message": "Location added successfully", "location_id": "a1b2c3d4" }
+    { "message": "Location added successfully", "location_id": "b1f2c3d4-..." }
     ```
     """
     return await service.add_doctor_location(doctor_id, request.model_dump(), current_user)
@@ -332,10 +347,17 @@ async def update_location(
     **Request Body (all fields optional):**
     ```json
     {
-      "name": "Apollo Hospital - New Wing",
-      "is_active": false
+      "location_name": "Apollo Hospital - New Wing",
+      "facility_type": "MEDICAL_CENTER",
+      "status": "INACTIVE"
     }
     ```
+
+    **Path Param:** `location_id` — the `location_id` from GET /doctors/{doctor_id}/locations
+
+    **Updatable fields:** `location_name`, `facility_type`, `facility_type_other`, `address`, `area`,
+    `city`, `district`, `state`, `country`, `postcode`, `latitude`, `longitude`, `location_source`,
+    `status`, `location_priority`
 
     **Response:**
     ```json
@@ -356,6 +378,8 @@ async def delete_location(
     **Purpose:** Remove a practice location from a doctor.
 
     **Access:** Platform Admin only
+
+    **Path Param:** `location_id` — the `location_id` from GET /doctors/{doctor_id}/locations
 
     **Response:**
     ```json
