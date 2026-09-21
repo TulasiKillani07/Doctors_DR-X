@@ -8,7 +8,7 @@ from typing import Dict, Optional
 from pydantic import BaseModel, Field, field_validator
 from app.core.auth import require_doctor
 from app.api.v1.settings import service
-from app.api.v1.auth.schemas import validate_password_strength
+from app.utils.validators import validate_password
 
 router = APIRouter()
 
@@ -20,7 +20,7 @@ class ChangePasswordRequest(BaseModel):
     @field_validator("new_password")
     @classmethod
     def check_new_password(cls, v: str) -> str:
-        return validate_password_strength(v)
+        return validate_password(v)
 
 
 class UpdatePreferencesRequest(BaseModel):

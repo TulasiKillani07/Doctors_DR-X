@@ -2,33 +2,15 @@
 Auth schemas for DRX
 """
 
-import re
 from pydantic import BaseModel, EmailStr, Field, field_validator
 from typing import Optional
-
-
-# ══════════════════════════════════════════════════════════════
-# Password Validation (shared across all password fields)
-# ══════════════════════════════════════════════════════════════
-
-PASSWORD_REGEX = re.compile(
-    r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>/?~`])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};\':"\\|,.<>/?~`]{8,64}$'
+from app.utils.validators import (
+    validate_username as _v_username,
+    validate_password as _v_password,
+    validate_full_name as _v_fullname,
+    validate_phone as _v_phone,
+    validate_email_domain as _v_email_domain,
 )
-
-PASSWORD_ERROR = (
-    "Password must be 8-64 characters and include at least one uppercase letter, "
-    "one lowercase letter, one number, and one symbol. "
-    "Only English letters, numbers, and standard symbols are allowed."
-)
-
-
-def validate_password_strength(password: Optional[str]) -> Optional[str]:
-    """Validate password meets strength requirements. Returns password if valid."""
-    if password is None:
-        return None
-    if not PASSWORD_REGEX.match(password):
-        raise ValueError(PASSWORD_ERROR)
-    return password
 
 
 # ══════════════════════════════════════════════════════════════
@@ -41,42 +23,63 @@ class AdminLoginRequest(BaseModel):
 
 
 class AdminCreateRequest(BaseModel):
-    name: str = Field(..., min_length=2, max_length=100)
-    username: str = Field(..., min_length=3, max_length=30, description="Unique username (3-30 chars, alphanumeric + underscores)")
+    name: str = Field(..., description="Full name (8-64 characters)")
+    username: str = Field(..., description="Unique username (6-16 chars, letters/numbers/underscore)")
     email: EmailStr
-    password: str = Field(..., min_length=8, max_length=64)
+    password: str = Field(..., description="8-24 chars, 1 upper, 1 lower, 1 number, 1 symbol")
+
+    @field_validator("name")
+    @classmethod
+    def _name(cls, v: str) -> str:
+        return _v_fullname(v)
 
     @field_validator("username")
     @classmethod
-    def validate_username(cls, v: str) -> str:
-        if not re.match(r'^[a-zA-Z0-9_]{3,30}$', v):
-            raise ValueError("Username must be 3-30 characters, only letters, numbers, and underscores allowed")
-        return v.lower()
+    def _username(cls, v: str) -> str:
+        return _v_username(v)
 
     @field_validator("password")
     @classmethod
-    def check_password(cls, v: str) -> str:
-        return validate_password_strength(v)
+    def _password(cls, v: str) -> str:
+        return _v_password(v)
+
+    @field_validator("email")
+    @classmethod
+    def _email(cls, v: str) -> str:
+        return _v_email_domain(v)
 
 
 class DoctorRegisterRequest(BaseModel):
-    name: str = Field(..., min_length=2, max_length=100)
-    username: str = Field(..., min_length=3, max_length=30, description="Unique username (3-30 chars, alphanumeric + underscores)")
+    name: str = Field(..., description="Full name (8-64 characters)")
+    username: str = Field(..., description="Unique username (6-16 chars, letters/numbers/underscore)")
     email: EmailStr
-    phone: str = Field(..., min_length=10, max_length=15)
-    password: str = Field(..., min_length=8, max_length=64)
+    phone: str = Field(..., description="E.164 format, e.g. +919848012345")
+    password: str = Field(..., description="8-24 chars, 1 upper, 1 lower, 1 number, 1 symbol")
+
+    @field_validator("name")
+    @classmethod
+    def _name(cls, v: str) -> str:
+        return _v_fullname(v)
 
     @field_validator("username")
     @classmethod
-    def validate_username(cls, v: str) -> str:
-        if not re.match(r'^[a-zA-Z0-9_]{3,30}$', v):
-            raise ValueError("Username must be 3-30 characters, only letters, numbers, and underscores allowed")
-        return v.lower()  # Store lowercase for case-insensitive uniqueness
+    def _username(cls, v: str) -> str:
+        return _v_username(v)
+
+    @field_validator("phone")
+    @classmethod
+    def _phone(cls, v: str) -> str:
+        return _v_phone(v)
 
     @field_validator("password")
     @classmethod
-    def check_password(cls, v: str) -> str:
-        return validate_password_strength(v)
+    def _password(cls, v: str) -> str:
+        return _v_password(v)
+
+    @field_validator("email")
+    @classmethod
+    def _email(cls, v: str) -> str:
+        return _v_email_domain(v)
 
 
 class DoctorLoginRequest(BaseModel):

@@ -1,0 +1,7827 @@
+[
+  {
+    "query": "medicine for sleepiness and weight gain",
+    "entities": [
+      {
+        "text": "sleepiness",
+        "label": "SYMPTOM",
+        "start": 13,
+        "end": 23
+      },
+      {
+        "text": "weight gain",
+        "label": "SYMPTOM",
+        "start": 28,
+        "end": 39
+      }
+    ],
+    "category": "multiple_same_type",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "sleepiness",
+      "weight gain"
+    ],
+    "frame_id": "ss_inf_medicine_s1_s2"
+  },
+  {
+    "query": "therapies for neutropenia with concurrent mood instability",
+    "entities": [
+      {
+        "text": "neutropenia",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 25
+      },
+      {
+        "text": "mood instability",
+        "label": "SYMPTOM",
+        "start": 42,
+        "end": 58
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "neutropenia",
+      "mood instability"
+    ],
+    "frame_id": "ds_therapies_d_s"
+  },
+  {
+    "query": "how is acute respiratory toxicity managed in elderly patients",
+    "entities": [
+      {
+        "text": "acute respiratory toxicity",
+        "label": "DISEASE",
+        "start": 7,
+        "end": 33
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 45,
+        "end": 52
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute respiratory toxicity",
+      "elderly"
+    ],
+    "frame_id": "dc_dq_how_is_d_managed_c"
+  },
+  {
+    "query": "what helps treat ventricular fibrillation in elderly patients",
+    "entities": [
+      {
+        "text": "ventricular fibrillation",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 41
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 45,
+        "end": 52
+      }
+    ],
+    "category": "disease_condition",
+    "style": "can_help_relief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "ventricular fibrillation",
+      "elderly"
+    ],
+    "frame_id": "help_what_can_treat_d_c"
+  },
+  {
+    "query": "show drugs for anaphylactic shock accompanied by sores in the mouth and exercise intolerance",
+    "entities": [
+      {
+        "text": "anaphylactic shock",
+        "label": "DISEASE",
+        "start": 15,
+        "end": 33
+      },
+      {
+        "text": "sores in the mouth",
+        "label": "SYMPTOM",
+        "start": 49,
+        "end": 67
+      },
+      {
+        "text": "exercise intolerance",
+        "label": "SYMPTOM",
+        "start": 72,
+        "end": 92
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "action_oriented",
+    "difficulty": "hard",
+    "source_concepts": [
+      "anaphylactic shock",
+      "sores in the mouth",
+      "exercise intolerance"
+    ],
+    "frame_id": "dss_act_show_meds_d_s1_s2"
+  },
+  {
+    "query": "medicines for fatigue during dialysis",
+    "entities": [
+      {
+        "text": "fatigue",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 21
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 29,
+        "end": 37
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "fatigue",
+      "dialysis"
+    ],
+    "frame_id": "sc_meds_s_c"
+  },
+  {
+    "query": "what medicine relieves joint restriction in pregnancy",
+    "entities": [
+      {
+        "text": "joint restriction",
+        "label": "SYMPTOM",
+        "start": 23,
+        "end": 40
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 44,
+        "end": 53
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "joint restriction",
+      "pregnancy"
+    ],
+    "frame_id": "sc_dq_what_relieves_s_c"
+  },
+  {
+    "query": "how to manage joint discomfort in patients with hepatic impairment",
+    "entities": [
+      {
+        "text": "joint discomfort",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 30
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 48,
+        "end": 66
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "joint discomfort",
+      "hepatic impairment"
+    ],
+    "frame_id": "sc_dq_how_manage_s_c"
+  },
+  {
+    "query": "what medicine helps with dizziness and difficulties with sleep maintenance",
+    "entities": [
+      {
+        "text": "dizziness",
+        "label": "SYMPTOM",
+        "start": 25,
+        "end": 34
+      },
+      {
+        "text": "difficulties with sleep maintenance",
+        "label": "SYMPTOM",
+        "start": 39,
+        "end": 74
+      }
+    ],
+    "category": "multiple_same_type",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "dizziness",
+      "difficulties with sleep maintenance"
+    ],
+    "frame_id": "ss_dq_what_helps_s1_s2"
+  },
+  {
+    "query": "managing respiratory failure accompanied by visual impairment",
+    "entities": [
+      {
+        "text": "respiratory failure",
+        "label": "DISEASE",
+        "start": 9,
+        "end": 28
+      },
+      {
+        "text": "visual impairment",
+        "label": "SYMPTOM",
+        "start": 44,
+        "end": 61
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "respiratory failure",
+      "visual impairment"
+    ],
+    "frame_id": "ds_managing_d_with_s"
+  },
+  {
+    "query": "find medicines for complicated skin and soft tissue infections for elderly patients",
+    "entities": [
+      {
+        "text": "complicated skin and soft tissue infections",
+        "label": "DISEASE",
+        "start": 19,
+        "end": 62
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 67,
+        "end": 74
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "complicated skin and soft tissue infections",
+      "elderly"
+    ],
+    "frame_id": "act_find_medicines_d_c"
+  },
+  {
+    "query": "which drug helps treat acute myopia and secondary angle-closure glaucoma",
+    "entities": [
+      {
+        "text": "acute myopia and secondary angle-closure glaucoma",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 72
+      }
+    ],
+    "category": "single_disease",
+    "style": "can_help_relief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "acute myopia and secondary angle-closure glaucoma"
+    ],
+    "frame_id": "help_which_drug_helps"
+  },
+  {
+    "query": "what therapeutic options exist for hyperglycemia",
+    "entities": [
+      {
+        "text": "hyperglycemia",
+        "label": "DISEASE",
+        "start": 35,
+        "end": 48
+      }
+    ],
+    "category": "single_disease",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "hyperglycemia"
+    ],
+    "frame_id": "dq_what_options_exist"
+  },
+  {
+    "query": "where can i display drug strengths for tablet lines",
+    "entities": [],
+    "category": "no_entity",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [],
+    "frame_id": "ne_drug_strengths_v"
+  },
+  {
+    "query": "which medicine is used for acute respiratory toxicity",
+    "entities": [
+      {
+        "text": "acute respiratory toxicity",
+        "label": "DISEASE",
+        "start": 27,
+        "end": 53
+      }
+    ],
+    "category": "single_disease",
+    "style": "direct_question",
+    "difficulty": "easy",
+    "source_concepts": [
+      "acute respiratory toxicity"
+    ],
+    "frame_id": "dq_which_medicine_used"
+  },
+  {
+    "query": "medicines for sweating and restlessness",
+    "entities": [
+      {
+        "text": "sweating",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 22
+      },
+      {
+        "text": "restlessness",
+        "label": "SYMPTOM",
+        "start": 27,
+        "end": 39
+      }
+    ],
+    "category": "multiple_same_type",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "sweating",
+      "restlessness"
+    ],
+    "frame_id": "ss_meds_s1_s2"
+  },
+  {
+    "query": "treatment for wolff-parkinson-white syndrome tachycardia with restlessness",
+    "entities": [
+      {
+        "text": "wolff-parkinson-white syndrome tachycardia",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 56
+      },
+      {
+        "text": "restlessness",
+        "label": "SYMPTOM",
+        "start": 62,
+        "end": 74
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "wolff-parkinson-white syndrome tachycardia",
+      "restlessness"
+    ],
+    "frame_id": "ds_inf_treatment_d_s"
+  },
+  {
+    "query": "what stops bone crises",
+    "entities": [
+      {
+        "text": "bone crises",
+        "label": "SYMPTOM",
+        "start": 11,
+        "end": 22
+      }
+    ],
+    "category": "single_symptom",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "bone crises"
+    ],
+    "frame_id": "inf_what_stops_s"
+  },
+  {
+    "query": "what is suitable for dysostosis multiplex with joint restriction and swelling",
+    "entities": [
+      {
+        "text": "dysostosis multiplex",
+        "label": "DISEASE",
+        "start": 21,
+        "end": 41
+      },
+      {
+        "text": "joint restriction",
+        "label": "SYMPTOM",
+        "start": 47,
+        "end": 64
+      },
+      {
+        "text": "swelling",
+        "label": "SYMPTOM",
+        "start": 69,
+        "end": 77
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "dysostosis multiplex",
+      "joint restriction",
+      "swelling"
+    ],
+    "frame_id": "dss_dq_what_suitable_d_s1_s2"
+  },
+  {
+    "query": "what helps reduce hypohidrosis",
+    "entities": [
+      {
+        "text": "hypohidrosis",
+        "label": "SYMPTOM",
+        "start": 18,
+        "end": 30
+      }
+    ],
+    "category": "single_symptom",
+    "style": "direct_question",
+    "difficulty": "easy",
+    "source_concepts": [
+      "hypohidrosis"
+    ],
+    "frame_id": "dq_what_helps_reduce"
+  },
+  {
+    "query": "medication to manage tickling cough",
+    "entities": [
+      {
+        "text": "tickling cough",
+        "label": "SYMPTOM",
+        "start": 21,
+        "end": 35
+      }
+    ],
+    "category": "single_symptom",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "tickling cough"
+    ],
+    "frame_id": "s_management_meds"
+  },
+  {
+    "query": "i need to what vial sizes are supplied for hospital distribution",
+    "entities": [],
+    "category": "no_entity",
+    "style": "direct_question",
+    "difficulty": "easy",
+    "source_concepts": [],
+    "frame_id": "ne_vial_sizes_hospital_v"
+  },
+  {
+    "query": "dose adjustment in renal impairment",
+    "entities": [
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 19,
+        "end": 35
+      }
+    ],
+    "category": "difficult_boundary_cases",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "renal impairment"
+    ],
+    "frame_id": "b_ri_alone_1"
+  },
+  {
+    "query": "display approved drugs for immune thrombocytopenic purpura during lactation",
+    "entities": [
+      {
+        "text": "immune thrombocytopenic purpura",
+        "label": "DISEASE",
+        "start": 27,
+        "end": 58
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 66,
+        "end": 75
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "immune thrombocytopenic purpura",
+      "lactation"
+    ],
+    "frame_id": "act_display_drugs_d_c"
+  },
+  {
+    "query": "drugs for complicated skin and soft tissue infections",
+    "entities": [
+      {
+        "text": "complicated skin and soft tissue infections",
+        "label": "DISEASE",
+        "start": 10,
+        "end": 53
+      }
+    ],
+    "category": "single_disease",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "complicated skin and soft tissue infections"
+    ],
+    "frame_id": "d_drugs_for"
+  },
+  {
+    "query": "medical remedies for rapid ventricular rhythm",
+    "entities": [
+      {
+        "text": "rapid ventricular rhythm",
+        "label": "SYMPTOM",
+        "start": 21,
+        "end": 45
+      }
+    ],
+    "category": "single_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "rapid ventricular rhythm"
+    ],
+    "frame_id": "s_remedies"
+  },
+  {
+    "query": "how to manage weight gain",
+    "entities": [
+      {
+        "text": "weight gain",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 25
+      }
+    ],
+    "category": "single_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "weight gain"
+    ],
+    "frame_id": "dq_how_to_manage_s"
+  },
+  {
+    "query": "how to treat chronic gvhd accompanied by pyrexia",
+    "entities": [
+      {
+        "text": "chronic gvhd",
+        "label": "DISEASE",
+        "start": 13,
+        "end": 25
+      },
+      {
+        "text": "pyrexia",
+        "label": "SYMPTOM",
+        "start": 41,
+        "end": 48
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "chronic gvhd",
+      "pyrexia"
+    ],
+    "frame_id": "ds_dq_how_to_treat_d_s"
+  },
+  {
+    "query": "what drugs are permitted during breastfeeding",
+    "entities": [
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 32,
+        "end": 45
+      }
+    ],
+    "category": "single_condition",
+    "style": "direct_question",
+    "difficulty": "easy",
+    "source_concepts": [
+      "breastfeeding"
+    ],
+    "frame_id": "dq_what_drugs_permitted_c"
+  },
+  {
+    "query": "please list available medicinal products with oral route in stock",
+    "entities": [],
+    "category": "no_entity",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [],
+    "frame_id": "ne_oral_route_list_v"
+  },
+  {
+    "query": "what therapeutic options exist for sleep apnea",
+    "entities": [
+      {
+        "text": "sleep apnea",
+        "label": "DISEASE",
+        "start": 35,
+        "end": 46
+      }
+    ],
+    "category": "single_disease",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "sleep apnea"
+    ],
+    "frame_id": "dq_what_options_exist"
+  },
+  {
+    "query": "what treatments are available for acid α-glucosidase deficiency in hepatic impairment",
+    "entities": [
+      {
+        "text": "acid α-glucosidase deficiency",
+        "label": "DISEASE",
+        "start": 34,
+        "end": 63
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 67,
+        "end": 85
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acid α-glucosidase deficiency",
+      "hepatic impairment"
+    ],
+    "frame_id": "dc_dq_what_treatments_available_d_c"
+  },
+  {
+    "query": "relief for urinary frequency and bone pain",
+    "entities": [
+      {
+        "text": "urinary frequency",
+        "label": "SYMPTOM",
+        "start": 11,
+        "end": 28
+      },
+      {
+        "text": "bone pain",
+        "label": "SYMPTOM",
+        "start": 33,
+        "end": 42
+      }
+    ],
+    "category": "multiple_same_type",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "urinary frequency",
+      "bone pain"
+    ],
+    "frame_id": "ss_relief_s1_s2"
+  },
+  {
+    "query": "what helps treat ventricular fibrillation while relieving joint restriction",
+    "entities": [
+      {
+        "text": "ventricular fibrillation",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 41
+      },
+      {
+        "text": "joint restriction",
+        "label": "SYMPTOM",
+        "start": 58,
+        "end": 75
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "can_help_relief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "ventricular fibrillation",
+      "joint restriction"
+    ],
+    "frame_id": "ds_help_what_helps_d_s"
+  },
+  {
+    "query": "what treatment is available for hepatosplenomegaly",
+    "entities": [
+      {
+        "text": "hepatosplenomegaly",
+        "label": "DISEASE",
+        "start": 32,
+        "end": 50
+      }
+    ],
+    "category": "single_disease",
+    "style": "direct_question",
+    "difficulty": "easy",
+    "source_concepts": [
+      "hepatosplenomegaly"
+    ],
+    "frame_id": "dq_what_treatment_available"
+  },
+  {
+    "query": "display drugs for acute renal failure with concurrent sleepiness in patients with renal impairment",
+    "entities": [
+      {
+        "text": "acute renal failure",
+        "label": "DISEASE",
+        "start": 18,
+        "end": 37
+      },
+      {
+        "text": "sleepiness",
+        "label": "SYMPTOM",
+        "start": 54,
+        "end": 64
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 82,
+        "end": 98
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "action_oriented",
+    "difficulty": "hard",
+    "source_concepts": [
+      "acute renal failure",
+      "sleepiness",
+      "renal impairment"
+    ],
+    "frame_id": "dsc_act_display_drugs_d_s_c"
+  },
+  {
+    "query": "treatment for acute toxic leukoencephalopathy with sores in the mouth",
+    "entities": [
+      {
+        "text": "acute toxic leukoencephalopathy",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 45
+      },
+      {
+        "text": "sores in the mouth",
+        "label": "SYMPTOM",
+        "start": 51,
+        "end": 69
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "acute toxic leukoencephalopathy",
+      "sores in the mouth"
+    ],
+    "frame_id": "ds_inf_treatment_d_s"
+  },
+  {
+    "query": "therapies indicated for cardiac insufficiency in patients with hepatic impairment",
+    "entities": [
+      {
+        "text": "cardiac insufficiency",
+        "label": "DISEASE",
+        "start": 24,
+        "end": 45
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 63,
+        "end": 81
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "cardiac insufficiency",
+      "hepatic impairment"
+    ],
+    "frame_id": "dc_therapies_for_d_c"
+  },
+  {
+    "query": "treatment for leukopenia presenting with tremor and headache",
+    "entities": [
+      {
+        "text": "leukopenia",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 24
+      },
+      {
+        "text": "tremor",
+        "label": "SYMPTOM",
+        "start": 41,
+        "end": 47
+      },
+      {
+        "text": "headache",
+        "label": "SYMPTOM",
+        "start": 52,
+        "end": 60
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "leukopenia",
+      "tremor",
+      "headache"
+    ],
+    "frame_id": "dss_treatment_d_s1_s2"
+  },
+  {
+    "query": "medicines for anaemia in renal impairment",
+    "entities": [
+      {
+        "text": "anaemia",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 21
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 25,
+        "end": 41
+      }
+    ],
+    "category": "disease_condition",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "anaemia",
+      "renal impairment"
+    ],
+    "frame_id": "inf_meds_d_c"
+  },
+  {
+    "query": "which medicines treat autoimmune hepatitis in hepatic impairment",
+    "entities": [
+      {
+        "text": "autoimmune hepatitis",
+        "label": "DISEASE",
+        "start": 22,
+        "end": 42
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 46,
+        "end": 64
+      }
+    ],
+    "category": "difficult_boundary_cases",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "autoimmune hepatitis",
+      "hepatic impairment"
+    ],
+    "frame_id": "b_hep_hi_2"
+  },
+  {
+    "query": "medical remedies for urinary frequency",
+    "entities": [
+      {
+        "text": "urinary frequency",
+        "label": "SYMPTOM",
+        "start": 21,
+        "end": 38
+      }
+    ],
+    "category": "single_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "urinary frequency"
+    ],
+    "frame_id": "s_remedies"
+  },
+  {
+    "query": "therapies for acute renal failure with concurrent fever",
+    "entities": [
+      {
+        "text": "acute renal failure",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 33
+      },
+      {
+        "text": "fever",
+        "label": "SYMPTOM",
+        "start": 50,
+        "end": 55
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute renal failure",
+      "fever"
+    ],
+    "frame_id": "ds_therapies_d_s"
+  },
+  {
+    "query": "what is suitable for toxic epidermal necrolysis with difficulties with sleep onset and hypohidrosis",
+    "entities": [
+      {
+        "text": "toxic epidermal necrolysis",
+        "label": "DISEASE",
+        "start": 21,
+        "end": 47
+      },
+      {
+        "text": "difficulties with sleep onset",
+        "label": "SYMPTOM",
+        "start": 53,
+        "end": 82
+      },
+      {
+        "text": "hypohidrosis",
+        "label": "SYMPTOM",
+        "start": 87,
+        "end": 99
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "toxic epidermal necrolysis",
+      "difficulties with sleep onset",
+      "hypohidrosis"
+    ],
+    "frame_id": "dss_dq_what_suitable_d_s1_s2"
+  },
+  {
+    "query": "list options for progressive muscle weakness in renal impairment",
+    "entities": [
+      {
+        "text": "progressive muscle weakness",
+        "label": "SYMPTOM",
+        "start": 17,
+        "end": 44
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 48,
+        "end": 64
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "progressive muscle weakness",
+      "renal impairment"
+    ],
+    "frame_id": "sc_act_list_options_s_c"
+  },
+  {
+    "query": "treatment for acid α-glucosidase deficiency in renal impairment",
+    "entities": [
+      {
+        "text": "acid α-glucosidase deficiency",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 43
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 47,
+        "end": 63
+      }
+    ],
+    "category": "difficult_boundary_cases",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "acid α-glucosidase deficiency",
+      "renal impairment"
+    ],
+    "frame_id": "diff_d_c_bound_treatment_d_c"
+  },
+  {
+    "query": "list medications for wolff-parkinson-white syndrome tachycardia during lactation",
+    "entities": [
+      {
+        "text": "wolff-parkinson-white syndrome tachycardia",
+        "label": "DISEASE",
+        "start": 21,
+        "end": 63
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 71,
+        "end": 80
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "wolff-parkinson-white syndrome tachycardia",
+      "lactation"
+    ],
+    "frame_id": "act_list_meds_d_c"
+  },
+  {
+    "query": "drug choices in hepatic impairment",
+    "entities": [
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 16,
+        "end": 34
+      }
+    ],
+    "category": "single_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "hepatic impairment"
+    ],
+    "frame_id": "c_drug_choices"
+  },
+  {
+    "query": "treatment for acute renal failure with seizures",
+    "entities": [
+      {
+        "text": "acute renal failure",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 33
+      },
+      {
+        "text": "seizures",
+        "label": "SYMPTOM",
+        "start": 39,
+        "end": 47
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "acute renal failure",
+      "seizures"
+    ],
+    "frame_id": "ds_treatment_d_with_s"
+  },
+  {
+    "query": "managing complicated intra-abdominal infections for paediatric patients",
+    "entities": [
+      {
+        "text": "complicated intra-abdominal infections",
+        "label": "DISEASE",
+        "start": 9,
+        "end": 47
+      },
+      {
+        "text": "paediatric",
+        "label": "CONDITION",
+        "start": 52,
+        "end": 62
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "complicated intra-abdominal infections",
+      "paediatric"
+    ],
+    "frame_id": "dc_managing_d_c"
+  },
+  {
+    "query": "managing acute respiratory toxicity accompanied by urinary frequency",
+    "entities": [
+      {
+        "text": "acute respiratory toxicity",
+        "label": "DISEASE",
+        "start": 9,
+        "end": 35
+      },
+      {
+        "text": "urinary frequency",
+        "label": "SYMPTOM",
+        "start": 51,
+        "end": 68
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute respiratory toxicity",
+      "urinary frequency"
+    ],
+    "frame_id": "ds_managing_d_with_s"
+  },
+  {
+    "query": "show drugs for alpha-galactosidase a deficiency accompanied by sweating and anxiety",
+    "entities": [
+      {
+        "text": "alpha-galactosidase a deficiency",
+        "label": "DISEASE",
+        "start": 15,
+        "end": 47
+      },
+      {
+        "text": "sweating",
+        "label": "SYMPTOM",
+        "start": 63,
+        "end": 71
+      },
+      {
+        "text": "anxiety",
+        "label": "SYMPTOM",
+        "start": 76,
+        "end": 83
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "action_oriented",
+    "difficulty": "hard",
+    "source_concepts": [
+      "alpha-galactosidase a deficiency",
+      "sweating",
+      "anxiety"
+    ],
+    "frame_id": "dss_act_show_meds_d_s1_s2"
+  },
+  {
+    "query": "medicines for dysostosis multiplex with somnolence and urticaria",
+    "entities": [
+      {
+        "text": "dysostosis multiplex",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 34
+      },
+      {
+        "text": "somnolence",
+        "label": "SYMPTOM",
+        "start": 40,
+        "end": 50
+      },
+      {
+        "text": "urticaria",
+        "label": "SYMPTOM",
+        "start": 55,
+        "end": 64
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "dysostosis multiplex",
+      "somnolence",
+      "urticaria"
+    ],
+    "frame_id": "dss_meds_d_s1_s2"
+  },
+  {
+    "query": "medicines for acute respiratory toxicity in patients with hepatic impairment",
+    "entities": [
+      {
+        "text": "acute respiratory toxicity",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 40
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 58,
+        "end": 76
+      }
+    ],
+    "category": "disease_condition",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "acute respiratory toxicity",
+      "hepatic impairment"
+    ],
+    "frame_id": "inf_meds_d_c"
+  },
+  {
+    "query": "display treatments for nausea during breastfeeding",
+    "entities": [
+      {
+        "text": "nausea",
+        "label": "SYMPTOM",
+        "start": 23,
+        "end": 29
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 37,
+        "end": 50
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "nausea",
+      "breastfeeding"
+    ],
+    "frame_id": "sc_act_display_treatments_s_c"
+  },
+  {
+    "query": "what medicine helps with reduced walking ability and abdominal pain",
+    "entities": [
+      {
+        "text": "reduced walking ability",
+        "label": "SYMPTOM",
+        "start": 25,
+        "end": 48
+      },
+      {
+        "text": "abdominal pain",
+        "label": "SYMPTOM",
+        "start": 53,
+        "end": 67
+      }
+    ],
+    "category": "multiple_same_type",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "reduced walking ability",
+      "abdominal pain"
+    ],
+    "frame_id": "ss_dq_what_helps_s1_s2"
+  },
+  {
+    "query": "find therapy for acute renal failure accompanied by fever",
+    "entities": [
+      {
+        "text": "acute renal failure",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 36
+      },
+      {
+        "text": "fever",
+        "label": "SYMPTOM",
+        "start": 52,
+        "end": 57
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute renal failure",
+      "fever"
+    ],
+    "frame_id": "ds_act_find_therapy_d_s"
+  },
+  {
+    "query": "identify medicines for acute respiratory toxicity in patients with renal impairment",
+    "entities": [
+      {
+        "text": "acute respiratory toxicity",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 49
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 67,
+        "end": 83
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute respiratory toxicity",
+      "renal impairment"
+    ],
+    "frame_id": "act_identify_medicines_d_c"
+  },
+  {
+    "query": "managing acute renal failure accompanied by fever",
+    "entities": [
+      {
+        "text": "acute renal failure",
+        "label": "DISEASE",
+        "start": 9,
+        "end": 28
+      },
+      {
+        "text": "fever",
+        "label": "SYMPTOM",
+        "start": 44,
+        "end": 49
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute renal failure",
+      "fever"
+    ],
+    "frame_id": "ds_managing_d_with_s"
+  },
+  {
+    "query": "what works for acute renal failure",
+    "entities": [
+      {
+        "text": "acute renal failure",
+        "label": "DISEASE",
+        "start": 15,
+        "end": 34
+      }
+    ],
+    "category": "single_disease",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "acute renal failure"
+    ],
+    "frame_id": "inf_what_works_for"
+  },
+  {
+    "query": "drug choices for alpha-galactosidase a deficiency with stiffness in patients with hepatic impairment",
+    "entities": [
+      {
+        "text": "alpha-galactosidase a deficiency",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 49
+      },
+      {
+        "text": "stiffness",
+        "label": "SYMPTOM",
+        "start": 55,
+        "end": 64
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 82,
+        "end": 100
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "alpha-galactosidase a deficiency",
+      "stiffness",
+      "hepatic impairment"
+    ],
+    "frame_id": "dsc_drug_choices_d_s_c"
+  },
+  {
+    "query": "pharmacotherapy for acute myopia and secondary angle-closure glaucoma accompanied by anxiety during breastfeeding",
+    "entities": [
+      {
+        "text": "acute myopia and secondary angle-closure glaucoma",
+        "label": "DISEASE",
+        "start": 20,
+        "end": 69
+      },
+      {
+        "text": "anxiety",
+        "label": "SYMPTOM",
+        "start": 85,
+        "end": 92
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 100,
+        "end": 113
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "acute myopia and secondary angle-closure glaucoma",
+      "anxiety",
+      "breastfeeding"
+    ],
+    "frame_id": "dsc_pharmacotherapy_d_s_c"
+  },
+  {
+    "query": "drugs for nausea in patients on dialysis",
+    "entities": [
+      {
+        "text": "nausea",
+        "label": "SYMPTOM",
+        "start": 10,
+        "end": 16
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 32,
+        "end": 40
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "nausea",
+      "dialysis"
+    ],
+    "frame_id": "sc_drugs_s_c"
+  },
+  {
+    "query": "is there anything to help ease progressive muscle weakness",
+    "entities": [
+      {
+        "text": "progressive muscle weakness",
+        "label": "SYMPTOM",
+        "start": 31,
+        "end": 58
+      }
+    ],
+    "category": "single_symptom",
+    "style": "can_help_relief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "progressive muscle weakness"
+    ],
+    "frame_id": "help_anything_to_ease_s"
+  },
+  {
+    "query": "prescribing for thyroid dysfunction in patients with hepatic impairment",
+    "entities": [
+      {
+        "text": "thyroid dysfunction",
+        "label": "DISEASE",
+        "start": 16,
+        "end": 35
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 53,
+        "end": 71
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "thyroid dysfunction",
+      "hepatic impairment"
+    ],
+    "frame_id": "dc_prescribing_for_d_c"
+  },
+  {
+    "query": "managing acute toxic leukoencephalopathy in hepatic impairment",
+    "entities": [
+      {
+        "text": "acute toxic leukoencephalopathy",
+        "label": "DISEASE",
+        "start": 9,
+        "end": 40
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 44,
+        "end": 62
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute toxic leukoencephalopathy",
+      "hepatic impairment"
+    ],
+    "frame_id": "dc_managing_d_c"
+  },
+  {
+    "query": "what options exist for conjunctivitis in renal impairment",
+    "entities": [
+      {
+        "text": "conjunctivitis",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 37
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 41,
+        "end": 57
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "conjunctivitis",
+      "renal impairment"
+    ],
+    "frame_id": "dc_dq_options_for_d_c"
+  },
+  {
+    "query": "locate therapies for acid α-glucosidase deficiency for paediatric patients",
+    "entities": [
+      {
+        "text": "acid α-glucosidase deficiency",
+        "label": "DISEASE",
+        "start": 21,
+        "end": 50
+      },
+      {
+        "text": "paediatric",
+        "label": "CONDITION",
+        "start": 55,
+        "end": 65
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acid α-glucosidase deficiency",
+      "paediatric"
+    ],
+    "frame_id": "act_locate_therapies_d_c"
+  },
+  {
+    "query": "how to treat immune thrombocytopenic purpura in pregnancy",
+    "entities": [
+      {
+        "text": "immune thrombocytopenic purpura",
+        "label": "DISEASE",
+        "start": 13,
+        "end": 44
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 48,
+        "end": 57
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "immune thrombocytopenic purpura",
+      "pregnancy"
+    ],
+    "frame_id": "dc_dq_how_to_treat_d_c"
+  },
+  {
+    "query": "what drugs are used to relieve urticaria",
+    "entities": [
+      {
+        "text": "urticaria",
+        "label": "SYMPTOM",
+        "start": 31,
+        "end": 40
+      }
+    ],
+    "category": "single_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "urticaria"
+    ],
+    "frame_id": "dq_what_drugs_prescribed_s"
+  },
+  {
+    "query": "display drugs for simple and complex absence seizures with concurrent tremor during lactation",
+    "entities": [
+      {
+        "text": "simple and complex absence seizures",
+        "label": "DISEASE",
+        "start": 18,
+        "end": 53
+      },
+      {
+        "text": "tremor",
+        "label": "SYMPTOM",
+        "start": 70,
+        "end": 76
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 84,
+        "end": 93
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "action_oriented",
+    "difficulty": "hard",
+    "source_concepts": [
+      "simple and complex absence seizures",
+      "tremor",
+      "lactation"
+    ],
+    "frame_id": "dsc_act_display_drugs_d_s_c"
+  },
+  {
+    "query": "what medicine is suitable for dysostosis multiplex and joint discomfort",
+    "entities": [
+      {
+        "text": "dysostosis multiplex",
+        "label": "DISEASE",
+        "start": 30,
+        "end": 50
+      },
+      {
+        "text": "joint discomfort",
+        "label": "SYMPTOM",
+        "start": 55,
+        "end": 71
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "dysostosis multiplex",
+      "joint discomfort"
+    ],
+    "frame_id": "ds_dq_what_suitable_d_s"
+  },
+  {
+    "query": "show therapies indicated for acute generalized exanthematous pustulosis for elderly patients",
+    "entities": [
+      {
+        "text": "acute generalized exanthematous pustulosis",
+        "label": "DISEASE",
+        "start": 29,
+        "end": 71
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 76,
+        "end": 83
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute generalized exanthematous pustulosis",
+      "elderly"
+    ],
+    "frame_id": "act_show_therapies_d_c"
+  },
+  {
+    "query": "what can treat broncho-pulmonary infections in cystic fibrosis in renal impairment",
+    "entities": [
+      {
+        "text": "broncho-pulmonary infections in cystic fibrosis",
+        "label": "DISEASE",
+        "start": 15,
+        "end": 62
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 66,
+        "end": 82
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "broncho-pulmonary infections in cystic fibrosis",
+      "renal impairment"
+    ],
+    "frame_id": "dc_dq_what_can_treat_d_c"
+  },
+  {
+    "query": "which drug treats ventricular tachycardia and relieves weight gain",
+    "entities": [
+      {
+        "text": "ventricular tachycardia",
+        "label": "DISEASE",
+        "start": 18,
+        "end": 41
+      },
+      {
+        "text": "weight gain",
+        "label": "SYMPTOM",
+        "start": 55,
+        "end": 66
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "ventricular tachycardia",
+      "weight gain"
+    ],
+    "frame_id": "ds_dq_which_drug_d_s"
+  },
+  {
+    "query": "therapies for toxic epidermal necrolysis in patients with hepatic impairment",
+    "entities": [
+      {
+        "text": "toxic epidermal necrolysis",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 40
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 58,
+        "end": 76
+      }
+    ],
+    "category": "disease_condition",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "toxic epidermal necrolysis",
+      "hepatic impairment"
+    ],
+    "frame_id": "inf_therapies_d_c"
+  },
+  {
+    "query": "pharmacotherapy for complicated urinary tract infections accompanied by ataxia for paediatric patients",
+    "entities": [
+      {
+        "text": "complicated urinary tract infections",
+        "label": "DISEASE",
+        "start": 20,
+        "end": 56
+      },
+      {
+        "text": "ataxia",
+        "label": "SYMPTOM",
+        "start": 72,
+        "end": 78
+      },
+      {
+        "text": "paediatric",
+        "label": "CONDITION",
+        "start": 83,
+        "end": 93
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "complicated urinary tract infections",
+      "ataxia",
+      "paediatric"
+    ],
+    "frame_id": "dsc_pharmacotherapy_d_s_c"
+  },
+  {
+    "query": "show drugs for acute renal failure accompanied by sleepiness and progressive muscle weakness",
+    "entities": [
+      {
+        "text": "acute renal failure",
+        "label": "DISEASE",
+        "start": 15,
+        "end": 34
+      },
+      {
+        "text": "sleepiness",
+        "label": "SYMPTOM",
+        "start": 50,
+        "end": 60
+      },
+      {
+        "text": "progressive muscle weakness",
+        "label": "SYMPTOM",
+        "start": 65,
+        "end": 92
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "action_oriented",
+    "difficulty": "hard",
+    "source_concepts": [
+      "acute renal failure",
+      "sleepiness",
+      "progressive muscle weakness"
+    ],
+    "frame_id": "dss_act_show_meds_d_s1_s2"
+  },
+  {
+    "query": "find treatments for weakness",
+    "entities": [
+      {
+        "text": "weakness",
+        "label": "SYMPTOM",
+        "start": 20,
+        "end": 28
+      }
+    ],
+    "category": "single_symptom",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "weakness"
+    ],
+    "frame_id": "act_find_treatments_s"
+  },
+  {
+    "query": "what medicine is suitable for conjunctivitis and rigors",
+    "entities": [
+      {
+        "text": "conjunctivitis",
+        "label": "DISEASE",
+        "start": 30,
+        "end": 44
+      },
+      {
+        "text": "rigors",
+        "label": "SYMPTOM",
+        "start": 49,
+        "end": 55
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "conjunctivitis",
+      "rigors"
+    ],
+    "frame_id": "ds_dq_what_suitable_d_s"
+  },
+  {
+    "query": "medicines for weakness",
+    "entities": [
+      {
+        "text": "weakness",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 22
+      }
+    ],
+    "category": "single_symptom",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "weakness"
+    ],
+    "frame_id": "s_medicines_for"
+  },
+  {
+    "query": "medical remedies for sores in the mouth",
+    "entities": [
+      {
+        "text": "sores in the mouth",
+        "label": "SYMPTOM",
+        "start": 21,
+        "end": 39
+      }
+    ],
+    "category": "single_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "sores in the mouth"
+    ],
+    "frame_id": "s_remedies"
+  },
+  {
+    "query": "relief for nausea and blunted affect in elderly patients",
+    "entities": [
+      {
+        "text": "nausea",
+        "label": "SYMPTOM",
+        "start": 11,
+        "end": 17
+      },
+      {
+        "text": "blunted affect",
+        "label": "SYMPTOM",
+        "start": 22,
+        "end": 36
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 40,
+        "end": 47
+      }
+    ],
+    "category": "three_entity_ssc",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "nausea",
+      "blunted affect",
+      "elderly"
+    ],
+    "frame_id": "ssc_relief_s1_s2_c"
+  },
+  {
+    "query": "prescribing for acute myopia and secondary angle-closure glaucoma during breastfeeding",
+    "entities": [
+      {
+        "text": "acute myopia and secondary angle-closure glaucoma",
+        "label": "DISEASE",
+        "start": 16,
+        "end": 65
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 73,
+        "end": 86
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute myopia and secondary angle-closure glaucoma",
+      "breastfeeding"
+    ],
+    "frame_id": "dc_prescribing_for_d_c"
+  },
+  {
+    "query": "medicines for localized cutaneous amyloidosis and difficulties with sleep maintenance",
+    "entities": [
+      {
+        "text": "localized cutaneous amyloidosis",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 45
+      },
+      {
+        "text": "difficulties with sleep maintenance",
+        "label": "SYMPTOM",
+        "start": 50,
+        "end": 85
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "localized cutaneous amyloidosis",
+      "difficulties with sleep maintenance"
+    ],
+    "frame_id": "ds_meds_d_and_s"
+  },
+  {
+    "query": "which agent eases blunted affect for paediatric patients",
+    "entities": [
+      {
+        "text": "blunted affect",
+        "label": "SYMPTOM",
+        "start": 18,
+        "end": 32
+      },
+      {
+        "text": "paediatric",
+        "label": "CONDITION",
+        "start": 37,
+        "end": 47
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "blunted affect",
+      "paediatric"
+    ],
+    "frame_id": "sc_dq_which_agent_eases_s_c"
+  },
+  {
+    "query": "drug options for hyperglycemia in patients with hepatic impairment",
+    "entities": [
+      {
+        "text": "hyperglycemia",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 30
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 48,
+        "end": 66
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "hyperglycemia",
+      "hepatic impairment"
+    ],
+    "frame_id": "dc_drug_options_d_c"
+  },
+  {
+    "query": "medicines for cardiomegaly with pyrexia in renal impairment",
+    "entities": [
+      {
+        "text": "cardiomegaly",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 26
+      },
+      {
+        "text": "pyrexia",
+        "label": "SYMPTOM",
+        "start": 32,
+        "end": 39
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 43,
+        "end": 59
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "informal_brief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "cardiomegaly",
+      "pyrexia",
+      "renal impairment"
+    ],
+    "frame_id": "dsc_inf_meds_d_s_c"
+  },
+  {
+    "query": "which pharmaceutical eases emotional and social withdrawal",
+    "entities": [
+      {
+        "text": "emotional and social withdrawal",
+        "label": "SYMPTOM",
+        "start": 27,
+        "end": 58
+      }
+    ],
+    "category": "single_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "emotional and social withdrawal"
+    ],
+    "frame_id": "dq_which_agent_eases"
+  },
+  {
+    "query": "display pharmaceutical options for difficulties with sleep onset",
+    "entities": [
+      {
+        "text": "difficulties with sleep onset",
+        "label": "SYMPTOM",
+        "start": 35,
+        "end": 64
+      }
+    ],
+    "category": "single_symptom",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "difficulties with sleep onset"
+    ],
+    "frame_id": "act_display_options_s"
+  },
+  {
+    "query": "what therapeutic options exist for complicated skin and soft tissue infections",
+    "entities": [
+      {
+        "text": "complicated skin and soft tissue infections",
+        "label": "DISEASE",
+        "start": 35,
+        "end": 78
+      }
+    ],
+    "category": "single_disease",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "complicated skin and soft tissue infections"
+    ],
+    "frame_id": "dq_what_options_exist"
+  },
+  {
+    "query": "what stops blunted affect",
+    "entities": [
+      {
+        "text": "blunted affect",
+        "label": "SYMPTOM",
+        "start": 11,
+        "end": 25
+      }
+    ],
+    "category": "single_symptom",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "blunted affect"
+    ],
+    "frame_id": "inf_what_stops_s"
+  },
+  {
+    "query": "drugs for stroke for paediatric patients",
+    "entities": [
+      {
+        "text": "stroke",
+        "label": "DISEASE",
+        "start": 10,
+        "end": 16
+      },
+      {
+        "text": "paediatric",
+        "label": "CONDITION",
+        "start": 21,
+        "end": 31
+      }
+    ],
+    "category": "disease_condition",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "stroke",
+      "paediatric"
+    ],
+    "frame_id": "inf_drugs_d_c"
+  },
+  {
+    "query": "what treats ventricular fibrillation accompanied by anxiety",
+    "entities": [
+      {
+        "text": "ventricular fibrillation",
+        "label": "DISEASE",
+        "start": 12,
+        "end": 36
+      },
+      {
+        "text": "anxiety",
+        "label": "SYMPTOM",
+        "start": 52,
+        "end": 59
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "ventricular fibrillation",
+      "anxiety"
+    ],
+    "frame_id": "ds_dq_what_given_d_s"
+  },
+  {
+    "query": "list treatments for thyroid dysfunction",
+    "entities": [
+      {
+        "text": "thyroid dysfunction",
+        "label": "DISEASE",
+        "start": 20,
+        "end": 39
+      }
+    ],
+    "category": "single_disease",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "thyroid dysfunction"
+    ],
+    "frame_id": "act_list_treatments"
+  },
+  {
+    "query": "which drug treats acute myopia and secondary angle-closure glaucoma and relieves hypotonia",
+    "entities": [
+      {
+        "text": "acute myopia and secondary angle-closure glaucoma",
+        "label": "DISEASE",
+        "start": 18,
+        "end": 67
+      },
+      {
+        "text": "hypotonia",
+        "label": "SYMPTOM",
+        "start": 81,
+        "end": 90
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute myopia and secondary angle-closure glaucoma",
+      "hypotonia"
+    ],
+    "frame_id": "ds_dq_which_drug_d_s"
+  },
+  {
+    "query": "what therapies are indicated for respiratory failure for elderly patients",
+    "entities": [
+      {
+        "text": "respiratory failure",
+        "label": "DISEASE",
+        "start": 33,
+        "end": 52
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 57,
+        "end": 64
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "respiratory failure",
+      "elderly"
+    ],
+    "frame_id": "dc_dq_what_therapies_indicated_d_c"
+  },
+  {
+    "query": "how is sleep apnea managed in renal impairment",
+    "entities": [
+      {
+        "text": "sleep apnea",
+        "label": "DISEASE",
+        "start": 7,
+        "end": 18
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 30,
+        "end": 46
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "sleep apnea",
+      "renal impairment"
+    ],
+    "frame_id": "dc_dq_how_is_d_managed_c"
+  },
+  {
+    "query": "which medicine helps with abdominal pain",
+    "entities": [
+      {
+        "text": "abdominal pain",
+        "label": "SYMPTOM",
+        "start": 26,
+        "end": 40
+      }
+    ],
+    "category": "single_symptom",
+    "style": "can_help_relief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "abdominal pain"
+    ],
+    "frame_id": "help_which_medicine_helps_s"
+  },
+  {
+    "query": "treatment for acute respiratory toxicity accompanied by bone pain during breastfeeding",
+    "entities": [
+      {
+        "text": "acute respiratory toxicity",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 40
+      },
+      {
+        "text": "bone pain",
+        "label": "SYMPTOM",
+        "start": 56,
+        "end": 65
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 73,
+        "end": 86
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute respiratory toxicity",
+      "bone pain",
+      "breastfeeding"
+    ],
+    "frame_id": "dsc_treatment_d_s_c"
+  },
+  {
+    "query": "drugs for osteonecrosis",
+    "entities": [
+      {
+        "text": "osteonecrosis",
+        "label": "DISEASE",
+        "start": 10,
+        "end": 23
+      }
+    ],
+    "category": "single_disease",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "osteonecrosis"
+    ],
+    "frame_id": "d_drugs_for"
+  },
+  {
+    "query": "clinical management of wolff-parkinson-white syndrome tachycardia and nausea during pregnancy",
+    "entities": [
+      {
+        "text": "wolff-parkinson-white syndrome tachycardia",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 65
+      },
+      {
+        "text": "nausea",
+        "label": "SYMPTOM",
+        "start": 70,
+        "end": 76
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 84,
+        "end": 93
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "wolff-parkinson-white syndrome tachycardia",
+      "nausea",
+      "pregnancy"
+    ],
+    "frame_id": "dsc_clinical_mgmt_d_s_c"
+  },
+  {
+    "query": "show medicines for complex partial seizures",
+    "entities": [
+      {
+        "text": "complex partial seizures",
+        "label": "DISEASE",
+        "start": 19,
+        "end": 43
+      }
+    ],
+    "category": "single_disease",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "complex partial seizures"
+    ],
+    "frame_id": "act_show_meds"
+  },
+  {
+    "query": "what treats acute respiratory toxicity accompanied by headache",
+    "entities": [
+      {
+        "text": "acute respiratory toxicity",
+        "label": "DISEASE",
+        "start": 12,
+        "end": 38
+      },
+      {
+        "text": "headache",
+        "label": "SYMPTOM",
+        "start": 54,
+        "end": 62
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute respiratory toxicity",
+      "headache"
+    ],
+    "frame_id": "ds_dq_what_given_d_s"
+  },
+  {
+    "query": "drug therapies for anaphylactic shock during lactation",
+    "entities": [
+      {
+        "text": "anaphylactic shock",
+        "label": "DISEASE",
+        "start": 19,
+        "end": 37
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 45,
+        "end": 54
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "anaphylactic shock",
+      "lactation"
+    ],
+    "frame_id": "dc_drug_therapies_d_c"
+  },
+  {
+    "query": "are there medicines that help with ventricular tachycardia",
+    "entities": [
+      {
+        "text": "ventricular tachycardia",
+        "label": "DISEASE",
+        "start": 35,
+        "end": 58
+      }
+    ],
+    "category": "single_disease",
+    "style": "can_help_relief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "ventricular tachycardia"
+    ],
+    "frame_id": "help_medicines_that_help"
+  },
+  {
+    "query": "where can i list all approved medicines",
+    "entities": [],
+    "category": "no_entity",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [],
+    "frame_id": "ne_approved_medicines_v"
+  },
+  {
+    "query": "find therapy for thyroid dysfunction accompanied by urinary frequency",
+    "entities": [
+      {
+        "text": "thyroid dysfunction",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 36
+      },
+      {
+        "text": "urinary frequency",
+        "label": "SYMPTOM",
+        "start": 52,
+        "end": 69
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "thyroid dysfunction",
+      "urinary frequency"
+    ],
+    "frame_id": "ds_act_find_therapy_d_s"
+  },
+  {
+    "query": "treatment for localized cutaneous amyloidosis for elderly patients",
+    "entities": [
+      {
+        "text": "localized cutaneous amyloidosis",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 45
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 50,
+        "end": 57
+      }
+    ],
+    "category": "difficult_boundary_cases",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "localized cutaneous amyloidosis",
+      "elderly"
+    ],
+    "frame_id": "diff_d_c_bound_treatment_d_c"
+  },
+  {
+    "query": "which treatment is appropriate for immune thrombocytopenic purpura in renal impairment",
+    "entities": [
+      {
+        "text": "immune thrombocytopenic purpura",
+        "label": "DISEASE",
+        "start": 35,
+        "end": 66
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 70,
+        "end": 86
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "immune thrombocytopenic purpura",
+      "renal impairment"
+    ],
+    "frame_id": "dc_dq_which_treatment_d_c"
+  },
+  {
+    "query": "treatment options for angina and difficulties with sleep onset during breastfeeding",
+    "entities": [
+      {
+        "text": "angina",
+        "label": "DISEASE",
+        "start": 22,
+        "end": 28
+      },
+      {
+        "text": "difficulties with sleep onset",
+        "label": "SYMPTOM",
+        "start": 33,
+        "end": 62
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 70,
+        "end": 83
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "angina",
+      "difficulties with sleep onset",
+      "breastfeeding"
+    ],
+    "frame_id": "dsc_options_d_s_c"
+  },
+  {
+    "query": "medicines for sleep apnea in patients with renal impairment",
+    "entities": [
+      {
+        "text": "sleep apnea",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 25
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 43,
+        "end": 59
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "sleep apnea",
+      "renal impairment"
+    ],
+    "frame_id": "dc_medicines_for_d_c"
+  },
+  {
+    "query": "therapy choices for anaemia in pregnancy",
+    "entities": [
+      {
+        "text": "anaemia",
+        "label": "DISEASE",
+        "start": 20,
+        "end": 27
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 31,
+        "end": 40
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "anaemia",
+      "pregnancy"
+    ],
+    "frame_id": "dc_therapy_choices_d_c"
+  },
+  {
+    "query": "list medical therapies in patients undergoing dialysis",
+    "entities": [
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 46,
+        "end": 54
+      }
+    ],
+    "category": "single_condition",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "dialysis"
+    ],
+    "frame_id": "act_list_treatments_c"
+  },
+  {
+    "query": "list options for weight gain during pregnancy",
+    "entities": [
+      {
+        "text": "weight gain",
+        "label": "SYMPTOM",
+        "start": 17,
+        "end": 28
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 36,
+        "end": 45
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "weight gain",
+      "pregnancy"
+    ],
+    "frame_id": "sc_act_list_options_s_c"
+  },
+  {
+    "query": "which drug treats conjunctivitis and relieves difficulties with sleep maintenance",
+    "entities": [
+      {
+        "text": "conjunctivitis",
+        "label": "DISEASE",
+        "start": 18,
+        "end": 32
+      },
+      {
+        "text": "difficulties with sleep maintenance",
+        "label": "SYMPTOM",
+        "start": 46,
+        "end": 81
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "conjunctivitis",
+      "difficulties with sleep maintenance"
+    ],
+    "frame_id": "ds_dq_which_drug_d_s"
+  },
+  {
+    "query": "list options for hepatosplenomegaly accompanied by weakness while breastfeeding",
+    "entities": [
+      {
+        "text": "hepatosplenomegaly",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 35
+      },
+      {
+        "text": "weakness",
+        "label": "SYMPTOM",
+        "start": 51,
+        "end": 59
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 66,
+        "end": 79
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "action_oriented",
+    "difficulty": "hard",
+    "source_concepts": [
+      "hepatosplenomegaly",
+      "weakness",
+      "breastfeeding"
+    ],
+    "frame_id": "dsc_act_list_options_d_s_c"
+  },
+  {
+    "query": "what treats acquired hemophilia a accompanied by bone pain",
+    "entities": [
+      {
+        "text": "acquired hemophilia a",
+        "label": "DISEASE",
+        "start": 12,
+        "end": 33
+      },
+      {
+        "text": "bone pain",
+        "label": "SYMPTOM",
+        "start": 49,
+        "end": 58
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acquired hemophilia a",
+      "bone pain"
+    ],
+    "frame_id": "ds_dq_what_given_d_s"
+  },
+  {
+    "query": "therapies for sleep apnea with concurrent somnolence",
+    "entities": [
+      {
+        "text": "sleep apnea",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 25
+      },
+      {
+        "text": "somnolence",
+        "label": "SYMPTOM",
+        "start": 42,
+        "end": 52
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "sleep apnea",
+      "somnolence"
+    ],
+    "frame_id": "ds_therapies_d_s"
+  },
+  {
+    "query": "treatment options for difficulties with sleep onset in renal impairment",
+    "entities": [
+      {
+        "text": "difficulties with sleep onset",
+        "label": "SYMPTOM",
+        "start": 22,
+        "end": 51
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 55,
+        "end": 71
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "difficulties with sleep onset",
+      "renal impairment"
+    ],
+    "frame_id": "sc_treatment_s_c"
+  },
+  {
+    "query": "which medicine helps with acute toxic leukoencephalopathy and urticaria in patients with renal impairment",
+    "entities": [
+      {
+        "text": "acute toxic leukoencephalopathy",
+        "label": "DISEASE",
+        "start": 26,
+        "end": 57
+      },
+      {
+        "text": "urticaria",
+        "label": "SYMPTOM",
+        "start": 62,
+        "end": 71
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 89,
+        "end": 105
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "can_help_relief",
+    "difficulty": "hard",
+    "source_concepts": [
+      "acute toxic leukoencephalopathy",
+      "urticaria",
+      "renal impairment"
+    ],
+    "frame_id": "dsc_help_which_medicine_helps_d_s_c"
+  },
+  {
+    "query": "medication options during lactation",
+    "entities": [
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 26,
+        "end": 35
+      }
+    ],
+    "category": "single_condition",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "lactation"
+    ],
+    "frame_id": "inf_medication_c"
+  },
+  {
+    "query": "clinical management of immune thrombocytopenic purpura and joint discomfort during breastfeeding",
+    "entities": [
+      {
+        "text": "immune thrombocytopenic purpura",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 54
+      },
+      {
+        "text": "joint discomfort",
+        "label": "SYMPTOM",
+        "start": 59,
+        "end": 75
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 83,
+        "end": 96
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "immune thrombocytopenic purpura",
+      "joint discomfort",
+      "breastfeeding"
+    ],
+    "frame_id": "dsc_clinical_mgmt_d_s_c"
+  },
+  {
+    "query": "what treatments exist for blunted affect during lactation",
+    "entities": [
+      {
+        "text": "blunted affect",
+        "label": "SYMPTOM",
+        "start": 26,
+        "end": 40
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 48,
+        "end": 57
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "blunted affect",
+      "lactation"
+    ],
+    "frame_id": "sc_dq_what_treatments_s_c"
+  },
+  {
+    "query": "what drugs are used for cardiac insufficiency during breastfeeding",
+    "entities": [
+      {
+        "text": "cardiac insufficiency",
+        "label": "DISEASE",
+        "start": 24,
+        "end": 45
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 53,
+        "end": 66
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "cardiac insufficiency",
+      "breastfeeding"
+    ],
+    "frame_id": "dc_dq_what_drugs_used_d_c"
+  },
+  {
+    "query": "drug options for broncho-pulmonary infections in cystic fibrosis in patients with renal impairment",
+    "entities": [
+      {
+        "text": "broncho-pulmonary infections in cystic fibrosis",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 64
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 82,
+        "end": 98
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "broncho-pulmonary infections in cystic fibrosis",
+      "renal impairment"
+    ],
+    "frame_id": "dc_drug_options_d_c"
+  },
+  {
+    "query": "something for fatigue",
+    "entities": [
+      {
+        "text": "fatigue",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 21
+      }
+    ],
+    "category": "single_symptom",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "fatigue"
+    ],
+    "frame_id": "inf_something_for_s"
+  },
+  {
+    "query": "please list medicines with intravenous infusion route listed in database",
+    "entities": [],
+    "category": "no_entity",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [],
+    "frame_id": "ne_iv_route_v"
+  },
+  {
+    "query": "display therapeutic options for simple and complex absence seizures during lactation",
+    "entities": [
+      {
+        "text": "simple and complex absence seizures",
+        "label": "DISEASE",
+        "start": 32,
+        "end": 67
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 75,
+        "end": 84
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "simple and complex absence seizures",
+      "lactation"
+    ],
+    "frame_id": "act_display_options_d_c"
+  },
+  {
+    "query": "therapies for immune thrombocytopenic purpura with concurrent sleepiness",
+    "entities": [
+      {
+        "text": "immune thrombocytopenic purpura",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 45
+      },
+      {
+        "text": "sleepiness",
+        "label": "SYMPTOM",
+        "start": 62,
+        "end": 72
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "immune thrombocytopenic purpura",
+      "sleepiness"
+    ],
+    "frame_id": "ds_therapies_d_s"
+  },
+  {
+    "query": "find medicines for emotional and social withdrawal for elderly patients",
+    "entities": [
+      {
+        "text": "emotional and social withdrawal",
+        "label": "SYMPTOM",
+        "start": 19,
+        "end": 50
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 55,
+        "end": 62
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "emotional and social withdrawal",
+      "elderly"
+    ],
+    "frame_id": "sc_act_find_meds_s_c"
+  },
+  {
+    "query": "medicines for complicated urinary tract infections and fever",
+    "entities": [
+      {
+        "text": "complicated urinary tract infections",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 50
+      },
+      {
+        "text": "fever",
+        "label": "SYMPTOM",
+        "start": 55,
+        "end": 60
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "complicated urinary tract infections",
+      "fever"
+    ],
+    "frame_id": "ds_meds_d_and_s"
+  },
+  {
+    "query": "drugs for ventricular tachycardia in renal impairment",
+    "entities": [
+      {
+        "text": "ventricular tachycardia",
+        "label": "DISEASE",
+        "start": 10,
+        "end": 33
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 37,
+        "end": 53
+      }
+    ],
+    "category": "disease_condition",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "ventricular tachycardia",
+      "renal impairment"
+    ],
+    "frame_id": "inf_drugs_d_c"
+  },
+  {
+    "query": "what drugs treat ventricular fibrillation presenting with headache in renal impairment",
+    "entities": [
+      {
+        "text": "ventricular fibrillation",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 41
+      },
+      {
+        "text": "headache",
+        "label": "SYMPTOM",
+        "start": 58,
+        "end": 66
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 70,
+        "end": 86
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "ventricular fibrillation",
+      "headache",
+      "renal impairment"
+    ],
+    "frame_id": "dsc_dq_what_drugs_treat_d_s_c"
+  },
+  {
+    "query": "options for stroke in renal impairment",
+    "entities": [
+      {
+        "text": "stroke",
+        "label": "DISEASE",
+        "start": 12,
+        "end": 18
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 22,
+        "end": 38
+      }
+    ],
+    "category": "disease_condition",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "stroke",
+      "renal impairment"
+    ],
+    "frame_id": "inf_options_d_c"
+  },
+  {
+    "query": "how to treat complicated intra-abdominal infections in patients with renal impairment",
+    "entities": [
+      {
+        "text": "complicated intra-abdominal infections",
+        "label": "DISEASE",
+        "start": 13,
+        "end": 51
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 69,
+        "end": 85
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "complicated intra-abdominal infections",
+      "renal impairment"
+    ],
+    "frame_id": "dc_dq_how_to_treat_d_c"
+  },
+  {
+    "query": "treatment options for pain crises during dialysis",
+    "entities": [
+      {
+        "text": "pain crises",
+        "label": "SYMPTOM",
+        "start": 22,
+        "end": 33
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 41,
+        "end": 49
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "pain crises",
+      "dialysis"
+    ],
+    "frame_id": "sc_treatment_s_c"
+  },
+  {
+    "query": "what helps treat alpha-galactosidase a deficiency while relieving progressive muscle weakness",
+    "entities": [
+      {
+        "text": "alpha-galactosidase a deficiency",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 49
+      },
+      {
+        "text": "progressive muscle weakness",
+        "label": "SYMPTOM",
+        "start": 66,
+        "end": 93
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "can_help_relief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "alpha-galactosidase a deficiency",
+      "progressive muscle weakness"
+    ],
+    "frame_id": "ds_help_what_helps_d_s"
+  },
+  {
+    "query": "treatment options for elderly patients",
+    "entities": [
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 22,
+        "end": 29
+      }
+    ],
+    "category": "single_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "elderly"
+    ],
+    "frame_id": "c_treatment_options"
+  },
+  {
+    "query": "what helps with angina",
+    "entities": [
+      {
+        "text": "angina",
+        "label": "DISEASE",
+        "start": 16,
+        "end": 22
+      }
+    ],
+    "category": "single_disease",
+    "style": "can_help_relief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "angina"
+    ],
+    "frame_id": "help_what_helps_with"
+  },
+  {
+    "query": "medical remedies for anxiety",
+    "entities": [
+      {
+        "text": "anxiety",
+        "label": "SYMPTOM",
+        "start": 21,
+        "end": 28
+      }
+    ],
+    "category": "single_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "anxiety"
+    ],
+    "frame_id": "s_remedies"
+  },
+  {
+    "query": "display approved drugs for hepatosplenomegaly in pregnancy",
+    "entities": [
+      {
+        "text": "hepatosplenomegaly",
+        "label": "DISEASE",
+        "start": 27,
+        "end": 45
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 49,
+        "end": 58
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "hepatosplenomegaly",
+      "pregnancy"
+    ],
+    "frame_id": "act_display_drugs_d_c"
+  },
+  {
+    "query": "treatment for wolff-parkinson-white syndrome tachycardia in patients undergoing dialysis",
+    "entities": [
+      {
+        "text": "wolff-parkinson-white syndrome tachycardia",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 56
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 80,
+        "end": 88
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "wolff-parkinson-white syndrome tachycardia",
+      "dialysis"
+    ],
+    "frame_id": "dc_treatment_for_d_c"
+  },
+  {
+    "query": "treatment for complex partial seizures",
+    "entities": [
+      {
+        "text": "complex partial seizures",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 38
+      }
+    ],
+    "category": "single_disease",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "complex partial seizures"
+    ],
+    "frame_id": "d_treatment_for"
+  },
+  {
+    "query": "managing anaphylactic shock accompanied by hypotonia",
+    "entities": [
+      {
+        "text": "anaphylactic shock",
+        "label": "DISEASE",
+        "start": 9,
+        "end": 27
+      },
+      {
+        "text": "hypotonia",
+        "label": "SYMPTOM",
+        "start": 43,
+        "end": 52
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "anaphylactic shock",
+      "hypotonia"
+    ],
+    "frame_id": "ds_managing_d_with_s"
+  },
+  {
+    "query": "what treatments are available for complicated skin and soft tissue infections in hepatic impairment",
+    "entities": [
+      {
+        "text": "complicated skin and soft tissue infections",
+        "label": "DISEASE",
+        "start": 34,
+        "end": 77
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 81,
+        "end": 99
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "complicated skin and soft tissue infections",
+      "hepatic impairment"
+    ],
+    "frame_id": "dc_dq_what_treatments_available_d_c"
+  },
+  {
+    "query": "drugs for thrombocytopenia",
+    "entities": [
+      {
+        "text": "thrombocytopenia",
+        "label": "DISEASE",
+        "start": 10,
+        "end": 26
+      }
+    ],
+    "category": "single_disease",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "thrombocytopenia"
+    ],
+    "frame_id": "d_drugs_for"
+  },
+  {
+    "query": "which drug for reduced walking ability is suitable during breastfeeding",
+    "entities": [
+      {
+        "text": "reduced walking ability",
+        "label": "SYMPTOM",
+        "start": 15,
+        "end": 38
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 58,
+        "end": 71
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "reduced walking ability",
+      "breastfeeding"
+    ],
+    "frame_id": "sc_dq_which_drug_s_c"
+  },
+  {
+    "query": "therapy choices for immune thrombocytopenic purpura in hepatic impairment",
+    "entities": [
+      {
+        "text": "immune thrombocytopenic purpura",
+        "label": "DISEASE",
+        "start": 20,
+        "end": 51
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 55,
+        "end": 73
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "immune thrombocytopenic purpura",
+      "hepatic impairment"
+    ],
+    "frame_id": "dc_therapy_choices_d_c"
+  },
+  {
+    "query": "drug therapies for simple and complex absence seizures in patients with renal impairment",
+    "entities": [
+      {
+        "text": "simple and complex absence seizures",
+        "label": "DISEASE",
+        "start": 19,
+        "end": 54
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 72,
+        "end": 88
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "simple and complex absence seizures",
+      "renal impairment"
+    ],
+    "frame_id": "dc_drug_therapies_d_c"
+  },
+  {
+    "query": "how to treat toxic epidermal necrolysis accompanied by visual impairment",
+    "entities": [
+      {
+        "text": "toxic epidermal necrolysis",
+        "label": "DISEASE",
+        "start": 13,
+        "end": 39
+      },
+      {
+        "text": "visual impairment",
+        "label": "SYMPTOM",
+        "start": 55,
+        "end": 72
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "toxic epidermal necrolysis",
+      "visual impairment"
+    ],
+    "frame_id": "ds_dq_how_to_treat_d_s"
+  },
+  {
+    "query": "find approved drugs for dysostosis multiplex",
+    "entities": [
+      {
+        "text": "dysostosis multiplex",
+        "label": "DISEASE",
+        "start": 24,
+        "end": 44
+      }
+    ],
+    "category": "single_disease",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "dysostosis multiplex"
+    ],
+    "frame_id": "act_find_drugs"
+  },
+  {
+    "query": "what medicine is suitable for thyroid dysfunction and emotional and social withdrawal",
+    "entities": [
+      {
+        "text": "thyroid dysfunction",
+        "label": "DISEASE",
+        "start": 30,
+        "end": 49
+      },
+      {
+        "text": "emotional and social withdrawal",
+        "label": "SYMPTOM",
+        "start": 54,
+        "end": 85
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "thyroid dysfunction",
+      "emotional and social withdrawal"
+    ],
+    "frame_id": "ds_dq_what_suitable_d_s"
+  },
+  {
+    "query": "show drugs for hyperglycemia accompanied by bone crises and tremor",
+    "entities": [
+      {
+        "text": "hyperglycemia",
+        "label": "DISEASE",
+        "start": 15,
+        "end": 28
+      },
+      {
+        "text": "bone crises",
+        "label": "SYMPTOM",
+        "start": 44,
+        "end": 55
+      },
+      {
+        "text": "tremor",
+        "label": "SYMPTOM",
+        "start": 60,
+        "end": 66
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "action_oriented",
+    "difficulty": "hard",
+    "source_concepts": [
+      "hyperglycemia",
+      "bone crises",
+      "tremor"
+    ],
+    "frame_id": "dss_act_show_meds_d_s1_s2"
+  },
+  {
+    "query": "show medications for complicated skin and soft tissue infections with somnolence",
+    "entities": [
+      {
+        "text": "complicated skin and soft tissue infections",
+        "label": "DISEASE",
+        "start": 21,
+        "end": 64
+      },
+      {
+        "text": "somnolence",
+        "label": "SYMPTOM",
+        "start": 70,
+        "end": 80
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "complicated skin and soft tissue infections",
+      "somnolence"
+    ],
+    "frame_id": "ds_act_show_meds_d_s"
+  },
+  {
+    "query": "managing chronic gvhd accompanied by weakness for elderly patients",
+    "entities": [
+      {
+        "text": "chronic gvhd",
+        "label": "DISEASE",
+        "start": 9,
+        "end": 21
+      },
+      {
+        "text": "weakness",
+        "label": "SYMPTOM",
+        "start": 37,
+        "end": 45
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 50,
+        "end": 57
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "chronic gvhd",
+      "weakness",
+      "elderly"
+    ],
+    "frame_id": "dsc_managing_d_s_c"
+  },
+  {
+    "query": "what treats hyperglycemia accompanied by tremor",
+    "entities": [
+      {
+        "text": "hyperglycemia",
+        "label": "DISEASE",
+        "start": 12,
+        "end": 25
+      },
+      {
+        "text": "tremor",
+        "label": "SYMPTOM",
+        "start": 41,
+        "end": 47
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "hyperglycemia",
+      "tremor"
+    ],
+    "frame_id": "ds_dq_what_given_d_s"
+  },
+  {
+    "query": "medicines that help treat localized cutaneous amyloidosis in hepatic impairment",
+    "entities": [
+      {
+        "text": "localized cutaneous amyloidosis",
+        "label": "DISEASE",
+        "start": 26,
+        "end": 57
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 61,
+        "end": 79
+      }
+    ],
+    "category": "disease_condition",
+    "style": "can_help_relief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "localized cutaneous amyloidosis",
+      "hepatic impairment"
+    ],
+    "frame_id": "help_medicines_that_help_d_c"
+  },
+  {
+    "query": "treatment for ventricular tachycardia presenting with weight gain and pain crises",
+    "entities": [
+      {
+        "text": "ventricular tachycardia",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 37
+      },
+      {
+        "text": "weight gain",
+        "label": "SYMPTOM",
+        "start": 54,
+        "end": 65
+      },
+      {
+        "text": "pain crises",
+        "label": "SYMPTOM",
+        "start": 70,
+        "end": 81
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "ventricular tachycardia",
+      "weight gain",
+      "pain crises"
+    ],
+    "frame_id": "dss_treatment_d_s1_s2"
+  },
+  {
+    "query": "show medications for stroke with urinary frequency",
+    "entities": [
+      {
+        "text": "stroke",
+        "label": "DISEASE",
+        "start": 21,
+        "end": 27
+      },
+      {
+        "text": "urinary frequency",
+        "label": "SYMPTOM",
+        "start": 33,
+        "end": 50
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "stroke",
+      "urinary frequency"
+    ],
+    "frame_id": "ds_act_show_meds_d_s"
+  },
+  {
+    "query": "what helps reduce emotional and social withdrawal in paediatric patients",
+    "entities": [
+      {
+        "text": "emotional and social withdrawal",
+        "label": "SYMPTOM",
+        "start": 18,
+        "end": 49
+      },
+      {
+        "text": "paediatric",
+        "label": "CONDITION",
+        "start": 53,
+        "end": 63
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "emotional and social withdrawal",
+      "paediatric"
+    ],
+    "frame_id": "sc_dq_what_helps_reduce_s_c"
+  },
+  {
+    "query": "show medications indicated for progressive muscle weakness and stiffness",
+    "entities": [
+      {
+        "text": "progressive muscle weakness",
+        "label": "SYMPTOM",
+        "start": 31,
+        "end": 58
+      },
+      {
+        "text": "stiffness",
+        "label": "SYMPTOM",
+        "start": 63,
+        "end": 72
+      }
+    ],
+    "category": "multiple_same_type",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "progressive muscle weakness",
+      "stiffness"
+    ],
+    "frame_id": "ss_act_show_meds_s1_s2"
+  },
+  {
+    "query": "what relieves nausea and joint restriction",
+    "entities": [
+      {
+        "text": "nausea",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 20
+      },
+      {
+        "text": "joint restriction",
+        "label": "SYMPTOM",
+        "start": 25,
+        "end": 42
+      }
+    ],
+    "category": "multiple_same_type",
+    "style": "can_help_relief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "nausea",
+      "joint restriction"
+    ],
+    "frame_id": "ss_help_what_relieves_s1_s2"
+  },
+  {
+    "query": "what options exist for conjunctivitis accompanied by bone pain for paediatric patients",
+    "entities": [
+      {
+        "text": "conjunctivitis",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 37
+      },
+      {
+        "text": "bone pain",
+        "label": "SYMPTOM",
+        "start": 53,
+        "end": 62
+      },
+      {
+        "text": "paediatric",
+        "label": "CONDITION",
+        "start": 67,
+        "end": 77
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "conjunctivitis",
+      "bone pain",
+      "paediatric"
+    ],
+    "frame_id": "dsc_dq_options_d_s_c"
+  },
+  {
+    "query": "which pharmaceutical is used for dysostosis multiplex during lactation",
+    "entities": [
+      {
+        "text": "dysostosis multiplex",
+        "label": "DISEASE",
+        "start": 33,
+        "end": 53
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 61,
+        "end": 70
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "dysostosis multiplex",
+      "lactation"
+    ],
+    "frame_id": "dc_dq_which_pharmaceutical_d_c"
+  },
+  {
+    "query": "what relieves progressive muscle weakness and mood instability during breastfeeding",
+    "entities": [
+      {
+        "text": "progressive muscle weakness",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 41
+      },
+      {
+        "text": "mood instability",
+        "label": "SYMPTOM",
+        "start": 46,
+        "end": 62
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 70,
+        "end": 83
+      }
+    ],
+    "category": "three_entity_ssc",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "progressive muscle weakness",
+      "mood instability",
+      "breastfeeding"
+    ],
+    "frame_id": "ssc_dq_what_relieves_s1_s2_c"
+  },
+  {
+    "query": "drugs for sleepiness during lactation",
+    "entities": [
+      {
+        "text": "sleepiness",
+        "label": "SYMPTOM",
+        "start": 10,
+        "end": 20
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 28,
+        "end": 37
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "sleepiness",
+      "lactation"
+    ],
+    "frame_id": "sc_drugs_s_c"
+  },
+  {
+    "query": "show medicines for immune thrombocytopenic purpura",
+    "entities": [
+      {
+        "text": "immune thrombocytopenic purpura",
+        "label": "DISEASE",
+        "start": 19,
+        "end": 50
+      }
+    ],
+    "category": "single_disease",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "immune thrombocytopenic purpura"
+    ],
+    "frame_id": "act_show_meds"
+  },
+  {
+    "query": "therapy choices for complex partial seizures in hepatic impairment",
+    "entities": [
+      {
+        "text": "complex partial seizures",
+        "label": "DISEASE",
+        "start": 20,
+        "end": 44
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 48,
+        "end": 66
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "complex partial seizures",
+      "hepatic impairment"
+    ],
+    "frame_id": "dc_therapy_choices_d_c"
+  },
+  {
+    "query": "drug therapies for chronic gvhd in elderly patients",
+    "entities": [
+      {
+        "text": "chronic gvhd",
+        "label": "DISEASE",
+        "start": 19,
+        "end": 31
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 35,
+        "end": 42
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "chronic gvhd",
+      "elderly"
+    ],
+    "frame_id": "dc_drug_therapies_d_c"
+  },
+  {
+    "query": "show medications for neutropenia with exercise intolerance",
+    "entities": [
+      {
+        "text": "neutropenia",
+        "label": "DISEASE",
+        "start": 21,
+        "end": 32
+      },
+      {
+        "text": "exercise intolerance",
+        "label": "SYMPTOM",
+        "start": 38,
+        "end": 58
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "neutropenia",
+      "exercise intolerance"
+    ],
+    "frame_id": "ds_act_show_meds_d_s"
+  },
+  {
+    "query": "find therapy for immune thrombocytopenic purpura accompanied by ataxia",
+    "entities": [
+      {
+        "text": "immune thrombocytopenic purpura",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 48
+      },
+      {
+        "text": "ataxia",
+        "label": "SYMPTOM",
+        "start": 64,
+        "end": 70
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "immune thrombocytopenic purpura",
+      "ataxia"
+    ],
+    "frame_id": "ds_act_find_therapy_d_s"
+  },
+  {
+    "query": "which drug treats acute generalized exanthematous pustulosis and relieves anxiety",
+    "entities": [
+      {
+        "text": "acute generalized exanthematous pustulosis",
+        "label": "DISEASE",
+        "start": 18,
+        "end": 60
+      },
+      {
+        "text": "anxiety",
+        "label": "SYMPTOM",
+        "start": 74,
+        "end": 81
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute generalized exanthematous pustulosis",
+      "anxiety"
+    ],
+    "frame_id": "ds_dq_which_drug_d_s"
+  },
+  {
+    "query": "is there an approved medical treatment for leukopenia",
+    "entities": [
+      {
+        "text": "leukopenia",
+        "label": "DISEASE",
+        "start": 43,
+        "end": 53
+      }
+    ],
+    "category": "single_disease",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "leukopenia"
+    ],
+    "frame_id": "dq_is_there_medical_treatment"
+  },
+  {
+    "query": "managing sinusitis accompanied by bone crises",
+    "entities": [
+      {
+        "text": "sinusitis",
+        "label": "DISEASE",
+        "start": 9,
+        "end": 18
+      },
+      {
+        "text": "bone crises",
+        "label": "SYMPTOM",
+        "start": 34,
+        "end": 45
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "sinusitis",
+      "bone crises"
+    ],
+    "frame_id": "ds_managing_d_with_s"
+  },
+  {
+    "query": "what treatment is available for broncho-pulmonary infections in cystic fibrosis",
+    "entities": [
+      {
+        "text": "broncho-pulmonary infections in cystic fibrosis",
+        "label": "DISEASE",
+        "start": 32,
+        "end": 79
+      }
+    ],
+    "category": "single_disease",
+    "style": "direct_question",
+    "difficulty": "easy",
+    "source_concepts": [
+      "broncho-pulmonary infections in cystic fibrosis"
+    ],
+    "frame_id": "dq_what_treatment_available"
+  },
+  {
+    "query": "prescribing for localized cutaneous amyloidosis in elderly patients",
+    "entities": [
+      {
+        "text": "localized cutaneous amyloidosis",
+        "label": "DISEASE",
+        "start": 16,
+        "end": 47
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 51,
+        "end": 58
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "localized cutaneous amyloidosis",
+      "elderly"
+    ],
+    "frame_id": "dc_prescribing_for_d_c"
+  },
+  {
+    "query": "what treats thrombocytopenia accompanied by progressive muscle weakness",
+    "entities": [
+      {
+        "text": "thrombocytopenia",
+        "label": "DISEASE",
+        "start": 12,
+        "end": 28
+      },
+      {
+        "text": "progressive muscle weakness",
+        "label": "SYMPTOM",
+        "start": 44,
+        "end": 71
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "thrombocytopenia",
+      "progressive muscle weakness"
+    ],
+    "frame_id": "ds_dq_what_given_d_s"
+  },
+  {
+    "query": "medicines for complex partial seizures",
+    "entities": [
+      {
+        "text": "complex partial seizures",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 38
+      }
+    ],
+    "category": "single_disease",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "complex partial seizures"
+    ],
+    "frame_id": "d_meds_for"
+  },
+  {
+    "query": "how to treat stroke and relieve dizziness during pregnancy",
+    "entities": [
+      {
+        "text": "stroke",
+        "label": "DISEASE",
+        "start": 13,
+        "end": 19
+      },
+      {
+        "text": "dizziness",
+        "label": "SYMPTOM",
+        "start": 32,
+        "end": 41
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 49,
+        "end": 58
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "stroke",
+      "dizziness",
+      "pregnancy"
+    ],
+    "frame_id": "dsc_dq_how_to_treat_d_s_c"
+  },
+  {
+    "query": "which pharmaceutical eases joint restriction",
+    "entities": [
+      {
+        "text": "joint restriction",
+        "label": "SYMPTOM",
+        "start": 27,
+        "end": 44
+      }
+    ],
+    "category": "single_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "joint restriction"
+    ],
+    "frame_id": "dq_which_agent_eases"
+  },
+  {
+    "query": "treatment for ataxia in renal impairment",
+    "entities": [
+      {
+        "text": "ataxia",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 20
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 24,
+        "end": 40
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "ataxia",
+      "renal impairment"
+    ],
+    "frame_id": "sc_inf_treatment_s_c"
+  },
+  {
+    "query": "need medicine for mood instability",
+    "entities": [
+      {
+        "text": "mood instability",
+        "label": "SYMPTOM",
+        "start": 18,
+        "end": 34
+      }
+    ],
+    "category": "single_symptom",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "mood instability"
+    ],
+    "frame_id": "inf_need_medicine_for_s"
+  },
+  {
+    "query": "what helps treat complicated intra-abdominal infections in patients on dialysis",
+    "entities": [
+      {
+        "text": "complicated intra-abdominal infections",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 55
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 71,
+        "end": 79
+      }
+    ],
+    "category": "disease_condition",
+    "style": "can_help_relief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "complicated intra-abdominal infections",
+      "dialysis"
+    ],
+    "frame_id": "help_what_can_treat_d_c"
+  },
+  {
+    "query": "therapies for acquired hemophilia a with concurrent weakness in renal impairment",
+    "entities": [
+      {
+        "text": "acquired hemophilia a",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 35
+      },
+      {
+        "text": "weakness",
+        "label": "SYMPTOM",
+        "start": 52,
+        "end": 60
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 64,
+        "end": 80
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "acquired hemophilia a",
+      "weakness",
+      "renal impairment"
+    ],
+    "frame_id": "dsc_therapies_d_s_c"
+  },
+  {
+    "query": "how to treat anaphylactic shock accompanied by rigors",
+    "entities": [
+      {
+        "text": "anaphylactic shock",
+        "label": "DISEASE",
+        "start": 13,
+        "end": 31
+      },
+      {
+        "text": "rigors",
+        "label": "SYMPTOM",
+        "start": 47,
+        "end": 53
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "anaphylactic shock",
+      "rigors"
+    ],
+    "frame_id": "ds_dq_how_to_treat_d_s"
+  },
+  {
+    "query": "ventricular fibrillation",
+    "entities": [
+      {
+        "text": "ventricular fibrillation",
+        "label": "DISEASE",
+        "start": 0,
+        "end": 24
+      }
+    ],
+    "category": "bare_concept",
+    "style": "bare_concept",
+    "difficulty": "easy",
+    "source_concepts": [
+      "ventricular fibrillation"
+    ],
+    "frame_id": "bare_d"
+  },
+  {
+    "query": "what medicine relieves somnolence during lactation",
+    "entities": [
+      {
+        "text": "somnolence",
+        "label": "SYMPTOM",
+        "start": 23,
+        "end": 33
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 41,
+        "end": 50
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "somnolence",
+      "lactation"
+    ],
+    "frame_id": "sc_dq_what_relieves_s_c"
+  },
+  {
+    "query": "which medicine helps with fatigue",
+    "entities": [
+      {
+        "text": "fatigue",
+        "label": "SYMPTOM",
+        "start": 26,
+        "end": 33
+      }
+    ],
+    "category": "single_symptom",
+    "style": "can_help_relief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "fatigue"
+    ],
+    "frame_id": "help_which_medicine_helps_s"
+  },
+  {
+    "query": "treatment for hepatosplenomegaly presenting with anxiety and blunted affect",
+    "entities": [
+      {
+        "text": "hepatosplenomegaly",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 32
+      },
+      {
+        "text": "anxiety",
+        "label": "SYMPTOM",
+        "start": 49,
+        "end": 56
+      },
+      {
+        "text": "blunted affect",
+        "label": "SYMPTOM",
+        "start": 61,
+        "end": 75
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "hepatosplenomegaly",
+      "anxiety",
+      "blunted affect"
+    ],
+    "frame_id": "dss_treatment_d_s1_s2"
+  },
+  {
+    "query": "managing anaemia accompanied by ataxia",
+    "entities": [
+      {
+        "text": "anaemia",
+        "label": "DISEASE",
+        "start": 9,
+        "end": 16
+      },
+      {
+        "text": "ataxia",
+        "label": "SYMPTOM",
+        "start": 32,
+        "end": 38
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "anaemia",
+      "ataxia"
+    ],
+    "frame_id": "ds_managing_d_with_s"
+  },
+  {
+    "query": "find therapy for complex partial seizures accompanied by mood instability",
+    "entities": [
+      {
+        "text": "complex partial seizures",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 41
+      },
+      {
+        "text": "mood instability",
+        "label": "SYMPTOM",
+        "start": 57,
+        "end": 73
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "complex partial seizures",
+      "mood instability"
+    ],
+    "frame_id": "ds_act_find_therapy_d_s"
+  },
+  {
+    "query": "what is suitable for acute renal failure with ataxia and rapid heart rate",
+    "entities": [
+      {
+        "text": "acute renal failure",
+        "label": "DISEASE",
+        "start": 21,
+        "end": 40
+      },
+      {
+        "text": "ataxia",
+        "label": "SYMPTOM",
+        "start": 46,
+        "end": 52
+      },
+      {
+        "text": "rapid heart rate",
+        "label": "SYMPTOM",
+        "start": 57,
+        "end": 73
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "acute renal failure",
+      "ataxia",
+      "rapid heart rate"
+    ],
+    "frame_id": "dss_dq_what_suitable_d_s1_s2"
+  },
+  {
+    "query": "which pharmaceutical is used for neutropenia during pregnancy",
+    "entities": [
+      {
+        "text": "neutropenia",
+        "label": "DISEASE",
+        "start": 33,
+        "end": 44
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 52,
+        "end": 61
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "neutropenia",
+      "pregnancy"
+    ],
+    "frame_id": "dc_dq_which_pharmaceutical_d_c"
+  },
+  {
+    "query": "what options exist for autoimmune hepatitis in hepatic impairment",
+    "entities": [
+      {
+        "text": "autoimmune hepatitis",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 43
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 47,
+        "end": 65
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "autoimmune hepatitis",
+      "hepatic impairment"
+    ],
+    "frame_id": "dc_dq_options_for_d_c"
+  },
+  {
+    "query": "which pharmaceutical is used for angina for elderly patients",
+    "entities": [
+      {
+        "text": "angina",
+        "label": "DISEASE",
+        "start": 33,
+        "end": 39
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 44,
+        "end": 51
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "angina",
+      "elderly"
+    ],
+    "frame_id": "dc_dq_which_pharmaceutical_d_c"
+  },
+  {
+    "query": "display therapeutic options for angina in patients undergoing dialysis",
+    "entities": [
+      {
+        "text": "angina",
+        "label": "DISEASE",
+        "start": 32,
+        "end": 38
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 62,
+        "end": 70
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "angina",
+      "dialysis"
+    ],
+    "frame_id": "act_display_options_d_c"
+  },
+  {
+    "query": "show storage temperature requirements for stored products",
+    "entities": [],
+    "category": "no_entity",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [],
+    "frame_id": "ne_storage_temp"
+  },
+  {
+    "query": "medicines for leukopenia with joint discomfort and sleepiness",
+    "entities": [
+      {
+        "text": "leukopenia",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 24
+      },
+      {
+        "text": "joint discomfort",
+        "label": "SYMPTOM",
+        "start": 30,
+        "end": 46
+      },
+      {
+        "text": "sleepiness",
+        "label": "SYMPTOM",
+        "start": 51,
+        "end": 61
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "leukopenia",
+      "joint discomfort",
+      "sleepiness"
+    ],
+    "frame_id": "dss_meds_d_s1_s2"
+  },
+  {
+    "query": "options for acute renal failure in patients undergoing dialysis",
+    "entities": [
+      {
+        "text": "acute renal failure",
+        "label": "DISEASE",
+        "start": 12,
+        "end": 31
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 55,
+        "end": 63
+      }
+    ],
+    "category": "difficult_boundary_cases",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "acute renal failure",
+      "dialysis"
+    ],
+    "frame_id": "diff_d_c_bound_options_d_c"
+  },
+  {
+    "query": "what can help with mood instability",
+    "entities": [
+      {
+        "text": "mood instability",
+        "label": "SYMPTOM",
+        "start": 19,
+        "end": 35
+      }
+    ],
+    "category": "single_symptom",
+    "style": "can_help_relief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "mood instability"
+    ],
+    "frame_id": "help_what_can_help_with_s"
+  },
+  {
+    "query": "show me available medicines",
+    "entities": [],
+    "category": "no_entity",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [],
+    "frame_id": "ne_available_medicines"
+  },
+  {
+    "query": "treatment for acute generalized exanthematous pustulosis presenting with urticaria and exercise intolerance",
+    "entities": [
+      {
+        "text": "acute generalized exanthematous pustulosis",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 56
+      },
+      {
+        "text": "urticaria",
+        "label": "SYMPTOM",
+        "start": 73,
+        "end": 82
+      },
+      {
+        "text": "exercise intolerance",
+        "label": "SYMPTOM",
+        "start": 87,
+        "end": 107
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute generalized exanthematous pustulosis",
+      "urticaria",
+      "exercise intolerance"
+    ],
+    "frame_id": "dss_treatment_d_s1_s2"
+  },
+  {
+    "query": "anything for autoimmune hepatitis",
+    "entities": [
+      {
+        "text": "autoimmune hepatitis",
+        "label": "DISEASE",
+        "start": 13,
+        "end": 33
+      }
+    ],
+    "category": "single_disease",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "autoimmune hepatitis"
+    ],
+    "frame_id": "inf_anything_for"
+  },
+  {
+    "query": "therapies for alpha-galactosidase a deficiency in paediatric patients",
+    "entities": [
+      {
+        "text": "alpha-galactosidase a deficiency",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 46
+      },
+      {
+        "text": "paediatric",
+        "label": "CONDITION",
+        "start": 50,
+        "end": 60
+      }
+    ],
+    "category": "disease_condition",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "alpha-galactosidase a deficiency",
+      "paediatric"
+    ],
+    "frame_id": "inf_therapies_d_c"
+  },
+  {
+    "query": "what helps treat acute renal failure and relieve rapid heart rate during lactation",
+    "entities": [
+      {
+        "text": "acute renal failure",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 36
+      },
+      {
+        "text": "rapid heart rate",
+        "label": "SYMPTOM",
+        "start": 49,
+        "end": 65
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 73,
+        "end": 82
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "can_help_relief",
+    "difficulty": "hard",
+    "source_concepts": [
+      "acute renal failure",
+      "rapid heart rate",
+      "lactation"
+    ],
+    "frame_id": "dsc_help_what_can_help_d_s_c"
+  },
+  {
+    "query": "list treatments for ventricular fibrillation during lactation",
+    "entities": [
+      {
+        "text": "ventricular fibrillation",
+        "label": "DISEASE",
+        "start": 20,
+        "end": 44
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 52,
+        "end": 61
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "ventricular fibrillation",
+      "lactation"
+    ],
+    "frame_id": "act_list_treatments_d_c"
+  },
+  {
+    "query": "find medicines for localized cutaneous amyloidosis for elderly patients",
+    "entities": [
+      {
+        "text": "localized cutaneous amyloidosis",
+        "label": "DISEASE",
+        "start": 19,
+        "end": 50
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 55,
+        "end": 62
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "localized cutaneous amyloidosis",
+      "elderly"
+    ],
+    "frame_id": "act_find_medicines_d_c"
+  },
+  {
+    "query": "which medications are indicated for thrombocytopenia",
+    "entities": [
+      {
+        "text": "thrombocytopenia",
+        "label": "DISEASE",
+        "start": 36,
+        "end": 52
+      }
+    ],
+    "category": "single_disease",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "thrombocytopenia"
+    ],
+    "frame_id": "dq_which_medications_indicated"
+  },
+  {
+    "query": "what therapeutic options exist in pregnancy",
+    "entities": [
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 34,
+        "end": 43
+      }
+    ],
+    "category": "single_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "pregnancy"
+    ],
+    "frame_id": "dq_what_therapeutic_options_c"
+  },
+  {
+    "query": "therapies for acquired hemophilia a with concurrent rapid heart rate",
+    "entities": [
+      {
+        "text": "acquired hemophilia a",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 35
+      },
+      {
+        "text": "rapid heart rate",
+        "label": "SYMPTOM",
+        "start": 52,
+        "end": 68
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acquired hemophilia a",
+      "rapid heart rate"
+    ],
+    "frame_id": "ds_therapies_d_s"
+  },
+  {
+    "query": "what treats ventricular fibrillation accompanied by restlessness",
+    "entities": [
+      {
+        "text": "ventricular fibrillation",
+        "label": "DISEASE",
+        "start": 12,
+        "end": 36
+      },
+      {
+        "text": "restlessness",
+        "label": "SYMPTOM",
+        "start": 52,
+        "end": 64
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "ventricular fibrillation",
+      "restlessness"
+    ],
+    "frame_id": "ds_dq_what_given_d_s"
+  },
+  {
+    "query": "medicine needed for anaphylactic shock",
+    "entities": [
+      {
+        "text": "anaphylactic shock",
+        "label": "DISEASE",
+        "start": 20,
+        "end": 38
+      }
+    ],
+    "category": "single_disease",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "anaphylactic shock"
+    ],
+    "frame_id": "inf_medicine_for"
+  },
+  {
+    "query": "anything for sleepiness",
+    "entities": [
+      {
+        "text": "sleepiness",
+        "label": "SYMPTOM",
+        "start": 13,
+        "end": 23
+      }
+    ],
+    "category": "single_symptom",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "sleepiness"
+    ],
+    "frame_id": "inf_anything_for_s"
+  },
+  {
+    "query": "medicines for progressive muscle weakness",
+    "entities": [
+      {
+        "text": "progressive muscle weakness",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 41
+      }
+    ],
+    "category": "single_symptom",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "progressive muscle weakness"
+    ],
+    "frame_id": "s_medicines_for"
+  },
+  {
+    "query": "what helps with sleep apnea",
+    "entities": [
+      {
+        "text": "sleep apnea",
+        "label": "DISEASE",
+        "start": 16,
+        "end": 27
+      }
+    ],
+    "category": "single_disease",
+    "style": "can_help_relief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "sleep apnea"
+    ],
+    "frame_id": "help_what_helps_with"
+  },
+  {
+    "query": "display treatments for restlessness in paediatric patients",
+    "entities": [
+      {
+        "text": "restlessness",
+        "label": "SYMPTOM",
+        "start": 23,
+        "end": 35
+      },
+      {
+        "text": "paediatric",
+        "label": "CONDITION",
+        "start": 39,
+        "end": 49
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "restlessness",
+      "paediatric"
+    ],
+    "frame_id": "sc_act_display_treatments_s_c"
+  },
+  {
+    "query": "where can i what treatments do you have in the inventory available for order",
+    "entities": [],
+    "category": "no_entity",
+    "style": "direct_question",
+    "difficulty": "easy",
+    "source_concepts": [],
+    "frame_id": "ne_inventory_treatments_v"
+  },
+  {
+    "query": "approved treatments for acute respiratory toxicity in renal impairment",
+    "entities": [
+      {
+        "text": "acute respiratory toxicity",
+        "label": "DISEASE",
+        "start": 24,
+        "end": 50
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 54,
+        "end": 70
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute respiratory toxicity",
+      "renal impairment"
+    ],
+    "frame_id": "dc_approved_treatments_d_c"
+  },
+  {
+    "query": "which treatment is appropriate for broncho-pulmonary infections in cystic fibrosis in patients on dialysis",
+    "entities": [
+      {
+        "text": "broncho-pulmonary infections in cystic fibrosis",
+        "label": "DISEASE",
+        "start": 35,
+        "end": 82
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 98,
+        "end": 106
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "broncho-pulmonary infections in cystic fibrosis",
+      "dialysis"
+    ],
+    "frame_id": "dc_dq_which_treatment_d_c"
+  },
+  {
+    "query": "what treatment is appropriate for neutropenia accompanied by somnolence in renal impairment",
+    "entities": [
+      {
+        "text": "neutropenia",
+        "label": "DISEASE",
+        "start": 34,
+        "end": 45
+      },
+      {
+        "text": "somnolence",
+        "label": "SYMPTOM",
+        "start": 61,
+        "end": 71
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 75,
+        "end": 91
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "neutropenia",
+      "somnolence",
+      "renal impairment"
+    ],
+    "frame_id": "dsc_dq_what_appropriate_d_s_c"
+  },
+  {
+    "query": "medical remedies for emotional and social withdrawal during lactation",
+    "entities": [
+      {
+        "text": "emotional and social withdrawal",
+        "label": "SYMPTOM",
+        "start": 21,
+        "end": 52
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 60,
+        "end": 69
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "emotional and social withdrawal",
+      "lactation"
+    ],
+    "frame_id": "sc_remedies_s_c"
+  },
+  {
+    "query": "pharmacotherapy for localized cutaneous amyloidosis in hepatic impairment",
+    "entities": [
+      {
+        "text": "localized cutaneous amyloidosis",
+        "label": "DISEASE",
+        "start": 20,
+        "end": 51
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 55,
+        "end": 73
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "localized cutaneous amyloidosis",
+      "hepatic impairment"
+    ],
+    "frame_id": "dc_pharmacotherapy_d_c"
+  },
+  {
+    "query": "prescription options for toxic epidermal necrolysis during pregnancy",
+    "entities": [
+      {
+        "text": "toxic epidermal necrolysis",
+        "label": "DISEASE",
+        "start": 25,
+        "end": 51
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 59,
+        "end": 68
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "toxic epidermal necrolysis",
+      "pregnancy"
+    ],
+    "frame_id": "dc_rx_options_d_c"
+  },
+  {
+    "query": "is there an approved treatment for cardiomegaly in patients undergoing dialysis",
+    "entities": [
+      {
+        "text": "cardiomegaly",
+        "label": "DISEASE",
+        "start": 35,
+        "end": 47
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 71,
+        "end": 79
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "cardiomegaly",
+      "dialysis"
+    ],
+    "frame_id": "dc_dq_is_there_treatment_d_c"
+  },
+  {
+    "query": "prescription options for autoimmune hepatitis",
+    "entities": [
+      {
+        "text": "autoimmune hepatitis",
+        "label": "DISEASE",
+        "start": 25,
+        "end": 45
+      }
+    ],
+    "category": "single_disease",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "autoimmune hepatitis"
+    ],
+    "frame_id": "d_rx_options"
+  },
+  {
+    "query": "treatment for immune thrombocytopenic purpura with sweating",
+    "entities": [
+      {
+        "text": "immune thrombocytopenic purpura",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 45
+      },
+      {
+        "text": "sweating",
+        "label": "SYMPTOM",
+        "start": 51,
+        "end": 59
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "immune thrombocytopenic purpura",
+      "sweating"
+    ],
+    "frame_id": "ds_treatment_d_with_s"
+  },
+  {
+    "query": "find therapies for autoimmune hepatitis accompanied by weight gain in pregnancy",
+    "entities": [
+      {
+        "text": "autoimmune hepatitis",
+        "label": "DISEASE",
+        "start": 19,
+        "end": 39
+      },
+      {
+        "text": "weight gain",
+        "label": "SYMPTOM",
+        "start": 55,
+        "end": 66
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 70,
+        "end": 79
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "action_oriented",
+    "difficulty": "hard",
+    "source_concepts": [
+      "autoimmune hepatitis",
+      "weight gain",
+      "pregnancy"
+    ],
+    "frame_id": "dsc_act_find_therapies_d_s_c"
+  },
+  {
+    "query": "how to manage rapid heart rate",
+    "entities": [
+      {
+        "text": "rapid heart rate",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 30
+      }
+    ],
+    "category": "single_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "rapid heart rate"
+    ],
+    "frame_id": "dq_how_to_manage_s"
+  },
+  {
+    "query": "drugs for rigors",
+    "entities": [
+      {
+        "text": "rigors",
+        "label": "SYMPTOM",
+        "start": 10,
+        "end": 16
+      }
+    ],
+    "category": "single_symptom",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "rigors"
+    ],
+    "frame_id": "s_drugs_for"
+  },
+  {
+    "query": "options for cardiomegaly and urticaria in patients undergoing dialysis",
+    "entities": [
+      {
+        "text": "cardiomegaly",
+        "label": "DISEASE",
+        "start": 12,
+        "end": 24
+      },
+      {
+        "text": "urticaria",
+        "label": "SYMPTOM",
+        "start": 29,
+        "end": 38
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 62,
+        "end": 70
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "informal_brief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "cardiomegaly",
+      "urticaria",
+      "dialysis"
+    ],
+    "frame_id": "dsc_inf_options_d_s_c"
+  },
+  {
+    "query": "list drugs indicated for relieving urticaria",
+    "entities": [
+      {
+        "text": "urticaria",
+        "label": "SYMPTOM",
+        "start": 35,
+        "end": 44
+      }
+    ],
+    "category": "single_symptom",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "urticaria"
+    ],
+    "frame_id": "act_list_drugs_s"
+  },
+  {
+    "query": "medical remedies for headache",
+    "entities": [
+      {
+        "text": "headache",
+        "label": "SYMPTOM",
+        "start": 21,
+        "end": 29
+      }
+    ],
+    "category": "single_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "headache"
+    ],
+    "frame_id": "s_remedies"
+  },
+  {
+    "query": "medicines for anaemia with difficulties with sleep maintenance during dialysis",
+    "entities": [
+      {
+        "text": "anaemia",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 21
+      },
+      {
+        "text": "difficulties with sleep maintenance",
+        "label": "SYMPTOM",
+        "start": 27,
+        "end": 62
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 70,
+        "end": 78
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "informal_brief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "anaemia",
+      "difficulties with sleep maintenance",
+      "dialysis"
+    ],
+    "frame_id": "dsc_inf_meds_d_s_c"
+  },
+  {
+    "query": "how to treat localized cutaneous amyloidosis accompanied by fatigue",
+    "entities": [
+      {
+        "text": "localized cutaneous amyloidosis",
+        "label": "DISEASE",
+        "start": 13,
+        "end": 44
+      },
+      {
+        "text": "fatigue",
+        "label": "SYMPTOM",
+        "start": 60,
+        "end": 67
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "localized cutaneous amyloidosis",
+      "fatigue"
+    ],
+    "frame_id": "ds_dq_how_to_treat_d_s"
+  },
+  {
+    "query": "medicines for osteonecrosis with urinary frequency during lactation",
+    "entities": [
+      {
+        "text": "osteonecrosis",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 27
+      },
+      {
+        "text": "urinary frequency",
+        "label": "SYMPTOM",
+        "start": 33,
+        "end": 50
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 58,
+        "end": 67
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "informal_brief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "osteonecrosis",
+      "urinary frequency",
+      "lactation"
+    ],
+    "frame_id": "dsc_inf_meds_d_s_c"
+  },
+  {
+    "query": "medicines that help treat anaphylactic shock during dialysis",
+    "entities": [
+      {
+        "text": "anaphylactic shock",
+        "label": "DISEASE",
+        "start": 26,
+        "end": 44
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 52,
+        "end": 60
+      }
+    ],
+    "category": "disease_condition",
+    "style": "can_help_relief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "anaphylactic shock",
+      "dialysis"
+    ],
+    "frame_id": "help_medicines_that_help_d_c"
+  },
+  {
+    "query": "medicines for alpha-galactosidase a deficiency with reduced range of motion and emotional and social withdrawal",
+    "entities": [
+      {
+        "text": "alpha-galactosidase a deficiency",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 46
+      },
+      {
+        "text": "reduced range of motion",
+        "label": "SYMPTOM",
+        "start": 52,
+        "end": 75
+      },
+      {
+        "text": "emotional and social withdrawal",
+        "label": "SYMPTOM",
+        "start": 80,
+        "end": 111
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "alpha-galactosidase a deficiency",
+      "reduced range of motion",
+      "emotional and social withdrawal"
+    ],
+    "frame_id": "dss_meds_d_s1_s2"
+  },
+  {
+    "query": "kindly list medicines with intravenous infusion route available for order",
+    "entities": [],
+    "category": "no_entity",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [],
+    "frame_id": "ne_iv_route_v"
+  },
+  {
+    "query": "management of vomiting while breastfeeding",
+    "entities": [
+      {
+        "text": "vomiting",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 22
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 29,
+        "end": 42
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "vomiting",
+      "breastfeeding"
+    ],
+    "frame_id": "sc_management_s_c"
+  },
+  {
+    "query": "what helps treat wolff-parkinson-white syndrome tachycardia while relieving difficulties with sleep onset",
+    "entities": [
+      {
+        "text": "wolff-parkinson-white syndrome tachycardia",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 59
+      },
+      {
+        "text": "difficulties with sleep onset",
+        "label": "SYMPTOM",
+        "start": 76,
+        "end": 105
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "can_help_relief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "wolff-parkinson-white syndrome tachycardia",
+      "difficulties with sleep onset"
+    ],
+    "frame_id": "ds_help_what_helps_d_s"
+  },
+  {
+    "query": "how is simple and complex absence seizures treated",
+    "entities": [
+      {
+        "text": "simple and complex absence seizures",
+        "label": "DISEASE",
+        "start": 7,
+        "end": 42
+      }
+    ],
+    "category": "single_disease",
+    "style": "direct_question",
+    "difficulty": "easy",
+    "source_concepts": [
+      "simple and complex absence seizures"
+    ],
+    "frame_id": "dq_how_is_d_treated"
+  },
+  {
+    "query": "relief for sleepiness and joint restriction during lactation",
+    "entities": [
+      {
+        "text": "sleepiness",
+        "label": "SYMPTOM",
+        "start": 11,
+        "end": 21
+      },
+      {
+        "text": "joint restriction",
+        "label": "SYMPTOM",
+        "start": 26,
+        "end": 43
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 51,
+        "end": 60
+      }
+    ],
+    "category": "three_entity_ssc",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "sleepiness",
+      "joint restriction",
+      "lactation"
+    ],
+    "frame_id": "ssc_relief_s1_s2_c"
+  },
+  {
+    "query": "drugs for neutropenia in elderly patients",
+    "entities": [
+      {
+        "text": "neutropenia",
+        "label": "DISEASE",
+        "start": 10,
+        "end": 21
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 25,
+        "end": 32
+      }
+    ],
+    "category": "disease_condition",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "neutropenia",
+      "elderly"
+    ],
+    "frame_id": "inf_drugs_d_c"
+  },
+  {
+    "query": "how to treat leukopenia during pregnancy",
+    "entities": [
+      {
+        "text": "leukopenia",
+        "label": "DISEASE",
+        "start": 13,
+        "end": 23
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 31,
+        "end": 40
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "leukopenia",
+      "pregnancy"
+    ],
+    "frame_id": "dc_dq_how_to_treat_d_c"
+  },
+  {
+    "query": "display pharmaceutical options for headache",
+    "entities": [
+      {
+        "text": "headache",
+        "label": "SYMPTOM",
+        "start": 35,
+        "end": 43
+      }
+    ],
+    "category": "single_symptom",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "headache"
+    ],
+    "frame_id": "act_display_options_s"
+  },
+  {
+    "query": "what helps reduce fever while breastfeeding",
+    "entities": [
+      {
+        "text": "fever",
+        "label": "SYMPTOM",
+        "start": 18,
+        "end": 23
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 30,
+        "end": 43
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "fever",
+      "breastfeeding"
+    ],
+    "frame_id": "sc_dq_what_helps_reduce_s_c"
+  },
+  {
+    "query": "which drug treats acid α-glucosidase deficiency and relieves swelling",
+    "entities": [
+      {
+        "text": "acid α-glucosidase deficiency",
+        "label": "DISEASE",
+        "start": 18,
+        "end": 47
+      },
+      {
+        "text": "swelling",
+        "label": "SYMPTOM",
+        "start": 61,
+        "end": 69
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acid α-glucosidase deficiency",
+      "swelling"
+    ],
+    "frame_id": "ds_dq_which_drug_d_s"
+  },
+  {
+    "query": "identify medicines for respiratory failure during lactation",
+    "entities": [
+      {
+        "text": "respiratory failure",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 42
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 50,
+        "end": 59
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "respiratory failure",
+      "lactation"
+    ],
+    "frame_id": "act_identify_medicines_d_c"
+  },
+  {
+    "query": "how to manage rigors in patients with hepatic impairment",
+    "entities": [
+      {
+        "text": "rigors",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 20
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 38,
+        "end": 56
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "rigors",
+      "hepatic impairment"
+    ],
+    "frame_id": "sc_dq_how_manage_s_c"
+  },
+  {
+    "query": "show treatment options for difficulties with sleep maintenance and tremor in patients with renal impairment",
+    "entities": [
+      {
+        "text": "difficulties with sleep maintenance",
+        "label": "SYMPTOM",
+        "start": 27,
+        "end": 62
+      },
+      {
+        "text": "tremor",
+        "label": "SYMPTOM",
+        "start": 67,
+        "end": 73
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 91,
+        "end": 107
+      }
+    ],
+    "category": "three_entity_ssc",
+    "style": "action_oriented",
+    "difficulty": "hard",
+    "source_concepts": [
+      "difficulties with sleep maintenance",
+      "tremor",
+      "renal impairment"
+    ],
+    "frame_id": "ssc_act_show_options_s1_s2_c"
+  },
+  {
+    "query": "therapies for complex partial seizures with concurrent hypotonia",
+    "entities": [
+      {
+        "text": "complex partial seizures",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 38
+      },
+      {
+        "text": "hypotonia",
+        "label": "SYMPTOM",
+        "start": 55,
+        "end": 64
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "complex partial seizures",
+      "hypotonia"
+    ],
+    "frame_id": "ds_therapies_d_s"
+  },
+  {
+    "query": "how to treat neutropenia in patients with renal impairment",
+    "entities": [
+      {
+        "text": "neutropenia",
+        "label": "DISEASE",
+        "start": 13,
+        "end": 24
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 42,
+        "end": 58
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "neutropenia",
+      "renal impairment"
+    ],
+    "frame_id": "dc_dq_how_to_treat_d_c"
+  },
+  {
+    "query": "medicines for acquired hemophilia a and urticaria",
+    "entities": [
+      {
+        "text": "acquired hemophilia a",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 35
+      },
+      {
+        "text": "urticaria",
+        "label": "SYMPTOM",
+        "start": 40,
+        "end": 49
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "acquired hemophilia a",
+      "urticaria"
+    ],
+    "frame_id": "ds_meds_d_and_s"
+  },
+  {
+    "query": "therapies for toxic epidermal necrolysis in elderly patients",
+    "entities": [
+      {
+        "text": "toxic epidermal necrolysis",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 40
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 44,
+        "end": 51
+      }
+    ],
+    "category": "disease_condition",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "toxic epidermal necrolysis",
+      "elderly"
+    ],
+    "frame_id": "inf_therapies_d_c"
+  },
+  {
+    "query": "display pharmaceutical options for rigors",
+    "entities": [
+      {
+        "text": "rigors",
+        "label": "SYMPTOM",
+        "start": 35,
+        "end": 41
+      }
+    ],
+    "category": "single_symptom",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "rigors"
+    ],
+    "frame_id": "act_display_options_s"
+  },
+  {
+    "query": "managing thrombocytopenia accompanied by pain crises",
+    "entities": [
+      {
+        "text": "thrombocytopenia",
+        "label": "DISEASE",
+        "start": 9,
+        "end": 25
+      },
+      {
+        "text": "pain crises",
+        "label": "SYMPTOM",
+        "start": 41,
+        "end": 52
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "thrombocytopenia",
+      "pain crises"
+    ],
+    "frame_id": "ds_managing_d_with_s"
+  },
+  {
+    "query": "treatment for pain crises during breastfeeding",
+    "entities": [
+      {
+        "text": "pain crises",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 25
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 33,
+        "end": 46
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "pain crises",
+      "breastfeeding"
+    ],
+    "frame_id": "sc_inf_treatment_s_c"
+  },
+  {
+    "query": "what helps relieve joint restriction",
+    "entities": [
+      {
+        "text": "joint restriction",
+        "label": "SYMPTOM",
+        "start": 19,
+        "end": 36
+      }
+    ],
+    "category": "single_symptom",
+    "style": "can_help_relief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "joint restriction"
+    ],
+    "frame_id": "help_what_helps_relieve_s"
+  },
+  {
+    "query": "show medications indicated for urinary frequency and bone pain",
+    "entities": [
+      {
+        "text": "urinary frequency",
+        "label": "SYMPTOM",
+        "start": 31,
+        "end": 48
+      },
+      {
+        "text": "bone pain",
+        "label": "SYMPTOM",
+        "start": 53,
+        "end": 62
+      }
+    ],
+    "category": "multiple_same_type",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "urinary frequency",
+      "bone pain"
+    ],
+    "frame_id": "ss_act_show_meds_s1_s2"
+  },
+  {
+    "query": "what therapeutic options exist while breastfeeding",
+    "entities": [
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 37,
+        "end": 50
+      }
+    ],
+    "category": "single_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "breastfeeding"
+    ],
+    "frame_id": "dq_what_therapeutic_options_c"
+  },
+  {
+    "query": "drug options for ventricular fibrillation in renal impairment",
+    "entities": [
+      {
+        "text": "ventricular fibrillation",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 41
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 45,
+        "end": 61
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "ventricular fibrillation",
+      "renal impairment"
+    ],
+    "frame_id": "dc_drug_options_d_c"
+  },
+  {
+    "query": "which treatment addresses difficulties with sleep maintenance and reduced walking ability",
+    "entities": [
+      {
+        "text": "difficulties with sleep maintenance",
+        "label": "SYMPTOM",
+        "start": 26,
+        "end": 61
+      },
+      {
+        "text": "reduced walking ability",
+        "label": "SYMPTOM",
+        "start": 66,
+        "end": 89
+      }
+    ],
+    "category": "multiple_same_type",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "difficulties with sleep maintenance",
+      "reduced walking ability"
+    ],
+    "frame_id": "ss_dq_which_treatment_s1_s2"
+  },
+  {
+    "query": "list treatments for hyperglycemia in renal impairment",
+    "entities": [
+      {
+        "text": "hyperglycemia",
+        "label": "DISEASE",
+        "start": 20,
+        "end": 33
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 37,
+        "end": 53
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "hyperglycemia",
+      "renal impairment"
+    ],
+    "frame_id": "act_list_treatments_d_c"
+  },
+  {
+    "query": "what relieves sleepiness and somnolence",
+    "entities": [
+      {
+        "text": "sleepiness",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 24
+      },
+      {
+        "text": "somnolence",
+        "label": "SYMPTOM",
+        "start": 29,
+        "end": 39
+      }
+    ],
+    "category": "multiple_same_type",
+    "style": "can_help_relief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "sleepiness",
+      "somnolence"
+    ],
+    "frame_id": "ss_help_what_relieves_s1_s2"
+  },
+  {
+    "query": "what helps with hypotonia during pregnancy",
+    "entities": [
+      {
+        "text": "hypotonia",
+        "label": "SYMPTOM",
+        "start": 16,
+        "end": 25
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 33,
+        "end": 42
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "can_help_relief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "hypotonia",
+      "pregnancy"
+    ],
+    "frame_id": "sc_help_what_helps_s_c"
+  },
+  {
+    "query": "which medicine is used for wolff-parkinson-white syndrome tachycardia during pregnancy",
+    "entities": [
+      {
+        "text": "wolff-parkinson-white syndrome tachycardia",
+        "label": "DISEASE",
+        "start": 27,
+        "end": 69
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 77,
+        "end": 86
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "wolff-parkinson-white syndrome tachycardia",
+      "pregnancy"
+    ],
+    "frame_id": "dc_dq_which_medicine_used_d_c"
+  },
+  {
+    "query": "what is indicated for conjunctivitis accompanied by joint discomfort during dialysis",
+    "entities": [
+      {
+        "text": "conjunctivitis",
+        "label": "DISEASE",
+        "start": 22,
+        "end": 36
+      },
+      {
+        "text": "joint discomfort",
+        "label": "SYMPTOM",
+        "start": 52,
+        "end": 68
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 76,
+        "end": 84
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "conjunctivitis",
+      "joint discomfort",
+      "dialysis"
+    ],
+    "frame_id": "dsc_dq_what_is_indicated_d_s_c"
+  },
+  {
+    "query": "medication choices for ventricular tachycardia during pregnancy",
+    "entities": [
+      {
+        "text": "ventricular tachycardia",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 46
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 54,
+        "end": 63
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "ventricular tachycardia",
+      "pregnancy"
+    ],
+    "frame_id": "dc_medication_choices_d_c"
+  },
+  {
+    "query": "which medications are indicated for autoimmune hepatitis",
+    "entities": [
+      {
+        "text": "autoimmune hepatitis",
+        "label": "DISEASE",
+        "start": 36,
+        "end": 56
+      }
+    ],
+    "category": "single_disease",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "autoimmune hepatitis"
+    ],
+    "frame_id": "dq_which_medications_indicated"
+  },
+  {
+    "query": "which therapy addresses stroke and sleepiness in renal impairment",
+    "entities": [
+      {
+        "text": "stroke",
+        "label": "DISEASE",
+        "start": 24,
+        "end": 30
+      },
+      {
+        "text": "sleepiness",
+        "label": "SYMPTOM",
+        "start": 35,
+        "end": 45
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 49,
+        "end": 65
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "stroke",
+      "sleepiness",
+      "renal impairment"
+    ],
+    "frame_id": "dsc_dq_which_therapy_d_s_c"
+  },
+  {
+    "query": "how to treat respiratory failure accompanied by weakness",
+    "entities": [
+      {
+        "text": "respiratory failure",
+        "label": "DISEASE",
+        "start": 13,
+        "end": 32
+      },
+      {
+        "text": "weakness",
+        "label": "SYMPTOM",
+        "start": 48,
+        "end": 56
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "respiratory failure",
+      "weakness"
+    ],
+    "frame_id": "ds_dq_how_to_treat_d_s"
+  },
+  {
+    "query": "pharmacotherapy for complicated intra-abdominal infections accompanied by urticaria in pregnancy",
+    "entities": [
+      {
+        "text": "complicated intra-abdominal infections",
+        "label": "DISEASE",
+        "start": 20,
+        "end": 58
+      },
+      {
+        "text": "urticaria",
+        "label": "SYMPTOM",
+        "start": 74,
+        "end": 83
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 87,
+        "end": 96
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "complicated intra-abdominal infections",
+      "urticaria",
+      "pregnancy"
+    ],
+    "frame_id": "dsc_pharmacotherapy_d_s_c"
+  },
+  {
+    "query": "are there capsules available in the inventory",
+    "entities": [],
+    "category": "no_entity",
+    "style": "direct_question",
+    "difficulty": "easy",
+    "source_concepts": [],
+    "frame_id": "ne_capsules_inventory"
+  },
+  {
+    "query": "medicines suitable in patients undergoing dialysis",
+    "entities": [
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 42,
+        "end": 50
+      }
+    ],
+    "category": "single_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "dialysis"
+    ],
+    "frame_id": "c_meds_suitable"
+  },
+  {
+    "query": "clinical management of ventricular tachycardia during dialysis",
+    "entities": [
+      {
+        "text": "ventricular tachycardia",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 46
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 54,
+        "end": 62
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "ventricular tachycardia",
+      "dialysis"
+    ],
+    "frame_id": "dc_clinical_management_d_c"
+  },
+  {
+    "query": "something for vomiting",
+    "entities": [
+      {
+        "text": "vomiting",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 22
+      }
+    ],
+    "category": "single_symptom",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "vomiting"
+    ],
+    "frame_id": "inf_something_for_s"
+  },
+  {
+    "query": "swelling relief for elderly patients",
+    "entities": [
+      {
+        "text": "swelling",
+        "label": "SYMPTOM",
+        "start": 0,
+        "end": 8
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 20,
+        "end": 27
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "swelling",
+      "elderly"
+    ],
+    "frame_id": "sc_relief_s_c"
+  },
+  {
+    "query": "which pharmaceutical eases nausea",
+    "entities": [
+      {
+        "text": "nausea",
+        "label": "SYMPTOM",
+        "start": 27,
+        "end": 33
+      }
+    ],
+    "category": "single_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "nausea"
+    ],
+    "frame_id": "dq_which_agent_eases"
+  },
+  {
+    "query": "treatment for toxic epidermal necrolysis in patients with hepatic impairment",
+    "entities": [
+      {
+        "text": "toxic epidermal necrolysis",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 40
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 58,
+        "end": 76
+      }
+    ],
+    "category": "difficult_boundary_cases",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "toxic epidermal necrolysis",
+      "hepatic impairment"
+    ],
+    "frame_id": "diff_d_c_bound_treatment_d_c"
+  },
+  {
+    "query": "show medicines for ventricular tachycardia and somnolence in hepatic impairment",
+    "entities": [
+      {
+        "text": "ventricular tachycardia",
+        "label": "DISEASE",
+        "start": 19,
+        "end": 42
+      },
+      {
+        "text": "somnolence",
+        "label": "SYMPTOM",
+        "start": 47,
+        "end": 57
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 61,
+        "end": 79
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "action_oriented",
+    "difficulty": "hard",
+    "source_concepts": [
+      "ventricular tachycardia",
+      "somnolence",
+      "hepatic impairment"
+    ],
+    "frame_id": "dsc_act_show_meds_d_s_c"
+  },
+  {
+    "query": "treatment for conjunctivitis in pregnancy",
+    "entities": [
+      {
+        "text": "conjunctivitis",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 28
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 32,
+        "end": 41
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "conjunctivitis",
+      "pregnancy"
+    ],
+    "frame_id": "dc_treatment_for_d_c"
+  },
+  {
+    "query": "what is suitable for hypoglycemia with reduced walking ability and urticaria",
+    "entities": [
+      {
+        "text": "hypoglycemia",
+        "label": "DISEASE",
+        "start": 21,
+        "end": 33
+      },
+      {
+        "text": "reduced walking ability",
+        "label": "SYMPTOM",
+        "start": 39,
+        "end": 62
+      },
+      {
+        "text": "urticaria",
+        "label": "SYMPTOM",
+        "start": 67,
+        "end": 76
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "hypoglycemia",
+      "reduced walking ability",
+      "urticaria"
+    ],
+    "frame_id": "dss_dq_what_suitable_d_s1_s2"
+  },
+  {
+    "query": "find approved drugs for thyroid dysfunction",
+    "entities": [
+      {
+        "text": "thyroid dysfunction",
+        "label": "DISEASE",
+        "start": 24,
+        "end": 43
+      }
+    ],
+    "category": "single_disease",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "thyroid dysfunction"
+    ],
+    "frame_id": "act_find_drugs"
+  },
+  {
+    "query": "find therapy for hyperglycemia accompanied by hypohidrosis",
+    "entities": [
+      {
+        "text": "hyperglycemia",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 30
+      },
+      {
+        "text": "hypohidrosis",
+        "label": "SYMPTOM",
+        "start": 46,
+        "end": 58
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "hyperglycemia",
+      "hypohidrosis"
+    ],
+    "frame_id": "ds_act_find_therapy_d_s"
+  },
+  {
+    "query": "treatment options for sinusitis and visual impairment during pregnancy",
+    "entities": [
+      {
+        "text": "sinusitis",
+        "label": "DISEASE",
+        "start": 22,
+        "end": 31
+      },
+      {
+        "text": "visual impairment",
+        "label": "SYMPTOM",
+        "start": 36,
+        "end": 53
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 61,
+        "end": 70
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "sinusitis",
+      "visual impairment",
+      "pregnancy"
+    ],
+    "frame_id": "dsc_options_d_s_c"
+  },
+  {
+    "query": "prescription options for localized cutaneous amyloidosis in renal impairment",
+    "entities": [
+      {
+        "text": "localized cutaneous amyloidosis",
+        "label": "DISEASE",
+        "start": 25,
+        "end": 56
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 60,
+        "end": 76
+      }
+    ],
+    "category": "disease_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "localized cutaneous amyloidosis",
+      "renal impairment"
+    ],
+    "frame_id": "dc_rx_options_d_c"
+  },
+  {
+    "query": "list options for localized cutaneous amyloidosis accompanied by joint discomfort during dialysis",
+    "entities": [
+      {
+        "text": "localized cutaneous amyloidosis",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 48
+      },
+      {
+        "text": "joint discomfort",
+        "label": "SYMPTOM",
+        "start": 64,
+        "end": 80
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 88,
+        "end": 96
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "action_oriented",
+    "difficulty": "hard",
+    "source_concepts": [
+      "localized cutaneous amyloidosis",
+      "joint discomfort",
+      "dialysis"
+    ],
+    "frame_id": "dsc_act_list_options_d_s_c"
+  },
+  {
+    "query": "find therapy for thrombocytopenia accompanied by hypotonia",
+    "entities": [
+      {
+        "text": "thrombocytopenia",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 33
+      },
+      {
+        "text": "hypotonia",
+        "label": "SYMPTOM",
+        "start": 49,
+        "end": 58
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "thrombocytopenia",
+      "hypotonia"
+    ],
+    "frame_id": "ds_act_find_therapy_d_s"
+  },
+  {
+    "query": "find therapy for stroke accompanied by hypotonia",
+    "entities": [
+      {
+        "text": "stroke",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 23
+      },
+      {
+        "text": "hypotonia",
+        "label": "SYMPTOM",
+        "start": 39,
+        "end": 48
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "stroke",
+      "hypotonia"
+    ],
+    "frame_id": "ds_act_find_therapy_d_s"
+  },
+  {
+    "query": "treatment for wolff-parkinson-white syndrome tachycardia with swelling",
+    "entities": [
+      {
+        "text": "wolff-parkinson-white syndrome tachycardia",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 56
+      },
+      {
+        "text": "swelling",
+        "label": "SYMPTOM",
+        "start": 62,
+        "end": 70
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "wolff-parkinson-white syndrome tachycardia",
+      "swelling"
+    ],
+    "frame_id": "ds_inf_treatment_d_s"
+  },
+  {
+    "query": "what treatment is appropriate for hypoglycemia accompanied by swelling for paediatric patients",
+    "entities": [
+      {
+        "text": "hypoglycemia",
+        "label": "DISEASE",
+        "start": 34,
+        "end": 46
+      },
+      {
+        "text": "swelling",
+        "label": "SYMPTOM",
+        "start": 62,
+        "end": 70
+      },
+      {
+        "text": "paediatric",
+        "label": "CONDITION",
+        "start": 75,
+        "end": 85
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "hypoglycemia",
+      "swelling",
+      "paediatric"
+    ],
+    "frame_id": "dsc_dq_what_appropriate_d_s_c"
+  },
+  {
+    "query": "show medications for thyroid dysfunction with blunted affect",
+    "entities": [
+      {
+        "text": "thyroid dysfunction",
+        "label": "DISEASE",
+        "start": 21,
+        "end": 40
+      },
+      {
+        "text": "blunted affect",
+        "label": "SYMPTOM",
+        "start": 46,
+        "end": 60
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "thyroid dysfunction",
+      "blunted affect"
+    ],
+    "frame_id": "ds_act_show_meds_d_s"
+  },
+  {
+    "query": "which treatment is appropriate for anaemia in patients with hepatic impairment",
+    "entities": [
+      {
+        "text": "anaemia",
+        "label": "DISEASE",
+        "start": 35,
+        "end": 42
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 60,
+        "end": 78
+      }
+    ],
+    "category": "disease_condition",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "anaemia",
+      "hepatic impairment"
+    ],
+    "frame_id": "dc_dq_which_treatment_d_c"
+  },
+  {
+    "query": "display therapy options for neutropenia",
+    "entities": [
+      {
+        "text": "neutropenia",
+        "label": "DISEASE",
+        "start": 28,
+        "end": 39
+      }
+    ],
+    "category": "single_disease",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "neutropenia"
+    ],
+    "frame_id": "act_display_options"
+  },
+  {
+    "query": "show remedies for seizures in renal impairment",
+    "entities": [
+      {
+        "text": "seizures",
+        "label": "SYMPTOM",
+        "start": 18,
+        "end": 26
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 30,
+        "end": 46
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [
+      "seizures",
+      "renal impairment"
+    ],
+    "frame_id": "sc_act_show_remedies_s_c"
+  },
+  {
+    "query": "what helps treat toxic epidermal necrolysis while relieving urticaria",
+    "entities": [
+      {
+        "text": "toxic epidermal necrolysis",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 43
+      },
+      {
+        "text": "urticaria",
+        "label": "SYMPTOM",
+        "start": 60,
+        "end": 69
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "can_help_relief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "toxic epidermal necrolysis",
+      "urticaria"
+    ],
+    "frame_id": "ds_help_what_helps_d_s"
+  },
+  {
+    "query": "medicines for acquired hemophilia a with difficulties with sleep onset and ataxia",
+    "entities": [
+      {
+        "text": "acquired hemophilia a",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 35
+      },
+      {
+        "text": "difficulties with sleep onset",
+        "label": "SYMPTOM",
+        "start": 41,
+        "end": 70
+      },
+      {
+        "text": "ataxia",
+        "label": "SYMPTOM",
+        "start": 75,
+        "end": 81
+      }
+    ],
+    "category": "three_entity_dss",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acquired hemophilia a",
+      "difficulties with sleep onset",
+      "ataxia"
+    ],
+    "frame_id": "dss_meds_d_s1_s2"
+  },
+  {
+    "query": "treatment for leukopenia",
+    "entities": [
+      {
+        "text": "leukopenia",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 24
+      }
+    ],
+    "category": "single_disease",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "leukopenia"
+    ],
+    "frame_id": "d_treatment_for"
+  },
+  {
+    "query": "treatment for thrombocytopenia with reduced range of motion",
+    "entities": [
+      {
+        "text": "thrombocytopenia",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 30
+      },
+      {
+        "text": "reduced range of motion",
+        "label": "SYMPTOM",
+        "start": 36,
+        "end": 59
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "thrombocytopenia",
+      "reduced range of motion"
+    ],
+    "frame_id": "ds_inf_treatment_d_s"
+  },
+  {
+    "query": "relief for pain crises and reduced walking ability",
+    "entities": [
+      {
+        "text": "pain crises",
+        "label": "SYMPTOM",
+        "start": 11,
+        "end": 22
+      },
+      {
+        "text": "reduced walking ability",
+        "label": "SYMPTOM",
+        "start": 27,
+        "end": 50
+      }
+    ],
+    "category": "multiple_same_type",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "pain crises",
+      "reduced walking ability"
+    ],
+    "frame_id": "ss_relief_s1_s2"
+  },
+  {
+    "query": "which medicine helps relieve pyrexia in patients undergoing dialysis",
+    "entities": [
+      {
+        "text": "pyrexia",
+        "label": "SYMPTOM",
+        "start": 29,
+        "end": 36
+      },
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 60,
+        "end": 68
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "can_help_relief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "pyrexia",
+      "dialysis"
+    ],
+    "frame_id": "sc_help_which_relieves_s_c"
+  },
+  {
+    "query": "find therapies for acid α-glucosidase deficiency while breastfeeding",
+    "entities": [
+      {
+        "text": "acid α-glucosidase deficiency",
+        "label": "DISEASE",
+        "start": 19,
+        "end": 48
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 55,
+        "end": 68
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acid α-glucosidase deficiency",
+      "breastfeeding"
+    ],
+    "frame_id": "act_find_therapies_d_c"
+  },
+  {
+    "query": "where can i display maximum retail prices for catalog medicines in current inventory",
+    "entities": [],
+    "category": "no_entity",
+    "style": "action_oriented",
+    "difficulty": "easy",
+    "source_concepts": [],
+    "frame_id": "ne_display_mrp_v"
+  },
+  {
+    "query": "what is indicated for anaemia accompanied by seizures while breastfeeding",
+    "entities": [
+      {
+        "text": "anaemia",
+        "label": "DISEASE",
+        "start": 22,
+        "end": 29
+      },
+      {
+        "text": "seizures",
+        "label": "SYMPTOM",
+        "start": 45,
+        "end": 53
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 60,
+        "end": 73
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "anaemia",
+      "seizures",
+      "breastfeeding"
+    ],
+    "frame_id": "dsc_dq_what_is_indicated_d_s_c"
+  },
+  {
+    "query": "which therapy addresses ventricular tachycardia and joint restriction for elderly patients",
+    "entities": [
+      {
+        "text": "ventricular tachycardia",
+        "label": "DISEASE",
+        "start": 24,
+        "end": 47
+      },
+      {
+        "text": "joint restriction",
+        "label": "SYMPTOM",
+        "start": 52,
+        "end": 69
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 74,
+        "end": 81
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "ventricular tachycardia",
+      "joint restriction",
+      "elderly"
+    ],
+    "frame_id": "dsc_dq_which_therapy_d_s_c"
+  },
+  {
+    "query": "anything for progressive muscle weakness",
+    "entities": [
+      {
+        "text": "progressive muscle weakness",
+        "label": "SYMPTOM",
+        "start": 13,
+        "end": 40
+      }
+    ],
+    "category": "single_symptom",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "progressive muscle weakness"
+    ],
+    "frame_id": "inf_anything_for_s"
+  },
+  {
+    "query": "which medicine helps relieve sores in the mouth during lactation",
+    "entities": [
+      {
+        "text": "sores in the mouth",
+        "label": "SYMPTOM",
+        "start": 29,
+        "end": 47
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 55,
+        "end": 64
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "can_help_relief",
+    "difficulty": "medium",
+    "source_concepts": [
+      "sores in the mouth",
+      "lactation"
+    ],
+    "frame_id": "sc_help_which_relieves_s_c"
+  },
+  {
+    "query": "therapies indicated for leukopenia",
+    "entities": [
+      {
+        "text": "leukopenia",
+        "label": "DISEASE",
+        "start": 24,
+        "end": 34
+      }
+    ],
+    "category": "single_disease",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "leukopenia"
+    ],
+    "frame_id": "d_therapies_indicated"
+  },
+  {
+    "query": "need something for sores in the mouth during breastfeeding",
+    "entities": [
+      {
+        "text": "sores in the mouth",
+        "label": "SYMPTOM",
+        "start": 19,
+        "end": 37
+      },
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 45,
+        "end": 58
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "sores in the mouth",
+      "breastfeeding"
+    ],
+    "frame_id": "sc_inf_need_something_s_c"
+  },
+  {
+    "query": "relief for weakness and rigors",
+    "entities": [
+      {
+        "text": "weakness",
+        "label": "SYMPTOM",
+        "start": 11,
+        "end": 19
+      },
+      {
+        "text": "rigors",
+        "label": "SYMPTOM",
+        "start": 24,
+        "end": 30
+      }
+    ],
+    "category": "multiple_same_type",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "weakness",
+      "rigors"
+    ],
+    "frame_id": "ss_relief_s1_s2"
+  },
+  {
+    "query": "treatment for broncho-pulmonary infections in cystic fibrosis during lactation",
+    "entities": [
+      {
+        "text": "broncho-pulmonary infections in cystic fibrosis",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 61
+      },
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 69,
+        "end": 78
+      }
+    ],
+    "category": "difficult_boundary_cases",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "broncho-pulmonary infections in cystic fibrosis",
+      "lactation"
+    ],
+    "frame_id": "diff_d_c_bound_treatment_d_c"
+  },
+  {
+    "query": "medicines for abdominal pain and nausea during pregnancy",
+    "entities": [
+      {
+        "text": "abdominal pain",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 28
+      },
+      {
+        "text": "nausea",
+        "label": "SYMPTOM",
+        "start": 33,
+        "end": 39
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 47,
+        "end": 56
+      }
+    ],
+    "category": "three_entity_ssc",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "abdominal pain",
+      "nausea",
+      "pregnancy"
+    ],
+    "frame_id": "ssc_meds_s1_s2_c"
+  },
+  {
+    "query": "treatment for cardiomegaly with nausea",
+    "entities": [
+      {
+        "text": "cardiomegaly",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 26
+      },
+      {
+        "text": "nausea",
+        "label": "SYMPTOM",
+        "start": 32,
+        "end": 38
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "informal_brief",
+    "difficulty": "easy",
+    "source_concepts": [
+      "cardiomegaly",
+      "nausea"
+    ],
+    "frame_id": "ds_inf_treatment_d_s"
+  },
+  {
+    "query": "which drug treats angina and relieves fever",
+    "entities": [
+      {
+        "text": "angina",
+        "label": "DISEASE",
+        "start": 18,
+        "end": 24
+      },
+      {
+        "text": "fever",
+        "label": "SYMPTOM",
+        "start": 38,
+        "end": 43
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "angina",
+      "fever"
+    ],
+    "frame_id": "ds_dq_which_drug_d_s"
+  },
+  {
+    "query": "managing conjunctivitis accompanied by blunted affect",
+    "entities": [
+      {
+        "text": "conjunctivitis",
+        "label": "DISEASE",
+        "start": 9,
+        "end": 23
+      },
+      {
+        "text": "blunted affect",
+        "label": "SYMPTOM",
+        "start": 39,
+        "end": 53
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "search_style",
+    "difficulty": "medium",
+    "source_concepts": [
+      "conjunctivitis",
+      "blunted affect"
+    ],
+    "frame_id": "ds_managing_d_with_s"
+  },
+  {
+    "query": "what medicine relieves acute seizures",
+    "entities": [
+      {
+        "text": "seizures",
+        "label": "SYMPTOM",
+        "start": 29,
+        "end": 37
+      }
+    ],
+    "category": "difficult_boundary_cases",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "seizures"
+    ],
+    "frame_id": "b_sz_3"
+  },
+  {
+    "query": "treatment for immune thrombocytopenic purpura",
+    "entities": [
+      {
+        "text": "immune thrombocytopenic purpura",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 45
+      }
+    ],
+    "category": "single_disease",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "immune thrombocytopenic purpura"
+    ],
+    "frame_id": "d_treatment_for"
+  },
+  {
+    "query": "what helps treat complex partial seizures and relieve difficulties with sleep maintenance in hepatic impairment",
+    "entities": [
+      {
+        "text": "complex partial seizures",
+        "label": "DISEASE",
+        "start": 17,
+        "end": 41
+      },
+      {
+        "text": "difficulties with sleep maintenance",
+        "label": "SYMPTOM",
+        "start": 54,
+        "end": 89
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 93,
+        "end": 111
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "can_help_relief",
+    "difficulty": "hard",
+    "source_concepts": [
+      "complex partial seizures",
+      "difficulties with sleep maintenance",
+      "hepatic impairment"
+    ],
+    "frame_id": "dsc_help_what_can_help_d_s_c"
+  },
+  {
+    "query": "managing acute toxic leukoencephalopathy accompanied by sores in the mouth in renal impairment",
+    "entities": [
+      {
+        "text": "acute toxic leukoencephalopathy",
+        "label": "DISEASE",
+        "start": 9,
+        "end": 40
+      },
+      {
+        "text": "sores in the mouth",
+        "label": "SYMPTOM",
+        "start": 56,
+        "end": 74
+      },
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 78,
+        "end": 94
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "search_style",
+    "difficulty": "hard",
+    "source_concepts": [
+      "acute toxic leukoencephalopathy",
+      "sores in the mouth",
+      "renal impairment"
+    ],
+    "frame_id": "dsc_managing_d_s_c"
+  },
+  {
+    "query": "locate therapies for neutropenia in pregnancy",
+    "entities": [
+      {
+        "text": "neutropenia",
+        "label": "DISEASE",
+        "start": 21,
+        "end": 32
+      },
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 36,
+        "end": 45
+      }
+    ],
+    "category": "disease_condition",
+    "style": "action_oriented",
+    "difficulty": "medium",
+    "source_concepts": [
+      "neutropenia",
+      "pregnancy"
+    ],
+    "frame_id": "act_locate_therapies_d_c"
+  },
+  {
+    "query": "what options exist for complex partial seizures accompanied by tremor in elderly patients",
+    "entities": [
+      {
+        "text": "complex partial seizures",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 47
+      },
+      {
+        "text": "tremor",
+        "label": "SYMPTOM",
+        "start": 63,
+        "end": 69
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 73,
+        "end": 80
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "complex partial seizures",
+      "tremor",
+      "elderly"
+    ],
+    "frame_id": "dsc_dq_options_d_s_c"
+  },
+  {
+    "query": "how to treat respiratory failure accompanied by hypotonia",
+    "entities": [
+      {
+        "text": "respiratory failure",
+        "label": "DISEASE",
+        "start": 13,
+        "end": 32
+      },
+      {
+        "text": "hypotonia",
+        "label": "SYMPTOM",
+        "start": 48,
+        "end": 57
+      }
+    ],
+    "category": "disease_symptom",
+    "style": "direct_question",
+    "difficulty": "medium",
+    "source_concepts": [
+      "respiratory failure",
+      "hypotonia"
+    ],
+    "frame_id": "ds_dq_how_to_treat_d_s"
+  },
+  {
+    "query": "drugs for progressive muscle weakness for elderly patients",
+    "entities": [
+      {
+        "text": "progressive muscle weakness",
+        "label": "SYMPTOM",
+        "start": 10,
+        "end": 37
+      },
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 42,
+        "end": 49
+      }
+    ],
+    "category": "symptom_condition",
+    "style": "search_style",
+    "difficulty": "easy",
+    "source_concepts": [
+      "progressive muscle weakness",
+      "elderly"
+    ],
+    "frame_id": "sc_drugs_s_c"
+  },
+  {
+    "query": "kindly what is the packaging format for vials available for order",
+    "entities": [],
+    "category": "no_entity",
+    "style": "direct_question",
+    "difficulty": "easy",
+    "source_concepts": [],
+    "frame_id": "ne_vial_packaging_v"
+  },
+  {
+    "query": "what options exist for angina accompanied by difficulties with sleep onset in patients with hepatic impairment",
+    "entities": [
+      {
+        "text": "angina",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 29
+      },
+      {
+        "text": "difficulties with sleep onset",
+        "label": "SYMPTOM",
+        "start": 45,
+        "end": 74
+      },
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 92,
+        "end": 110
+      }
+    ],
+    "category": "disease_symptom_condition",
+    "style": "direct_question",
+    "difficulty": "hard",
+    "source_concepts": [
+      "angina",
+      "difficulties with sleep onset",
+      "hepatic impairment"
+    ],
+    "frame_id": "dsc_dq_options_d_s_c"
+  }
+]

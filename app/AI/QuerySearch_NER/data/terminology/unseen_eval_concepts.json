@@ -1,0 +1,30 @@
+{
+  "_comment": "TEST-ONLY vocabulary. Deliberately NOT present in terminology_bank.json. Used only to build the unseen-concept portion of the test set, to check whether the NER model generalizes beyond memorized terminology. The generator asserts zero overlap with terminology_bank.json before running. Never merge these into the training bank.",
+  "labels": ["DISEASE", "SYMPTOM", "CONDITION"],
+  "concepts": {
+    "DISEASE": [
+      "migraine",
+      "tuberculosis",
+      "psoriasis",
+      "gout",
+      "glaucoma",
+      "hepatitis B",
+      "chronic kidney disease",
+      "COPD"
+    ],
+    "SYMPTOM": [
+      "sore throat",
+      "blurred vision",
+      "constipation",
+      "palpitations",
+      "back pain",
+      "insomnia"
+    ],
+    "CONDITION": [
+      "obesity",
+      "immunocompromised",
+      "adolescents",
+      "geriatric patients"
+    ]
+  }
+}

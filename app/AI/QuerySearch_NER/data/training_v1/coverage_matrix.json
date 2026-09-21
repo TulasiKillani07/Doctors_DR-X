@@ -1,0 +1,87 @@
+{
+  "seed": 42,
+  "train": {
+    "total": 764,
+    "by_category": {
+      "difficult_boundary_cases": 44,
+      "disease_condition": 89,
+      "disease_symptom": 90,
+      "disease_symptom_condition": 40,
+      "multiple_same_type": 59,
+      "no_entity": 30,
+      "single_condition": 51,
+      "single_disease": 155,
+      "single_symptom": 136,
+      "symptom_condition": 70
+    },
+    "by_difficulty": {
+      "easy": 372,
+      "hard": 84,
+      "medium": 308
+    },
+    "entities_by_label": {
+      "CONDITION": 322,
+      "DISEASE": 468,
+      "SYMPTOM": 376
+    },
+    "queries_by_entity_count": {
+      "0": 30,
+      "1": 342,
+      "2": 352,
+      "3": 40
+    }
+  },
+  "test_seen_concept_new_phrasing": {
+    "total": 69,
+    "by_category": {
+      "test_seen_concept_new_phrasing": 69
+    },
+    "by_difficulty": {
+      "medium": 69
+    },
+    "entities_by_label": {
+      "CONDITION": 29,
+      "DISEASE": 15,
+      "SYMPTOM": 25
+    },
+    "queries_by_entity_count": {
+      "1": 69
+    }
+  },
+  "test_unseen_concept": {
+    "total": 58,
+    "by_category": {
+      "test_unseen_concept": 58
+    },
+    "by_difficulty": {
+      "hard": 58
+    },
+    "entities_by_label": {
+      "CONDITION": 17,
+      "DISEASE": 22,
+      "SYMPTOM": 19
+    },
+    "queries_by_entity_count": {
+      "1": 58
+    }
+  },
+  "test_total": {
+    "total": 127,
+    "by_category": {
+      "test_seen_concept_new_phrasing": 69,
+      "test_unseen_concept": 58
+    },
+    "by_difficulty": {
+      "hard": 58,
+      "medium": 69
+    },
+    "entities_by_label": {
+      "CONDITION": 46,
+      "DISEASE": 37,
+      "SYMPTOM": 44
+    },
+    "queries_by_entity_count": {
+      "1": 127
+    }
+  }
+}

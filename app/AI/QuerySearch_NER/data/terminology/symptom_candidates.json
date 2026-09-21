@@ -1,0 +1,2000 @@
+[
+  {
+    "label": "SYMPTOM",
+    "concept": "abdominal distension",
+    "normalized_concept": "abdominal distension",
+    "source_drug": "Frusemide + Spironolactone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "abdominal pain",
+    "normalized_concept": "abdominal pain",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Acute and chronic anxiety",
+    "normalized_concept": "acute and chronic anxiety",
+    "source_drug": "Clobazam",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "aggression",
+    "normalized_concept": "aggression",
+    "source_drug": "Clobazam",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "agitation",
+    "normalized_concept": "agitation",
+    "source_drug": "Amisulpride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "allergic reactions",
+    "normalized_concept": "allergic reactions",
+    "source_drug": "Insulin Injection Soluble + Biphasic Isophane Insulin",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "alopecia",
+    "normalized_concept": "alopecia",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "anaemia",
+    "normalized_concept": "anaemia",
+    "source_drug": "Fludarabine Phosphate",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "angina",
+    "normalized_concept": "angina",
+    "source_drug": "Clopidogrel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "angiokeratoma",
+    "normalized_concept": "angiokeratoma",
+    "source_drug": "Agalsidase Beta",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "ankle swelling",
+    "normalized_concept": "ankle swelling",
+    "source_drug": "Telmisartan + Amlodipine",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "anorexia",
+    "normalized_concept": "anorexia",
+    "source_drug": "Belumosudil",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "anxiety",
+    "normalized_concept": "anxiety",
+    "source_drug": "Amisulpride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "arthralgia",
+    "normalized_concept": "arthralgia",
+    "source_drug": "Belumosudil",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "asthenia",
+    "normalized_concept": "asthenia",
+    "source_drug": "Cabazitaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "ataxia",
+    "normalized_concept": "ataxia",
+    "source_drug": "Clobazam",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "atrial fibrillation",
+    "normalized_concept": "atrial fibrillation",
+    "source_drug": "Clopidogrel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "atrial flutter",
+    "normalized_concept": "atrial flutter",
+    "source_drug": "Amiodarone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "B-cell CLL symptoms",
+    "normalized_concept": "b-cell cll symptoms",
+    "source_drug": "Fludarabine Phosphate",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "back pain",
+    "normalized_concept": "back pain",
+    "source_drug": "Cabazitaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "blunted affect",
+    "normalized_concept": "blunted affect",
+    "source_drug": "Amisulpride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "bone crises",
+    "normalized_concept": "bone crises",
+    "source_drug": "Imiglucerase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "bone pain",
+    "normalized_concept": "bone pain",
+    "source_drug": "Imiglucerase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "bradycardia",
+    "normalized_concept": "bradycardia",
+    "source_drug": "Ramipril + Metoprolol Succinate Extended Release",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "breathlessness",
+    "normalized_concept": "breathlessness",
+    "source_drug": "Frusemide + Spironolactone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "cardiac disease",
+    "normalized_concept": "cardiac disease",
+    "source_drug": "Laronidase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "cardiomegaly",
+    "normalized_concept": "cardiomegaly",
+    "source_drug": "Alglucosidase Alfa",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "change or absence of menstrual period",
+    "normalized_concept": "change or absence of menstrual period",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "chest pain",
+    "normalized_concept": "chest pain",
+    "source_drug": "Clopidogrel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "chills",
+    "normalized_concept": "chills",
+    "source_drug": "Alemtuzumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "cognitive disorders",
+    "normalized_concept": "cognitive disorders",
+    "source_drug": "Zolpidem Tartrate",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "complex partial seizures",
+    "normalized_concept": "complex partial seizures",
+    "source_drug": "Divalproex Sodium",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "conjunctivitis",
+    "normalized_concept": "conjunctivitis",
+    "source_drug": "Dupilumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "constipation",
+    "normalized_concept": "constipation",
+    "source_drug": "Clobazam",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "contusion",
+    "normalized_concept": "contusion",
+    "source_drug": "Belumosudil",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "corneal clouding",
+    "normalized_concept": "corneal clouding",
+    "source_drug": "Laronidase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "cough",
+    "normalized_concept": "cough",
+    "source_drug": "Belumosudil",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Decrease in red/white blood cell count",
+    "normalized_concept": "decrease in red/white blood cell count",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Deep vein thrombosis symptoms",
+    "normalized_concept": "deep vein thrombosis symptoms",
+    "source_drug": "Enoxaparin Sodium",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Delusions",
+    "normalized_concept": "delusions",
+    "source_drug": "Amisulpride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "diarrhea",
+    "normalized_concept": "diarrhea",
+    "source_drug": "Belumosudil",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "diarrhoea",
+    "normalized_concept": "diarrhoea",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "difficulties with sleep maintenance",
+    "normalized_concept": "difficulties with sleep maintenance",
+    "source_drug": "Zolpidem Tartrate",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "difficulties with sleep onset",
+    "normalized_concept": "difficulties with sleep onset",
+    "source_drug": "Zolpidem Tartrate",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "difficulty walking",
+    "normalized_concept": "difficulty walking",
+    "source_drug": "Alglucosidase Alfa",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "dizziness",
+    "normalized_concept": "dizziness",
+    "source_drug": "Telmisartan",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "dry mouth",
+    "normalized_concept": "dry mouth",
+    "source_drug": "Clobazam",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "dry skin",
+    "normalized_concept": "dry skin",
+    "source_drug": "Glibenclamide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "dryness of the mouth",
+    "normalized_concept": "dryness of the mouth",
+    "source_drug": "Glibenclamide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "dysostosis multiplex",
+    "normalized_concept": "dysostosis multiplex",
+    "source_drug": "Laronidase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "dysphagia",
+    "normalized_concept": "dysphagia",
+    "source_drug": "Belumosudil",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "dyspnoea",
+    "normalized_concept": "dyspnoea",
+    "source_drug": "Alemtuzumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "eczematous skin lesions",
+    "normalized_concept": "eczematous skin lesions",
+    "source_drug": "Dupilumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "effusion",
+    "normalized_concept": "effusion",
+    "source_drug": "Hylan G-F 20",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "electrolyte disturbances",
+    "normalized_concept": "electrolyte disturbances",
+    "source_drug": "Ramipril + Hydrochlorothiazide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "electrolyte imbalance symptoms",
+    "normalized_concept": "electrolyte imbalance symptoms",
+    "source_drug": "Frusemide + Spironolactone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Elevated blood glucose",
+    "normalized_concept": "elevated blood glucose",
+    "source_drug": "Insulin Glargine + Lixisenatide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Elevated blood glucose levels",
+    "normalized_concept": "elevated blood glucose levels",
+    "source_drug": "Glimepiride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Elevated blood pressure",
+    "normalized_concept": "elevated blood pressure",
+    "source_drug": "Telmisartan",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "elevated liver enzymes",
+    "normalized_concept": "elevated liver enzymes",
+    "source_drug": "Teriflunomide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "emotional and social withdrawal",
+    "normalized_concept": "emotional and social withdrawal",
+    "source_drug": "Amisulpride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "erythema",
+    "normalized_concept": "erythema",
+    "source_drug": "Avalglucosidase Alfa",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "essential hypertension",
+    "normalized_concept": "essential hypertension",
+    "source_drug": "Telmisartan + Amlodipine",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "exercise intolerance",
+    "normalized_concept": "exercise intolerance",
+    "source_drug": "Alglucosidase Alfa",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "fatigue",
+    "normalized_concept": "fatigue",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "fever",
+    "normalized_concept": "fever",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "flatulence",
+    "normalized_concept": "flatulence",
+    "source_drug": "Metformin Hydrochloride (SR) + Glimepiride + Voglibose",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "fluid retention",
+    "normalized_concept": "fluid retention",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "flushing",
+    "normalized_concept": "flushing",
+    "source_drug": "Telmisartan + Amlodipine",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "from treatment",
+    "normalized_concept": "from treatment",
+    "source_drug": "Insulin Glargine + Lixisenatide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "gastrointestinal symptoms",
+    "normalized_concept": "gastrointestinal symptoms",
+    "source_drug": "Metformin Hydrochloride (SR) + Glimepiride + Voglibose",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "growth retardation in children",
+    "normalized_concept": "growth retardation in children",
+    "source_drug": "Imiglucerase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "hair loss",
+    "normalized_concept": "hair loss",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "hallucinations",
+    "normalized_concept": "hallucinations",
+    "source_drug": "Amisulpride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "headache",
+    "normalized_concept": "headache",
+    "source_drug": "Telmisartan",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "hematuria",
+    "normalized_concept": "hematuria",
+    "source_drug": "Cabazitaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "hepatosplenomegaly",
+    "normalized_concept": "hepatosplenomegaly",
+    "source_drug": "Laronidase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "high blood pressure",
+    "normalized_concept": "high blood pressure",
+    "source_drug": "Belumosudil",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "hyperglycemia",
+    "normalized_concept": "hyperglycemia",
+    "source_drug": "Insulin Glargine + Lixisenatide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "hypertension",
+    "normalized_concept": "hypertension",
+    "source_drug": "Telmisartan",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "hypertensive crisis",
+    "normalized_concept": "hypertensive crisis",
+    "source_drug": "Frusemide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "hypoglycemia",
+    "normalized_concept": "hypoglycemia",
+    "source_drug": "Insulin Glargine + Lixisenatide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "hypoglycemic symptoms",
+    "normalized_concept": "hypoglycemic symptoms",
+    "source_drug": "Glimepiride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "hypohidrosis",
+    "normalized_concept": "hypohidrosis",
+    "source_drug": "Agalsidase Beta",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "hypotonia",
+    "normalized_concept": "hypotonia",
+    "source_drug": "Alglucosidase Alfa",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "immune thrombocytopenic purpura",
+    "normalized_concept": "immune thrombocytopenic purpura",
+    "source_drug": "Alemtuzumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "infections",
+    "normalized_concept": "infections",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "inflammation of anorectal region",
+    "normalized_concept": "inflammation of anorectal region",
+    "source_drug": "Beclomethasone Dipropionate + Phenylephrine Hydrochloride + Lignocaine Hydrochloride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "influenza like illness",
+    "normalized_concept": "influenza like illness",
+    "source_drug": "Avalglucosidase Alfa",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "influenza-like symptoms",
+    "normalized_concept": "influenza-like symptoms",
+    "source_drug": "Telmisartan + Amlodipine + Hydrochlorothiazide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "infusion associated reactions",
+    "normalized_concept": "infusion associated reactions",
+    "source_drug": "Alemtuzumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "infusion-associated reactions",
+    "normalized_concept": "infusion-associated reactions",
+    "source_drug": "Agalsidase Beta",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "injection site lipodystrophy",
+    "normalized_concept": "injection site lipodystrophy",
+    "source_drug": "Insulin Injection Soluble + Biphasic Isophane Insulin",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "injection site reactions",
+    "normalized_concept": "injection site reactions",
+    "source_drug": "Insulin Glargine + Lixisenatide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "insomnia",
+    "normalized_concept": "insomnia",
+    "source_drug": "Amisulpride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "intense thirst",
+    "normalized_concept": "intense thirst",
+    "source_drug": "Glibenclamide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "intra-abdominal infection",
+    "normalized_concept": "intra-abdominal infection",
+    "source_drug": "Meropenem",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "irregular pulse",
+    "normalized_concept": "irregular pulse",
+    "source_drug": "Frusemide + Spironolactone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "irritability",
+    "normalized_concept": "irritability",
+    "source_drug": "Clobazam",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "joint discomfort",
+    "normalized_concept": "joint discomfort",
+    "source_drug": "Hylan G-F 20",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "joint restriction",
+    "normalized_concept": "joint restriction",
+    "source_drug": "Laronidase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "lassitude",
+    "normalized_concept": "lassitude",
+    "source_drug": "Glimepiride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "leg cramps",
+    "normalized_concept": "leg cramps",
+    "source_drug": "Frusemide + Spironolactone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "leukopenia",
+    "normalized_concept": "leukopenia",
+    "source_drug": "Cabazitaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "lipodystrophy",
+    "normalized_concept": "lipodystrophy",
+    "source_drug": "Insulin Glargine",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "localized cutaneous amyloidosis",
+    "normalized_concept": "localized cutaneous amyloidosis",
+    "source_drug": "Insulin Injection Soluble + Biphasic Isophane Insulin",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "loss of appetite",
+    "normalized_concept": "loss of appetite",
+    "source_drug": "Metformin Hydrochloride Prolonged Release",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "lymphocyte count decrease",
+    "normalized_concept": "lymphocyte count decrease",
+    "source_drug": "Teriflunomide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Manic episodes in bipolar disorder",
+    "normalized_concept": "manic episodes in bipolar disorder",
+    "source_drug": "Divalproex Sodium",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "meningitis",
+    "normalized_concept": "meningitis",
+    "source_drug": "Meropenem",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "metallic taste",
+    "normalized_concept": "metallic taste",
+    "source_drug": "Metformin Hydrochloride (Prolonged Release) + Glimepiride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Metastatic castration-resistant prostate cancer symptoms",
+    "normalized_concept": "metastatic castration-resistant prostate cancer symptoms",
+    "source_drug": "Cabazitaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "mild to moderate hypertension",
+    "normalized_concept": "mild to moderate hypertension",
+    "source_drug": "Ramipril + Hydrochlorothiazide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Moderate-to-severe atopic dermatitis",
+    "normalized_concept": "moderate-to-severe atopic dermatitis",
+    "source_drug": "Dupilumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "mood instability",
+    "normalized_concept": "mood instability",
+    "source_drug": "Divalproex Sodium",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "muscle or bone pain",
+    "normalized_concept": "muscle or bone pain",
+    "source_drug": "Belumosudil",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "muscle weakness",
+    "normalized_concept": "muscle weakness",
+    "source_drug": "Frusemide + Spironolactone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "myalgia",
+    "normalized_concept": "myalgia",
+    "source_drug": "Glimepiride + Pioglitazone + Metformin Hydrochloride Extended Release",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "myocardial infarction symptoms",
+    "normalized_concept": "myocardial infarction symptoms",
+    "source_drug": "Clopidogrel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "nail changes",
+    "normalized_concept": "nail changes",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "nasopharyngitis",
+    "normalized_concept": "nasopharyngitis",
+    "source_drug": "Insulin Glargine + Lixisenatide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "nausea",
+    "normalized_concept": "nausea",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "negative symptoms",
+    "normalized_concept": "negative symptoms",
+    "source_drug": "Amisulpride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "nephropathy",
+    "normalized_concept": "nephropathy",
+    "source_drug": "Alemtuzumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "neutropenia",
+    "normalized_concept": "neutropenia",
+    "source_drug": "Fludarabine Phosphate",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "non-productive tickling cough",
+    "normalized_concept": "non-productive tickling cough",
+    "source_drug": "Ramipril + Hydrochlorothiazide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "oedema",
+    "normalized_concept": "oedema",
+    "source_drug": "Telmisartan + Amlodipine",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "opportunistic infections",
+    "normalized_concept": "opportunistic infections",
+    "source_drug": "Fludarabine Phosphate",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "osteonecrosis",
+    "normalized_concept": "osteonecrosis",
+    "source_drug": "Imiglucerase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "pain",
+    "normalized_concept": "pain",
+    "source_drug": "Teicoplanin",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "pain crises",
+    "normalized_concept": "pain crises",
+    "source_drug": "Agalsidase Beta",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "palpitations",
+    "normalized_concept": "palpitations",
+    "source_drug": "Telmisartan + Amlodipine",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "peripheral arterial disease symptoms",
+    "normalized_concept": "peripheral arterial disease symptoms",
+    "source_drug": "Clopidogrel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "peripheral edema",
+    "normalized_concept": "peripheral edema",
+    "source_drug": "Belumosudil",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "peripheral neuropathy",
+    "normalized_concept": "peripheral neuropathy",
+    "source_drug": "Teriflunomide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "pharyngitis",
+    "normalized_concept": "pharyngitis",
+    "source_drug": "Glimepiride + Pioglitazone + Metformin Hydrochloride Extended Release",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "pneumonia",
+    "normalized_concept": "pneumonia",
+    "source_drug": "Meropenem",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "positive symptoms",
+    "normalized_concept": "positive symptoms",
+    "source_drug": "Amisulpride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "post haemorrhoidectomy pain",
+    "normalized_concept": "post haemorrhoidectomy pain",
+    "source_drug": "Beclomethasone Dipropionate + Phenylephrine Hydrochloride + Lignocaine Hydrochloride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "postprandial glucose elevation",
+    "normalized_concept": "postprandial glucose elevation",
+    "source_drug": "Insulin Glulisine",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "postprandial hyperglycemia",
+    "normalized_concept": "postprandial hyperglycemia",
+    "source_drug": "Metformin Hydrochloride (Sustained Release) + Voglibose",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "proctitis symptoms",
+    "normalized_concept": "proctitis symptoms",
+    "source_drug": "Beclomethasone Dipropionate + Phenylephrine Hydrochloride + Lignocaine Hydrochloride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Progressive muscle weakness",
+    "normalized_concept": "progressive muscle weakness",
+    "source_drug": "Alglucosidase Alfa",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Progressive symptoms of Fabry disease",
+    "normalized_concept": "progressive symptoms of fabry disease",
+    "source_drug": "Agalsidase Beta",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Progressive symptoms of Gaucher disease",
+    "normalized_concept": "progressive symptoms of gaucher disease",
+    "source_drug": "Imiglucerase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Progressive symptoms of Mucopolysaccharidosis I",
+    "normalized_concept": "progressive symptoms of mucopolysaccharidosis i",
+    "source_drug": "Laronidase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "pruritus",
+    "normalized_concept": "pruritus",
+    "source_drug": "Alemtuzumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "pruritus ani",
+    "normalized_concept": "pruritus ani",
+    "source_drug": "Beclomethasone Dipropionate + Phenylephrine Hydrochloride + Lignocaine Hydrochloride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "pulmonary embolism symptoms",
+    "normalized_concept": "pulmonary embolism symptoms",
+    "source_drug": "Enoxaparin Sodium",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "pyrexia",
+    "normalized_concept": "pyrexia",
+    "source_drug": "Belumosudil",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "rapid heart rate",
+    "normalized_concept": "rapid heart rate",
+    "source_drug": "Amiodarone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "rapid ventricular rhythm",
+    "normalized_concept": "rapid ventricular rhythm",
+    "source_drug": "Amiodarone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "rash",
+    "normalized_concept": "rash",
+    "source_drug": "Alemtuzumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "ravenous hunger",
+    "normalized_concept": "ravenous hunger",
+    "source_drug": "Glimepiride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "recurrent respiratory infections",
+    "normalized_concept": "recurrent respiratory infections",
+    "source_drug": "Laronidase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "redness",
+    "normalized_concept": "redness",
+    "source_drug": "Teicoplanin",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "reduced range of motion",
+    "normalized_concept": "reduced range of motion",
+    "source_drug": "Hylan G-F 20",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "reduced walking ability",
+    "normalized_concept": "reduced walking ability",
+    "source_drug": "Laronidase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Relapsing multiple sclerosis symptoms",
+    "normalized_concept": "relapsing multiple sclerosis symptoms",
+    "source_drug": "Teriflunomide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Relapsing remitting multiple sclerosis symptoms",
+    "normalized_concept": "relapsing remitting multiple sclerosis symptoms",
+    "source_drug": "Alemtuzumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "renal failure",
+    "normalized_concept": "renal failure",
+    "source_drug": "Agalsidase Beta",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "respiratory failure",
+    "normalized_concept": "respiratory failure",
+    "source_drug": "Alglucosidase Alfa",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "restlessness",
+    "normalized_concept": "restlessness",
+    "source_drug": "Glimepiride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "rigors",
+    "normalized_concept": "rigors",
+    "source_drug": "Teicoplanin",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "seizures",
+    "normalized_concept": "seizures",
+    "source_drug": "Divalproex Sodium",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Serious rhythm disturbances",
+    "normalized_concept": "serious rhythm disturbances",
+    "source_drug": "Amiodarone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "short stature",
+    "normalized_concept": "short stature",
+    "source_drug": "Laronidase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "shortness of breath",
+    "normalized_concept": "shortness of breath",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Signs and symptoms of bacterial infections",
+    "normalized_concept": "signs and symptoms of bacterial infections",
+    "source_drug": "Meropenem",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "signs of autoimmune disorders",
+    "normalized_concept": "signs of autoimmune disorders",
+    "source_drug": "Alemtuzumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "signs of haemorrhage",
+    "normalized_concept": "signs of haemorrhage",
+    "source_drug": "Enoxaparin Sodium",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "signs of secondary hyperaldosteronism",
+    "normalized_concept": "signs of secondary hyperaldosteronism",
+    "source_drug": "Frusemide + Spironolactone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "simple and complex absence seizures",
+    "normalized_concept": "simple and complex absence seizures",
+    "source_drug": "Divalproex Sodium Extended Release",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "sinusitis",
+    "normalized_concept": "sinusitis",
+    "source_drug": "Telmisartan + Amlodipine + Hydrochlorothiazide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "skeletal pathology",
+    "normalized_concept": "skeletal pathology",
+    "source_drug": "Imiglucerase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "skin and soft tissue infection",
+    "normalized_concept": "skin and soft tissue infection",
+    "source_drug": "Meropenem",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "sleep apnea",
+    "normalized_concept": "sleep apnea",
+    "source_drug": "Laronidase",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "sleepiness",
+    "normalized_concept": "sleepiness",
+    "source_drug": "Glimepiride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "somnolence",
+    "normalized_concept": "somnolence",
+    "source_drug": "Telmisartan + Amlodipine + Hydrochlorothiazide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "sores in the mouth",
+    "normalized_concept": "sores in the mouth",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "STEMI symptoms",
+    "normalized_concept": "stemi symptoms",
+    "source_drug": "Enoxaparin Sodium",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "stiffness",
+    "normalized_concept": "stiffness",
+    "source_drug": "Hylan G-F 20",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "stroke",
+    "normalized_concept": "stroke",
+    "source_drug": "Agalsidase Beta",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "stroke symptoms",
+    "normalized_concept": "stroke symptoms",
+    "source_drug": "Clopidogrel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "supraventricular tachycardia",
+    "normalized_concept": "supraventricular tachycardia",
+    "source_drug": "Amiodarone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "sweating",
+    "normalized_concept": "sweating",
+    "source_drug": "Glimepiride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "swelling",
+    "normalized_concept": "swelling",
+    "source_drug": "Hylan G-F 20",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "swelling of hands/feet/legs/weight gain",
+    "normalized_concept": "swelling of hands/feet/legs/weight gain",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Symptoms of acute coronary syndrome",
+    "normalized_concept": "symptoms of acute coronary syndrome",
+    "source_drug": "Clopidogrel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "symptoms of cardiac failure",
+    "normalized_concept": "symptoms of cardiac failure",
+    "source_drug": "Frusemide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "symptoms of hyperglycemia",
+    "normalized_concept": "symptoms of hyperglycemia",
+    "source_drug": "Glimepiride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "symptoms of Wolff-Parkinson-White syndrome",
+    "normalized_concept": "symptoms of wolff-parkinson-white syndrome",
+    "source_drug": "Amiodarone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "systemic sepsis symptoms",
+    "normalized_concept": "systemic sepsis symptoms",
+    "source_drug": "Teicoplanin",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Tachyarrhythmias",
+    "normalized_concept": "tachyarrhythmias",
+    "source_drug": "Amiodarone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "tachycardia",
+    "normalized_concept": "tachycardia",
+    "source_drug": "Glimepiride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "thought disorders",
+    "normalized_concept": "thought disorders",
+    "source_drug": "Amisulpride",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "thrombocytopenia",
+    "normalized_concept": "thrombocytopenia",
+    "source_drug": "Fludarabine Phosphate",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "thyroid dysfunction",
+    "normalized_concept": "thyroid dysfunction",
+    "source_drug": "Alemtuzumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "tickling cough",
+    "normalized_concept": "tickling cough",
+    "source_drug": "Ramipril + Amlodipine",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "transient ischemic attack symptoms",
+    "normalized_concept": "transient ischemic attack symptoms",
+    "source_drug": "Clopidogrel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "tremor",
+    "normalized_concept": "tremor",
+    "source_drug": "Divalproex Sodium",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "unstable angina symptoms",
+    "normalized_concept": "unstable angina symptoms",
+    "source_drug": "Enoxaparin Sodium",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "upper respiratory tract infection",
+    "normalized_concept": "upper respiratory tract infection",
+    "source_drug": "Telmisartan + Amlodipine + Hydrochlorothiazide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "urinary frequency",
+    "normalized_concept": "urinary frequency",
+    "source_drug": "Glibenclamide",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "urinary tract infection",
+    "normalized_concept": "urinary tract infection",
+    "source_drug": "Meropenem",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "urticaria",
+    "normalized_concept": "urticaria",
+    "source_drug": "Alemtuzumab",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "ventricular fibrillation",
+    "normalized_concept": "ventricular fibrillation",
+    "source_drug": "Amiodarone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "ventricular tachycardia",
+    "normalized_concept": "ventricular tachycardia",
+    "source_drug": "Amiodarone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "visual impairment",
+    "normalized_concept": "visual impairment",
+    "source_drug": "Insulin Glargine",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "vomiting",
+    "normalized_concept": "vomiting",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "warmth at infection site",
+    "normalized_concept": "warmth at infection site",
+    "source_drug": "Teicoplanin",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "weakness",
+    "normalized_concept": "weakness",
+    "source_drug": "Belumosudil",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "single-word candidate — confirm it is a real concept"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "weight gain",
+    "normalized_concept": "weight gain",
+    "source_drug": "Frusemide + Spironolactone",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "weight gain or loss",
+    "normalized_concept": "weight gain or loss",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "MEDIUM",
+    "review_reason": "phrase from symptom-source column"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "cardiac arrest related to ventricular fibrillation resistant to external electric shock",
+    "normalized_concept": "cardiac arrest related to ventricular fibrillation resistant to external electric shock",
+    "source_drug": "Amiodarone",
+    "source_column": "symptoms",
+    "confidence": "LOW",
+    "review_reason": "long phrase, likely a clause fragment"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "cardiovascular risk symptoms in high-risk patients aged 55 years or older",
+    "normalized_concept": "cardiovascular risk symptoms in high-risk patients aged 55 years or older",
+    "source_drug": "Telmisartan",
+    "source_column": "symptoms",
+    "confidence": "LOW",
+    "review_reason": "long phrase, likely a clause fragment"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "numbness/pins and needles/pain in joints or muscles",
+    "normalized_concept": "numbness/pins and needles/pain in joints or muscles",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "LOW",
+    "review_reason": "long phrase, likely a clause fragment"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Pain and bleeding associated with anal fissures and haemorrhoids",
+    "normalized_concept": "pain and bleeding associated with anal fissures and haemorrhoids",
+    "source_drug": "Beclomethasone Dipropionate + Phenylephrine Hydrochloride + Lignocaine Hydrochloride",
+    "source_column": "symptoms",
+    "confidence": "LOW",
+    "review_reason": "long phrase, likely a clause fragment"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Pain associated with osteoarthritis of the knee",
+    "normalized_concept": "pain associated with osteoarthritis of the knee",
+    "source_drug": "Hylan G-F 20",
+    "source_column": "symptoms",
+    "confidence": "LOW",
+    "review_reason": "long phrase, likely a clause fragment"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "redness and swelling of palms/soles of feet",
+    "normalized_concept": "redness and swelling of palms/soles of feet",
+    "source_drug": "Docetaxel",
+    "source_column": "symptoms",
+    "confidence": "LOW",
+    "review_reason": "long phrase, likely a clause fragment"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "Signs and symptoms of gram-positive bacterial infections",
+    "normalized_concept": "signs and symptoms of gram-positive bacterial infections",
+    "source_drug": "Teicoplanin",
+    "source_column": "symptoms",
+    "confidence": "LOW",
+    "review_reason": "long phrase, likely a clause fragment"
+  },
+  {
+    "label": "SYMPTOM",
+    "concept": "thromboembolic risk in surgical and medical patients",
+    "normalized_concept": "thromboembolic risk in surgical and medical patients",
+    "source_drug": "Enoxaparin Sodium",
+    "source_column": "symptoms",
+    "confidence": "LOW",
+    "review_reason": "long phrase, likely a clause fragment"
+  }
+]

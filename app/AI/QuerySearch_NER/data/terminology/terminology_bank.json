@@ -1,0 +1,1367 @@
+{
+  "labels": [
+    "CONDITION",
+    "DISEASE",
+    "SYMPTOM"
+  ],
+  "counts": {
+    "DISEASE": 41,
+    "SYMPTOM": 44,
+    "CONDITION": 8
+  },
+  "needs_final_check_count": 0,
+  "concepts": {
+    "DISEASE": [
+      {
+        "concept": "acid α-glucosidase deficiency",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "acid α-glucosidase deficiency",
+            "source_drug": "Alglucosidase Alfa",
+            "source_column": "indications"
+          }
+        ]
+      },
+      {
+        "concept": "acquired hemophilia a",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "acquired hemophilia A",
+            "source_drug": "Alemtuzumab",
+            "source_column": "contraindications"
+          }
+        ]
+      },
+      {
+        "concept": "acute generalized exanthematous pustulosis",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "Acute generalized exanthematous pustulosis",
+            "source_drug": "Teicoplanin",
+            "source_column": "warnings_precautions"
+          }
+        ]
+      },
+      {
+        "concept": "acute myopia and secondary angle-closure glaucoma",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "Acute Myopia and Secondary Angle-Closure Glaucoma",
+            "source_drug": "Telmisartan + Amlodipine + Hydrochlorothiazide",
+            "source_column": "warnings_precautions"
+          }
+        ]
+      },
+      {
+        "concept": "acute renal failure",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "acute renal failure",
+            "source_drug": "Frusemide + Spironolactone",
+            "source_column": "contraindications"
+          }
+        ]
+      },
+      {
+        "concept": "acute respiratory toxicity",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "Acute Respiratory Toxicity",
+            "source_drug": "Ramipril + Hydrochlorothiazide",
+            "source_column": "warnings_precautions"
+          }
+        ]
+      },
+      {
+        "concept": "acute toxic leukoencephalopathy",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "acute toxic leukoencephalopathy",
+            "source_drug": "Fludarabine Phosphate",
+            "source_column": "warnings_precautions"
+          }
+        ]
+      },
+      {
+        "concept": "alpha-galactosidase a deficiency",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "alpha-galactosidase A deficiency",
+            "source_drug": "Agalsidase Beta",
+            "source_column": "indications"
+          }
+        ]
+      },
+      {
+        "concept": "anaemia",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "anaemia",
+            "source_drug": "Cabazitaxel",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "anaemia",
+            "source_drug": "Fludarabine Phosphate",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "anaphylactic shock",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "anaphylactic shock",
+            "source_drug": "Teicoplanin",
+            "source_column": "warnings_precautions"
+          }
+        ]
+      },
+      {
+        "concept": "angina",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "angina",
+            "source_drug": "Amiodarone",
+            "source_column": "contraindications"
+          },
+          {
+            "concept": "angina",
+            "source_drug": "Clopidogrel",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "autoimmune hepatitis",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "autoimmune hepatitis",
+            "source_drug": "Alemtuzumab",
+            "source_column": "contraindications"
+          }
+        ]
+      },
+      {
+        "concept": "broncho-pulmonary infections in cystic fibrosis",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "broncho-pulmonary infections in cystic fibrosis",
+            "source_drug": "Meropenem",
+            "source_column": "indications"
+          }
+        ]
+      },
+      {
+        "concept": "cardiac insufficiency",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "cardiac insufficiency",
+            "source_drug": "Enoxaparin Sodium",
+            "source_column": "indications"
+          }
+        ]
+      },
+      {
+        "concept": "cardiomegaly",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "cardiomegaly",
+            "source_drug": "Alglucosidase Alfa",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "chronic gvhd",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "chronic GvHD",
+            "source_drug": "Belumosudil",
+            "source_column": "indications"
+          }
+        ]
+      },
+      {
+        "concept": "complex partial seizures",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "complex partial seizures",
+            "source_drug": "Divalproex Sodium",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "complicated intra-abdominal infections",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "complicated intra-abdominal infections",
+            "source_drug": "Meropenem",
+            "source_column": "indications"
+          }
+        ]
+      },
+      {
+        "concept": "complicated skin and soft tissue infections",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "complicated skin and soft tissue infections",
+            "source_drug": "Meropenem",
+            "source_column": "indications"
+          }
+        ]
+      },
+      {
+        "concept": "complicated urinary tract infections",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "complicated urinary tract infections",
+            "source_drug": "Meropenem",
+            "source_column": "indications"
+          }
+        ]
+      },
+      {
+        "concept": "conjunctivitis",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "conjunctivitis",
+            "source_drug": "Dupilumab",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "dysostosis multiplex",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "dysostosis multiplex",
+            "source_drug": "Laronidase",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "hepatosplenomegaly",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "hepatosplenomegaly",
+            "source_drug": "Laronidase",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "hyperglycemia",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "hyperglycemia",
+            "source_drug": "Insulin Glargine + Lixisenatide",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "hypoglycemia",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "hypoglycemia",
+            "source_drug": "Insulin Injection Soluble + Biphasic Isophane Insulin",
+            "source_column": "contraindications"
+          },
+          {
+            "concept": "hypoglycemia",
+            "source_drug": "Insulin Glargine + Lixisenatide",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "immune thrombocytopenic purpura",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "immune thrombocytopenic purpura",
+            "source_drug": "Alemtuzumab",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "leukopenia",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "leukopenia",
+            "source_drug": "Cabazitaxel",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "localized cutaneous amyloidosis",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "localized cutaneous amyloidosis",
+            "source_drug": "Insulin Injection Soluble + Biphasic Isophane Insulin",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "neutropenia",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "neutropenia",
+            "source_drug": "Fludarabine Phosphate",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "osteonecrosis",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "osteonecrosis",
+            "source_drug": "Imiglucerase",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "respiratory failure",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "respiratory failure",
+            "source_drug": "Glibenclamide + Metformin Hydrochloride (Sustained Release)",
+            "source_column": "contraindications"
+          },
+          {
+            "concept": "respiratory failure",
+            "source_drug": "Enoxaparin Sodium",
+            "source_column": "indications"
+          },
+          {
+            "concept": "respiratory failure",
+            "source_drug": "Alglucosidase Alfa",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "simple and complex absence seizures",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "simple and complex absence seizures",
+            "source_drug": "Divalproex Sodium Extended Release",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "sinusitis",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "sinusitis",
+            "source_drug": "Telmisartan + Amlodipine + Hydrochlorothiazide",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "sleep apnea",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "sleep apnea",
+            "source_drug": "Laronidase",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "stroke",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "stroke",
+            "source_drug": "Clopidogrel",
+            "source_column": "indications"
+          },
+          {
+            "concept": "stroke",
+            "source_drug": "Agalsidase Beta",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "thrombocytopenia",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "thrombocytopenia",
+            "source_drug": "Telmisartan + Amlodipine + Hydrochlorothiazide",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "thrombocytopenia",
+            "source_drug": "Fludarabine Phosphate",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "thyroid dysfunction",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "Thyroid dysfunction",
+            "source_drug": "Amiodarone",
+            "source_column": "contraindications"
+          },
+          {
+            "concept": "thyroid dysfunction",
+            "source_drug": "Alemtuzumab",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "toxic epidermal necrolysis",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "Toxic Epidermal Necrolysis",
+            "source_drug": "Teicoplanin",
+            "source_column": "warnings_precautions"
+          }
+        ]
+      },
+      {
+        "concept": "ventricular fibrillation",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "ventricular fibrillation",
+            "source_drug": "Amiodarone",
+            "source_column": "indications"
+          },
+          {
+            "concept": "ventricular fibrillation",
+            "source_drug": "Amiodarone",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "ventricular tachycardia",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "ventricular tachycardia",
+            "source_drug": "Amiodarone",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "wolff-parkinson-white syndrome tachycardia",
+        "label": "DISEASE",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "Wolff-Parkinson-White syndrome tachycardia",
+            "source_drug": "Amiodarone",
+            "source_column": "indications"
+          }
+        ]
+      }
+    ],
+    "SYMPTOM": [
+      {
+        "concept": "abdominal pain",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "abdominal pain",
+            "source_drug": "Docetaxel",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "anxiety",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "anxiety",
+            "source_drug": "Amisulpride",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "ataxia",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "ataxia",
+            "source_drug": "Clobazam",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "blunted affect",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "blunted affect",
+            "source_drug": "Amisulpride",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "bone crises",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "bone crises",
+            "source_drug": "Imiglucerase",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "bone pain",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "bone pain",
+            "source_drug": "Imiglucerase",
+            "source_column": "pregnancy_lactation"
+          },
+          {
+            "concept": "bone pain",
+            "source_drug": "Imiglucerase",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "difficulties with sleep maintenance",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "difficulties with sleep maintenance",
+            "source_drug": "Zolpidem Tartrate",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "difficulties with sleep onset",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "difficulties with sleep onset",
+            "source_drug": "Zolpidem Tartrate",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "dizziness",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "dizziness",
+            "source_drug": "Telmisartan",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "emotional and social withdrawal",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "emotional and social withdrawal",
+            "source_drug": "Amisulpride",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "exercise intolerance",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "exercise intolerance",
+            "source_drug": "Alglucosidase Alfa",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "fatigue",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "fatigue",
+            "source_drug": "Docetaxel",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "fever",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "fever",
+            "source_drug": "Insulin Glargine + Lixisenatide",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "fever",
+            "source_drug": "Docetaxel",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "headache",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "headache",
+            "source_drug": "Telmisartan",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "hypohidrosis",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "hypohidrosis",
+            "source_drug": "Agalsidase Beta",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "hypotonia",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "hypotonia",
+            "source_drug": "Zolpidem Tartrate",
+            "source_column": "pregnancy_lactation"
+          },
+          {
+            "concept": "hypotonia",
+            "source_drug": "Alglucosidase Alfa",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "joint discomfort",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "joint discomfort",
+            "source_drug": "Hylan G-F 20",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "joint restriction",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "joint restriction",
+            "source_drug": "Laronidase",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "mood instability",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "mood instability",
+            "source_drug": "Divalproex Sodium",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "nausea",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "nausea",
+            "source_drug": "Insulin Glargine + Lixisenatide",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "nausea",
+            "source_drug": "Docetaxel",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "pain crises",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "pain crises",
+            "source_drug": "Agalsidase Beta",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "progressive muscle weakness",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "Progressive muscle weakness",
+            "source_drug": "Alglucosidase Alfa",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "pyrexia",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "pyrexia",
+            "source_drug": "Belumosudil",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "rapid heart rate",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "rapid heart rate",
+            "source_drug": "Amiodarone",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "rapid ventricular rhythm",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "rapid ventricular rhythm",
+            "source_drug": "Amiodarone",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "reduced range of motion",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "reduced range of motion",
+            "source_drug": "Hylan G-F 20",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "reduced walking ability",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "reduced walking ability",
+            "source_drug": "Laronidase",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "restlessness",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "restlessness",
+            "source_drug": "Glimepiride",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "rigors",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "rigors",
+            "source_drug": "Teicoplanin",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "seizures",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "seizures",
+            "source_drug": "Divalproex Sodium",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "sleepiness",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "sleepiness",
+            "source_drug": "Glimepiride",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "somnolence",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "somnolence",
+            "source_drug": "Telmisartan + Amlodipine + Hydrochlorothiazide",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "sores in the mouth",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "sores in the mouth",
+            "source_drug": "Docetaxel",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "stiffness",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "stiffness",
+            "source_drug": "Hylan G-F 20",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "sweating",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "sweating",
+            "source_drug": "Glimepiride",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "swelling",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "swelling",
+            "source_drug": "Hylan G-F 20",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "tickling cough",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "tickling cough",
+            "source_drug": "Ramipril + Amlodipine",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "tremor",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "tremor",
+            "source_drug": "Divalproex Sodium",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "urinary frequency",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "urinary frequency",
+            "source_drug": "Glibenclamide",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "urticaria",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "urticaria",
+            "source_drug": "Alemtuzumab",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "visual impairment",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "visual impairment",
+            "source_drug": "Insulin Glargine",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "vomiting",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "vomiting",
+            "source_drug": "Docetaxel",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "weakness",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "weakness",
+            "source_drug": "Belumosudil",
+            "source_column": "symptoms"
+          }
+        ]
+      },
+      {
+        "concept": "weight gain",
+        "label": "SYMPTOM",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "weight gain",
+            "source_drug": "Frusemide + Spironolactone",
+            "source_column": "symptoms"
+          }
+        ]
+      }
+    ],
+    "CONDITION": [
+      {
+        "concept": "breastfeeding",
+        "label": "CONDITION",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "breast-feeding",
+            "source_drug": "Telmisartan",
+            "source_column": "pregnancy_lactation"
+          },
+          {
+            "concept": "breastfeeding",
+            "source_drug": "Belumosudil",
+            "source_column": "pregnancy_lactation"
+          },
+          {
+            "concept": "Breast-feeding is contra-indicated",
+            "source_drug": "Amisulpride",
+            "source_column": "pregnancy_lactation"
+          },
+          {
+            "concept": "Breast-feeding women",
+            "source_drug": "Glimepiride",
+            "source_column": "contraindications"
+          }
+        ]
+      },
+      {
+        "concept": "dialysis",
+        "label": "CONDITION",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "dialysis",
+            "source_drug": "Telmisartan",
+            "source_column": "renal_dose_adjustment"
+          },
+          {
+            "concept": "haemodialysis",
+            "source_drug": "Meropenem",
+            "source_column": "renal_dose_adjustment"
+          },
+          {
+            "concept": "hemodialysis",
+            "source_drug": "Telmisartan",
+            "source_column": "renal_dose_adjustment"
+          },
+          {
+            "concept": "Teicoplanin is not removed by hemodialysis",
+            "source_drug": "Teicoplanin",
+            "source_column": "renal_dose_adjustment"
+          },
+          {
+            "concept": "Prevention of thrombus formation in extra corporeal circulation during hemodialysis",
+            "source_drug": "Enoxaparin Sodium",
+            "source_column": "indications"
+          }
+        ]
+      },
+      {
+        "concept": "elderly",
+        "label": "CONDITION",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "elderly",
+            "source_drug": "Telmisartan + Amlodipine",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "Caution in elderly persons",
+            "source_drug": "Fludarabine Phosphate",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "elderly patients",
+            "source_drug": "Insulin Glargine",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "especially in elderly patients",
+            "source_drug": "Glibenclamide",
+            "source_column": "warnings_precautions"
+          }
+        ]
+      },
+      {
+        "concept": "hepatic impairment",
+        "label": "CONDITION",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "hepatic impairment",
+            "source_drug": "Docetaxel",
+            "source_column": "hepatic_dose_adjustment"
+          },
+          {
+            "concept": "hepatic insufficiency",
+            "source_drug": "Telmisartan + Amlodipine + Hydrochlorothiazide",
+            "source_column": "hepatic_dose_adjustment"
+          },
+          {
+            "concept": "impaired hepatic function",
+            "source_drug": "Telmisartan + Amlodipine + Hydrochlorothiazide",
+            "source_column": "hepatic_dose_adjustment"
+          },
+          {
+            "concept": "Contraindicated in patients with hepatic insufficiency",
+            "source_drug": "Metformin Hydrochloride Prolonged Release",
+            "source_column": "hepatic_dose_adjustment"
+          },
+          {
+            "concept": "Patients with mild hepatic impairment",
+            "source_drug": "Cabazitaxel",
+            "source_column": "hepatic_dose_adjustment"
+          },
+          {
+            "concept": "Severe hepatic impairment",
+            "source_drug": "Docetaxel",
+            "source_column": "contraindications"
+          },
+          {
+            "concept": "severe hepatic insufficiency",
+            "source_drug": "Zolpidem Tartrate",
+            "source_column": "contraindications"
+          }
+        ]
+      },
+      {
+        "concept": "lactation",
+        "label": "CONDITION",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "lactation",
+            "source_drug": "Telmisartan",
+            "source_column": "pregnancy_lactation"
+          }
+        ]
+      },
+      {
+        "concept": "paediatric",
+        "label": "CONDITION",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "paediatric",
+            "source_drug": "Docetaxel",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "pediatric",
+            "source_drug": "Zolpidem Tartrate",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "No paediatric data available",
+            "source_drug": "Docetaxel",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "Paediatric use not recommended",
+            "source_drug": "Amiodarone",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "Indicated as monotherapy and adjunctive therapy in treatment of adult patients and pediatric patients",
+            "source_drug": "Divalproex Sodium Extended Release",
+            "source_column": "indications"
+          }
+        ]
+      },
+      {
+        "concept": "pregnancy",
+        "label": "CONDITION",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "pregnancy",
+            "source_drug": "Telmisartan",
+            "source_column": "pregnancy_lactation"
+          },
+          {
+            "concept": "Change over to insulin during pregnancy",
+            "source_drug": "Metformin Hydrochloride (Prolonged Release) 1000 mg + Glimepiride",
+            "source_column": "pregnancy_lactation"
+          },
+          {
+            "concept": "Jevtana is not recommended during pregnancy",
+            "source_drug": "Cabazitaxel",
+            "source_column": "pregnancy_lactation"
+          },
+          {
+            "concept": "less than 300 pregnancy outcomes reported",
+            "source_drug": "Insulin Glulisine",
+            "source_column": "pregnancy_lactation"
+          },
+          {
+            "concept": "more than 1000 pregnancy outcomes",
+            "source_drug": "Insulin Glargine + Lixisenatide",
+            "source_column": "pregnancy_lactation"
+          },
+          {
+            "concept": "Pregnancy: Frusemide crosses the placental barrier",
+            "source_drug": "Frusemide",
+            "source_column": "pregnancy_lactation"
+          },
+          {
+            "concept": "Second and third trimesters of pregnancy",
+            "source_drug": "Telmisartan",
+            "source_column": "contraindications"
+          },
+          {
+            "concept": "Teriflunomide is contraindicated in pregnancy",
+            "source_drug": "Teriflunomide",
+            "source_column": "pregnancy_lactation"
+          },
+          {
+            "concept": "third trimester of pregnancy",
+            "source_drug": "Zolpidem Tartrate",
+            "source_column": "pregnancy_lactation"
+          }
+        ]
+      },
+      {
+        "concept": "renal impairment",
+        "label": "CONDITION",
+        "needs_final_check": false,
+        "source_variants": [
+          {
+            "concept": "impaired renal function",
+            "source_drug": "Telmisartan + Amlodipine + Hydrochlorothiazide",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "renal impairment",
+            "source_drug": "Telmisartan",
+            "source_column": "renal_dose_adjustment"
+          },
+          {
+            "concept": "renal insufficiency",
+            "source_drug": "Telmisartan",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "Moderate renal impairment",
+            "source_drug": "Ramipril + Hydrochlorothiazide",
+            "source_column": "renal_dose_adjustment"
+          },
+          {
+            "concept": "Patients with renal insufficiency",
+            "source_drug": "Teicoplanin",
+            "source_column": "warnings_precautions"
+          },
+          {
+            "concept": "Severe renal impairment",
+            "source_drug": "Enoxaparin Sodium",
+            "source_column": "renal_dose_adjustment"
+          }
+        ]
+      }
+    ]
+  }
+}

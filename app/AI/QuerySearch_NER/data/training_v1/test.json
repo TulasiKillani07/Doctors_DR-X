@@ -1,0 +1,2034 @@
+[
+  {
+    "query": "help with urticaria please",
+    "entities": [
+      {
+        "text": "urticaria",
+        "label": "SYMPTOM",
+        "start": 10,
+        "end": 19
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "urticaria"
+    ]
+  },
+  {
+    "query": "advise a treatment for paediatric patients",
+    "entities": [
+      {
+        "text": "paediatric",
+        "label": "CONDITION",
+        "start": 23,
+        "end": 33
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "paediatric"
+    ]
+  },
+  {
+    "query": "kindly recommend medicine for renal impairment",
+    "entities": [
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 30,
+        "end": 46
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "renal impairment"
+    ]
+  },
+  {
+    "query": "could you suggest something for sleepiness",
+    "entities": [
+      {
+        "text": "sleepiness",
+        "label": "SYMPTOM",
+        "start": 32,
+        "end": 42
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "sleepiness"
+    ]
+  },
+  {
+    "query": "i need a medicine for progressive muscle weakness",
+    "entities": [
+      {
+        "text": "progressive muscle weakness",
+        "label": "SYMPTOM",
+        "start": 22,
+        "end": 49
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "progressive muscle weakness"
+    ]
+  },
+  {
+    "query": "help with tremor please",
+    "entities": [
+      {
+        "text": "tremor",
+        "label": "SYMPTOM",
+        "start": 10,
+        "end": 16
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "tremor"
+    ]
+  },
+  {
+    "query": "kindly recommend medicine for breastfeeding",
+    "entities": [
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 30,
+        "end": 43
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "breastfeeding"
+    ]
+  },
+  {
+    "query": "kindly recommend medicine for joint discomfort",
+    "entities": [
+      {
+        "text": "joint discomfort",
+        "label": "SYMPTOM",
+        "start": 30,
+        "end": 46
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "joint discomfort"
+    ]
+  },
+  {
+    "query": "could you suggest something for hepatic impairment",
+    "entities": [
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 32,
+        "end": 50
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "hepatic impairment"
+    ]
+  },
+  {
+    "query": "what would you recommend for renal impairment",
+    "entities": [
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 29,
+        "end": 45
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "renal impairment"
+    ]
+  },
+  {
+    "query": "what would you recommend for pregnancy",
+    "entities": [
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 29,
+        "end": 38
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "pregnancy"
+    ]
+  },
+  {
+    "query": "any options to manage dialysis",
+    "entities": [
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 22,
+        "end": 30
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "dialysis"
+    ]
+  },
+  {
+    "query": "im looking for treatment for neutropenia",
+    "entities": [
+      {
+        "text": "neutropenia",
+        "label": "DISEASE",
+        "start": 29,
+        "end": 40
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "neutropenia"
+    ]
+  },
+  {
+    "query": "please suggest a drug for emotional and social withdrawal",
+    "entities": [
+      {
+        "text": "emotional and social withdrawal",
+        "label": "SYMPTOM",
+        "start": 26,
+        "end": 57
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "emotional and social withdrawal"
+    ]
+  },
+  {
+    "query": "please suggest a drug for hepatic impairment",
+    "entities": [
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 26,
+        "end": 44
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "hepatic impairment"
+    ]
+  },
+  {
+    "query": "could you suggest something for renal impairment",
+    "entities": [
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 32,
+        "end": 48
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "renal impairment"
+    ]
+  },
+  {
+    "query": "advise a treatment for elderly patients",
+    "entities": [
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 23,
+        "end": 30
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "elderly"
+    ]
+  },
+  {
+    "query": "im looking for treatment for thrombocytopenia",
+    "entities": [
+      {
+        "text": "thrombocytopenia",
+        "label": "DISEASE",
+        "start": 29,
+        "end": 45
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "thrombocytopenia"
+    ]
+  },
+  {
+    "query": "advise a treatment for renal impairment",
+    "entities": [
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 23,
+        "end": 39
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "renal impairment"
+    ]
+  },
+  {
+    "query": "what would you recommend for pain crises",
+    "entities": [
+      {
+        "text": "pain crises",
+        "label": "SYMPTOM",
+        "start": 29,
+        "end": 40
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "pain crises"
+    ]
+  },
+  {
+    "query": "im looking for treatment for sweating",
+    "entities": [
+      {
+        "text": "sweating",
+        "label": "SYMPTOM",
+        "start": 29,
+        "end": 37
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "sweating"
+    ]
+  },
+  {
+    "query": "help with paediatric patients please",
+    "entities": [
+      {
+        "text": "paediatric",
+        "label": "CONDITION",
+        "start": 10,
+        "end": 20
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "paediatric"
+    ]
+  },
+  {
+    "query": "any options to manage renal impairment",
+    "entities": [
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 22,
+        "end": 38
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "renal impairment"
+    ]
+  },
+  {
+    "query": "advise a treatment for complicated intra-abdominal infections",
+    "entities": [
+      {
+        "text": "complicated intra-abdominal infections",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 61
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "complicated intra-abdominal infections"
+    ]
+  },
+  {
+    "query": "help with hypohidrosis please",
+    "entities": [
+      {
+        "text": "hypohidrosis",
+        "label": "SYMPTOM",
+        "start": 10,
+        "end": 22
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "hypohidrosis"
+    ]
+  },
+  {
+    "query": "what should be given for headache",
+    "entities": [
+      {
+        "text": "headache",
+        "label": "SYMPTOM",
+        "start": 25,
+        "end": 33
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "headache"
+    ]
+  },
+  {
+    "query": "im looking for treatment for sleepiness",
+    "entities": [
+      {
+        "text": "sleepiness",
+        "label": "SYMPTOM",
+        "start": 29,
+        "end": 39
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "sleepiness"
+    ]
+  },
+  {
+    "query": "help with lactation please",
+    "entities": [
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 10,
+        "end": 19
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "lactation"
+    ]
+  },
+  {
+    "query": "advise a treatment for thyroid dysfunction",
+    "entities": [
+      {
+        "text": "thyroid dysfunction",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 42
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "thyroid dysfunction"
+    ]
+  },
+  {
+    "query": "im looking for treatment for reduced range of motion",
+    "entities": [
+      {
+        "text": "reduced range of motion",
+        "label": "SYMPTOM",
+        "start": 29,
+        "end": 52
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "reduced range of motion"
+    ]
+  },
+  {
+    "query": "could you suggest something for complicated skin and soft tissue infections",
+    "entities": [
+      {
+        "text": "complicated skin and soft tissue infections",
+        "label": "DISEASE",
+        "start": 32,
+        "end": 75
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "complicated skin and soft tissue infections"
+    ]
+  },
+  {
+    "query": "im looking for treatment for bone pain",
+    "entities": [
+      {
+        "text": "bone pain",
+        "label": "SYMPTOM",
+        "start": 29,
+        "end": 38
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "bone pain"
+    ]
+  },
+  {
+    "query": "help with vomiting please",
+    "entities": [
+      {
+        "text": "vomiting",
+        "label": "SYMPTOM",
+        "start": 10,
+        "end": 18
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "vomiting"
+    ]
+  },
+  {
+    "query": "help with stroke please",
+    "entities": [
+      {
+        "text": "stroke",
+        "label": "DISEASE",
+        "start": 10,
+        "end": 16
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "stroke"
+    ]
+  },
+  {
+    "query": "what would you recommend for lactation",
+    "entities": [
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 29,
+        "end": 38
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "lactation"
+    ]
+  },
+  {
+    "query": "kindly recommend medicine for ventricular tachycardia",
+    "entities": [
+      {
+        "text": "ventricular tachycardia",
+        "label": "DISEASE",
+        "start": 30,
+        "end": 53
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "ventricular tachycardia"
+    ]
+  },
+  {
+    "query": "could you suggest something for chronic gvhd",
+    "entities": [
+      {
+        "text": "chronic gvhd",
+        "label": "DISEASE",
+        "start": 32,
+        "end": 44
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "chronic gvhd"
+    ]
+  },
+  {
+    "query": "any options to manage hepatic impairment",
+    "entities": [
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 22,
+        "end": 40
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "hepatic impairment"
+    ]
+  },
+  {
+    "query": "please suggest a drug for acute toxic leukoencephalopathy",
+    "entities": [
+      {
+        "text": "acute toxic leukoencephalopathy",
+        "label": "DISEASE",
+        "start": 26,
+        "end": 57
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "acute toxic leukoencephalopathy"
+    ]
+  },
+  {
+    "query": "i need a medicine for sleepiness",
+    "entities": [
+      {
+        "text": "sleepiness",
+        "label": "SYMPTOM",
+        "start": 22,
+        "end": 32
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "sleepiness"
+    ]
+  },
+  {
+    "query": "could you suggest something for elderly patients",
+    "entities": [
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 32,
+        "end": 39
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "elderly"
+    ]
+  },
+  {
+    "query": "please suggest a drug for elderly patients",
+    "entities": [
+      {
+        "text": "elderly",
+        "label": "CONDITION",
+        "start": 26,
+        "end": 33
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "elderly"
+    ]
+  },
+  {
+    "query": "what should be given for renal impairment",
+    "entities": [
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 25,
+        "end": 41
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "renal impairment"
+    ]
+  },
+  {
+    "query": "help with hepatic impairment please",
+    "entities": [
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 10,
+        "end": 28
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "hepatic impairment"
+    ]
+  },
+  {
+    "query": "could you suggest something for mood instability",
+    "entities": [
+      {
+        "text": "mood instability",
+        "label": "SYMPTOM",
+        "start": 32,
+        "end": 48
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "mood instability"
+    ]
+  },
+  {
+    "query": "any options to manage thyroid dysfunction",
+    "entities": [
+      {
+        "text": "thyroid dysfunction",
+        "label": "DISEASE",
+        "start": 22,
+        "end": 41
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "thyroid dysfunction"
+    ]
+  },
+  {
+    "query": "what would you recommend for breastfeeding",
+    "entities": [
+      {
+        "text": "breastfeeding",
+        "label": "CONDITION",
+        "start": 29,
+        "end": 42
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "breastfeeding"
+    ]
+  },
+  {
+    "query": "could you suggest something for fatigue",
+    "entities": [
+      {
+        "text": "fatigue",
+        "label": "SYMPTOM",
+        "start": 32,
+        "end": 39
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "fatigue"
+    ]
+  },
+  {
+    "query": "what would you recommend for somnolence",
+    "entities": [
+      {
+        "text": "somnolence",
+        "label": "SYMPTOM",
+        "start": 29,
+        "end": 39
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "somnolence"
+    ]
+  },
+  {
+    "query": "could you suggest something for lactation",
+    "entities": [
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 32,
+        "end": 41
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "lactation"
+    ]
+  },
+  {
+    "query": "kindly recommend medicine for complicated urinary tract infections",
+    "entities": [
+      {
+        "text": "complicated urinary tract infections",
+        "label": "DISEASE",
+        "start": 30,
+        "end": 66
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "complicated urinary tract infections"
+    ]
+  },
+  {
+    "query": "im looking for treatment for dialysis",
+    "entities": [
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 29,
+        "end": 37
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "dialysis"
+    ]
+  },
+  {
+    "query": "advise a treatment for seizures",
+    "entities": [
+      {
+        "text": "seizures",
+        "label": "SYMPTOM",
+        "start": 23,
+        "end": 31
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "seizures"
+    ]
+  },
+  {
+    "query": "help with renal impairment please",
+    "entities": [
+      {
+        "text": "renal impairment",
+        "label": "CONDITION",
+        "start": 10,
+        "end": 26
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "renal impairment"
+    ]
+  },
+  {
+    "query": "im looking for treatment for alpha-galactosidase a deficiency",
+    "entities": [
+      {
+        "text": "alpha-galactosidase a deficiency",
+        "label": "DISEASE",
+        "start": 29,
+        "end": 61
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "alpha-galactosidase a deficiency"
+    ]
+  },
+  {
+    "query": "help with osteonecrosis please",
+    "entities": [
+      {
+        "text": "osteonecrosis",
+        "label": "DISEASE",
+        "start": 10,
+        "end": 23
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "osteonecrosis"
+    ]
+  },
+  {
+    "query": "what would you recommend for hepatic impairment",
+    "entities": [
+      {
+        "text": "hepatic impairment",
+        "label": "CONDITION",
+        "start": 29,
+        "end": 47
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "hepatic impairment"
+    ]
+  },
+  {
+    "query": "please suggest a drug for pregnancy",
+    "entities": [
+      {
+        "text": "pregnancy",
+        "label": "CONDITION",
+        "start": 26,
+        "end": 35
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "pregnancy"
+    ]
+  },
+  {
+    "query": "i need a medicine for paediatric patients",
+    "entities": [
+      {
+        "text": "paediatric",
+        "label": "CONDITION",
+        "start": 22,
+        "end": 32
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "paediatric"
+    ]
+  },
+  {
+    "query": "i need a medicine for weakness",
+    "entities": [
+      {
+        "text": "weakness",
+        "label": "SYMPTOM",
+        "start": 22,
+        "end": 30
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "weakness"
+    ]
+  },
+  {
+    "query": "what should be given for anaemia",
+    "entities": [
+      {
+        "text": "anaemia",
+        "label": "DISEASE",
+        "start": 25,
+        "end": 32
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "anaemia"
+    ]
+  },
+  {
+    "query": "could you suggest something for hypotonia",
+    "entities": [
+      {
+        "text": "hypotonia",
+        "label": "SYMPTOM",
+        "start": 32,
+        "end": 41
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "hypotonia"
+    ]
+  },
+  {
+    "query": "any options to manage rapid ventricular rhythm",
+    "entities": [
+      {
+        "text": "rapid ventricular rhythm",
+        "label": "SYMPTOM",
+        "start": 22,
+        "end": 46
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "rapid ventricular rhythm"
+    ]
+  },
+  {
+    "query": "im looking for treatment for joint restriction",
+    "entities": [
+      {
+        "text": "joint restriction",
+        "label": "SYMPTOM",
+        "start": 29,
+        "end": 46
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "joint restriction"
+    ]
+  },
+  {
+    "query": "kindly recommend medicine for tremor",
+    "entities": [
+      {
+        "text": "tremor",
+        "label": "SYMPTOM",
+        "start": 30,
+        "end": 36
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "tremor"
+    ]
+  },
+  {
+    "query": "im looking for treatment for complex partial seizures",
+    "entities": [
+      {
+        "text": "complex partial seizures",
+        "label": "DISEASE",
+        "start": 29,
+        "end": 53
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "complex partial seizures"
+    ]
+  },
+  {
+    "query": "what should be given for dialysis",
+    "entities": [
+      {
+        "text": "dialysis",
+        "label": "CONDITION",
+        "start": 25,
+        "end": 33
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "dialysis"
+    ]
+  },
+  {
+    "query": "please suggest a drug for exercise intolerance",
+    "entities": [
+      {
+        "text": "exercise intolerance",
+        "label": "SYMPTOM",
+        "start": 26,
+        "end": 46
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "exercise intolerance"
+    ]
+  },
+  {
+    "query": "i need a medicine for lactation",
+    "entities": [
+      {
+        "text": "lactation",
+        "label": "CONDITION",
+        "start": 22,
+        "end": 31
+      }
+    ],
+    "category": "test_seen_concept_new_phrasing",
+    "difficulty": "medium",
+    "source_concepts": [
+      "lactation"
+    ]
+  },
+  {
+    "query": "which drugs can be used in adolescents",
+    "entities": [
+      {
+        "text": "adolescents",
+        "label": "CONDITION",
+        "start": 27,
+        "end": 38
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "adolescents"
+    ]
+  },
+  {
+    "query": "recommended drugs for immunocompromised patients",
+    "entities": [
+      {
+        "text": "immunocompromised",
+        "label": "CONDITION",
+        "start": 22,
+        "end": 39
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "immunocompromised"
+    ]
+  },
+  {
+    "query": "treatment options for COPD",
+    "entities": [
+      {
+        "text": "COPD",
+        "label": "DISEASE",
+        "start": 22,
+        "end": 26
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "COPD"
+    ]
+  },
+  {
+    "query": "how to manage insomnia",
+    "entities": [
+      {
+        "text": "insomnia",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 22
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "insomnia"
+    ]
+  },
+  {
+    "query": "drugs to help with insomnia",
+    "entities": [
+      {
+        "text": "insomnia",
+        "label": "SYMPTOM",
+        "start": 19,
+        "end": 27
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "insomnia"
+    ]
+  },
+  {
+    "query": "treatment in obesity",
+    "entities": [
+      {
+        "text": "obesity",
+        "label": "CONDITION",
+        "start": 13,
+        "end": 20
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "obesity"
+    ]
+  },
+  {
+    "query": "drugs suitable for adolescents",
+    "entities": [
+      {
+        "text": "adolescents",
+        "label": "CONDITION",
+        "start": 19,
+        "end": 30
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "adolescents"
+    ]
+  },
+  {
+    "query": "drug use in obesity",
+    "entities": [
+      {
+        "text": "obesity",
+        "label": "CONDITION",
+        "start": 12,
+        "end": 19
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "obesity"
+    ]
+  },
+  {
+    "query": "what can be given to immunocompromised patients",
+    "entities": [
+      {
+        "text": "immunocompromised",
+        "label": "CONDITION",
+        "start": 21,
+        "end": 38
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "immunocompromised"
+    ]
+  },
+  {
+    "query": "how is hepatitis B treated",
+    "entities": [
+      {
+        "text": "hepatitis B",
+        "label": "DISEASE",
+        "start": 7,
+        "end": 18
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "hepatitis B"
+    ]
+  },
+  {
+    "query": "anything for sore throat",
+    "entities": [
+      {
+        "text": "sore throat",
+        "label": "SYMPTOM",
+        "start": 13,
+        "end": 24
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "sore throat"
+    ]
+  },
+  {
+    "query": "medication for geriatric patients",
+    "entities": [
+      {
+        "text": "geriatric patients",
+        "label": "CONDITION",
+        "start": 15,
+        "end": 33
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "geriatric patients"
+    ]
+  },
+  {
+    "query": "drugs suitable for geriatric patients",
+    "entities": [
+      {
+        "text": "geriatric patients",
+        "label": "CONDITION",
+        "start": 19,
+        "end": 37
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "geriatric patients"
+    ]
+  },
+  {
+    "query": "remedy for blurred vision",
+    "entities": [
+      {
+        "text": "blurred vision",
+        "label": "SYMPTOM",
+        "start": 11,
+        "end": 25
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "blurred vision"
+    ]
+  },
+  {
+    "query": "medicine for palpitations",
+    "entities": [
+      {
+        "text": "palpitations",
+        "label": "SYMPTOM",
+        "start": 13,
+        "end": 25
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "palpitations"
+    ]
+  },
+  {
+    "query": "safe medication for geriatric patients",
+    "entities": [
+      {
+        "text": "geriatric patients",
+        "label": "CONDITION",
+        "start": 20,
+        "end": 38
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "geriatric patients"
+    ]
+  },
+  {
+    "query": "recommended drugs in obesity",
+    "entities": [
+      {
+        "text": "obesity",
+        "label": "CONDITION",
+        "start": 21,
+        "end": 28
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "obesity"
+    ]
+  },
+  {
+    "query": "medicines for constipation",
+    "entities": [
+      {
+        "text": "constipation",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 26
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "constipation"
+    ]
+  },
+  {
+    "query": "which drugs can be used in obesity",
+    "entities": [
+      {
+        "text": "obesity",
+        "label": "CONDITION",
+        "start": 27,
+        "end": 34
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "obesity"
+    ]
+  },
+  {
+    "query": "what can I give for sore throat",
+    "entities": [
+      {
+        "text": "sore throat",
+        "label": "SYMPTOM",
+        "start": 20,
+        "end": 31
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "sore throat"
+    ]
+  },
+  {
+    "query": "treatment for blurred vision",
+    "entities": [
+      {
+        "text": "blurred vision",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 28
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "blurred vision"
+    ]
+  },
+  {
+    "query": "which drugs can be used in geriatric patients",
+    "entities": [
+      {
+        "text": "geriatric patients",
+        "label": "CONDITION",
+        "start": 27,
+        "end": 45
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "geriatric patients"
+    ]
+  },
+  {
+    "query": "how to relieve palpitations",
+    "entities": [
+      {
+        "text": "palpitations",
+        "label": "SYMPTOM",
+        "start": 15,
+        "end": 27
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "palpitations"
+    ]
+  },
+  {
+    "query": "treatment for sore throat",
+    "entities": [
+      {
+        "text": "sore throat",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 25
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "sore throat"
+    ]
+  },
+  {
+    "query": "how is chronic kidney disease treated",
+    "entities": [
+      {
+        "text": "chronic kidney disease",
+        "label": "DISEASE",
+        "start": 7,
+        "end": 29
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "chronic kidney disease"
+    ]
+  },
+  {
+    "query": "drugs for gout",
+    "entities": [
+      {
+        "text": "gout",
+        "label": "DISEASE",
+        "start": 10,
+        "end": 14
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "gout"
+    ]
+  },
+  {
+    "query": "glaucoma treatment options",
+    "entities": [
+      {
+        "text": "glaucoma",
+        "label": "DISEASE",
+        "start": 0,
+        "end": 8
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "glaucoma"
+    ]
+  },
+  {
+    "query": "treatment options for geriatric patients",
+    "entities": [
+      {
+        "text": "geriatric patients",
+        "label": "CONDITION",
+        "start": 22,
+        "end": 40
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "geriatric patients"
+    ]
+  },
+  {
+    "query": "gout treatment options",
+    "entities": [
+      {
+        "text": "gout",
+        "label": "DISEASE",
+        "start": 0,
+        "end": 4
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "gout"
+    ]
+  },
+  {
+    "query": "relief for blurred vision",
+    "entities": [
+      {
+        "text": "blurred vision",
+        "label": "SYMPTOM",
+        "start": 11,
+        "end": 25
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "blurred vision"
+    ]
+  },
+  {
+    "query": "medicines for tuberculosis",
+    "entities": [
+      {
+        "text": "tuberculosis",
+        "label": "DISEASE",
+        "start": 14,
+        "end": 26
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "tuberculosis"
+    ]
+  },
+  {
+    "query": "medication for gout",
+    "entities": [
+      {
+        "text": "gout",
+        "label": "DISEASE",
+        "start": 15,
+        "end": 19
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "gout"
+    ]
+  },
+  {
+    "query": "migraine treatment options",
+    "entities": [
+      {
+        "text": "migraine",
+        "label": "DISEASE",
+        "start": 0,
+        "end": 8
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "migraine"
+    ]
+  },
+  {
+    "query": "dose adjustment in obesity",
+    "entities": [
+      {
+        "text": "obesity",
+        "label": "CONDITION",
+        "start": 19,
+        "end": 26
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "obesity"
+    ]
+  },
+  {
+    "query": "anything for blurred vision",
+    "entities": [
+      {
+        "text": "blurred vision",
+        "label": "SYMPTOM",
+        "start": 13,
+        "end": 27
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "blurred vision"
+    ]
+  },
+  {
+    "query": "how is psoriasis treated",
+    "entities": [
+      {
+        "text": "psoriasis",
+        "label": "DISEASE",
+        "start": 7,
+        "end": 16
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "psoriasis"
+    ]
+  },
+  {
+    "query": "blurred vision relief",
+    "entities": [
+      {
+        "text": "blurred vision",
+        "label": "SYMPTOM",
+        "start": 0,
+        "end": 14
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "blurred vision"
+    ]
+  },
+  {
+    "query": "medication for adolescents",
+    "entities": [
+      {
+        "text": "adolescents",
+        "label": "CONDITION",
+        "start": 15,
+        "end": 26
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "adolescents"
+    ]
+  },
+  {
+    "query": "what is prescribed for chronic kidney disease",
+    "entities": [
+      {
+        "text": "chronic kidney disease",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 45
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "chronic kidney disease"
+    ]
+  },
+  {
+    "query": "what can be used for sore throat",
+    "entities": [
+      {
+        "text": "sore throat",
+        "label": "SYMPTOM",
+        "start": 21,
+        "end": 32
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "sore throat"
+    ]
+  },
+  {
+    "query": "dose adjustment for geriatric patients",
+    "entities": [
+      {
+        "text": "geriatric patients",
+        "label": "CONDITION",
+        "start": 20,
+        "end": 38
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "geriatric patients"
+    ]
+  },
+  {
+    "query": "drugs indicated for hepatitis B",
+    "entities": [
+      {
+        "text": "hepatitis B",
+        "label": "DISEASE",
+        "start": 20,
+        "end": 31
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "hepatitis B"
+    ]
+  },
+  {
+    "query": "glaucoma drugs",
+    "entities": [
+      {
+        "text": "glaucoma",
+        "label": "DISEASE",
+        "start": 0,
+        "end": 8
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "glaucoma"
+    ]
+  },
+  {
+    "query": "which drugs are used for COPD",
+    "entities": [
+      {
+        "text": "COPD",
+        "label": "DISEASE",
+        "start": 25,
+        "end": 29
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "COPD"
+    ]
+  },
+  {
+    "query": "treatment options for glaucoma",
+    "entities": [
+      {
+        "text": "glaucoma",
+        "label": "DISEASE",
+        "start": 22,
+        "end": 30
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "glaucoma"
+    ]
+  },
+  {
+    "query": "medicine to relieve sore throat",
+    "entities": [
+      {
+        "text": "sore throat",
+        "label": "SYMPTOM",
+        "start": 20,
+        "end": 31
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "sore throat"
+    ]
+  },
+  {
+    "query": "remedy for back pain",
+    "entities": [
+      {
+        "text": "back pain",
+        "label": "SYMPTOM",
+        "start": 11,
+        "end": 20
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "back pain"
+    ]
+  },
+  {
+    "query": "which drugs are used for chronic kidney disease",
+    "entities": [
+      {
+        "text": "chronic kidney disease",
+        "label": "DISEASE",
+        "start": 25,
+        "end": 47
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "chronic kidney disease"
+    ]
+  },
+  {
+    "query": "how to treat gout",
+    "entities": [
+      {
+        "text": "gout",
+        "label": "DISEASE",
+        "start": 13,
+        "end": 17
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "gout"
+    ]
+  },
+  {
+    "query": "what is prescribed for hepatitis B",
+    "entities": [
+      {
+        "text": "hepatitis B",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 34
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "hepatitis B"
+    ]
+  },
+  {
+    "query": "which drug is used for gout",
+    "entities": [
+      {
+        "text": "gout",
+        "label": "DISEASE",
+        "start": 23,
+        "end": 27
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "gout"
+    ]
+  },
+  {
+    "query": "gout drugs",
+    "entities": [
+      {
+        "text": "gout",
+        "label": "DISEASE",
+        "start": 0,
+        "end": 4
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "gout"
+    ]
+  },
+  {
+    "query": "how to manage palpitations",
+    "entities": [
+      {
+        "text": "palpitations",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 26
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "palpitations"
+    ]
+  },
+  {
+    "query": "how to manage constipation",
+    "entities": [
+      {
+        "text": "constipation",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 26
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "constipation"
+    ]
+  },
+  {
+    "query": "what is used to treat COPD",
+    "entities": [
+      {
+        "text": "COPD",
+        "label": "DISEASE",
+        "start": 22,
+        "end": 26
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "COPD"
+    ]
+  },
+  {
+    "query": "what is used to treat hepatitis B",
+    "entities": [
+      {
+        "text": "hepatitis B",
+        "label": "DISEASE",
+        "start": 22,
+        "end": 33
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "hepatitis B"
+    ]
+  },
+  {
+    "query": "something for sore throat",
+    "entities": [
+      {
+        "text": "sore throat",
+        "label": "SYMPTOM",
+        "start": 14,
+        "end": 25
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "sore throat"
+    ]
+  },
+  {
+    "query": "drugs suitable for immunocompromised patients",
+    "entities": [
+      {
+        "text": "immunocompromised",
+        "label": "CONDITION",
+        "start": 19,
+        "end": 36
+      }
+    ],
+    "category": "test_unseen_concept",
+    "difficulty": "hard",
+    "source_concepts": [
+      "immunocompromised"
+    ]
+  }
+]

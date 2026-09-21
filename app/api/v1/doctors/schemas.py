@@ -3,6 +3,13 @@ Doctor management schemas — DRX Doctor Platform
 """
 
 from pydantic import BaseModel, Field, field_validator, model_validator
+from app.utils.validators import (
+    validate_username as _v_username,
+    validate_password as _v_password,
+    validate_full_name as _v_fullname,
+    validate_phone as _v_phone,
+    validate_email_domain as _v_email_domain,
+)
 from typing import Optional, List
 from datetime import datetime
 
@@ -105,23 +112,40 @@ class LocationInput(BaseModel):
 
 class AddDoctorRequest(BaseModel):
     """Admin manually adds a single doctor"""
-    name: str = Field(..., min_length=2, max_length=100)
-    username: str = Field(..., min_length=3, max_length=30, description="Unique username (3-30 chars, lowercase + numbers + underscore)")
+    name: str = Field(..., description="Full name (8-64 characters)")
+    username: str = Field(..., description="Unique username (6-16 chars, letters/numbers/underscore)")
     email: str = Field(..., description="Doctor email")
-    phone: str = Field(..., min_length=10, max_length=15)
-    password: str = Field(..., min_length=8, max_length=64, description="8-64 chars, 1 upper, 1 lower, 1 number, 1 symbol")
+    phone: str = Field(..., description="E.164 format, e.g. +919848012345")
+    password: str = Field(..., description="8-24 chars, 1 upper, 1 lower, 1 number, 1 symbol")
     specialization: Optional[str] = Field(None, description="Must be from predefined list")
     qualification: Optional[str] = Field(None, max_length=200)
     license_number: Optional[str] = Field(None, max_length=50)
     location: Optional[LocationInput] = Field(None, description="Doctor's practice location")
 
+    @field_validator("name")
+    @classmethod
+    def _name(cls, v: str) -> str:
+        return _v_fullname(v)
+
     @field_validator("username")
     @classmethod
-    def validate_username(cls, v: str) -> str:
-        import re
-        if not re.match(r'^[a-z0-9_]{3,30}$', v):
-            raise ValueError("Username must be 3-30 characters, only lowercase letters, numbers, and underscores")
-        return v.lower()
+    def _username(cls, v: str) -> str:
+        return _v_username(v)
+
+    @field_validator("phone")
+    @classmethod
+    def _phone(cls, v: str) -> str:
+        return _v_phone(v)
+
+    @field_validator("password")
+    @classmethod
+    def _password(cls, v: str) -> str:
+        return _v_password(v)
+
+    @field_validator("email")
+    @classmethod
+    def _email(cls, v: str) -> str:
+        return _v_email_domain(v)
 
     @field_validator("specialization")
     @classmethod
